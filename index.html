@@ -12,19 +12,23 @@
 			{
 				var navigation_list = $('#navigation_list');
 				
-				json_root_element = $(OpenIndexJson());
+				json_root_element = OpenIndexJson();
+				
+				console.debug('Element name: '+ json_root_element.key);
+				console.debug('Element type: '+ $.type(json_root_element));
+				
+				json_root_element = $(json_root_element);
+				
+				console.debug('Element name: '+ json_root_element.key);
+				console.debug('Element type: '+ $.type(json_root_element));
 				
 				CreateNavigationElement(navigation_list, json_root_element);
 			}
-			
-			url = document.URL.slice(0, -11);
-			
+
 			function OpenIndexJson()
 			{
 				var json = null;
-			
 
-			<!--callback=?-->
 				$.getJSON
 				(
 					'portfolio/index.json',
@@ -86,7 +90,7 @@
 				var complex_elements = [];
 			
 				console.debug('Element type: '+ $.type(element));
-			
+
 				console.debug('Element name: '+ element.key);
 			
 				$.each(
