@@ -8,28 +8,7 @@
 		<script src='javascripts\libraries/jquery-1.9.1.js'></script>
 		
 		<script>
-			function CreateNavigation()
-			{
-				var navigation_list = $('#navigation_list');
-				
-				OpenIndexJson();
-				
-				
-				
-				/*
-				console.debug('Element name: '+ json_root_element.key);
-				console.debug('Element type: '+ $.type(json_root_element));
-				
-				json_root_element = $(json_root_element);
-				
-				console.debug('Element name: '+ json_root_element.key);
-				console.debug('Element type: '+ $.type(json_root_element));
-				
-				CreateNavigationElement(navigation_list, json_root_element); 
-				*/
-			}
-
-			function OpenIndexJson()
+			function CreateNavigationFromIndexJson()
 			{
 				var json = null;
 
@@ -44,7 +23,7 @@
 						
 						console.debug(JSON.stringify(data));
 
-						CreateNavigationElement(navigation_list, {key: 'root', value: data});
+						CreateNavigationElement(null, {key: 'root', value: data});
 					}
 				)
 				.error ( function() { console.debug('Could not open index.json'); } )
@@ -52,7 +31,7 @@
 				return json;
 			}
 			
-			function CreateNavigationElement(parent_page_element, json_tuple)
+			function CreateNavigationElement(own_list_item, json_tuple)
 			{
 				var images = GetArrayByKey(json_tuple.value, 'images');
 				var videos = GetArrayByKey(json_tuple.value, 'videos');
@@ -60,25 +39,34 @@
 
 				var subelements = GetComplexElementList(json_tuple.value);
 				
-				var list_item = $('<li>').appendTo(parent_page_element);
-				$('<label />', { for: json_tuple.key }).html(json_tuple.key).appendTo(list_item);
-				$('<input />', { type: 'radio', name: 'vertical_menu', id: json_tuple.key +'_input' }).appendTo(list_item);
 
 				console.debug('Number of subelements: '+ subelements.length);
 				
 				if(subelements.length > 0)
 				{
-					var navigation_sublist = $('<ul />');
-					$('<div />').html(navigation_sublist).appendTo(list_item);
+					var navigation_sublist = null; 
+					
+					if(own_list_item == null)
+						navigation_sublist = $('#navigation_list');
+					else
+					{
+						navigation_sublist = $('<ul />');
+						$('<div />').html(navigation_sublist).appendTo(own_list_item);
+					}
 				
 					$.each
 					(
 						subelements,
 						function( index, tuple )
 						{
+							var child_list_item = $('<li />').appendTo(navigation_sublist);
+							$('<label />', { for: tuple.key }).html(tuple.key).appendTo(list_item);
+							$('<input />', { type: 'radio', name: 'vertical_menu', id: tuple.key +'_input' }).appendTo(list_item);
+
+							
 							console.debug('Element name: '+ tuple.key);
 							console.debug('Element type: '+ $.type(tuple.value));
-							CreateNavigationElement(navigation_sublist, tuple);
+							CreateNavigationElement(child_list_item, tuple);
 						}
 					)
 				}
@@ -136,7 +124,7 @@
 		</script>	
 	</head>
 
-	<body onload='CreateNavigation()'>
+	<body onload='CreateNavigationFromIndexJson()'>
 		<header>Portfolio of Jouni Sarvanko</header>
 		
 		<nav id="portfolio_navigation">
