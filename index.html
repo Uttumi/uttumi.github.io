@@ -67,6 +67,8 @@
 				$('<label>', { for: element.key }).html(element.key).appendTo(list_item);
 				$('<input>', { type: 'radio', name: 'vertical_menu', id: element.key +'_input' }).appendTo(list_item);
 
+				console.debug('Number of subelements: '+ subelements.length);
+				
 				if(subelements.length > 0)
 				{
 					var navigation_sublist = $('<ul>');
