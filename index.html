@@ -50,7 +50,7 @@
 						navigation_sublist = $('#navigation_list');
 					else
 					{
-						navigation_sublist = $('<ul />');
+						navigation_sublist = $('<ul />', {id: 'level_'+ list_level});
 						$('<div />').html(navigation_sublist).appendTo(own_list_item);
 					}
 				
