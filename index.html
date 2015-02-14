@@ -50,7 +50,7 @@
 				
 				var list_item = $('<li>').appendTo(parent_page_element);
 				$('<label>', { for: element.key }).html(element.key).appendTo(list_item);
-				$('<input>', { type: radio, name: vertical_menu, id: element.key +'_input' }).appendTo(list_item);
+				$('<input>', { type: 'radio', name: 'vertical_menu', id: element.key +'_input' }).appendTo(list_item);
 
 				if(subelements.length > 0)
 				{
