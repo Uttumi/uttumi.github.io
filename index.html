@@ -12,9 +12,9 @@
 			{
 				var navigation_list = $('#navigation_list');
 				
-				var json_root_element = OpenIndexJson();
+				OpenIndexJson();
 				
-				console.debug(JSON.stringify(json_root_element));
+				
 				
 				/*
 				console.debug('Element name: '+ json_root_element.key);
@@ -41,6 +41,8 @@
 						console.log('Opened index.json');
 						
 						json = data;
+						
+						console.debug(JSON.stringify(data;));
 						
 						console.debug('Element name: '+ data.key);
 						console.debug('Element type: '+ $.type(data));
