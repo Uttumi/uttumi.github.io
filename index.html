@@ -37,6 +37,9 @@
 						console.log('Opened index.json');
 						
 						json = data;
+						
+						console.debug('Element name: '+ data.key);
+						console.debug('Element type: '+ $.type(data));
 					}
 				)
 				.error ( function() { console.debug('Could not open index.json'); } )
