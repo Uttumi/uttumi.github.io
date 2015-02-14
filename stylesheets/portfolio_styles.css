@@ -145,7 +145,7 @@ footer
 }
 
 #portfolio_navigation > ul > li > label + input:checked + div,
-#level_1 > li > label + input:checked + div
+#level_1 > li > label + input:checked > div
 {
 	max-height: 500px;
 }
