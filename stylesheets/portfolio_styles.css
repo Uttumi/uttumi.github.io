@@ -1,0 +1,169 @@
+* {
+	margin: 0;
+	padding: 0;
+	outline: none;
+/*	border:1px solid black;*/
+	
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body
+{
+	background: black;
+	font-size: 62.5%;
+}
+
+header
+{
+	display: block;
+	
+}
+
+nav
+{
+	display: block;
+
+}
+
+footer
+{
+	display: block;
+
+}
+
+#content_area
+{
+	position: fixed;
+	left: 500px;
+	top: 100px;
+	width: 700px;
+	
+	border-top: 5px solid rgba(0,255,255,.2);
+	border-right: 5px solid rgba(0,255,255,.2);
+	border-bottom: 5px solid rgba(0,255,255,.2);	
+}
+
+#portfolio_navigation
+{
+	background: darkblue;
+	background: -moz-linear-gradient(-45deg,  rgba(194,237,234,0) 0%, rgba(139,170,172,1) 9%, rgba(12,13,28,1) 30%);
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(194,237,234,0)), color-stop(9%,rgba(139,170,172,1)), color-stop(30%,rgba(12,13,28,1)));
+	background: -webkit-linear-gradient(-45deg,  rgba(194,237,234,0) 0%,rgba(139,170,172,1) 9%,rgba(12,13,28,1) 30%);
+	background: -o-linear-gradient(-45deg,  rgba(194,237,234,0) 0%,rgba(139,170,172,1) 9%,rgba(12,13,28,1) 30%);
+	background: -ms-linear-gradient(-45deg,  rgba(194,237,234,0) 0%,rgba(139,170,172,1) 9%,rgba(12,13,28,1) 30%);
+	background: linear-gradient(135deg,  rgba(194,237,234,0) 0%,rgba(139,170,172,1) 9%,rgba(12,13,28,1) 30%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00c2edea', endColorstr='#0c0d1c',GradientType=1 );
+
+	-webkit-border-top-left-radius: 40%;
+	-moz-border-radius-topleft: 40%;
+	border-top-left-radius: 40%;
+
+	position: fixed;
+	left: 50px;
+	top: 100px;
+	width: 400px;
+	/*height: 600px;*/
+	
+	z-index: 1;
+
+	
+	border-top: 5px solid rgba(0,255,255,.2);
+	border-right: 5px solid rgba(0,255,255,.2);
+	border-bottom: 5px solid rgba(0,255,255,.2);
+
+	text-align: center;
+}
+
+#portfolio_navigation > ul > li > label,
+#portfolio_navigation > ul > li > a
+{
+/*	background: -moz-linear-gradient(left,  rgba(194,237,234,0) 0%, rgba(73,88,97,1) 18%, rgba(12,13,28,1) 27%); /* FF3.6+ */
+/*	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(194,237,234,0)), color-stop(18%,rgba(73,88,97,1)), color-stop(27%,rgba(12,13,28,1))); /* Chrome,Safari4+ */
+/*	background: -webkit-linear-gradient(left,  rgba(194,237,234,0) 0%,rgba(73,88,97,1) 18%,rgba(12,13,28,1) 27%); /* Chrome10+,Safari5.1+ */
+/*	background: -o-linear-gradient(left,  rgba(194,237,234,0) 0%,rgba(73,88,97,1) 18%,rgba(12,13,28,1) 27%); /* Opera 11.10+ */
+/*	background: -ms-linear-gradient(left,  rgba(194,237,234,0) 0%,rgba(73,88,97,1) 18%,rgba(12,13,28,1) 27%); /* IE10+ */
+/*	background: linear-gradient(to right,  rgba(194,237,234,0) 0%,rgba(73,88,97,1) 18%,rgba(12,13,28,1) 27%); /* W3C */
+/*	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00c2edea', endColorstr='#0c0d1c',GradientType=1 ); /* IE6-9 */
+
+	display: block;
+	width: 100%;
+	height: 100px;
+	
+	border-right: 5px solid rgba(0,1,.5,1);
+	
+	font-size: 20px; font-size: 2.0rem;
+	
+	/*border-radius: 100px;*/
+	
+	line-height: 100px;
+	vertical-align: middle;
+	
+	color: rgb(255,255,255);
+	text-decoration: none;
+}
+
+#portfolio_navigation > ul > li > div > ul > li > label,
+#portfolio_navigation > ul > li > div > ul > li > a
+{
+	 background-color: rgb(255,255,255);
+	 border-bottom: 1px solid rgba(0,0,0,.05);
+	 color: #333331;
+	 display: block;
+	 font-size: 16px; font-size: 1.6rem;
+	 padding: 10px 0;
+	 text-decoration: none;
+	 transition: all 1s ease-in-out;
+}
+
+#portfolio_navigation > ul > li > div > ul > li > label:hover,
+#portfolio_navigation > ul > li > div > ul > li > a:hover
+{
+	background-color: lightBlue;
+	color: rgb(255,255,255);
+	padding: 10px 0 10px 50px;
+}
+
+#portfolio_navigation > ul > li > label + input
+{
+	display: none;
+	visability: hidden;
+}
+
+#portfolio_navigation > ul > li > div
+{
+	background-color: rgb(255,255,255);
+	max-height: 0;
+	overflow: hidden;
+	transition: all 2s linear;
+}
+
+#portfolio_navigation > ul > li > label + input:checked + div
+{
+	max-height: 500px;
+}
+
+@media screen and (max-width: 600px)
+{
+	#portfolio_navigation
+	{
+		width: 200px;
+		/*background: red;*/
+	}
+}
+
+@media screen and (max-width: 1200px) and (min-width: 600px)
+{
+	#portfolio_navigation
+	{
+		width: 400px;
+		/*background: none;*/
+		/*background: lightblue;*/
+	}
+	
+	#portfolio_navigation > ul > li > a
+	{
+		height: 80px;
+	}
+}
