@@ -78,6 +78,7 @@ footer
 
 #portfolio_navigation > ul > li > label,
 #portfolio_navigation > ul > li > a
+#level_1 > li > label
 {
 /*	background: -moz-linear-gradient(left,  rgba(194,237,234,0) 0%, rgba(73,88,97,1) 18%, rgba(12,13,28,1) 27%); /* FF3.6+ */
 /*	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(194,237,234,0)), color-stop(18%,rgba(73,88,97,1)), color-stop(27%,rgba(12,13,28,1))); /* Chrome,Safari4+ */
@@ -105,7 +106,8 @@ footer
 }
 
 #portfolio_navigation > ul > li > div > ul > li > label,
-#portfolio_navigation > ul > li > div > ul > li > a
+#portfolio_navigation > ul > li > div > ul > li > a,
+#level_2 > li > label
 {
 	 background-color: rgb(255,255,255);
 	 border-bottom: 1px solid rgba(0,0,0,.05);
@@ -118,20 +120,23 @@ footer
 }
 
 #portfolio_navigation > ul > li > div > ul > li > label:hover,
-#portfolio_navigation > ul > li > div > ul > li > a:hover
+#portfolio_navigation > ul > li > div > ul > li > a:hover,
+#level_2 > li > label:hover
 {
 	background-color: lightBlue;
 	color: rgb(255,255,255);
 	padding: 10px 0 10px 50px;
 }
 
-#portfolio_navigation > ul > li > label + input
+#portfolio_navigation > ul > li > label + input,
+#level_1 > li > label + input
 {
 	display: none;
 	visability: hidden;
 }
 
-#portfolio_navigation > ul > li > div
+#portfolio_navigation > ul > li > div,
+#level_1 > li > div
 {
 	background-color: rgb(255,255,255);
 	max-height: 0;
@@ -139,7 +144,8 @@ footer
 	transition: all 2s linear;
 }
 
-#portfolio_navigation > ul > li > label + input:checked + div
+#portfolio_navigation > ul > li > label + input:checked + div,
+#level_1 > li > label + input:checked + div
 {
 	max-height: 500px;
 }
