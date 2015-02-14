@@ -43,11 +43,8 @@
 						json = data;
 						
 						console.debug(JSON.stringify(data));
-						
-						console.debug('Element name: '+ data.key);
-						console.debug('Element type: '+ $.type(data));
-						
-						CreateNavigationElement(navigation_list, data);
+
+						CreateNavigationElement(navigation_list, {key: 'root', value: data);
 					}
 				)
 				.error ( function() { console.debug('Could not open index.json'); } )
@@ -55,17 +52,17 @@
 				return json;
 			}
 			
-			function CreateNavigationElement(parent_page_element, element)
+			function CreateNavigationElement(parent_page_element, json_tuple)
 			{
-				var images = GetArrayByKey(element, 'images');
-				var videos = GetArrayByKey(element, 'videos');
-				var webpages = GetArrayByKey(element, 'webpages');
+				var images = GetArrayByKey(json_tuple.value, 'images');
+				var videos = GetArrayByKey(json_tuple.value, 'videos');
+				var webpages = GetArrayByKey(json_tuple.value, 'webpages');
 
-				var subelements = GetComplexElementList(element);
+				var subelements = GetComplexElementList(json_tuple.value);
 				
 				var list_item = $('<li>').appendTo(parent_page_element);
-				$('<label>', { for: element.key }).html(element.key).appendTo(list_item);
-				$('<input>', { type: 'radio', name: 'vertical_menu', id: element.key +'_input' }).appendTo(list_item);
+				$('<label />', { for: json_tuple.key }).html(json_tuple.key).appendTo(list_item);
+				$('<input />', { type: 'radio', name: 'vertical_menu', id: json_tuple.key +'_input' }).appendTo(list_item);
 
 				console.debug('Number of subelements: '+ subelements.length);
 				
@@ -81,7 +78,7 @@
 						{
 							console.debug('Element name: '+ tuple.key);
 							console.debug('Element type: '+ $.type(tuple.value));
-							CreateNavigationElement(navigation_sublist, tuple.value);
+							CreateNavigationElement(navigation_sublist, tuple);
 						}
 					)
 				}
