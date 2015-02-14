@@ -60,8 +60,8 @@
 						function( index, tuple )
 						{
 							var child_list_item = $('<li />').appendTo(navigation_sublist);
-							$('<label />', { for: tuple.key }).html(tuple.key).appendTo(list_item);
-							$('<input />', { type: 'radio', name: 'vertical_menu', id: tuple.key +'_input' }).appendTo(list_item);
+							$('<label />', { for: tuple.key }).html(tuple.key).appendTo(child_list_item);
+							$('<input />', { type: 'radio', name: 'vertical_menu', id: tuple.key +'_input' }).appendTo(child_list_item);
 
 							
 							console.debug('Element name: '+ tuple.key);
