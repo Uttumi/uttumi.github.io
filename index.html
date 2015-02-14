@@ -75,9 +75,11 @@
 					$.each
 					(
 						subelements,
-						function( index, value )
+						function( index, tuple )
 						{
-							CreateNavigationElement(navigation_sublist, value);
+							console.debug('Element name: '+ tuple.key);
+							console.debug('Element type: '+ $.type(tuple.value));
+							CreateNavigationElement(navigation_sublist, tuple.value);
 						}
 					)
 				}
@@ -99,18 +101,14 @@
 			function GetComplexElementList(element)
 			{
 				var complex_elements = [];
-			
-				console.debug('Element type: '+ $.type(element));
 
-				console.debug('Element name: '+ element.key);
-			
 				$.each(
 					element, 
 					function(key, value) 
 					{
 						if(!$.isArray(value))
 						{
-							complex_elements.push(value);
+							complex_elements.push({'key': key, 'value': value);
 						}
 					}
 				)
