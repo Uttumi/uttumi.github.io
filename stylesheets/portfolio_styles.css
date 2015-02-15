@@ -146,7 +146,7 @@ label + input
 	transition: all 2s linear;
 }
 
-#level_1 > li > label + input:checked + div
+label + input:checked + div
 {
 	max-height: 500px;
 }
