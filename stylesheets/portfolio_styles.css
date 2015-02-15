@@ -128,8 +128,7 @@ footer
 	padding: 10px 0 10px 50px;
 }
 
-#portfolio_navigation > ul > li > label + input,
-#level_1 > li > label + input
+label + input
 {
 	display: none;
 	visability: hidden;
