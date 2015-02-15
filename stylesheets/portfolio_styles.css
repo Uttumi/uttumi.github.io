@@ -151,16 +151,6 @@ label + input:checked + div
 	max-height: 500px;
 }
 
-#level_2 > li > label + input:checked + div
-{
-	max-height: 500px;
-}
-
-#level_3 > li > label + input:checked + div
-{
-	max-height: 500px;
-}
-
 @media screen and (max-width: 600px)
 {
 	#portfolio_navigation
