@@ -76,8 +76,6 @@ footer
 	text-align: center;
 }
 
-#portfolio_navigation > ul > li > label,
-#portfolio_navigation > ul > li > a
 #level_1 > li > label
 {
 /*	background: -moz-linear-gradient(left,  rgba(194,237,234,0) 0%, rgba(73,88,97,1) 18%, rgba(12,13,28,1) 27%); /* FF3.6+ */
@@ -105,9 +103,8 @@ footer
 	text-decoration: none;
 }
 
-#portfolio_navigation > ul > li > div > ul > li > label,
-#portfolio_navigation > ul > li > div > ul > li > a,
-#level_2 > li > label
+#level_2 > li > label,
+#level_3 > li > label
 {
 	 background-color: rgb(255,255,255);
 	 border-bottom: 1px solid rgba(0,0,0,.05);
@@ -119,9 +116,8 @@ footer
 	 transition: all 1s ease-in-out;
 }
 
-#portfolio_navigation > ul > li > div > ul > li > label:hover,
-#portfolio_navigation > ul > li > div > ul > li > a:hover,
-#level_2 > li > label:hover
+#level_2 > li > label:hover,
+#level_3 > li > label:hover
 {
 	background-color: lightBlue;
 	color: rgb(255,255,255);
@@ -134,8 +130,15 @@ label + input
 	visability: hidden;
 }
 
-#portfolio_navigation > ul > li > div,
 #level_1 > li > div
+{
+	background-color: rgb(200,200,255);
+	max-height: 0;
+	overflow: hidden;
+	transition: all 2s linear;
+}
+
+#level_2 > li > div
 {
 	background-color: rgb(255,255,255);
 	max-height: 0;
@@ -143,9 +146,7 @@ label + input
 	transition: all 2s linear;
 }
 
-#portfolio_navigation > ul > li > label + input:checked + div,
-#level_1 > li > label + input:checked + div,
-#level_1 > li > label + input:checked > div
+label + input:checked + div,
 {
 	max-height: 500px;
 }
