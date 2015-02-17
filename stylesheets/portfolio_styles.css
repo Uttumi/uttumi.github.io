@@ -19,7 +19,7 @@ header
 {
 	display: block;
 	position: fixed;
-	top: 20;
+	top: 100;
 	width: 800px;
 	left: 50%;
 	margin-left: -400px;
