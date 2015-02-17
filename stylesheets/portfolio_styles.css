@@ -26,6 +26,11 @@ nav
 	display: block;
 }
 
+a
+{
+	color: #AAA;
+}
+
 footer
 {
 	display: block;
@@ -33,6 +38,8 @@ footer
 	width: 600px;
 	left: 50%;
 	margin-left: -300px;
+	
+	text-align: center;
 	
 	color: #333331;
 	font-size: 10px; font-size: 1.2rem;
