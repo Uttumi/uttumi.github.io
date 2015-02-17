@@ -18,7 +18,15 @@ body
 header
 {
 	display: block;
+	position: fixed;
+	top: 10;
+	width: 800px;
+	left: 50%;
+	margin-left: -400px;
 	
+	color: #456;
+	font-size: 10px; font-size: 1.2rem;
+	text-align: center;
 }
 
 nav
@@ -39,11 +47,9 @@ footer
 	left: 50%;
 	margin-left: -300px;
 	
-	text-align: center;
-	
-/*	color: #333331;	*/
 	color: #456;
 	font-size: 10px; font-size: 1.2rem;
+	text-align: center;
 }
 
 #contact_info
