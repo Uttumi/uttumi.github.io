@@ -19,11 +19,11 @@ header
 {
 	display: block;
 	position: fixed;
-	height: 80px;
-  	line-height: 80px;
-	width: 800px;
-	left: 50%;
-	margin-left: -400px;
+	height: 100px;
+  	line-height: 100px;
+	width: 1200px;
+/*	left: 50%;
+	margin-left: -400px; */
 	
 	color: #456;
 	font-size: 30px; font-size: 3.0rem;
@@ -46,8 +46,8 @@ footer
 	display: block;
 	position: fixed;
 	width: 600px;
-	left: 50%;
-	margin-left: -300px;
+	left: 300px;
+/*	margin-left: -300px;  */
 	
 	color: #456;
 	font-size: 10px; font-size: 1.0rem;
