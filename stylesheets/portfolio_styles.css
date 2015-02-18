@@ -86,10 +86,14 @@ footer
 	background: -ms-linear-gradient(-45deg,  rgba(194,237,234,0) 0%,rgba(139,170,172,1) 9%,rgba(12,13,28,1) 30%);
 	background: linear-gradient(135deg,  rgba(194,237,234,0) 0%,rgba(139,170,172,1) 9%,rgba(12,13,28,1) 30%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00c2edea', endColorstr='#0c0d1c',GradientType=1 );
-
+/*
 	-webkit-border-top-left-radius: 40%;
 	-moz-border-radius-topleft: 40%;
 	border-top-left-radius: 40%;
+*/
+	-webkit-border-top-left-radius: 100px;
+	-moz-border-radius-topleft: 100px;
+	border-top-left-radius: 100px;
 
 	position: fixed;
 	left: 50px;
