@@ -137,6 +137,11 @@ footer
 	text-decoration: none;
 }
 
+#level_1 > li > label:hover
+{
+	background: rgba(255,255,255,0.2);
+}
+
 #level_2 > li > label,
 #level_3 > li > label
 {
