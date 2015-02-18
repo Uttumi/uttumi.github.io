@@ -170,7 +170,9 @@ label + input
 {
 	max-height: 0;
 	overflow: hidden;
-	transition: max-height 1s cubic-bezier(1,0.8,0,1);
+/*	transition: max-height 1s cubic-bezier(1,0.8,0,1);*/
+	transition: max-height 1s cubic-bezier(0,0.76,0.5,0.39);
+	
 }
 
 #level_1 > li > div
