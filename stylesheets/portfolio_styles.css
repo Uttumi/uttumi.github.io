@@ -99,7 +99,6 @@ footer
 	
 	z-index: 1;
 
-	
 	border-top: 5px solid rgba(0,255,255,.2);
 	border-right: 5px solid rgba(0,255,255,.2);
 	border-bottom: 5px solid rgba(0,255,255,.2);
@@ -139,7 +138,7 @@ footer
 {
 	 background-color: rgb(255,255,255);
 	 border-bottom: 1px solid rgba(0,0,0,.05);
-	 color: #333331;
+	 color: #9AB;
 	 display: block;
 	 font-size: 16px; font-size: 1.6rem;
 	 padding: 10px 0;
@@ -150,7 +149,7 @@ footer
 #level_2 > li > label:hover,
 #level_3 > li > label:hover
 {
-	background-color: lightBlue;
+	background-color: rgb(200,200,255);
 	color: rgb(255,255,255);
 	padding: 10px 0 10px 50px;
 }
@@ -158,23 +157,31 @@ footer
 label + input
 {
 	display: none;
-	visability: hidden;
+	visibility: hidden;
+}
+
+#level_1 > li > div,
+#level_2 > li > div,
+#level_3 > li > div
+{
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.5s cubic-bezier(0, 1.05, 0, 1);
 }
 
 #level_1 > li > div
 {
 	background-color: rgb(200,200,255);
-	max-height: 0;
-	overflow: hidden;
-	transition: all 2s linear;
 }
 
 #level_2 > li > div
 {
+	background-color: rgb(225,225,255);
+}
+
+#level_3 > li > div
+{
 	background-color: rgb(255,255,255);
-	max-height: 0;
-	overflow: hidden;
-	transition: all 2s linear;
 }
 
 #level_1 > li > label + input:checked + div,
@@ -182,8 +189,8 @@ label + input
 #level_3 > li > label + input:checked + div
 {
 	max-height: 500px;
+	transition: max-height 1s linear;
 }
-
 
 @media screen and (max-width: 600px)
 {
