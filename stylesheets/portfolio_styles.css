@@ -140,6 +140,7 @@ footer
 #level_1 > li > label:hover
 {
 	background: rgba(255,255,255,0.2);
+	background-clip: content-box;
 }
 
 #level_2 > li > label,
