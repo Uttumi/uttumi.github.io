@@ -61,7 +61,14 @@
 						{
 							var child_list_item = $('<li />').appendTo(navigation_sublist);
 							$('<label />', { for: tuple.key +'_input' }).html(tuple.key).appendTo(child_list_item);
-							$('<input />', { type: 'radio', name: 'vertical_menu_'+ list_level, id: tuple.key +'_input' }).appendTo(child_list_item);
+							$('<input />', 
+								{ 
+									type: 'radio', 
+									name: 'vertical_menu_'+ list_level, 
+									id: tuple.key +'_input',
+									onclick: 'NavigationClick(tuple)'
+								}
+							).appendTo(child_list_item);
 
 							
 							console.debug('Element name: '+ tuple.key);
@@ -70,6 +77,11 @@
 						}
 					)
 				}
+			}
+			
+			function NavigationClick(tuple)
+			{
+				console.debug('Clicked '+ tuple.key);
 			}
 			
 			function GetArrayByKey(element, list_key)
