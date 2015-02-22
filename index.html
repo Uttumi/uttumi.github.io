@@ -38,12 +38,16 @@
 				var webpages = GetArrayByKey(json_tuple.value, 'webpages');
 
 				var subelements = GetComplexElementList(json_tuple.value);
-				own_list_item.find('input').click(
-					function ()
-					{ 
-						NavigationClick(json_tuple.key, images, videos, webpages) 
-					}
-				);
+				
+				if(own_list_item != null)
+				{
+					own_list_item.find('input').click(
+						function ()
+						{ 
+							NavigationClick(json_tuple.key, images, videos, webpages) 
+						}
+					);
+				}
 
 				console.debug('Number of subelements: '+ subelements.length);
 				
