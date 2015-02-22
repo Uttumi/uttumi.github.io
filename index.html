@@ -38,7 +38,12 @@
 				var webpages = GetArrayByKey(json_tuple.value, 'webpages');
 
 				var subelements = GetComplexElementList(json_tuple.value);
-				
+				own_list_item.find('input').click(
+					funtion 
+					{ 
+						NavigationClick(json_tuple.key, images, videos, webpages) 
+					}
+				);
 
 				console.debug('Number of subelements: '+ subelements.length);
 				
@@ -60,16 +65,19 @@
 						function( index, tuple )
 						{
 							var child_list_item = $('<li />').appendTo(navigation_sublist);
-							$('<label />', { for: tuple.key +'_input' }).html(tuple.key).appendTo(child_list_item);
+							$('<label />', 
+								{ 
+								for: tuple.key +'_input' 
+								}
+							).html(tuple.key).appendTo(child_list_item);
+							
 							$('<input />', 
 								{ 
-									type: 'radio', 
-									name: 'vertical_menu_'+ list_level, 
-									id: tuple.key +'_input',
-									onclick: 'NavigationClick(tuple)'
+								type: 'radio', 
+								name: 'vertical_menu_'+ list_level, 
+								id: tuple.key +'_input',
 								}
-							).appendTo(child_list_item);
-
+							).input.appendTo(child_list_item);
 							
 							console.debug('Element name: '+ tuple.key);
 							console.debug('Element type: '+ $.type(tuple.value));
@@ -79,9 +87,9 @@
 				}
 			}
 			
-			function NavigationClick(tuple)
+			function NavigationClick(key, images, videos, webpages)
 			{
-				console.debug('Clicked '+ tuple.key);
+				console.debug('Clicked '+ key);
 			}
 			
 			function GetArrayByKey(element, list_key)
