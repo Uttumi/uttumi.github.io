@@ -2,14 +2,14 @@
     "Blender": {
         "House Model": {
             "images": [
+                "Blender/House Model/arm_chair.png",
                 "Blender/House Model/bedroom.png",
-                "Blender/House Model/Keittiönpöytä.png",
-                "Blender/House Model/kirjoituspoyta.png",
-                "Blender/House Model/Kuva 3.png",
-                "Blender/House Model/Kuva 4.png",
-                "Blender/House Model/lepotuoli.png",
-                "Blender/House Model/ruokapöytä.png",
-                "Blender/House Model/sohva.png"
+                "Blender/House Model/desk.png",
+                "Blender/House Model/kitchen_table.png",
+                "Blender/House Model/kitchen_table_in_room.png",
+                "Blender/House Model/perspective_view.png",
+                "Blender/House Model/sofa.png",
+                "Blender/House Model/top_view.png"
             ]
         },
         "Starship Enterprise Animation": {
