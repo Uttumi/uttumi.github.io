@@ -97,6 +97,8 @@
 				
 				var content_area = $('#content_area');
 				
+				content_area.empty();
+				
 				if(images == null)
 					return;
 					
@@ -105,11 +107,11 @@
 				var subelement_width = content_area.width();
 				
 				if(total_elements > 4)
-					subelement_width = content_area.width() / 2 - 10;
+					subelement_width = content_area.width() / 2 - 15;
 				if (total_elements > 8)
-					subelement_width = content_area.width() / 3 - 10;	
+					subelement_width = content_area.width() / 3 - 15;	
 				if (total_elements > 16)
-					subelement_width = content_area.width() / 4 - 10;
+					subelement_width = content_area.width() / 4 - 15;
 				
 				$.each(images, 
 					function(index, value)
