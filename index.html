@@ -94,6 +94,33 @@
 			function NavigationClick(key, images, videos, webpages)
 			{
 				console.debug('Clicked '+ key);
+				
+				var content_area = $('#content_area');
+				
+				var total_elements = images.length + videos.length + webpages.length;
+				
+				var subelement_width = content_area.width;
+				
+				if(total_elements > 4)
+					subelement_width = content_area.width / 2;
+				if (total_elements > 8)
+					subelement_width = content_area.width / 3;	
+				if (total_elements > 16)
+					subelement_width = content_area.width / 4;
+				
+				$.each(images, 
+					function(index, value)
+					{
+						var image = $('<img />', 
+							{
+								srt: value
+							}
+						);
+						
+						image.width(subelement_width);
+						image.appendTo(content_area);
+					}
+				)
 			}
 			
 			function GetArrayByKey(element, list_key)
