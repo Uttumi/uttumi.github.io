@@ -5,7 +5,7 @@
 		<title>Portfolio of Jouni Sarvanko</title>
 		<link rel="stylesheet" href="stylesheets/portfolio_styles.css">
 		
-		<script src='javascripts\libraries/jquery-1.9.1.js'></script>
+		<script src='javascripts/libraries/jquery-1.9.1.js'></script>
 		
 		<script>
 			function CreateNavigationFromIndexJson()
@@ -117,7 +117,7 @@
 						console.debug('Creating image: '+ value);
 						var image = $('<img />', 
 							{
-								srt: value
+								src: 'portfolio/'+ value
 							}
 						);
 						
