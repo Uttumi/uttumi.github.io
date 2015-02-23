@@ -2,19 +2,26 @@
     "Blender": {
         "House Model": {
             "images": [
-                "Blender/House Model/bedroom.png"
+                "Blender/House Model/bedroom.png",
+                "Blender/House Model/Keittiönpöytä.png",
+                "Blender/House Model/kirjoituspoyta.png",
+                "Blender/House Model/Kuva 3.png",
+                "Blender/House Model/Kuva 4.png",
+                "Blender/House Model/lepotuoli.png",
+                "Blender/House Model/ruokapöytä.png",
+                "Blender/House Model/sohva.png"
             ]
         },
         "Starship Enterprise Animation": {
             "videos": [
-                "./Blender/Starship Enterprise Animation/Starship Enterprise Animation.avi"
+                "Blender/Starship Enterprise Animation/Starship Enterprise Animation.avi"
             ]
         }
     },
     "Flash": {
         "Snow War (Group work)": {
             "web_pages": [
-                "./Flash/Snow War (Group work)/SnowWar.html"
+                "Flash/Snow War (Group work)/SnowWar.html"
             ]
         }
     },
@@ -22,7 +29,7 @@
         "Space combat": {
             "WebUI": {
                 "web_pages": [
-                    "./Unity/Space combat/WebUI/WebUI.html"
+                    "Unity/Space combat/WebUI/WebUI.html"
                 ]
             }
         }

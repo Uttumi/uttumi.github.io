@@ -3,7 +3,7 @@ import json
 from os import walk
 
 def get_filtered_file_list(file_list, filters, folder_path):
-	return [folder_path +'/'+ file_name for file_name in file_list if any( [file_name.endswith(filter) for filter in filters] ) ]
+	return [folder_path[2:] +'/'+ file_name for file_name in file_list if any( [file_name.endswith(filter) for filter in filters] ) ]
 
 def walk_folder_check(folder_path):
 	
@@ -50,6 +50,7 @@ def recursive_folder_check(folder_path):
 
 	return folder_content_dict
 
+	
 folder_structure_dict = recursive_folder_check('.')
 
 with open('index.json', 'w') as outfile:
