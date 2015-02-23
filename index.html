@@ -155,6 +155,14 @@
 					function(index, value)
 					{
 						console.debug('Creating video: '+ value +' with width '+ subelement_width);
+
+						content_area.after(
+							'<video width=\''+ subelement_width +'\' controls>
+								<source src=\''+ value +'\' type="video/mp4">
+								Your browser does not support the video tag.
+							</video>'
+							)
+						/*
 						var video = $('<video />', {width: subelement_width}).appendTo(content_area);
 						
 						video.html('Your browser does not support the video tag.');
@@ -165,6 +173,7 @@
 								type: 'video/mp4'
 							}
 						).appendTo(video);
+						*/
 					}
 				)
 			}			
