@@ -69,6 +69,7 @@ footer
 	position: fixed;
 	left: 500px;
 	top: 100px;
+	bottom: 100px;
 	width: 700px;
 	
 	border-top: 5px solid rgba(0,255,255,.2);
