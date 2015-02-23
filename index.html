@@ -99,6 +99,8 @@
 				
 				content_area.empty();
 				
+			function AddImages(content_area, images)
+			{
 				if(images == null)
 					return;
 					
@@ -121,7 +123,7 @@
 							{
 								src: 'portfolio/'+ value
 							}
-						).css('width', subelement_width).appendTo(content_area);
+						).width(subelement_width).appendTo(content_area);
 						
 						/*image.width(subelement_width);
 						image.appendTo(content_area);*/
@@ -129,6 +131,43 @@
 				)
 			}
 			
+			function AddVideos(content_area, videos)
+			{
+				if(videos == null)
+					return;
+					
+				var total_elements = videos.length; /* + videos.length + webpages.length;*/
+				
+				var subelement_width = content_area.width();
+				
+				if(total_elements > 4)
+					subelement_width = content_area.width() / 2 - 15;
+				if (total_elements > 8)
+					subelement_width = content_area.width() / 3 - 15;	
+				if (total_elements > 16)
+					subelement_width = content_area.width() / 4 - 15;
+				
+				$.each(videos, 
+					function(index, value)
+					{
+						console.debug('Creating video: '+ value +' with width '+ subelement_width);
+						var video = $('<video />', 
+							{
+								src: 'portfolio/'+ value
+							}
+						).css('width', subelement_width).appendTo(content_area);
+						
+						video.html('Your browser does not support the video tag.');
+						
+						$('<source />', 
+							{
+								type: 'video/mp4'
+							}
+						).appendTo(video);
+					}
+				)
+			}			
+
 			function GetArrayByKey(element, list_key)
 			{
 				if(element.hasOwnProperty(list_key))
