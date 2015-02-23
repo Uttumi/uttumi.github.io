@@ -155,16 +155,13 @@
 					function(index, value)
 					{
 						console.debug('Creating video: '+ value +' with width '+ subelement_width);
-						var video = $('<video />', 
-							{
-								src: 'portfolio/'+ value
-							}
-						).css('width', subelement_width).appendTo(content_area);
+						var video = $('<video />').css('width', subelement_width).appendTo(content_area);
 						
 						video.html('Your browser does not support the video tag.');
 						
 						$('<source />', 
 							{
+								src: 'portfolio/'+ value
 								type: 'video/mp4'
 							}
 						).appendTo(video);
