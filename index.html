@@ -122,7 +122,7 @@
 				$.each(images, 
 					function(index, value)
 					{
-						console.debug('Creating image: '+ value +' with width '+ subelement_width);
+						console.debug('Creating image: portfolio/'+ value +' with width '+ subelement_width);
 						var image = $('<img />', 
 							{
 								src: 'portfolio/'+ value
@@ -154,7 +154,7 @@
 				$.each(videos, 
 					function(index, value)
 					{
-						console.debug('Creating video: '+ value +' with width '+ subelement_width);
+						console.debug('Creating video: portfolio/'+ value +' with width '+ subelement_width);
 
 						content_area.append(
 							'<video width=\''+ subelement_width +'\' controls>'+
