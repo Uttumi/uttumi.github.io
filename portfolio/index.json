@@ -14,7 +14,8 @@
         },
         "Starship Enterprise Animation": {
             "videos": [
-                "Blender/Starship Enterprise Animation/Starship Enterprise Animation.avi"
+                "Blender/Starship Enterprise Animation/Starship Enterprise Animation.avi",
+                "Blender/Starship Enterprise Animation/Starship Enterprise Animation.mp4"
             ]
         }
     },
