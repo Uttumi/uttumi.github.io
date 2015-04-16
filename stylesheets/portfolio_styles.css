@@ -11,6 +11,11 @@
 /*	font-family: 'Georgia, serif'; */
 }
 
+html
+{ 
+	font-size: 62.5%;
+} 
+
 .main-font-color
 {
 	color: #456;
@@ -25,7 +30,6 @@ body
 {
 /*	background: #000; */
 	background: #11110B;
-	font-size: 62.5%;
 }
 
 header
