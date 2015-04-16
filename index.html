@@ -2,11 +2,16 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
 		<title>Portfolio of Jouni Sarvanko</title>
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 		<link rel="stylesheet" href="stylesheets/portfolio_styles.css">
 		
 		<script src='javascripts/libraries/jquery-1.9.1.js'></script>
-		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 		<script>
 			function CreateNavigationFromIndexJson()
 			{
@@ -231,7 +236,7 @@
 	</head>
 
 	<body onload='CreateNavigationFromIndexJson()'>
-		<header>Portfolio of Jouni Sarvanko</header>
+		<header class 'main-font-color'>Portfolio of Jouni Sarvanko</header>
 		
 		<nav id='portfolio_navigation'>
 			<ul id='level_1'>
@@ -248,7 +253,7 @@
 			-->
 		</chapter>
 		
-		<footer id='contact_info'>
+		<footer id='contact_info' class 'main-font-color'>
 			<p>Copyright &copy; 2015 Jouni Sarvanko. All Rights Reserved.</p>
 			<p>Contact information: <a href="uttumi@gmail.com">
 			uttumi@gmail.com</a></p>
