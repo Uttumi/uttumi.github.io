@@ -9,12 +9,12 @@
 	box-sizing: border-box;
 }
 
-#main-font-color
+.main-font-color
 {
 	color: #456;
 }
 
-#high-font-color
+.high-font-color
 {
 	color: #89A;
 }
@@ -24,7 +24,6 @@ body
 /*	background: #000; */
 	background: #11110B;
 	font-size: 62.5%;
-	color: #456;
 }
 
 header
