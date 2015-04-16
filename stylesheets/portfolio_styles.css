@@ -76,7 +76,7 @@ footer
 	border-right: 5px solid rgba(0,255,255,.2);
 	border-bottom: 5px solid rgba(0,255,255,.2);
 	
-	overflow: scroll;
+	overflow: hidden;
 }
 
 #portfolio_navigation
