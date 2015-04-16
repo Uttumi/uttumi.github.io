@@ -9,6 +9,16 @@
 	box-sizing: border-box;
 }
 
+main-font-color
+{
+	color: #456;
+}
+
+high-font-color
+{
+	color: #89A;
+}
+
 body
 {
 /*	background: #000; */
@@ -26,7 +36,7 @@ header
 /*	left: 50%;
 	margin-left: -400px; */
 	
-	color: #456;
+	
 	font-size: 30px; font-size: 3.0rem;
 	text-align: center;
 	vertical-align: middle;
@@ -49,8 +59,7 @@ footer
 	width: 600px;
 	left: 300px;
 /*	margin-left: -300px;  */
-	
-	color: #456;
+
 	font-size: 10px; font-size: 1.0rem;
 	text-align: center;
 }
