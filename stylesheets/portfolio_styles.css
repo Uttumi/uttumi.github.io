@@ -63,6 +63,12 @@ a
 	color: #89A;
 }
 
+video
+{
+  width: 100%    !important;
+  height: auto   !important;
+}
+
 footer
 {
 	display: block;
