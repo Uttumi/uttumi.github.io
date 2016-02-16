@@ -19,7 +19,8 @@ $(document).ready(function()
 
 	SetBGIntoMotion ();
 
-    $window.bind( 'hashchange', function(event){
+    $window.bind( 'hashchange', function(event)
+    {
 /*	    alert('Anchor changed!');*/
 	    CheckHash ();
     });
