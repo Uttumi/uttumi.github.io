@@ -1,0 +1,11 @@
+{
+"date": "13-02-2016",
+"place": "Himeji",
+"country": "Japan",
+"text":
+"
+
+
+"
+}
+
