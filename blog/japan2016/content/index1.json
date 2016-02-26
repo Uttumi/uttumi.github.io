@@ -1,0 +1,38 @@
+{
+    "en": {
+        "diary": {
+            "Kyoto": {
+                "articles": {
+                    "kyoto1": "en/diary/Kyoto/Kyoto1.html",
+                    "kyoto2": "en/diary/Kyoto/Kyoto2.html",
+                    "kyoto3": "en/diary/Kyoto/Kyoto1.html"
+                }
+            },
+            "articles": {
+                "himeji20160213": "en/diary/2016-02-13-Himeji.html"
+            }
+        },
+        "food": {
+            "articles": {
+                "nishiki": "en/food/2016-02-13-Nishiki.html"
+            }
+        },
+        "gifts": {
+            "articles": {
+                "shopshop": "en/gifts/Shopshop.html"
+            }
+        },
+        "plan": {
+            "Kyoto": {
+                "Arashiyama": {
+                    "articles": {
+                        "arashiyama": "en/plan/Kyoto/Arashiyama/Arashiyama.html"
+                    }
+                }
+            },
+            "articles": {
+                "himeji": "en/plan/2016-02-13-Himeji.html"
+            }
+        }
+    }
+}
