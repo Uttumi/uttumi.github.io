@@ -348,11 +348,12 @@ textarea {
 
     .dropdown-item
     {
-        display: block;
+        display: inline-block
+      /*  display: block;*/
         text-align: left;
         clear: both;
 
-        width: 100%;
+     /*   width: 100%;*/
         border-radius: 0px 0px 30px 20px;
     }
 
@@ -444,10 +445,32 @@ textarea {
       margin: 60px 0px;
     }
 
-    hr.fading-edge {
+    article > hr, hr.paragraph-gap {
         border: 0;
         height: 2px;
         background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(169, 98, 140, 0.75), rgba(0, 0, 0, 0));
+    }
+
+    /* Flaired edges, by Tomas Theunissen */
+    hr.article-gap
+    {
+        height: 40px;
+        border-style: solid;
+        border-color: rgba(169, 98, 140, 0.75);
+        border-width: 1px 0 0 0;
+        border-radius: 50px;
+    }
+
+    hr.article-gap:before 
+    { /* Not really supposed to work, but does */
+        display: block;
+        content: "";
+        height: 40px;
+        margin: -41px 0 0 0;
+        border-style: solid;
+        border-color: rgba(169, 98, 140, 0.75);
+        border-width: 0 0 1px 0;
+        border-radius: 50px;
     }
 
     img

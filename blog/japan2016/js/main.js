@@ -1,13 +1,3 @@
-/*var planArray = [
-	'content/plan/2016-02-13-Himeji.html',
-	'content/plan/2016-02-13-Himeji.html'
-];
-
-var experienceArray = [
-	'content/experience/2016-02-13-Himeji.html',
-	'content/experience/2016-02-13-Himeji.html'
-];*/
-
 var nav_lists = {};
 
 var $window = $(window);
@@ -17,16 +7,12 @@ $(document).ready(function()
 {
 	CreateNavigationFromIndexJson();
 
-/*	CheckHash ();*/
-
-	// BuildContentFromArray (contentArray);
-
 	SetBGIntoMotion ();
 
 	console.debug('Reading JSON');
 });
 
-function InitializePage()
+function FinalizePage()
 {
     $window.bind( 'hashchange', function(event)
     {
@@ -40,35 +26,20 @@ function InitializePage()
 	console.debug('Ready')
 }
 
-
-/*$(document).hashchange( function() //.bind("hashchange", function()
-{
-    // Anchor has changed.
-    alert('Anchor changed!');
-    CheckHash ();
-});*/
-
 function CheckHash ()
 {
 	//Remove the # from the hash, as different browsers may or may not include it
 	var hash = location.hash.replace('#','');
 
-	console.debug('Initial hash: '+ hash);
-	console.debug('content/'+ nav_lists[location.hash]);
+	console.debug('Initial hash: '+ hash +' - '+ location.hash);
+	$.each( nav_lists, function( key, value ) {
+		console.log( key + ": " + value );
+		value.element.text += ' ('+ value.own_articles +'-'+ value.child_articles +')';
+	});
 
-	templates.load(nav_lists[location.hash], "#content-area", "files-loaded");
+	console.debug('content/'+ nav_lists[location.hash].article_list);
 
-/*	switch (hash)
-	{
-		case 'plan':
-			console.log("PLAN!");
-			templates.load(planArray, "#content-area", "files-loaded");
-			break;
-		case 'experience':
-			console.log("EXPERIENCE!");
-			templates.load(experienceArray, "#content-area", "files-loaded");
-			break;
-	}*/
+	templates.load(nav_lists[location.hash].article_list, "#content-area", "files-loaded");
 
 	$('html,body').scrollTop(0);
 
@@ -128,7 +99,7 @@ function BuildContentFromArray (contentArray)
 	$.each(contentArray, function( index, value )
 	{
 		if (index > 0)
-			$('#content-area').append("<hr>");
+			$('#content-area').append('<hr class=\"article-gap clearfix\">');
 
 		$.get(value, function(data)
 		{
@@ -185,41 +156,8 @@ var templates = (function ($, host) {
 					}
 				);
 
-		/*		tempElement.appendTo('#content-area');*/
-
 				console.debug('TEMP ELEMENTS: '+ tempElements.length);
 				console.debug('HTMLs: '+ templateArray.length);
-
-                    	// on success, add the template to the targeted DOM element
-/*						if (index > 0)
-						{
-							$(target).append("<hr>");
-						}*/
-
-/*						var numberOfArticles = occurrences(data, '<article');*/
-
-/*						if (templateArray.length == 1 && numberOfArticles > 1)
-						{
-							var elements = $(theHtmlString);
-							var found = elements.('article id=\"'+ kyoto1 +'\"', elements);
-						}*/
-/*
-						$(target).append(data);*/
-
-/*                var loader = $.get('content/'+ urlValue)
-                    .success(function (data) 
-                    {
-                    	// on success, add the template to the targeted DOM element
-						if (index > 0)
-						{
-							$(target).append("<hr>");
-						}
-
-						var numberOfArticles = occurrences(data, '<article');
-
-						$(target).append(data);
-                	});
-                defferArray.push(loader);*/
             })
 
             $.when.apply(null, defferArray).done(
@@ -233,7 +171,8 @@ var templates = (function ($, host) {
 	            		{
 	            			if (index > 0)
 							{
-								$(target).append("<hr>");
+								$(target).append("<span class=\"clearfix\">");
+								$(target).append("<hr class=\"article-gap\">");
 							}
 
 /*							console.debug('TEMP ELEMENT: '+ tempElement.html());
@@ -257,6 +196,8 @@ var templates = (function ($, host) {
 						1, 
 						'#'
 					);
+
+					console.log(nav_lists);
             	});
 
             $.when(loader).done(function ()
@@ -271,7 +212,7 @@ $(document).on(
 	"json-loaded", 
 	function ()
 	{
-		InitializePage();
+		FinalizePage();
 	    console.debug('JSON loaded');
 	}
 )
@@ -290,29 +231,6 @@ function CreateNavigationFromIndexJson()
 	var json = null;
 
 	templates.loadJSON('content/index.json', "json-loaded");
-
-/*	$.getJSON
-	(
-		'content/index.json',
-		function(json)
-		{
-			console.log('Opened index.json');
-
-			console.debug(JSON.stringify(json.en.experience));
-
-			CreateNavigationElement(
-				$('nav'), 
-				{key: 'root', value: json.en}, 
-				1, 
-				'#'
-				);
-
-			console.debug(nav_lists);
-		}
-	)
-	.error ( function() { console.debug('Could not open index.json'); } )
-	
-	return json;*/
 }
 
 function CreateNavigationElement(parent_element, json_tuple, list_level, anchor)
@@ -339,7 +257,8 @@ function CreateNavigationElement(parent_element, json_tuple, list_level, anchor)
 						ul_element, 
 						complex_element_tuple,
 						list_level,
-						anchor + complex_element_tuple.key
+						anchor + complex_element_tuple.key,
+						false
 						);
 
 					list_item.appendTo(ul_element);
@@ -387,7 +306,8 @@ function CreateNavigationElement(parent_element, json_tuple, list_level, anchor)
 									ul_element, 
 									article_tuple,
 									list_level,
-									anchor +'/'+ article_tuple.key
+									anchor +'/'+ article_tuple.key,
+									true
 								);
 							}
 						)
@@ -401,7 +321,8 @@ function CreateNavigationElement(parent_element, json_tuple, list_level, anchor)
 							ul_element, 
 							complex_element_tuple,
 							list_level,
-							anchor +'/'+ complex_element_tuple.key
+							anchor +'/'+ complex_element_tuple.key,
+							false
 							);
 
 						CreateNavigationElement(
@@ -447,7 +368,9 @@ function CreateNavigationElement(parent_element, json_tuple, list_level, anchor)
 									parent_element, 
 									article_tuple,
 									list_level,
-									anchor +'/'+ article_tuple.key
+									anchor +'/'+ article_tuple.key,
+									true
+
 								);
 							}
 						)
@@ -458,7 +381,8 @@ function CreateNavigationElement(parent_element, json_tuple, list_level, anchor)
 							parent_element, 
 							complex_element_tuple,
 							list_level,
-							anchor +'/'+ complex_element_tuple.key
+							anchor +'/'+ complex_element_tuple.key,
+							false
 							);
 
 						var new_nav_element = CreateNavigationElement(
@@ -475,9 +399,9 @@ function CreateNavigationElement(parent_element, json_tuple, list_level, anchor)
 	}
 }
 
-function CreateListItem(parent_element, json_tuple, list_level, anchor)
+function CreateListItem(parent_element, json_tuple, list_level, anchor, is_article)
 {
-	anchor = anchor.toLowerCase();
+	anchor = anchor.replace(' ', '-').toLowerCase();
 
 	var list_item = $('<li />').appendTo(parent_element);
 	var link = $('<a />', {href: anchor}).appendTo(list_item);
@@ -491,19 +415,22 @@ function CreateListItem(parent_element, json_tuple, list_level, anchor)
 		case 2: 
 				list_item.addClass('dropdown-item level1');
 
-				AddToNavList(anchor, json_tuple);
+				if(is_article)
+					AddToNavList(anchor, json_tuple, link);
 
 				break;
 		case 3: 
 				list_item.addClass('dropdown-item level2');
 
-				AddToNavList(anchor, json_tuple);
+				if(is_article)
+					AddToNavList(anchor, json_tuple, link);
 
 				break;
 		default: 
 				list_item.addClass('dropdown-item level3');
 
-				AddToNavList(anchor, json_tuple);
+				if(is_article)
+					AddToNavList(anchor, json_tuple, link);
 
 				break;		
 	}
@@ -511,12 +438,14 @@ function CreateListItem(parent_element, json_tuple, list_level, anchor)
 	return list_item;
 }
 
-function AddToNavList(orig_anchor, json_tuple)
+function AddToNavList(orig_anchor, json_tuple, link_element)
 {
 	var folders = orig_anchor.split('/');
 	var anchor = '';
 	var article_id = folders[folders.length-1];
 	var article_selector = json_tuple.value +' #'+ article_id;
+
+	var last_folder = false;
 
 	$.each(
 		folders,
@@ -531,15 +460,51 @@ function AddToNavList(orig_anchor, json_tuple)
 				anchor += '/'+ folder;
 			}
 
+			if(index = folders.length-1)
+				last_folder = true;
+
 			if(nav_lists.hasOwnProperty(anchor))
 			{
 				console.debug('Pushing to '+ anchor +': '+ article_selector);
-				nav_lists[anchor].push(article_selector);
+				nav_object = nav_lists[anchor];
+
+				console.log(nav_object);
+
+				nav_object.article_list.push(article_selector);
+
+				console.log(nav_object);
+
+				if(last_folder)
+					nav_object.own_articles += 1;
+				else
+					nav_object.child_articles += 1;
+
+				console.log(nav_object);
+				console.log(nav_lists[anchor]);
 			}
 			else
 			{
 				console.debug('Initializing '+ anchor +': '+ article_selector);
-				nav_lists[anchor] = [article_selector];
+
+				var nav_object = {article_list: [article_selector], own_articles: 0, child_articles: 0, element: link_element};
+
+				if(last_folder)
+					nav_object.own_articles = 1;
+				else
+					nav_object.child_articles = 1;
+
+				console.log(nav_object);
+
+				nav_lists[anchor] = nav_object;
+
+				console.log(nav_lists[anchor]);
+			}
+
+			console.log(nav_lists[orig_anchor]);
+
+			for( variable in nav_lists )
+			{
+				console.log(variable.key +' - '+ variable.value);
 			}
 		}
 	);
@@ -621,5 +586,3 @@ function occurrences(string, subString, allowOverlapping)
     }
     return n;
 }
-
-
