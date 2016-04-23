@@ -1,15 +1,20 @@
 {
     "en": {
-        "Diary": {
-            "Kyoto": {
-                "Flea Markets": {
+        "articles": {
+            "English Index Page": "en/en_index.html"
+        },
+        "diary": {
+            "kyoto": {
+                "markets": {
                     "articles": {
-                        "Kitano Tenman-gu": "en/Diary/Kyoto/Flea Markets/Kitano Tenmangu.html"
+                        "Kitano Tenman-gu": "en/diary/kyoto/markets/kitano_tenman-gu.html"
                     }
                 },
-                "Hiking": {
-                    "articles": {
-                        "Fushimi Inari-taisha": "en/Diary/Kyoto/Hiking/Fushimi Inari Taisha.html"
+                "temples_n_shrines": {
+                    "fushimi_inari-taisha": {
+                        "articles": {
+                            "Fushimi Inari-taisha": "en/diary/kyoto/temples_n_shrines/fushimi_inari-taisha/Day1.html"
+                        }
                     }
                 }
             }

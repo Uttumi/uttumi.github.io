@@ -32,14 +32,18 @@ function CheckHash ()
 	var hash = location.hash.replace('#','');
 
 	console.debug('Initial hash: '+ hash +' - '+ location.hash);
-	$.each( nav_lists, function( key, value ) {
-		console.log( key + ": " + value );
-		value.element.text += ' ('+ value.own_articles +'-'+ value.child_articles +')';
-	});
+	$.each( 
+		nav_lists, 
+		function( key, value )
+		{
+			console.log( key + ": " + value );
+			value.element.text += ' ('+ value.own_articles +'-'+ value.child_articles +')';
+		}
+	);
 
-	console.debug('content/'+ nav_lists[location.hash].article_list);
+	//console.debug('content/'+ nav_lists[location.hash].article_list);
 
-	templates.load(nav_lists[location.hash].article_list, "#content-area", "files-loaded");
+	templates.load('content/'+ nav_lists[location.hash].article_list, "#content-area", "files-loaded");
 
 	$('html,body').scrollTop(0);
 
@@ -188,12 +192,12 @@ var templates = (function ($, host) {
         loadJSON: function (jsonPath, event)
         {
             var loader = $.getJSON(jsonPath)
-                .success(function (data) 
+                .success(function (jsonData) 
                 {
-					CreateNavigationElement(
-						$('nav'), 
-						{key: 'root', value: data.en}, 
-						1, 
+					ProcessNavigationElement(
+						$('nav'),
+						{key: 'root', value: jsonData.en},
+						1,
 						'#'
 					);
 
@@ -233,170 +237,128 @@ function CreateNavigationFromIndexJson()
 	templates.loadJSON('content/index.json', "json-loaded");
 }
 
-function CreateNavigationElement(parent_element, json_tuple, list_level, anchor)
+function ProcessNavigationElement(parent_element, json_element, list_level, anchor)
 {
-	var nav_element;
-
-	console.debug('ANCHOR LEVEL:'+ anchor);
+	console.debug('LEVEL:'+ list_level);
+	console.debug('ANCHOR:'+ anchor);
 	console.debug('#########################');
+
+	var sub_json_element_list = GetComplexElementList(json_element.value);
 
 	switch(list_level)
 	{
 		case 1: 
-			nav_element = $('<div />', {id: 'nav-bar'}).appendTo(parent_element);
-			var ul_element = $('<ul />').appendTo(nav_element);
-
-			var complex_element_list = GetComplexElementList(json_tuple.value);
+			var topics_div = $('<div />', {id: 'nav-bar'}).appendTo(parent_element);
+			var topics_ul = $('<ul />').appendTo(topics_div);
 
 			$.each
 			(
-				complex_element_list,
-				function( index, complex_element_tuple )
+				sub_json_element_list,
+				function( index, sub_json_element )
 				{
-					var list_item = CreateListItem(
-						ul_element, 
-						complex_element_tuple,
-						list_level,
-						anchor + complex_element_tuple.key,
-						false
-						);
+					if(sub_json_element.key == 'articles')
+					{
 
-					list_item.appendTo(ul_element);
-
-					var new_nav_element = CreateNavigationElement(
-						list_item, 
-						complex_element_tuple, 
-						list_level+1,
-						anchor + complex_element_tuple.key
-						);
-
-/*					new_nav_element.appendTo(list_item);*/
+					}
+					else
+					{
+						CreateNavElement(topics_ul, sub_json_element, list_level, anchor, true);
+					}
 				}
 			)
 			break;
 		case 2:
-			nav_element = $('<div />', {class: 'dropdown-menu'}).appendTo(parent_element);
-			var ul_element = $('<ul />').appendTo(nav_element);
-
-			var complex_element_list = GetComplexElementList(json_tuple.value);
+			var topic_dropdown_div = $('<div />', {class: 'dropdown-menu'}).appendTo(parent_element);
+			var topic_dropdown_ul = $('<ul />').appendTo(topic_dropdown_div);
 
 			$.each
 			(
-				complex_element_list,
-				function( index, complex_element_tuple )
+				sub_json_element_list,
+				function( index, sub_json_element )
 				{
-					if(complex_element_tuple.key == 'articles')
+					if(sub_json_element.key == 'articles')
 					{
-						console.debug('Articles 2');
-						console.debug(complex_element_tuple);
-
-						var article_list = GetComplexElementList(complex_element_tuple.value);
-
-						console.debug(article_list);
-
-						$.each
-						(
-							article_list,
-							function( index, article_tuple )
-							{
-								console.debug('Article: 2');
-								console.debug(article_tuple);
-
-								var list_item = CreateListItem(
-									ul_element, 
-									article_tuple,
-									list_level,
-									anchor +'/'+ article_tuple.key,
-									true
-								);
-							}
-						)
+						CreateNavElementsFromArticles(topic_dropdown_ul, sub_json_element, list_level, anchor +'/');
 					}
 					else
 					{
-						console.debug('Complex element 2');
-						console.debug(complex_element_tuple);
-
-						var list_item = CreateListItem(
-							ul_element, 
-							complex_element_tuple,
-							list_level,
-							anchor +'/'+ complex_element_tuple.key,
-							false
-							);
-
-						CreateNavigationElement(
-							ul_element, 
-							complex_element_tuple, 
-							list_level+1,
-							anchor +'/'+ complex_element_tuple.key
-							);
-
-/*						new_nav_element.appendTo(list_item);
-*/					}
+						CreateNavElement(topic_dropdown_ul, sub_json_element, list_level, anchor +'/', false);
+					}
 				}
 			)
 
 			break;
 		default:
-			var complex_element_list = GetComplexElementList(json_tuple.value);
-
 			$.each
 			(
-				complex_element_list,
-				function( index, complex_element_tuple )
+				sub_json_element_list,
+				function( index, sub_json_element )
 				{
-					console.debug('Tuple 3:');
-					console.debug(complex_element_tuple);
-
-					if(complex_element_tuple.key == 'articles')
+					if(sub_json_element.key == 'articles')
 					{
-						console.debug('Is articles 3');
-
-						var article_list = GetComplexElementList(complex_element_tuple.value);
-
-						console.debug(article_list);
-
-						$.each
-						(
-							article_list,
-							function( index, article_tuple )
-							{
-								console.debug(article_tuple);
-
-								var list_item = CreateListItem(
-									parent_element, 
-									article_tuple,
-									list_level,
-									anchor +'/'+ article_tuple.key,
-									true
-
-								);
-							}
-						)
+						CreateNavElementsFromArticles(parent_element, sub_json_element, list_level, anchor +'/');
 					}
 					else
 					{
-						var list_item = CreateListItem(
-							parent_element, 
-							complex_element_tuple,
-							list_level,
-							anchor +'/'+ complex_element_tuple.key,
-							false
-							);
-
-						var new_nav_element = CreateNavigationElement(
-							parent_element, 
-							complex_element_tuple, 
-							list_level+1,
-							anchor +'/'+ complex_element_tuple.key
-							);
+						CreateNavElement(parent_element, sub_json_element, list_level, anchor +'/', false);
 					}
 				}
 			)
-			
+
 			break;
 	}
+}
+
+function CreateNavElement(parent_element, json_element, list_level, parent_anchor, append_list_item)
+{
+	var list_item = CreateListItem(
+		parent_element, 
+		json_element,
+		list_level,
+		parent_anchor + json_element.key,
+		false
+		);
+
+	if(append_list_item)
+	{
+		list_item.appendTo(parent_element);
+
+		ProcessNavigationElement(
+			list_item, 
+			json_element, 
+			list_level+1,
+			parent_anchor + json_element.key
+			);
+	}
+	else
+	{
+		ProcessNavigationElement(
+			parent_element, 
+			json_element, 
+			list_level+1,
+			parent_anchor + json_element.key
+			);
+	}
+}
+
+function CreateNavElementsFromArticles(parent_element, json_element, list_level, parent_anchor)
+{
+	var article_list = GetComplexElementList(json_element.value);
+
+	$.each
+	(
+		article_list,
+		function( index, article_tuple )
+		{
+			CreateListItem(
+				parent_element, 
+				article_tuple,
+				list_level,
+				parent_anchor + article_tuple.key,
+				true
+			);
+		}
+	)
 }
 
 function CreateListItem(parent_element, json_tuple, list_level, anchor, is_article)
@@ -440,6 +402,8 @@ function CreateListItem(parent_element, json_tuple, list_level, anchor, is_artic
 
 function AddToNavList(orig_anchor, json_tuple, link_element)
 {
+	console.log('Adding to nav list');
+
 	var folders = orig_anchor.split('/');
 	var anchor = '';
 	var article_id = folders[folders.length-1];
