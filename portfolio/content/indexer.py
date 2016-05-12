@@ -58,7 +58,7 @@ def recursive_folder_check(folder_path):
 	if( len(folder_content_dict['pages']) == 0 ):
 		for subfolder in subfolders:
 			folder_name = subfolder
-			if folder_name[0] == '_':
+			if folder_name[0] == '-':
 				folder_name = folder_name[1:]
 				if 'subpages' in folder_content_dict:
 					folder_content_dict['subpages'].append( { folder_name: recursive_folder_check(folder_path +'/'+ subfolder) } )

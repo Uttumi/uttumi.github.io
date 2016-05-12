@@ -13,26 +13,26 @@
                 {
                     "furniture": {
                         "images": [
-                            "2_blender/house_model/_furniture/arm_chair.png",
-                            "2_blender/house_model/_furniture/desk.png",
-                            "2_blender/house_model/_furniture/kitchen_table.png",
-                            "2_blender/house_model/_furniture/sofa.png"
+                            "2_blender/house_model/-furniture/arm_chair.png",
+                            "2_blender/house_model/-furniture/desk.png",
+                            "2_blender/house_model/-furniture/kitchen_table.png",
+                            "2_blender/house_model/-furniture/sofa.png"
                         ]
                     }
                 },
                 {
                     "house": {
                         "images": [
-                            "2_blender/house_model/_house/perspective_view.png",
-                            "2_blender/house_model/_house/top_view.png"
+                            "2_blender/house_model/-house/perspective_view.png",
+                            "2_blender/house_model/-house/top_view.png"
                         ]
                     }
                 },
                 {
                     "render": {
                         "images": [
-                            "2_blender/house_model/_render/bedroom.png",
-                            "2_blender/house_model/_render/kitchen_table_in_room.png"
+                            "2_blender/house_model/-render/bedroom.png",
+                            "2_blender/house_model/-render/kitchen_table_in_room.png"
                         ]
                     }
                 }
