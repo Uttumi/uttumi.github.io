@@ -1,0 +1,94 @@
+@function calculateRem($size)
+{
+    $remSize: $size / 16px;
+    @return $remSize * 1rem;
+}
+
+@mixin font-size($size)
+{
+    font-size: $size;
+    font-size: calculateRem($size);
+}
+
+$myriad-font-stack: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+$lucida-font-stack: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
+$crimson-font-stack: 'Crimson Text', serif;
+$article-font-stack: Verdana, Geneva, sans-serif;
+
+
+@mixin nav-font()
+{
+    color: $font-color-light;
+    text-decoration: none;
+}
+
+
+
+/*
+$article-font-stack: Verdana, Geneva, sans-serif;
+
+@font-face {
+    font-family: 'japanese';
+    src: url('fonts/japanese/Japanese Tourist.ttf');
+}
+
+@font-face {
+    font-family: 'shanghai';
+    src: url('fonts/shanghai/shanghai.ttf');
+}
+
+.japanese-font
+{
+    letter-spacing: 10px;
+    font-family: 'japanese';
+}
+
+.shanghai-font
+{
+    letter-spacing: 10px;
+    font-family: 'shanghai';
+}
+*/
+/* 
+h1, h2, h3, h4, h5, h6
+{
+  margin: 10px 0;
+  font-weight: 700;
+  color: $highlight-color-2;
+  font-family: lucida-font-stack;
+  letter-spacing: -1px;
+}
+
+h1
+{
+  font-size: 36px;
+  font-weight: 700;
+}
+
+h2
+{
+  padding-bottom: 10px;
+  font-size: 32px;
+  background: url('../img/bg_hr.png') repeat-x bottom;
+}
+
+h3
+{
+  font-size: 24px;
+}
+
+h4
+{
+  font-size: 21px;
+}
+
+h5
+{
+  font-size: 18px;
+}
+
+h6
+{
+  font-size: 16px;
+}
+ */

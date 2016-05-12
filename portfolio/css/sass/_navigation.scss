@@ -1,0 +1,353 @@
+$menu-icon-lines: 3;
+$menu-icon-line-height: 6px;
+
+$nav-level-1-height: 100px;
+$nav-level-2-height: 50px;
+
+#portfolio-navigation
+{
+
+}
+
+#menu-icon
+{
+    z-index: 30;
+/*     position: fixed; */
+    position: absolute; 
+
+    display: block;
+    float: left;
+
+    height: $header-height / 2;
+    width: $header-height / 2;
+
+    margin: $header-height / 8;
+
+    @include border-radius(10px);
+
+    @include breakpoint($collapsed-nav)
+    {
+
+    }
+
+    @include breakpoint($full-size)
+    {
+        display: none;
+    }
+
+    & span
+    {
+        display: block;
+
+        width: 80%;
+        height: $menu-icon-line-height;
+
+        margin-left: 10%;
+        margin-right: 10%;
+
+        background-color: $colorful-color;
+
+        //border: 3px solid $main-color-colorful;
+        @include border-radius($menu-icon-line-height/2);
+
+        margin-top: (($header-height / 2) - $menu-icon-lines * $menu-icon-line-height) / ($menu-icon-lines+1);
+
+        transition: all 0.2s linear;
+    }
+
+    &:hover 
+    {
+        //@include animation(menu-icon-anim 10s linear 10s 1);
+        @include animation-name(menu-icon-anim);
+        @include animation-duration(1s);
+        @include animation-delay(0s);
+        @include animation-iteration-count(1);
+
+        background-color: $base-color-dim;
+
+        //@include rotateZ(90deg);
+        //transition: all 0.2s linear;
+
+        & span
+        {
+            background-color: $base-color-light;
+
+            width: 10%;
+            margin-left: 45%;
+            margin-right: 45%;
+
+            transition: all 0.2s linear;
+        }
+    }
+}
+
+#navigation-menu
+{
+    z-index: 15;
+/*     position: fixed; */
+    position: absolute;
+
+    left: 0px;
+    top: 0px;
+    width: $nav-width;
+
+    text-align: center;
+    text-transform: capitalize;
+
+    margin-top: $header-height - 20px;
+}
+
+
+label + input
+{
+    display: none;
+    visibility: hidden;
+}
+
+.nav-wrap
+{
+    //position: relative;
+    overflow: hidden;
+    //@include transform(translateZ(0));
+    & > ul > li
+    {
+        //position: relative;
+        //top: 0%;
+
+//        position: relative;
+        //margin-top: 0px;
+        //top: 0px;
+/*         @include transform(translateY(0%));
+        border:1px solid transparent;
+        overflow: hidden; */
+        //transition: margin-top 800ms linear; //ease-in-out;
+        //overflow: hidden;
+
+        
+    }
+
+    #hamburger-menu:not(:checked), label + input:not(:checked) + & ul > li
+    {
+        //margin-top: -$nav-level-2-height/2 !important;
+
+        & > label
+        {
+            height: 0px !important;
+            //line-height: 0px !important;
+            @include transform(scale(0));
+            opacity: 0;
+
+            transition: opacity 300ms linear, transform 300ms linear, color 800ms ease-in-out 200ms, padding 800ms ease-in-out 200ms, height 800ms linear 200ms !important;
+        }
+        
+//        position: relative;
+        //margin-top: -100%;
+        //top: 100%;
+/*         @include transform(translateY(-100%));
+        border:1px solid transparent;
+        overflow: hidden; */
+        //position: relative;
+        //top: -100%;
+        //transition: margin-top 800ms linear;
+        //overflow: hidden;
+    }
+
+    @include breakpoint($full-size)
+    {
+        label + input:not(:checked) + & > ul
+        {
+            margin-top: -100%;
+            transition: margin-top 800ms linear;
+        }
+
+        label + input:checked + & > ul
+        {
+            margin-top: 0px;
+            transition: margin-top 800ms linear; //ease-in-out;
+        }
+    }
+}
+
+#level_1
+{
+    height: auto;
+
+    @include breakpoint($full-size)
+    {
+        margin-top: 0px;
+    }
+}
+
+.nav_element
+{
+    display: block;
+    overflow: auto;
+
+    box-sizing: border-box; //Considers borders to be inside the dimensions of the element -> padding doesn't move borders and width 100% works
+    width: 100%;
+    
+    border-right: $nav-border-width solid $base-color-dark;
+
+    @include background-image(
+        linear-gradient(
+            90deg, 
+            rgba($left-color, 0.95) $gradient-line-pos, 
+            $right-color));
+
+    @include breakpoint($full-size)
+    {
+        @include background-image(
+            linear-gradient(
+                90deg, 
+                rgba($left-color, 0.0) $gradient-line-pos, 
+                $right-color));
+    }
+}
+
+#level_1 > li 
+{
+    @extend .nav_element;
+
+    & > label
+    {
+        height: $nav-level-1-height;
+
+        @include font-size(24px);
+        line-height: $nav-level-1-height;
+        vertical-align: middle;
+        
+        color: $base-color-bright;
+        text-decoration: none;
+
+        transition: opacity 200ms linear 800ms, transform 200ms linear 800ms, color 800ms ease-in-out, height 800ms linear;
+    }
+
+    &:hover
+    {
+        @include background-image(
+            linear-gradient(
+                90deg, 
+                rgba($left-focus-color, 0.95) $gradient-line-pos, 
+                $right-focus-color));
+
+        @include breakpoint($full-size)
+        {
+            @include background-image(
+                linear-gradient(
+                    90deg, 
+                    rgba($left-focus-color, 0.0) $gradient-line-pos, 
+                    $right-focus-color));
+
+        }
+
+        & > label
+        {
+            //font-weight: bold;
+            //letter-spacing: 1px;
+        }
+    }
+
+    &#first_nav_element
+    {
+        @include background-image(
+            radial-gradient(
+                $nav_width 100px, 
+                $nav_width - $gradient-line-pos 105px, 
+                $right-color, 
+                rgba($left-color, 0.95)));
+
+        @include breakpoint($full-size)
+        {
+            @include background-image(
+                radial-gradient(
+                    $nav_width 100px, 
+                    $nav_width - $gradient-line-pos 105px, 
+                    $right-color, 
+                    rgba($left-color, 0.0)));
+        }
+
+        &:hover
+        {
+            @include background-image(
+                radial-gradient(
+                    $nav_width 100px, 
+                    $nav_width - $gradient-line-pos 105px,  
+                    $right-focus-color, 
+                    rgba($left-focus-color, 0.95)));
+
+            @include breakpoint($full-size)
+            {
+                @include background-image(
+                    radial-gradient(
+                        $nav_width 100px, 
+                        $nav_width - $gradient-line-pos 105px, 
+                        $right-focus-color, 
+                        rgba($left-focus-color, 0.0)));
+            }
+
+            & > label
+            {
+
+            }
+        }
+    }
+
+    &#last_nav_element
+    {
+        @extend .nav_element;
+
+        height: 10px;
+
+        //@include border-bottom-left-radius(10px);
+        @include border-bottom-right-radius(10px);
+
+        border-bottom: $nav-border-width/2 solid $base-color-dark;
+    }
+}
+
+#level_2 > li,
+#level_3 > li
+{
+    background-color: rgba($base-color-dark, 0.95);
+    border-right: $nav-border-width solid $base-color-dark;
+    transition: background-color 800ms ease-in-out 200ms, margin-top 800ms linear 200ms;
+
+    @include breakpoint($full-size)
+    {
+        background-color: rgba($base-color-dark, 0.8);
+    }
+
+    & > label
+    {
+        display: block;
+        box-sizing: border-box; //Considers borders to be inside the dimensions of the element -> padding doesn't move borders and width 100% works  
+        width: 100%;
+        height: $nav-level-2-height;
+
+        @include font-size(20px);
+        line-height: $nav-level-2-height;
+        vertical-align: middle;
+
+        text-decoration: none;
+        color: $base-color;
+        padding: 0px 0;
+
+        transition: opacity 200ms linear 800ms, transform 200ms linear 800ms, color 800ms ease-in-out, padding 800ms ease-in-out, height 800ms linear;
+    }
+
+    &:hover
+    {
+        background-color: rgba($base-color-dim, 0.95);
+
+        @include breakpoint($full-size)
+        {
+            background-color: rgba($base-color-dim, 0.8);
+        }
+
+        & > label
+        {
+            color: $base-color-bright;
+            padding: 0px 0 0px 40px;
+        }
+    }
+}

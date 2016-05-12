@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Blog</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--
+<link rel="stylesheet" type="text/css" href="stylesheets/stylesheetTEST.css">
+-->
+
+<script src='lib/jquery-1.12.0.min.js'></script>
+<script src='lib/bootstrap-3.3.6-dist/js/bootstrap.min.js'></script>
+
+<link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.6-dist/css/bootstrap.min.css">
+
+<style type="text/css">
+
+	hidden-reset {
+		margin: 0;
+		border: 0;
+		padding: 0;
+	}
+
+	html
+	{
+		/* Make sure HTML element is at least as tall as the viewport */
+	    min-height:100%;
+	    position:relative;
+	}
+
+	body
+	{
+		/* Force the BODY element to match the height of the HTML element */
+	    height: 100%;  
+	}
+
+	header
+	{
+		background-color: #000;
+
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 30px;
+		width: 100%;
+
+		z-index: 200;
+	}
+
+	#content-area-2
+	{
+		background-color: #FFF;
+		height: 1800px;
+		z-index: 100;
+	}
+
+	#content-area
+	{
+		background-color: #FFF;
+		
+		position: relative;
+		height: 1800px;
+
+		/* Place the content are in the middle of the page */
+		margin: auto;
+		
+		z-index: 100;
+	}
+
+	.background
+	{
+		position: absolute;
+		top:0;
+		bottom:0;
+		left:0;
+		right:0;
+    	overflow:hidden;
+	}
+
+	#bg-layer-1
+	{
+		background-color: #ffe5e5;
+		top: 0%;
+		display:block;
+		overflow:auto;
+		z-index: 1;
+	}
+
+	#bg-layer-2
+	{
+		background-color: #ffcccc;
+		top: 20%;
+		height: 80%;
+		z-index: 2;
+	}
+
+	#bg-layer-3
+	{
+		background-color: #ffb3b3;
+		top: 40%;
+		height: 60%;
+		z-index: 3;
+	}
+
+
+
+	/*MAX AREA*/
+	@media screen and (min-width: 1024px) {
+		#content-area
+		{
+			width: 800px;
+		}
+	}
+
+	/*MEDIUM AREA*/
+	@media screen and (max-width: 1024px) {
+		#content-area
+		{
+			width: 100%;
+		}
+
+		.background
+		{
+
+			display: none;
+		}
+	}
+
+	/*MIN AREA*/
+	@media screen and (max-width: 480px) {
+		#content-area
+		{
+			width: 100%;
+		}
+
+		.background
+		{
+
+			display: none;
+		}
+	}
+
+	.navbar {
+		background-color: transparent;
+		background: transparent;
+		border-color: transparent;
+	}
+
+	.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+		background-color: transparent;
+		background: transparent;
+		border-color: transparent;
+	}
+
+	.navbar li { color: #000 } 
+
+	.navbar-nav
+	{
+		display: table;  /* Allow the centering to work */
+	    position: absolute;
+	    width: 100%;
+	    margin: auto;
+	}
+
+	.navbar-nav > li
+	{
+		display: inline;
+	}
+
+}
+
+</style>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
+
+</head>
+
+
+
+<body>
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+	 	<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-targets"#example">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">KYOTO 2016</a>
+			</div>
+			<div class="collapse navbar-collapse" if="example">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#">Page 1</a></li>
+					<li><a href="#">Page 2</a></li> 
+					<li><a href="#">Page 3</a></li> 
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="container-fluid">
+		<div class="row">
+			<div id="content-area-2" class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+			</div>
+		</div>
+	
+
+<!--	
+	<section></section>
+	<article></article>
+	<aside></aside>
+-->
+
+		<div class="background" id="bg-layer-3"></div>
+		<div class="background" id="bg-layer-2"></div>
+		<div class="background" id="bg-layer-1"></div>
+
+	</div>
+
+</body>
+</html>

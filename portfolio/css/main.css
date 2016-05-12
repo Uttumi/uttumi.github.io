@@ -1,0 +1,913 @@
+/*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+/* line 13, sass/_html5-boilerplate-reset.scss */
+html {
+  color: #222;
+  font-size: 1em;
+  line-height: 1.4; }
+
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+/* line 27, sass/_html5-boilerplate-reset.scss */
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none; }
+
+/* line 32, sass/_html5-boilerplate-reset.scss */
+::selection {
+  background: #b3d4fc;
+  text-shadow: none; }
+
+/*
+ * A better looking default horizontal rule
+ */
+/* line 41, sass/_html5-boilerplate-reset.scss */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0; }
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+/* line 56, sass/_html5-boilerplate-reset.scss */
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle; }
+
+/*
+ * Remove default fieldset styles.
+ */
+/* line 69, sass/_html5-boilerplate-reset.scss */
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0; }
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+/* line 79, sass/_html5-boilerplate-reset.scss */
+textarea {
+  resize: vertical; }
+
+/* ==========================================================================
+   Browser Upgrade Prompt
+   ========================================================================== */
+/* line 87, sass/_html5-boilerplate-reset.scss */
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0; }
+
+/* line 1, sass/_custom-reset.scss */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* line 14, sass/_custom-reset.scss */
+html {
+  height: 100%; }
+
+/* line 24, sass/_custom-reset.scss */
+body {
+  min-height: 100%; }
+
+/* HTML5 display-role reset for older browsers */
+/* line 31, sass/_custom-reset.scss */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+/* line 37, sass/_custom-reset.scss */
+ol, ul {
+  list-style: none; }
+
+/* line 42, sass/_custom-reset.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* 
+$main-color: #373737;
+$highlight-color: #FFF;
+$alt-highlight-color: #007edf;
+$alt-bg-color: #212121;
+
+
+//$bg-color: #11110B;
+$bg-color: #FFF;
+$link-color: #89A;
+
+$highlight-color-2: #222222;
+
+
+ */
+/*         background-color: $main-color-dim;
+
+        @include rotateZ(90deg);
+        transition: all 0.2s linear;
+
+        & span
+        {
+            background-color: $main-color-highlight;
+
+            width: 10%;
+            margin-left: 45%;
+            margin-right: 45%;
+
+
+
+            transition: all 0.2s linear;
+ */
+@-moz-keyframes menu-icon-anim {
+  0% {
+    background-color: rgba(68, 85, 102, 0); }
+  100% {
+    background-color: #445566; } }
+@-webkit-keyframes menu-icon-anim {
+  0% {
+    background-color: rgba(68, 85, 102, 0); }
+  100% {
+    background-color: #445566; } }
+@keyframes menu-icon-anim {
+  0% {
+    background-color: rgba(68, 85, 102, 0); }
+  100% {
+    background-color: #445566; } }
+/*
+$article-font-stack: Verdana, Geneva, sans-serif;
+
+@font-face {
+    font-family: 'japanese';
+    src: url('fonts/japanese/Japanese Tourist.ttf');
+}
+
+@font-face {
+    font-family: 'shanghai';
+    src: url('fonts/shanghai/shanghai.ttf');
+}
+
+.japanese-font
+{
+    letter-spacing: 10px;
+    font-family: 'japanese';
+}
+
+.shanghai-font
+{
+    letter-spacing: 10px;
+    font-family: 'shanghai';
+}
+*/
+/* 
+h1, h2, h3, h4, h5, h6
+{
+  margin: 10px 0;
+  font-weight: 700;
+  color: $highlight-color-2;
+  font-family: lucida-font-stack;
+  letter-spacing: -1px;
+}
+
+h1
+{
+  font-size: 36px;
+  font-weight: 700;
+}
+
+h2
+{
+  padding-bottom: 10px;
+  font-size: 32px;
+  background: url('../img/bg_hr.png') repeat-x bottom;
+}
+
+h3
+{
+  font-size: 24px;
+}
+
+h4
+{
+  font-size: 21px;
+}
+
+h5
+{
+  font-size: 18px;
+}
+
+h6
+{
+  font-size: 16px;
+}
+ */
+@keyframes fadeIn {
+  0% {
+    opacity: 0.0; }
+  100% {
+    opacity: 0.9; } }
+@keyframes fadeOut {
+  0% {
+    opacity: 0.9; }
+  100% {
+    opacity: 0.0; } }
+/* body {
+    box-sizing: border-box;
+    color: $main-color;
+    background: $bg-color;
+    font-size: 16px;
+    font-family: $myriad-font-stack;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+ */
+/* line 12, sass/_body.scss */
+body {
+  overflow-y: auto; }
+
+/* 
+h1, h2, h3, h4, h5, h6
+{
+    font-family: $crimson-font-stack;
+}
+
+p, div
+{
+    font-family: $crimson-font-stack;
+}
+ */
+/* line 29, sass/_body.scss */
+a {
+  color: #a0dcbe; }
+
+/* a
+{
+    color: $highlight-color;
+    //color: alt-highlight-color;
+
+    text-decoration: none;
+    text-shadow: none;
+    //font-weight: bold;
+
+    @include transition(color 0.5s ease, text-shadow 0.5s ease);
+
+    &:hover, &:focus
+    {
+        text-decoration: underline;
+    }
+}
+ */
+/* p
+{
+  margin: 10px 0 15px 0;
+}
+
+ */
+/* a
+{
+  
+    @include transition(color 0.5s ease, text-shadow 0.5s ease);
+
+  transition: color 0.5s ease;
+  transition: text-shadow 0.5s ease;
+  -webkit-transition: color 0.5s ease;
+  -webkit-transition: text-shadow 0.5s ease;
+  -moz-transition: color 0.5s ease;
+  -moz-transition: text-shadow 0.5s ease;
+  -o-transition: color 0.5s ease;
+  -o-transition: text-shadow 0.5s ease;
+  -ms-transition: color 0.5s ease;
+  -ms-transition: text-shadow 0.5s ease;
+} */
+/* line 1, sass/_header-footer.scss */
+header {
+  z-index: 20;
+  display: block;
+  position: fixed;
+  width: 100%; }
+  /* line 10, sass/_header-footer.scss */
+  header > #header-bar {
+    z-index: 20;
+    position: absolute;
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjBweCIgcj0iOTglIj48c3RvcCBvZmZzZXQ9Ijg1JSIgc3RvcC1jb2xvcj0iIzBjMGQxYyIvPjxzdG9wIG9mZnNldD0iOTAlIiBzdG9wLWNvbG9yPSIjNDQ1NTY2Ii8+PHN0b3Agb2Zmc2V0PSI5NSUiIHN0b3AtY29sb3I9IiMwYzBkMWMiLz48c3RvcCBvZmZzZXQ9Ijk4JSIgc3RvcC1jb2xvcj0iIzBjMGQxYyIgc3RvcC1vcGFjaXR5PSIwLjAiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+    background-size: 100%;
+    background-image: -moz-radial-gradient(50% 0px, 100% 100px, #0c0d1c 85%, #445566 90%, #0c0d1c 95%, rgba(12, 13, 28, 0) 98%);
+    background-image: -webkit-radial-gradient(50% 0px, 100% 100px, #0c0d1c 85%, #445566 90%, #0c0d1c 95%, rgba(12, 13, 28, 0) 98%);
+    background-image: radial-gradient(100% 100px at 50% 0px, #0c0d1c 85%, #445566 90%, #0c0d1c 95%, rgba(12, 13, 28, 0) 98%);
+    height: 100px;
+    line-height: 100px;
+    width: 100%;
+    color: #8baaac;
+    font-size: 48px;
+    font-size: 3rem;
+    text-align: center;
+    vertical-align: middle; }
+
+/* line 29, sass/_header-footer.scss */
+footer {
+  z-index: 20;
+  display: block;
+  position: fixed;
+  display: table-cell;
+  vertical-align: bottom;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjEwMCUiIHI9IjEwMCUiPjxzdG9wIG9mZnNldD0iODUlIiBzdG9wLWNvbG9yPSIjMGMwZDFjIiBzdG9wLW9wYWNpdHk9IjAuOSIvPjxzdG9wIG9mZnNldD0iOTAlIiBzdG9wLWNvbG9yPSIjNDQ1NTY2Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMGMwZDFjIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -moz-radial-gradient(50% 100%, 100% 100%, rgba(12, 13, 28, 0.9) 85%, #445566 90%, rgba(12, 13, 28, 0));
+  background-image: -webkit-radial-gradient(50% 100%, 100% 100%, rgba(12, 13, 28, 0.9) 85%, #445566 90%, rgba(12, 13, 28, 0));
+  background-image: radial-gradient(100% 100% at 50% 100%, rgba(12, 13, 28, 0.9) 85%, #445566 90%, rgba(12, 13, 28, 0));
+  width: 100%;
+  height: 7rem;
+  bottom: 0px;
+  color: #8baaac;
+  font-size: 16px;
+  font-size: 1rem;
+  text-align: center;
+  /*     & #date
+      {
+          position: absolute;
+  
+          // Use these two to get an element in the middle of its parent
+          // Place the left border of the element on the middle line of the parent
+          left: 50%;
+          // Move the element to the left half of its size
+          // Translate uses the element's own size when using percents
+          @include transform(translateX(-50%));
+  
+          width: 100%;
+  
+          padding: 5px;
+          bottom: 10px;
+      } */ }
+  /* line 54, sass/_header-footer.scss */
+  footer #contact_info, footer #date {
+    position: absolute;
+    width: 100%;
+    padding: 5px; }
+  /* line 62, sass/_header-footer.scss */
+  footer #contact_info {
+    bottom: 2.5rem; }
+  /* line 67, sass/_header-footer.scss */
+  footer #date {
+    bottom: 0.5rem; }
+
+/* line 12, sass/_navigation.scss */
+#menu-icon {
+  z-index: 30;
+  /*     position: fixed; */
+  position: absolute;
+  display: block;
+  float: left;
+  height: 50px;
+  width: 50px;
+  margin: 12.5px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px; }
+  @media (min-width: 1500px) {
+    /* line 12, sass/_navigation.scss */
+    #menu-icon {
+      display: none; } }
+  /* line 38, sass/_navigation.scss */
+  #menu-icon span {
+    display: block;
+    width: 80%;
+    height: 6px;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: #a0dcbe;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    margin-top: 8px;
+    transition: all 0.2s linear; }
+  /* line 58, sass/_navigation.scss */
+  #menu-icon:hover {
+    -moz-animation-name: menu-icon-anim;
+    -webkit-animation-name: menu-icon-anim;
+    animation-name: menu-icon-anim;
+    -moz-animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -moz-animation-delay: 0s;
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+    -moz-animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    background-color: #445566; }
+    /* line 71, sass/_navigation.scss */
+    #menu-icon:hover span {
+      background-color: #c2edea;
+      width: 10%;
+      margin-left: 45%;
+      margin-right: 45%;
+      transition: all 0.2s linear; }
+
+/* line 84, sass/_navigation.scss */
+#navigation-menu {
+  z-index: 15;
+  /*     position: fixed; */
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 350px;
+  text-align: center;
+  text-transform: capitalize;
+  margin-top: 80px; }
+
+/* line 101, sass/_navigation.scss */
+label + input {
+  display: none;
+  visibility: hidden; }
+
+/* line 107, sass/_navigation.scss */
+.nav-wrap {
+  overflow: hidden; }
+  /* line 112, sass/_navigation.scss */
+  .nav-wrap > ul > li {
+    /*         @include transform(translateY(0%));
+            border:1px solid transparent;
+            overflow: hidden; */ }
+  /* line 129, sass/_navigation.scss */
+  .nav-wrap #hamburger-menu:not(:checked), label + input:not(:checked) + .nav-wrap ul > li {
+    /*         @include transform(translateY(-100%));
+            border:1px solid transparent;
+            overflow: hidden; */ }
+    /* line 133, sass/_navigation.scss */
+    .nav-wrap #hamburger-menu:not(:checked) > label, label + input:not(:checked) + .nav-wrap ul > li > label {
+      height: 0px !important;
+      -moz-transform: scale(0);
+      -ms-transform: scale(0);
+      -webkit-transform: scale(0);
+      transform: scale(0);
+      opacity: 0;
+      transition: opacity 300ms linear, transform 300ms linear, color 800ms ease-in-out 200ms, padding 800ms ease-in-out 200ms, height 800ms linear 200ms !important; }
+  @media (min-width: 1500px) {
+    /* line 157, sass/_navigation.scss */
+    label + input:not(:checked) + .nav-wrap > ul {
+      margin-top: -100%;
+      transition: margin-top 800ms linear; }
+    /* line 163, sass/_navigation.scss */
+    label + input:checked + .nav-wrap > ul {
+      margin-top: 0px;
+      transition: margin-top 800ms linear; } }
+
+/* line 171, sass/_navigation.scss */
+#level_1 {
+  height: auto; }
+  @media (min-width: 1500px) {
+    /* line 171, sass/_navigation.scss */
+    #level_1 {
+      margin-top: 0px; } }
+
+/* line 181, sass/_navigation.scss */
+.nav_element, #level_1 > li, #level_1 > li#last_nav_element {
+  display: block;
+  overflow: auto;
+  box-sizing: border-box;
+  width: 100%;
+  border-right: 5px solid #0c0d1c;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIxMjBweCIgc3RvcC1jb2xvcj0iIzBjMGQxYyIgc3RvcC1vcGFjaXR5PSIwLjk1Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjOGJhYWFjIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -moz-linear-gradient(0deg, rgba(12, 13, 28, 0.95) 120px, #8baaac);
+  background-image: -webkit-linear-gradient(0deg, rgba(12, 13, 28, 0.95) 120px, #8baaac);
+  background-image: linear-gradient(90deg, rgba(12, 13, 28, 0.95) 120px, #8baaac); }
+  @media (min-width: 1500px) {
+    /* line 181, sass/_navigation.scss */
+    .nav_element, #level_1 > li, #level_1 > li#last_nav_element {
+      background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIxMjBweCIgc3RvcC1jb2xvcj0iIzBjMGQxYyIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM4YmFhYWMiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+      background-size: 100%;
+      background-image: -moz-linear-gradient(0deg, rgba(12, 13, 28, 0) 120px, #8baaac);
+      background-image: -webkit-linear-gradient(0deg, rgba(12, 13, 28, 0) 120px, #8baaac);
+      background-image: linear-gradient(90deg, rgba(12, 13, 28, 0) 120px, #8baaac); } }
+
+/* line 211, sass/_navigation.scss */
+#level_1 > li > label {
+  height: 100px;
+  font-size: 24px;
+  font-size: 1.5rem;
+  line-height: 100px;
+  vertical-align: middle;
+  color: white;
+  text-decoration: none;
+  transition: opacity 200ms linear 800ms, transform 200ms linear 800ms, color 800ms ease-in-out, height 800ms linear; }
+/* line 225, sass/_navigation.scss */
+#level_1 > li:hover {
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIxMjBweCIgc3RvcC1jb2xvcj0iIzBjMGQxYyIgc3RvcC1vcGFjaXR5PSIwLjk1Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjYzJlZGVhIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -moz-linear-gradient(0deg, rgba(12, 13, 28, 0.95) 120px, #c2edea);
+  background-image: -webkit-linear-gradient(0deg, rgba(12, 13, 28, 0.95) 120px, #c2edea);
+  background-image: linear-gradient(90deg, rgba(12, 13, 28, 0.95) 120px, #c2edea); }
+  @media (min-width: 1500px) {
+    /* line 225, sass/_navigation.scss */
+    #level_1 > li:hover {
+      background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIxMjBweCIgc3RvcC1jb2xvcj0iIzBjMGQxYyIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjMmVkZWEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+      background-size: 100%;
+      background-image: -moz-linear-gradient(0deg, rgba(12, 13, 28, 0) 120px, #c2edea);
+      background-image: -webkit-linear-gradient(0deg, rgba(12, 13, 28, 0) 120px, #c2edea);
+      background-image: linear-gradient(90deg, rgba(12, 13, 28, 0) 120px, #c2edea); } }
+/* line 250, sass/_navigation.scss */
+#level_1 > li#first_nav_element {
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjM1MHB4IiBjeT0iMTAwcHgiIHI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM4YmFhYWMiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwYzBkMWMiIHN0b3Atb3BhY2l0eT0iMC45NSIvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -moz-radial-gradient(350px 100px, 230px 105px, #8baaac, rgba(12, 13, 28, 0.95));
+  background-image: -webkit-radial-gradient(350px 100px, 230px 105px, #8baaac, rgba(12, 13, 28, 0.95));
+  background-image: radial-gradient(230px 105px at 350px 100px, #8baaac, rgba(12, 13, 28, 0.95)); }
+  @media (min-width: 1500px) {
+    /* line 250, sass/_navigation.scss */
+    #level_1 > li#first_nav_element {
+      background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjM1MHB4IiBjeT0iMTAwcHgiIHI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM4YmFhYWMiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwYzBkMWMiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+      background-size: 100%;
+      background-image: -moz-radial-gradient(350px 100px, 230px 105px, #8baaac, rgba(12, 13, 28, 0));
+      background-image: -webkit-radial-gradient(350px 100px, 230px 105px, #8baaac, rgba(12, 13, 28, 0));
+      background-image: radial-gradient(230px 105px at 350px 100px, #8baaac, rgba(12, 13, 28, 0)); } }
+  /* line 269, sass/_navigation.scss */
+  #level_1 > li#first_nav_element:hover {
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjM1MHB4IiBjeT0iMTAwcHgiIHI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNjMmVkZWEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwYzBkMWMiIHN0b3Atb3BhY2l0eT0iMC45NSIvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+    background-size: 100%;
+    background-image: -moz-radial-gradient(350px 100px, 230px 105px, #c2edea, rgba(12, 13, 28, 0.95));
+    background-image: -webkit-radial-gradient(350px 100px, 230px 105px, #c2edea, rgba(12, 13, 28, 0.95));
+    background-image: radial-gradient(230px 105px at 350px 100px, #c2edea, rgba(12, 13, 28, 0.95)); }
+    @media (min-width: 1500px) {
+      /* line 269, sass/_navigation.scss */
+      #level_1 > li#first_nav_element:hover {
+        background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjM1MHB4IiBjeT0iMTAwcHgiIHI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNjMmVkZWEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwYzBkMWMiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+        background-size: 100%;
+        background-image: -moz-radial-gradient(350px 100px, 230px 105px, #c2edea, rgba(12, 13, 28, 0));
+        background-image: -webkit-radial-gradient(350px 100px, 230px 105px, #c2edea, rgba(12, 13, 28, 0));
+        background-image: radial-gradient(230px 105px at 350px 100px, #c2edea, rgba(12, 13, 28, 0)); } }
+/* line 295, sass/_navigation.scss */
+#level_1 > li#last_nav_element {
+  height: 10px;
+  -moz-border-radius-bottomright: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom: 2.5px solid #0c0d1c; }
+
+/* line 308, sass/_navigation.scss */
+#level_2 > li,
+#level_3 > li {
+  background-color: rgba(12, 13, 28, 0.95);
+  border-right: 5px solid #0c0d1c;
+  transition: background-color 800ms ease-in-out 200ms, margin-top 800ms linear 200ms; }
+  @media (min-width: 1500px) {
+    /* line 308, sass/_navigation.scss */
+    #level_2 > li,
+    #level_3 > li {
+      background-color: rgba(12, 13, 28, 0.8); } }
+  /* line 320, sass/_navigation.scss */
+  #level_2 > li > label,
+  #level_3 > li > label {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    font-size: 1.25rem;
+    line-height: 50px;
+    vertical-align: middle;
+    text-decoration: none;
+    color: #8baaac;
+    padding: 0px 0;
+    transition: opacity 200ms linear 800ms, transform 200ms linear 800ms, color 800ms ease-in-out, padding 800ms ease-in-out, height 800ms linear; }
+  /* line 338, sass/_navigation.scss */
+  #level_2 > li:hover,
+  #level_3 > li:hover {
+    background-color: rgba(68, 85, 102, 0.95); }
+    @media (min-width: 1500px) {
+      /* line 338, sass/_navigation.scss */
+      #level_2 > li:hover,
+      #level_3 > li:hover {
+        background-color: rgba(68, 85, 102, 0.8); } }
+    /* line 347, sass/_navigation.scss */
+    #level_2 > li:hover > label,
+    #level_3 > li:hover > label {
+      color: white;
+      padding: 0px 0 0px 40px; }
+
+/* line 1, sass/_background.scss */
+.background {
+  position: fixed;
+  width: 100%;
+  overflow: hidden; }
+  /* line 11, sass/_background.scss */
+  .background > img {
+    width: 100%;
+    object-fit: cover; }
+
+/* line 18, sass/_background.scss */
+.background-true {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 100%; }
+
+/* #bg-layer-0
+{
+    background-color: #ffecec;
+    height: 100%;
+    z-index: 0;
+} */
+/* line 35, sass/_background.scss */
+#bg-layer-0 {
+  z-index: -1; }
+
+/* line 5, sass/_content.scss */
+#content-area {
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  box-sizing: content-box;
+  position: absolute;
+  background: rgba(194, 237, 234, 0.7);
+  top: 100px;
+  width: 100%;
+  margin-bottom: 7rem;
+  padding-left: 1%;
+  padding-bottom: 1%;
+  color: #126764; }
+  @media (min-width: 800px) {
+    /* line 5, sass/_content.scss */
+    #content-area {
+      width: 790px;
+      border: 5px solid #a0dcbe;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+      left: 50%;
+      -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+      padding-left: 5px;
+      padding-bottom: 5px; } }
+  /* line 49, sass/_content.scss */
+  #content-area > h1 {
+    width: 100%;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 32px;
+    font-size: 2rem;
+    line-height: 48px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: capitalize; }
+  /* line 68, sass/_content.scss */
+  #content-area > article {
+    order: 1000; }
+    /* line 72, sass/_content.scss */
+    #content-area > article > p {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 20px;
+      font-size: 1.25rem;
+      line-height: 24px;
+      text-align: justify;
+      text-decoration: none;
+      padding: 3%; }
+    /* line 86, sass/_content.scss */
+    #content-area > article > h2 {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 32px;
+      font-size: 2rem;
+      line-height: 48px;
+      text-align: center;
+      text-decoration: none;
+      text-transform: capitalize; }
+
+/* line 103, sass/_content.scss */
+.iframe-container {
+  background-color: red;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px; }
+  /* line 108, sass/_content.scss */
+  .iframe-container iframe {
+    overflow: hidden;
+    visibility: hidden;
+    border: 0px #000000 none; }
+
+/* line 119, sass/_content.scss */
+.content, .one-per-row, .two-per-row, .three-per-row, .four-per-row {
+  order: 1000;
+  width: 100%;
+  margin-top: 1%;
+  margin-right: 1%;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px; }
+  @media (min-width: 800px) {
+    /* line 119, sass/_content.scss */
+    .content, .one-per-row, .two-per-row, .three-per-row, .four-per-row {
+      margin-right: 5px;
+      margin-top: 5px; } }
+
+/* line 136, sass/_content.scss */
+.first {
+  order: 1 !important; }
+
+@media (min-width: 800px) {
+  /* line 141, sass/_content.scss */
+  .one-per-row {
+    width: 785px; } }
+
+@media (min-width: 800px) {
+  /* line 151, sass/_content.scss */
+  .two-per-row {
+    width: 390px; } }
+
+@media (min-width: 800px) {
+  /* line 161, sass/_content.scss */
+  .three-per-row {
+    width: 258.33333px; } }
+
+@media (min-width: 800px) {
+  /* line 171, sass/_content.scss */
+  .four-per-row {
+    width: 192.5px; } }
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+/*
+ * Hide visually and from screen readers
+ */
+/* line 9, sass/_html5-boilerplate-helper-classes.scss */
+.hidden {
+  display: none !important; }
+
+/*
+ * Hide only visually, but have it available for screen readers:
+ * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ */
+/* line 18, sass/_html5-boilerplate-helper-classes.scss */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+/*
+ * Extends the .visuallyhidden class to allow the element
+ * to be focusable when navigated to via the keyboard:
+ * https://www.drupal.org/node/897638
+ */
+/* line 35, sass/_html5-boilerplate-helper-classes.scss */
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto; }
+
+/*
+ * Hide visually and from screen readers, but maintain layout
+ */
+/* line 49, sass/_html5-boilerplate-helper-classes.scss */
+.invisible {
+  visibility: hidden; }
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+/* line 65, sass/_html5-boilerplate-helper-classes.scss */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */ }
+
+/* line 71, sass/_html5-boilerplate-helper-classes.scss */
+.clearfix:after {
+  clear: both; }
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+@media only screen and (min-width: 35em) {
+  /* Style adjustments for viewports that meet the condition */ }
+@media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 1.25dppx), (min-resolution: 120dpi) {
+  /* Style adjustments for high resolution devices */ }
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid the additional HTTP request:
+   http://www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+@media print {
+  /* line 99, sass/_html5-boilerplate-helper-classes.scss */
+  *,
+  *:before,
+  *:after,
+  *:first-letter,
+  *:first-line {
+    background: transparent !important;
+    color: #000 !important;
+    /* Black prints faster:
+       http://www.sanbeiji.com/archives/953 */
+    box-shadow: none !important;
+    text-shadow: none !important; }
+
+  /* line 111, sass/_html5-boilerplate-helper-classes.scss */
+  a,
+  a:visited {
+    text-decoration: underline; }
+
+  /* line 116, sass/_html5-boilerplate-helper-classes.scss */
+  a[href]:after {
+    content: " (" attr(href) ")"; }
+
+  /* line 120, sass/_html5-boilerplate-helper-classes.scss */
+  abbr[title]:after {
+    content: " (" attr(title) ")"; }
+
+  /*
+   * Don't show links that are fragment identifiers,
+   * or use the `javascript:` pseudo protocol
+   */
+  /* line 129, sass/_html5-boilerplate-helper-classes.scss */
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: ""; }
+
+  /* line 134, sass/_html5-boilerplate-helper-classes.scss */
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid; }
+
+  /*
+   * Printing Tables:
+   * http://css-discuss.incutio.com/wiki/Printing_Tables
+   */
+  /* line 145, sass/_html5-boilerplate-helper-classes.scss */
+  thead {
+    display: table-header-group; }
+
+  /* line 149, sass/_html5-boilerplate-helper-classes.scss */
+  tr,
+  img {
+    page-break-inside: avoid; }
+
+  /* line 154, sass/_html5-boilerplate-helper-classes.scss */
+  img {
+    max-width: 100% !important; }
+
+  /* line 158, sass/_html5-boilerplate-helper-classes.scss */
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3; }
+
+  /* line 165, sass/_html5-boilerplate-helper-classes.scss */
+  h2,
+  h3 {
+    page-break-after: avoid; } }

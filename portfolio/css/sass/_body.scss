@@ -1,0 +1,78 @@
+/* body {
+    box-sizing: border-box;
+    color: $main-color;
+    background: $bg-color;
+    font-size: 16px;
+    font-family: $myriad-font-stack;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+ */
+
+body
+{
+    //@include background-image(linear-gradient(90deg, $left-color $gradient-line-pos, $right-color $nav-width, $left-color $nav-width + 10px));
+    overflow-y: auto;
+}
+
+/* 
+h1, h2, h3, h4, h5, h6
+{
+    font-family: $crimson-font-stack;
+}
+
+p, div
+{
+    font-family: $crimson-font-stack;
+}
+ */
+a
+{
+    color: $colorful-color;
+}
+
+
+/* a
+{
+    color: $highlight-color;
+    //color: alt-highlight-color;
+
+    text-decoration: none;
+    text-shadow: none;
+    //font-weight: bold;
+
+    @include transition(color 0.5s ease, text-shadow 0.5s ease);
+
+    &:hover, &:focus
+    {
+        text-decoration: underline;
+    }
+}
+ */
+/* p
+{
+  margin: 10px 0 15px 0;
+}
+
+ */
+/* a
+{
+  
+    @include transition(color 0.5s ease, text-shadow 0.5s ease);
+
+  transition: color 0.5s ease;
+  transition: text-shadow 0.5s ease;
+  -webkit-transition: color 0.5s ease;
+  -webkit-transition: text-shadow 0.5s ease;
+  -moz-transition: color 0.5s ease;
+  -moz-transition: text-shadow 0.5s ease;
+  -o-transition: color 0.5s ease;
+  -o-transition: text-shadow 0.5s ease;
+  -ms-transition: color 0.5s ease;
+  -ms-transition: text-shadow 0.5s ease;
+} */
+
+
+
+
+

@@ -1,0 +1,90 @@
+header
+{
+    z-index: 20;
+
+    display: block;
+    position: fixed;
+
+    width: 100%;
+
+    & > #header-bar
+    {
+        z-index: 20;
+        position: absolute;
+
+        //background: $main-color-dark;
+        @include background-image(radial-gradient(50% 0px, 100% $header-height, rgba($base-color-dark, 1.0) 85%, $base-color-dim 90%, rgba($base-color-dark, 1.0) 95%, rgba($base-color-dark, 0.0) 98%));
+
+        height: $header-height;
+        line-height: $header-height;
+        width: 100%;
+
+        color: $base-color;
+        @include font-size(48px);  
+        text-align: center;
+        vertical-align: middle;
+    }
+}
+
+footer
+{
+    z-index: 20;
+
+    display: block;
+    position: fixed;
+
+    display: table-cell;
+    vertical-align: bottom;
+
+    //background: $main-color-dark;
+    @include background-image(radial-gradient(50% 100%, 100% 100%, rgba($base-color-dark, 0.9) 85%, $base-color-dim 90%, rgba($base-color-dark, 0.0)));
+
+    //@include border-top-left-radius(200px);
+    //@include border-top-right-radius(200px);
+
+    width: 100%;
+    height: $footer-height;
+    bottom: 0px;
+
+    color: $base-color;
+    @include font-size(16px);
+    //font-size: 16px; font-size: 1.6rem;
+    text-align: center;
+
+    & #contact_info, & #date
+    {
+        position: absolute;
+        width: 100%;
+
+        padding: 5px;
+    }
+
+    & #contact_info 
+    {
+        bottom: 2.5rem; 
+    }
+
+    & #date
+    {
+       bottom: 0.5rem; 
+    }
+
+
+/*     & #date
+    {
+        position: absolute;
+
+        // Use these two to get an element in the middle of its parent
+        // Place the left border of the element on the middle line of the parent
+        left: 50%;
+        // Move the element to the left half of its size
+        // Translate uses the element's own size when using percents
+        @include transform(translateX(-50%));
+
+        width: 100%;
+
+        padding: 5px;
+        bottom: 10px;
+    } */
+}
+

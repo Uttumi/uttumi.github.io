@@ -1,0 +1,68 @@
+* {
+	margin: 0;
+	padding: 0;
+	outline: none;
+/*	border:1px solid black;*/
+	
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+
+.main-font-color
+{
+	color: #456;
+}
+
+.high-font-color
+{
+	color: #89A;
+}
+
+
+nav
+{
+	display: block;
+}
+
+
+video
+{
+  width: 100%    !important;
+  height: auto   !important;
+}
+
+@media screen and (max-width: 600px)
+{
+	html
+	{
+		font-size: 10%;
+	}	
+	
+	#portfolio_navigation
+	{
+		width: 200px;
+		/*background: red;*/
+	}
+}
+
+@media screen and (max-width: 1200px) and (min-width: 600px)
+{
+	html
+	{
+		font-size: 30%;
+	}
+	
+	#portfolio_navigation
+	{
+		width: 400px;
+		/*background: none;*/
+		/*background: lightblue;*/
+	}
+	
+	#portfolio_navigation > ul > li > a
+	{
+		height: 80px;
+	}
+}

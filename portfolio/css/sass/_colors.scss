@@ -1,0 +1,97 @@
+
+
+$base-color-dark: 		rgba(12,13,28,1);
+$base-color-dim: 		rgba(68,85,102,1);
+$base-color: 			rgba(139,170,172,1);
+$base-color-light:      rgba(194,237,234,1);
+$base-color-bright:     rgba(255,255,255,1);
+
+$colorful-color-dark:   rgba(10,58,60,1);
+$colorful-color-dim:    rgba(18,103,100,1);
+$colorful-color:        rgba(160,220,190,1);
+$colorful-color-light:  rgba(45,154,157,1);
+
+//$font-color-light: 		rgba(255,255,255,1);
+//$font-color-dark: 		rgba(0,0,0,1);
+//$font-color-red: 		rgba(255,0,0,1);
+//$font-color-blue:		rgba(0,0,255,1);
+
+$header-height: 100px;
+$footer-height: 7rem;
+
+$content-width: 800px;
+
+$nav-width: 350px;
+//$nav-width: 20%;
+$nav-height: 100px;
+$nav-border-width: 5px;
+
+
+
+$left-color: $base-color-dark;
+$right-color: $base-color;
+$left-focus-color: $base-color-dark;
+$right-focus-color: $base-color-light;
+
+$gradient-line-pos: 120px;
+//$gradient-line-pos: 10%;
+
+/* 
+$main-color: #373737;
+$highlight-color: #FFF;
+$alt-highlight-color: #007edf;
+$alt-bg-color: #212121;
+
+
+//$bg-color: #11110B;
+$bg-color: #FFF;
+$link-color: #89A;
+
+$highlight-color-2: #222222;
+
+
+ */
+/*         background-color: $main-color-dim;
+
+        @include rotateZ(90deg);
+        transition: all 0.2s linear;
+
+        & span
+        {
+            background-color: $main-color-highlight;
+
+            width: 10%;
+            margin-left: 45%;
+            margin-right: 45%;
+
+
+
+            transition: all 0.2s linear;
+ */
+@include keyframes(menu-icon-anim)
+{
+    0%
+    {
+    	background-color: rgba($base-color-dim, 0.0);
+    }
+    100%
+    {
+    	background-color: rgba($base-color-dim, 1.0);
+    }
+}
+
+//***************
+//* BREAKPOINTS *
+//***************
+
+// If one number, assumes min-width by default (mobile-first implementation)
+$example-1: 500px;
+// If two numbers, assumes a set of min-width and max-width
+$example-2: 600px 800px;
+// If one value is a string, assumes a feature-value pair
+$example-3: max-width 1000px;
+// If string and value together within parentheses, assumes each item is a feature-value pair
+$example-4: (min-height 1000px) (orientation portrait);
+
+$full-size: $content-width + $nav-width*2;
+$collapsed-nav: $content-width;
