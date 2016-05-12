@@ -708,14 +708,12 @@ label + input {
 
 /* line 103, sass/_content.scss */
 .iframe-container {
-  background-color: red;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px; }
   /* line 108, sass/_content.scss */
   .iframe-container iframe {
     overflow: hidden;
-    visibility: hidden;
     border: 0px #000000 none; }
 
 /* line 119, sass/_content.scss */

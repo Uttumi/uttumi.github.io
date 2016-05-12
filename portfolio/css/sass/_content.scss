@@ -102,14 +102,14 @@ $content-area-width: $content-width - $border-width*2;
 
 .iframe-container
 {
-    background-color: red;
+    //background-color: red;
     @include border-radius(10px);
 
     & iframe
     {
         //@include border-radius(100px);
         overflow: hidden;
-        visibility: hidden;
+        //visibility: hidden;
 
         border:0px #000000 none
     }
