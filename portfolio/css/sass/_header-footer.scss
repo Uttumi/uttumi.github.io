@@ -1,28 +1,55 @@
+@mixin header-size($header-height, $text-size)
+{
+    height: $header-height;
+    line-height: $header-height;
+    @include font-size($text-size);
+
+    @include background-image(
+        radial-gradient(
+            50% 0px, 
+            100% $header-height, 
+            rgba($base-color-dark, 1.0) 85%, 
+            $base-color-dim 90%, 
+            rgba($base-color-dark, 1.0) 95%, 
+            rgba($base-color-dark, 0.0) 98%));
+}
+
 header
 {
     z-index: 20;
 
     display: block;
-    position: fixed;
+    position: absolute;
 
     width: 100%;
+
+    @include breakpoint($collapsed-nav)
+    {
+        position: fixed;
+    }
 
     & > #header-bar
     {
         z-index: 20;
         position: absolute;
 
-        //background: $main-color-dark;
-        @include background-image(radial-gradient(50% 0px, 100% $header-height, rgba($base-color-dark, 1.0) 85%, $base-color-dim 90%, rgba($base-color-dark, 1.0) 95%, rgba($base-color-dark, 0.0) 98%));
-
-        height: $header-height;
-        line-height: $header-height;
         width: 100%;
 
-        color: $base-color;
-        @include font-size(48px);  
+        color: $base-color; 
         text-align: center;
         vertical-align: middle;
+
+        @include header-size(50px, 24px);
+
+        @include breakpoint($collapsed-nav)
+        {
+            @include header-size(80px, 32px);
+        }
+
+        @include breakpoint($full-size)
+        {
+            @include header-size(100px, 48px);
+        }
     }
 }
 
@@ -43,7 +70,7 @@ footer
     //@include border-top-right-radius(200px);
 
     width: 100%;
-    height: $footer-height;
+    height: 7 rem;//$footer-height;
     bottom: 0px;
 
     color: $base-color;

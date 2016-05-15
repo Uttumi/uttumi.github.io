@@ -1,0 +1,186 @@
+//***************
+//* BREAKPOINTS *
+//***************
+
+// If one number, assumes min-width by default (mobile-first implementation)
+// $example-1: 500px;
+// If two numbers, assumes a set of min-width and max-width
+// $example-2: 600px 800px;
+// If one value is a string, assumes a feature-value pair
+// $example-3: max-width 1000px;
+// If string and value together within parentheses, assumes each item is a feature-value pair
+// $example-4: (min-height 1000px) (orientation portrait);
+
+$center-area-width: 800px;
+$side-area-width: 350px;
+
+$full-size: $center-area-width + $side-area-width*2;
+$collapsed-nav: $center-area-width;
+
+
+
+//**********
+//* COLORS *
+//**********
+
+$base-color-dark: 		rgba(12,13,28,1);
+$base-color-dim: 		rgba(68,85,102,1);
+$base-color: 			rgba(139,170,172,1);
+$base-color-light:      rgba(194,237,234,1);
+$base-color-bright:     rgba(255,255,255,1);
+
+$colorful-color-dark:   rgba(10,58,60,1);
+$colorful-color-dim:    rgba(18,103,100,1);
+$colorful-color:        rgba(160,220,190,1);
+$colorful-color-light:  rgba(45,154,157,1);
+
+
+
+
+//*********
+//* FONTS *
+//*********
+
+@function calculateRem($size)
+{
+    $remSize: $size / 16px;
+    @return $remSize * 1rem;
+}
+
+@mixin font-size($size)
+{
+    font-size: $size;
+    font-size: calculateRem($size);
+}
+
+@mixin nav-font()
+{
+    color: $font-color-light;
+    text-decoration: none;
+}
+
+/* 
+@font-face {
+    font-family: 'japanese';
+    src: url('fonts/japanese/Japanese Tourist.ttf');
+}
+
+@font-face {
+    font-family: 'shanghai';
+    src: url('fonts/shanghai/shanghai.ttf');
+}
+
+.japanese-font
+{
+    letter-spacing: 10px;
+    font-family: 'japanese';
+}
+
+.shanghai-font
+{
+    letter-spacing: 10px;
+    font-family: 'shanghai';
+}
+*/
+
+$myriad-font-stack: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+$lucida-font-stack: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
+$crimson-font-stack: 'Crimson Text', serif;
+$article-font-stack: Verdana, Geneva, sans-serif;
+
+$crimson-font-stack: 'Crimson Text', serif;;
+$lora-font-stack: 'Lora', serif;
+
+
+@mixin base-font()
+{
+    font-family: $article-font-stack;
+
+    @include font-size(32px);
+    line-height: 48px;
+
+    text-align: center;
+
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: capitalize; 
+}
+
+
+
+//**********************
+//* PAGE ELEMENT SIZES *
+//**********************
+
+//$header-height: 100px;
+//$footer-height: 7rem;
+
+$nav-width: $side-area-width;
+$nav-level-1-height: 50px;
+$nav-level-2-height: 25px;
+$nav-border-width: 5px;
+
+$content-gap: 5px;
+$border-width: 5px;
+$content-width: 800px;
+$content-area-width: $content-width - $border-width*2;
+
+@include breakpoint($collapsed-nav)
+{
+    $nav-level-1-height: 100px;
+    $nav-level-2-height: 50px;
+}
+
+@include breakpoint($full-size)
+{
+    $nav-level-1-height: 100px;
+    $nav-level-2-height: 50px;
+}
+
+
+//*************
+//* GRADIENTS *
+//*************
+
+$left-color: $base-color-dark;
+$right-color: $base-color;
+$left-focus-color: $base-color-dark;
+$right-focus-color: $base-color-light;
+
+
+$gradient-line-pos: 120px;
+//$gradient-line-pos: 10%;
+
+
+
+
+//**********************
+//* ANIMATIONS *
+//**********************
+
+@keyframes fadeIn
+{
+    0%   {opacity: 0.0;}
+    100% {opacity: 0.9;}
+}
+
+@keyframes fadeOut
+{
+    0%   {opacity: 0.9;}
+    100% {opacity: 0.0;}
+}
+
+@include keyframes(menu-icon-anim)
+{
+    0%
+    {
+    	background-color: rgba($base-color-dim, 0.0);
+    }
+    100%
+    {
+    	background-color: rgba($base-color-dim, 1.0);
+    }
+}
+
+
+

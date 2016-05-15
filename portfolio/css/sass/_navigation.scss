@@ -1,56 +1,29 @@
-$menu-icon-lines: 3;
-$menu-icon-line-height: 6px;
-
-$nav-level-1-height: 100px;
-$nav-level-2-height: 50px;
-
-#portfolio-navigation
+@mixin menu-icon-definitions($width, $height, $lines, $line-height)
 {
+    width: $width;
+    height: $height;
 
-}
-
-#menu-icon
-{
-    z-index: 30;
-/*     position: fixed; */
-    position: absolute; 
-
-    display: block;
-    float: left;
-
-    height: $header-height / 2;
-    width: $header-height / 2;
-
-    margin: $header-height / 8;
+    margin: $width / 4;
+    //margin-top: 50%;
+    //@include transform(translateY(-50%));
 
     @include border-radius(10px);
 
-    @include breakpoint($collapsed-nav)
-    {
-
-    }
-
-    @include breakpoint($full-size)
-    {
-        display: none;
-    }
-
     & span
     {
-        display: block;
-
         width: 80%;
-        height: $menu-icon-line-height;
+        height: $line-height;
+
+        @include border-radius($line-height/2);
+
+        margin-top: ($height - $lines * $line-height) / ($lines+1);
+
+        display: block;
 
         margin-left: 10%;
         margin-right: 10%;
 
         background-color: $colorful-color;
-
-        //border: 3px solid $main-color-colorful;
-        @include border-radius($menu-icon-line-height/2);
-
-        margin-top: (($header-height / 2) - $menu-icon-lines * $menu-icon-line-height) / ($menu-icon-lines+1);
 
         transition: all 0.2s linear;
     }
@@ -81,10 +54,30 @@ $nav-level-2-height: 50px;
     }
 }
 
-#navigation-menu
+#menu-icon
+{
+    z-index: 30;
+    position: absolute; 
+
+    display: block;
+    float: left;
+
+    @include menu-icon-definitions(25px, 25px, 3, 2px);
+
+    @include breakpoint($collapsed-nav)
+    {
+        @include menu-icon-definitions(40px, 40px, 3, 4px);
+    }
+
+    @include breakpoint($full-size)
+    {
+        display: none;
+    }
+}
+
+@mixin navigation-menu-definition($top-distance)
 {
     z-index: 15;
-/*     position: fixed; */
     position: absolute;
 
     left: 0px;
@@ -94,9 +87,23 @@ $nav-level-2-height: 50px;
     text-align: center;
     text-transform: capitalize;
 
-    margin-top: $header-height - 20px;
+    margin-top: $top-distance; 
 }
 
+#navigation-menu
+{
+    @include navigation-menu-definition(50px - 20px);
+
+    @include breakpoint($collapsed-nav)
+    {
+        @include navigation-menu-definition(80px - 20px);
+    }
+
+    @include breakpoint($full-size)
+    {
+        @include navigation-menu-definition(100px - 20px);
+    }
+}
 
 label + input
 {
@@ -106,50 +113,19 @@ label + input
 
 .nav-wrap
 {
-    //position: relative;
     overflow: hidden;
-    //@include transform(translateZ(0));
-    & > ul > li
-    {
-        //position: relative;
-        //top: 0%;
-
-//        position: relative;
-        //margin-top: 0px;
-        //top: 0px;
-/*         @include transform(translateY(0%));
-        border:1px solid transparent;
-        overflow: hidden; */
-        //transition: margin-top 800ms linear; //ease-in-out;
-        //overflow: hidden;
-
-        
-    }
 
     #hamburger-menu:not(:checked), label + input:not(:checked) + & ul > li
     {
-        //margin-top: -$nav-level-2-height/2 !important;
-
         & > label
         {
             height: 0px !important;
-            //line-height: 0px !important;
+
             @include transform(scale(0));
             opacity: 0;
 
             transition: opacity 300ms linear, transform 300ms linear, color 800ms ease-in-out 200ms, padding 800ms ease-in-out 200ms, height 800ms linear 200ms !important;
         }
-        
-//        position: relative;
-        //margin-top: -100%;
-        //top: 100%;
-/*         @include transform(translateY(-100%));
-        border:1px solid transparent;
-        overflow: hidden; */
-        //position: relative;
-        //top: -100%;
-        //transition: margin-top 800ms linear;
-        //overflow: hidden;
     }
 
     @include breakpoint($full-size)
@@ -168,17 +144,28 @@ label + input
     }
 }
 
-#level_1
+@mixin nav-level-1-gradient($element-height, $gradient-left-color, $gradient-right-color, $is-top)
 {
-    height: auto;
-
-    @include breakpoint($full-size)
+    @if $is-top
     {
-        margin-top: 0px;
+        @include background-image(
+            radial-gradient(
+                $nav_width $element-height, 
+                $nav_width - $gradient-line-pos 105px,  
+                $gradient-right-color, 
+                $gradient-left-color));
+    }
+    @else
+    {
+        @include background-image(
+            linear-gradient(
+                90deg, 
+                $gradient-left-color $gradient-line-pos, 
+                $gradient-right-color));
     }
 }
 
-.nav_element
+@mixin nav-level-1($element-height, $font-size, $text-color, $left-color, $right-color, $left-focus-color, $right-focus-color, $is-top)
 {
     display: block;
     overflow: auto;
@@ -188,115 +175,80 @@ label + input
     
     border-right: $nav-border-width solid $base-color-dark;
 
-    @include background-image(
-        linear-gradient(
-            90deg, 
-            rgba($left-color, 0.95) $gradient-line-pos, 
-            $right-color));
+    @include nav-level-1-gradient($element-height, rgba($left-color, 0.95), $right-color, $is-top);
 
     @include breakpoint($full-size)
     {
-        @include background-image(
-            linear-gradient(
-                90deg, 
-                rgba($left-color, 0.0) $gradient-line-pos, 
-                $right-color));
+        margin-top: 0px;
+
+        @include nav-level-1-gradient($element-height,rgba($left-color, 0.0), $right-color, $is-top);
+    }
+
+    &:hover
+    {
+        @include nav-level-1-gradient($element-height,rgba($left-focus-color, 0.95), $right-focus-color, $is-top);
+
+        @include breakpoint($full-size)
+        {
+            @include nav-level-1-gradient($element-height,rgba($left-focus-color, 0.0), $right-focus-color, $is-top);
+        }
+    }
+
+    & > label
+    {
+        display: block;
+        box-sizing: border-box;
+
+        height: $element-height;
+
+        @include font-size($font-size);
+
+        line-height: $element-height;
+        vertical-align: middle;
+        
+        color: $text-color;
+        text-decoration: none;
+
+        transition: opacity 200ms linear 800ms, transform 200ms linear 800ms, color 800ms ease-in-out, height 800ms linear;
     }
 }
 
 #level_1 > li 
 {
-    @extend .nav_element;
+    height: auto;
 
-    & > label
+    @include nav-level-1(50px, 16px, $base-color-bright, $left-color, $right-color, $left-focus-color, $right-focus-color, false);
+
+    @include breakpoint($collapsed-nav)
     {
-        height: $nav-level-1-height;
-
-        @include font-size(24px);
-        line-height: $nav-level-1-height;
-        vertical-align: middle;
-        
-        color: $base-color-bright;
-        text-decoration: none;
-
-        transition: opacity 200ms linear 800ms, transform 200ms linear 800ms, color 800ms ease-in-out, height 800ms linear;
+        @include nav-level-1(75px, 24px, $base-color-bright, $left-color, $right-color, $left-focus-color, $right-focus-color, false);
     }
 
-    &:hover
+    @include breakpoint($full-size)
     {
-        @include background-image(
-            linear-gradient(
-                90deg, 
-                rgba($left-focus-color, 0.95) $gradient-line-pos, 
-                $right-focus-color));
-
-        @include breakpoint($full-size)
-        {
-            @include background-image(
-                linear-gradient(
-                    90deg, 
-                    rgba($left-focus-color, 0.0) $gradient-line-pos, 
-                    $right-focus-color));
-
-        }
-
-        & > label
-        {
-            //font-weight: bold;
-            //letter-spacing: 1px;
-        }
+        @include nav-level-1(100px, 28px, $base-color-bright, $left-color, $right-color, $left-focus-color, $right-focus-color, false);
     }
 
     &#first_nav_element
     {
-        @include background-image(
-            radial-gradient(
-                $nav_width 100px, 
-                $nav_width - $gradient-line-pos 105px, 
-                $right-color, 
-                rgba($left-color, 0.95)));
+        @include nav-level-1(50px, 16px, $base-color-bright, $left-color, $right-color, $left-focus-color, $right-focus-color, true);
+
+        @include breakpoint($collapsed-nav)
+        {
+            @include nav-level-1(75px, 24px, $base-color-bright, $left-color, $right-color, $left-focus-color, $right-focus-color, true);
+        }
 
         @include breakpoint($full-size)
         {
-            @include background-image(
-                radial-gradient(
-                    $nav_width 100px, 
-                    $nav_width - $gradient-line-pos 105px, 
-                    $right-color, 
-                    rgba($left-color, 0.0)));
-        }
-
-        &:hover
-        {
-            @include background-image(
-                radial-gradient(
-                    $nav_width 100px, 
-                    $nav_width - $gradient-line-pos 105px,  
-                    $right-focus-color, 
-                    rgba($left-focus-color, 0.95)));
-
-            @include breakpoint($full-size)
-            {
-                @include background-image(
-                    radial-gradient(
-                        $nav_width 100px, 
-                        $nav_width - $gradient-line-pos 105px, 
-                        $right-focus-color, 
-                        rgba($left-focus-color, 0.0)));
-            }
-
-            & > label
-            {
-
-            }
+            @include nav-level-1(100px, 28px, $base-color-bright, $left-color, $right-color, $left-focus-color, $right-focus-color, true);
         }
     }
 
     &#last_nav_element
     {
-        @extend .nav_element;
-
         height: 10px;
+
+        @include nav-level-1(10px, 10px, $base-color-bright, $left-color, $right-color, $left-focus-color, $right-focus-color, false);
 
         //@include border-bottom-left-radius(10px);
         @include border-bottom-right-radius(10px);
@@ -305,11 +257,69 @@ label + input
     }
 }
 
+@mixin nav-level-2($element-height, $text-color, $text-focus-color, $main-color, $focus-color)
+{
+    background-color: rgba($main-color, 0.95);
+    //border-right: $nav-border-width solid $base-color-dark;
+    transition: background-color 800ms ease-in-out 200ms, margin-top 800ms linear 200ms;
+
+    @include breakpoint($full-size)
+    {
+        background-color: rgba($main-color, 0.8);
+    }
+
+    & > label
+    {
+        display: block;
+        box-sizing: border-box; //Considers borders to be inside the dimensions of the element -> padding doesn't move borders and width 100% works  
+        width: 100%;
+        height: $element-height;
+
+        @include font-size(20px);
+        line-height: $element-height;
+        vertical-align: middle;
+
+        text-decoration: none;
+        color: $text-color;
+        padding: 0px 0;
+
+        transition: opacity 200ms linear 800ms, transform 200ms linear 800ms, color 800ms ease-in-out, padding 800ms ease-in-out, height 800ms linear;
+    }
+
+    &:hover
+    {
+        background-color: rgba($focus-color, 0.95);
+
+        @include breakpoint($full-size)
+        {
+            background-color: rgba($focus-color, 0.8);
+        }
+
+        & > label
+        {
+            color: $text-focus-color;
+            padding: 0px 0 0px 40px;
+        }
+    }
+}
+
 #level_2 > li,
 #level_3 > li
 {
-    background-color: rgba($base-color-dark, 0.95);
-    border-right: $nav-border-width solid $base-color-dark;
+    @include nav-level-2(25px, $base-color, $base-color-bright, $base-color-dark, $base-color-dim);
+
+    @include breakpoint($collapsed-nav)
+    {
+        @include nav-level-2(40px, $base-color, $base-color-bright, $base-color-dark, $base-color-dim);
+    }
+
+    @include breakpoint($full-size)
+    {
+        @include nav-level-2(50px, $base-color, $base-color-bright, $base-color-dark, $base-color-dim);
+    }
+
+/*     background-color: rgba($base-color-dark, 0.95);
+    //border-right: $nav-border-width solid $base-color-dark;
     transition: background-color 800ms ease-in-out 200ms, margin-top 800ms linear 200ms;
 
     @include breakpoint($full-size)
@@ -322,7 +332,7 @@ label + input
         display: block;
         box-sizing: border-box; //Considers borders to be inside the dimensions of the element -> padding doesn't move borders and width 100% works  
         width: 100%;
-        height: $nav-level-2-height;
+        height: 25px;
 
         @include font-size(20px);
         line-height: $nav-level-2-height;
@@ -349,5 +359,5 @@ label + input
             color: $base-color-bright;
             padding: 0px 0 0px 40px;
         }
-    }
+    } */
 }
