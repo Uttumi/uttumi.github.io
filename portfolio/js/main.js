@@ -65,7 +65,7 @@ function CreateNavigationElement(own_list_item, json_tuple, list_level, is_home_
 		{
 			NavigationClick(title, description, images, videos, pages, subpages);
 
-			$('#Home_input').prop('checked', true);
+			$('#home_input').prop('checked', true);
 		}
 
 		own_list_item.find('input').click(
