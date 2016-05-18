@@ -2,8 +2,6 @@ var content_path = 'content/';
 
 var modification_date = new Date(document.lastModified);
 
-//console.debug(modification_date);
-
 function resizeIframe(obj)
 {
     var newheight;
@@ -39,7 +37,6 @@ $(document).on(
 	{
 		//console.debug(JSON.stringify(data));
 		CreateNavigationElement(null, {key: 'root', value: data}, 1);
-	    console.debug('JSON loaded');
 	}
 )
 
@@ -64,10 +61,11 @@ function CreateNavigationElement(own_list_item, json_tuple, list_level, is_home_
 	{
 		var title = json_tuple.key;
 
-		if(title == 'home')
+		if(title == 'welcome')
 		{
-			title = 'Welcome';
-			NavigationClick(title, description, images, videos, pages, subpages)
+			NavigationClick(title, description, images, videos, pages, subpages);
+
+			$('#Home_input').prop('checked', true);
 		}
 
 		own_list_item.find('input').click(
@@ -126,19 +124,24 @@ function CreateNavigationElement(own_list_item, json_tuple, list_level, is_home_
 					id: tuple.key +'_input',
 					}
 				).appendTo(child_list_item);
-				
-				console.debug('Element name: '+ tuple.key);
-				console.debug('Element type: '+ $.type(tuple.value));
+
 				CreateNavigationElement(child_list_item, tuple, list_level+1);
 			}
 		)
 	}
 }
 
+current_key = "";
+
 function NavigationClick(key, description, images, videos, pages, subpages)
 {
 	console.debug('Clicked '+ key);
 	
+	if(key == current_key)
+		return;
+
+	current_key = key;
+
 	var total_elements = description.length + images.length + videos.length + pages.length + subpages.length;
 
 	if(total_elements > 0)
@@ -147,6 +150,7 @@ function NavigationClick(key, description, images, videos, pages, subpages)
 		content_area.empty();
 
 		$('<h1>'+ key.replace(/_/g,' ') +'</h1>').appendTo(content_area);
+		$('<div class=\'title-underline\'/>').appendTo(content_area);
 		//$('<hr />').appendTo(content_area);
 
 		ProcessContent(content_area, description, images, videos, pages, subpages);
@@ -179,9 +183,9 @@ function AddSubpages(content_area, subpages)
 					console.debug(JSON.stringify(value));
 
 					var container = $('<article />').appendTo(content_area);
-					$('<hr />').appendTo(container);
+					$('<div class=\'article-gap-line\' />').appendTo(container);
 					var title = $('<h2>'+ key.replace(/_/g,' ') +'</h2>').appendTo(container);
-					$('<hr />').appendTo(container);
+					$('<div class=\'article-gap-line\' />').appendTo(container);
 
 					var description = GetArrayByKey(value, 'description');
 					var pages = GetArrayByKey(value, 'pages');

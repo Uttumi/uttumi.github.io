@@ -130,9 +130,22 @@ label + input
 
     @include breakpoint($full-size)
     {
-        label + input:not(:checked) + & > ul
+/*         label + input:not(:checked) + & > ul
         {
-            margin-top: -100%;
+            //margin-top: -100%;
+            height: 0px !important;
+            transition: margin-top 800ms linear;
+        }
+
+        label + input:checked + & > ul
+        {
+            margin-top: 0px;
+            transition: margin-top 800ms linear; //ease-in-out;
+        } */
+
+        label + input:not(:checked) + & ul > li
+        {
+            height: 0px !important;
             transition: margin-top 800ms linear;
         }
 

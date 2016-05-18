@@ -1,38 +1,50 @@
 {
-    "home": {
-        "description": [
-            "1_home/description.html"
-        ]
+    "Home": {
+        "welcome": {
+            "description": [
+                "1_Home/1_welcome/description.html"
+            ]
+        },
+        "me_who": {
+            "description": [
+                "1_Home/2_me_who/description.html"
+            ]
+        },
+        "web_page": {
+            "description": [
+                "1_Home/3_web_page/description.html"
+            ]
+        }
     },
-    "blender": {
+    "Blender": {
         "house_model": {
             "description": [
-                "2_blender/house_model/description.html"
+                "2_Blender/house_model/description.html"
             ],
             "subpages": [
                 {
                     "furniture": {
                         "images": [
-                            "2_blender/house_model/-furniture/arm_chair.png",
-                            "2_blender/house_model/-furniture/desk.png",
-                            "2_blender/house_model/-furniture/kitchen_table.png",
-                            "2_blender/house_model/-furniture/sofa.png"
+                            "2_Blender/house_model/-furniture/arm_chair.png",
+                            "2_Blender/house_model/-furniture/desk.png",
+                            "2_Blender/house_model/-furniture/kitchen_table.png",
+                            "2_Blender/house_model/-furniture/sofa.png"
                         ]
                     }
                 },
                 {
                     "house": {
                         "images": [
-                            "2_blender/house_model/-house/perspective_view.png",
-                            "2_blender/house_model/-house/top_view.png"
+                            "2_Blender/house_model/-house/perspective_view.png",
+                            "2_Blender/house_model/-house/top_view.png"
                         ]
                     }
                 },
                 {
                     "render": {
                         "images": [
-                            "2_blender/house_model/-render/bedroom.png",
-                            "2_blender/house_model/-render/kitchen_table_in_room.png"
+                            "2_Blender/house_model/-render/bedroom.png",
+                            "2_Blender/house_model/-render/kitchen_table_in_room.png"
                         ]
                     }
                 }
@@ -40,38 +52,33 @@
         },
         "ram": {
             "images": [
-                "2_blender/ram/wireframe.png",
-                "2_blender/ram/wireframe_angle.png"
+                "2_Blender/ram/wireframe.png",
+                "2_Blender/ram/wireframe_angle.png"
             ]
         },
         "starship_enterprise_animation": {
             "videos": [
-                "2_blender/starship_enterprise_animation/starship-enterprise-animation-x264.mp4"
+                "2_Blender/starship_enterprise_animation/starship-enterprise-animation-x264.mp4"
             ],
             "description": [
-                "2_blender/starship_enterprise_animation/description.html"
+                "2_Blender/starship_enterprise_animation/description.html"
             ]
         }
     },
-    "unity": {
+    "Unity": {
         "space_combat": {
             "pages": [
-                "3_unity/space_combat/WebUI.html"
-            ]
-        },
-        "space_combat_2": {
-            "pages": [
-                "3_unity/space_combat_2/index.html"
+                "3_Unity/space_combat/index.html"
             ]
         }
     },
-    "flash": {
+    "Flash": {
         "snow_war": {
             "pages": [
-                "4_flash/snow_war/SnowWar.html"
+                "4_Flash/snow_war/SnowWar.html"
             ],
             "description": [
-                "4_flash/snow_war/description.html"
+                "4_Flash/snow_war/description.html"
             ]
         }
     }
