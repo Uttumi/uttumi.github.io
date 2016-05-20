@@ -202,7 +202,7 @@ function AddSubpages(content_area, subpages)
 					if(images == null) images = [];
 					if(videos == null) videos = [];
 
-					ProcessContent(container, description, images, videos, pages, [])
+					ProcessContent(container, description, images, videos, pages, []);
 				}
 			)
 		}
