@@ -142,6 +142,82 @@
     }
 }
 
+#content-area input
+{
+    display: none;
+    visibility: hidden;
+}
+
+.play-button
+{
+    position: absolute;
+   
+
+    left: 50%;
+
+    background-color: $base-color-bright;
+
+    height: 50px;
+    width: 100px;
+
+    text-align: center;
+    line-height: 50px;
+
+    border: 2px solid $colorful-color;
+    @include border-radius(10px);
+
+    &:hover
+    {
+        background-color: $base-color-dim;
+    }
+
+    input:not(:checked) + &
+    {
+        z-index: 50;
+        opacity: 1;
+
+        & + .play-content
+        {
+            z-index: 30;
+            opacity: 0;
+            //visibility: hidden;
+        }
+    }
+
+/*     & + input:not(:checked) + .play-content
+    {
+        z-index: 30;
+        opacity: 0;
+        //visibility: hidden;
+    } */
+
+    input:checked + &
+    {
+        z-index: 10;
+        opacity: 0;
+
+        transition: opacity 300ms linear;
+
+        & + .play-content
+        {
+            opacity: 1;
+            //visibility: visible;
+
+            //transition: opacity 300ms linear;
+        }
+    }
+
+/*     & + input:checked + .play-content
+    {
+        opacity: 1;
+        //visibility: visible;
+
+        transition: opacity 300ms linear;
+    } */
+}
+
+
+
 .iframe-container
 {
     //background-color: red;
@@ -153,9 +229,10 @@
         overflow: hidden;
         //visibility: hidden;
 
-        border:0px #000000 none
-    }
+        border:0px #000000 none;
 
+        transition: all 1s linear;
+    }
 }
 
 .content

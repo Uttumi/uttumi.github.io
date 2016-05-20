@@ -7,11 +7,16 @@ function resizeIframe(obj)
     var newheight;
     var newwidth;
 
-    newheight = obj.contentWindow.document .body.scrollHeight;
-    newwidth = obj.contentWindow.document .body.scrollWidth;
+    newheight = obj[0].contentWindow.document .body.scrollHeight;
+    newwidth = obj[0].contentWindow.document .body.scrollWidth;
 
-    obj.height = (newheight) + "px";
-    obj.width = (newwidth) + "px";
+    console.debug('New iframe height: '+ newheight);
+    console.debug('New iframe width: '+ newwidth);
+    //obj.height = (newheight) + "px";
+    //obj.width = (newwidth) + "px";
+
+    obj.css('height', (newheight) + 'px');
+    obj.css('width', (newwidth) + 'px');
 }
 
 $(document).ready(function()
@@ -153,14 +158,14 @@ function NavigationClick(key, description, images, videos, pages, subpages)
 		$('<div class=\'title-underline\'/>').appendTo(content_area);
 		//$('<hr />').appendTo(content_area);
 
-		ProcessContent(content_area, description, images, videos, pages, subpages);
+		ProcessContent(key, content_area, description, images, videos, pages, subpages);
 	}
 }
 
-function ProcessContent(content_area, description, images, videos, pages, subpages)
+function ProcessContent(key, content_area, description, images, videos, pages, subpages)
 {
 	AddArticles(content_area, description);
-	AddExternalPages(content_area, pages);
+	AddExternalPages(key, content_area, pages);
 	AddImages(content_area, images);
 	AddVideos(content_area, videos);
 	AddSubpages(content_area, subpages);
@@ -204,7 +209,14 @@ function AddSubpages(content_area, subpages)
 	)
 }
 
-function AddExternalPages(content_area, external_pages)
+function PlayClicked(iframe)
+{
+	console.debug("CLICK!")
+
+	iframe.attr('src', iframe.attr('data-src'));
+}
+
+function AddExternalPages(key, content_area, external_pages)
 {
 	if(external_pages.length == 0)
 		return;
@@ -212,9 +224,59 @@ function AddExternalPages(content_area, external_pages)
 	$.each(external_pages,
 		function(index, page_url)
 		{
-			var iframe = $('<iframe src=\"'+ content_path + page_url +'?autoplay=false\" name="Game name" scrolling="no" onload="resizeIframe(this)"></iframe>');
-			
-			var div = $('<div class=\"one-per-row iframe-container\"/>').append(iframe);
+			var buttonID = 'play-button-'+ key;
+			var labelID = 'play-label-'+ key;
+
+			var iframe = $('<iframe />',
+				{ 
+					class: 'play-content',
+					'data-src': content_path + page_url,
+					name: "Game name",
+					scrolling: "no",
+				}
+			).on("load", 
+				function() 
+				{
+			    	resizeIframe($(this));
+				}
+			);
+
+/*			.load(
+				function ()
+				{ 
+					resizeIframe($(this));
+				}
+			);
+*/
+			var input = $('<input />', 
+				{ 
+					type: 'radio', 
+					//type: 'checkbox', 
+					name: 'play_inputs', 
+					id: buttonID
+				}
+			).click(
+				function ()
+				{ 
+					PlayClicked(iframe);
+				}
+			);
+
+			var label = $('<label />',
+				{
+					//id: labelID,
+					class: "play-button",
+					for: buttonID
+				}
+			).html('Play');
+
+
+			var div = $('<div class=\"one-per-row iframe-container\"/>')
+
+			div.append(input);
+			div.append(label);
+			div.append(iframe);
+
 			content_area.append(div);
 		}
 	);

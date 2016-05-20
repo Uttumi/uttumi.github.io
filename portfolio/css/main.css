@@ -1142,16 +1142,68 @@ label + input {
       text-transform: capitalize; }
 
 /* line 145, sass/_content.scss */
+#content-area input {
+  display: none;
+  visibility: hidden; }
+
+/* line 151, sass/_content.scss */
+.play-button {
+  position: absolute;
+  left: 50%;
+  background-color: white;
+  height: 50px;
+  width: 100px;
+  text-align: center;
+  line-height: 50px;
+  border: 2px solid #a0dcbe;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  /*     & + input:not(:checked) + .play-content
+      {
+          z-index: 30;
+          opacity: 0;
+          //visibility: hidden;
+      } */
+  /*     & + input:checked + .play-content
+      {
+          opacity: 1;
+          //visibility: visible;
+  
+          transition: opacity 300ms linear;
+      } */ }
+  /* line 169, sass/_content.scss */
+  .play-button:hover {
+    background-color: #445566; }
+  /* line 174, sass/_content.scss */
+  input:not(:checked) + .play-button {
+    z-index: 50;
+    opacity: 1; }
+    /* line 179, sass/_content.scss */
+    input:not(:checked) + .play-button + .play-content {
+      z-index: 30;
+      opacity: 0; }
+  /* line 194, sass/_content.scss */
+  input:checked + .play-button {
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 300ms linear; }
+    /* line 201, sass/_content.scss */
+    input:checked + .play-button + .play-content {
+      opacity: 1; }
+
+/* line 221, sass/_content.scss */
 .iframe-container {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px; }
-  /* line 150, sass/_content.scss */
+  /* line 226, sass/_content.scss */
   .iframe-container iframe {
     overflow: hidden;
-    border: 0px #000000 none; }
+    border: 0px #000000 none;
+    transition: all 1s linear; }
 
-/* line 161, sass/_content.scss */
+/* line 238, sass/_content.scss */
 .content, .one-per-row, .two-per-row, .three-per-row, .four-per-row {
   order: 1000;
   width: 100%;
@@ -1161,32 +1213,32 @@ label + input {
   -webkit-border-radius: 10px;
   border-radius: 10px; }
   @media (min-width: 800px) {
-    /* line 161, sass/_content.scss */
+    /* line 238, sass/_content.scss */
     .content, .one-per-row, .two-per-row, .three-per-row, .four-per-row {
       margin-right: 5px;
       margin-top: 5px; } }
 
-/* line 178, sass/_content.scss */
+/* line 255, sass/_content.scss */
 .first {
   order: 1 !important; }
 
 @media (min-width: 800px) {
-  /* line 183, sass/_content.scss */
+  /* line 260, sass/_content.scss */
   .one-per-row {
     width: 785px; } }
 
 @media (min-width: 800px) {
-  /* line 193, sass/_content.scss */
+  /* line 270, sass/_content.scss */
   .two-per-row {
     width: 390px; } }
 
 @media (min-width: 800px) {
-  /* line 203, sass/_content.scss */
+  /* line 280, sass/_content.scss */
   .three-per-row {
     width: 258.33333px; } }
 
 @media (min-width: 800px) {
-  /* line 213, sass/_content.scss */
+  /* line 290, sass/_content.scss */
   .four-per-row {
     width: 192.5px; } }
 
