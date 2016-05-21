@@ -60,6 +60,13 @@ function CreateNavigationElement(own_list_item, json_tuple, list_level, is_home_
 	if(videos == null) videos = [];
 	if(subpages == null) subpages = [];
 
+	//console.debug(json_tuple.key);
+	//console.debug(description);
+	//console.debug(images);
+	//console.debug(videos);
+	//console.debug(pages);
+	//console.debug(subpages);
+
 	var subelements = GetComplexElementList(json_tuple.value);
 	
 	if(own_list_item != null)
@@ -76,6 +83,7 @@ function CreateNavigationElement(own_list_item, json_tuple, list_level, is_home_
 		own_list_item.find('input').click(
 			function ()
 			{ 
+				console.debug('Clicked: '+ title);
 				NavigationClick(title, description, images, videos, pages, subpages) 
 			}
 		);
@@ -140,7 +148,7 @@ current_key = "";
 
 function NavigationClick(key, description, images, videos, pages, subpages)
 {
-	console.debug('Clicked '+ key);
+	//console.debug('Clicked '+ key);
 	
 	if(key == current_key)
 		return;
@@ -151,6 +159,12 @@ function NavigationClick(key, description, images, videos, pages, subpages)
 
 	if(total_elements > 0)
 	{
+		//console.debug(description);
+		//console.debug(images);
+		//console.debug(videos);
+		//console.debug(pages);
+		//console.debug(subpages);
+
 		var content_area = $('#content-area');
 		content_area.empty();
 
@@ -158,12 +172,14 @@ function NavigationClick(key, description, images, videos, pages, subpages)
 		$('<div class=\'title-underline\'/>').appendTo(content_area);
 		//$('<hr />').appendTo(content_area);
 
-		ProcessContent(key, content_area, description, images, videos, pages, subpages);
+		ProcessContent(current_key, content_area, description, images, videos, pages, subpages);
 	}
 }
 
 function ProcessContent(key, content_area, description, images, videos, pages, subpages)
 {
+	//console.debug('Processing key: '+ key);
+
 	AddArticles(content_area, description);
 	AddExternalPages(key, content_area, pages);
 	AddImages(content_area, images);
@@ -184,8 +200,8 @@ function AddSubpages(content_area, subpages)
 			$.each(subpage, 
 				function(key, value)
 				{
-					console.debug('Key: '+ key);
-					console.debug(JSON.stringify(value));
+					//console.debug('Key: '+ key);
+					//console.debug(JSON.stringify(value));
 
 					var container = $('<article />').appendTo(content_area);
 					$('<div class=\'article-gap-line\' />').appendTo(container);
@@ -202,7 +218,7 @@ function AddSubpages(content_area, subpages)
 					if(images == null) images = [];
 					if(videos == null) videos = [];
 
-					ProcessContent(container, description, images, videos, pages, []);
+					ProcessContent(key, container, description, images, videos, pages, []);
 				}
 			)
 		}
@@ -211,7 +227,7 @@ function AddSubpages(content_area, subpages)
 
 function PlayClicked(iframe)
 {
-	console.debug("CLICK!")
+	//console.debug("CLICK!")
 
 	iframe.attr('src', iframe.attr('data-src'));
 }
