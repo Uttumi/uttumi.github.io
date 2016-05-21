@@ -34,6 +34,25 @@ def is_number(s):
     except ValueError:
         return False
 
+
+def read_title(folder_path):
+
+	title = ''
+
+	title_path = folder_path[2:] +'/title.txt'
+
+	print(title_path)
+
+	if os.path.isfile(title_path):
+		file = open(title_path, 'r')
+
+		title = file.readline()
+
+		file.close()
+
+	return title
+
+
 def recursive_folder_check(folder_path):
 	
 	folder_content_dict = OrderedDict()
@@ -59,19 +78,24 @@ def recursive_folder_check(folder_path):
 		for subfolder in subfolders:
 			folder_name = subfolder
 			if folder_name[0] == '-':
-				folder_name = folder_name[1:]
+				title = read_title(folder_path +'/'+ subfolder)
+
+				title = title if len(title) > 0 else folder_name[1:]
 				if 'subpages' in folder_content_dict:
-					folder_content_dict['subpages'].append( { folder_name: recursive_folder_check(folder_path +'/'+ subfolder) } )
+					folder_content_dict['subpages'].append( { title: recursive_folder_check(folder_path +'/'+ subfolder) } )
 				else:
-					folder_content_dict['subpages'] = [ { folder_name: recursive_folder_check(folder_path +'/'+ subfolder) } ]
+					folder_content_dict['subpages'] = [ { title: recursive_folder_check(folder_path +'/'+ subfolder) } ]
 			else:
 				name_start = folder_name[0:folder_name.find('_')]
 
 				if is_number(name_start):
 					folder_name = folder_name[folder_name.find('_')+1:]
 					#print(name_start)
-					
-				folder_content_dict[folder_name] = recursive_folder_check(folder_path +'/'+ subfolder)
+			
+				title = read_title(folder_path +'/'+ subfolder)
+				title = title if len(title) > 0 else folder_name
+
+				folder_content_dict[title] = recursive_folder_check(folder_path +'/'+ subfolder)
 
 	#folder_content_dict = dict((k, v) for k, v in folder_content_dict.items() if len(v) > 0)
 	folder_content_dict = OrderedDict((k, v) for k, v in folder_content_dict.items() if len(v) > 0)
