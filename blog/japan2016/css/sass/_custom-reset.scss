@@ -1,0 +1,46 @@
+*
+{
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 0;
+    outline: none;
+
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+html
+{
+    // Make sure the HTML element is at least as tall as the viewport
+    height: 100%;
+
+    // With this 1 REM and 1 EM will match 10 px if the default font size (16px) is used
+    // Then you can write 1.6rem or 1.6em to get 16px font size
+    //font-size: 62.5%;
+}
+
+body
+{
+    // Force the BODY element to match the height of the HTML element
+    min-height: 100%;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section
+{
+    display: block;
+}
+
+ol, ul
+{
+    list-style: none;
+}
+
+table
+{
+    border-collapse: collapse;
+    border-spacing: 0;
+}

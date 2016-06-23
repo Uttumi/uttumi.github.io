@@ -1,0 +1,70 @@
+.background
+{
+/*        display: none;*/
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+    max-width:  100%;   /* Won't cause horizontal scrollbars */
+    max-height: 100%;   /* Won't cause vertical scrollbars */
+
+    display: none;
+
+    @include breakpoint($with-side-bars)
+    {
+        display: block;
+    }
+}
+
+.background-true, svg
+{
+    z-index: 0;
+
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    max-width:  100%;   /* Won't cause horizontal scrollbars */
+    max-height: 100%;   /* Won't cause vertical scrollbars */
+}
+
+#foreground0
+{
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+
+#bg-layer-0
+{
+    background-color: #ffecec;
+    height: 100%;
+    z-index: 0;
+}
+
+#bg-layer-1
+{
+    background-color: #ffe5e5;
+    height: 800px;
+    z-index: 1;
+}
+
+#bg-layer-2
+{
+    background-color: #ffcccc;
+    height: 600px;
+    z-index: 2;
+}
+
+#bg-layer-3
+{
+    background-color: #ffb3b3;
+    height: 300px;
+    z-index: 3;
+}
+
+#bg-layer-4
+{
+    background-color: #000;
+    height: 100px;
+    z-index: 4;
+}

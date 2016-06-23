@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
@@ -12,6 +12,7 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
@@ -24,6 +25,9 @@
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
+        <script src='js/async-file-loader.js'></script>
+        <script src='js/utilities.js'></script>
+        <script src='js/paralax-background.js'></script>     
         <script src="js/main.js"></script>
 
         <header>
@@ -31,43 +35,7 @@
                 <span class="japanese-font">JAPAN</span>
                 <span class="shanghai-font">2016</span>
             </a>
-           <!--  <a id="logo2" href="#">KYOTO Kyoto kyoto 2016</a> -->
             <nav>
-
-<!--                 <div id="nav-bar">
-                    <ul>
-                        <li class="active">
-                            <a href="#plan">Plan</a>
-                        </li>
-                        <li>
-                            <a href="#experience">Experience</a>
-                        </li>
-                        <li>
-                            <a href="#delicacies">Delicacies</a>
-                        </li>
-                        <li>
-                            <a href="#places">Places</a>
-                            <div class="dropdown-menu">
-                                <ul>
-                                    <li><a class="dropdown-item level1" href="#places-himeji">Himeji</a></li>
-                                    <li><a class="dropdown-item level1" href="#places-kobe">Kobe</a></li>
-                                    <li><a class="dropdown-item level1" href="#places-kyoto">Kyoto</a></li>
-                                    <li><a class="dropdown-item level2" href="#places-kyoto-gion">Gion</a></li>
-                                    <li><a class="dropdown-item level2" href="#places-kyoto-arashiyama">Arashiyama</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div> -->
-
-<!--                 <div class="nav-icon">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-targets"#example">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    </button>
-                </div> -->
-
             </nav>
         </header>
 
@@ -77,26 +45,33 @@
         <article></article>
         <aside></aside>
     -->
-
+    
+<!-- 
         <div class="background" id="bg-layer-0" data-type="background" data-speed="0"></div>
         <div class="background" id="bg-layer-1" data-type="background" data-speed="0.1"></div>
         <div class="background" id="bg-layer-2" data-type="background" data-speed="0.2"></div>
         <div class="background" id="bg-layer-3" data-type="background" data-speed="0.3"></div>
         <div class="background" id="bg-layer-4" data-type="background" data-speed="1"></div>
+ -->
 
-  <!--       <svg class="background-true" xmlns="http://www.w3.org/2000/svg">xmlns="img/Background_plain.svg"></svg> -->
+<!--         <img class="background-true" xmlns="http://www.w3.org/2000/svg" src="img/Background_plain.svg" alt="Background image"/> -->
 
         <footer>
-            <p>
-                Copyright &copy;
-                <script language="javascript" type="text/javascript">
-                    var today = new Date()
-                    var year = today.getFullYear()
-                    document.write(year)
-                </script>
-                Jouni Sarvanko. All Rights Reserved.
-            </p>
-            <p>Contact information: <a href="uttumi@gmail.com">uttumi@gmail.com</a></p>
+            <div id='contact_info'>
+                <p>
+                    Copyright &copy;
+                    <script language="javascript" type="text/javascript">
+                        var today = new Date()
+                        var year = today.getFullYear()
+                        document.write(year)
+                    </script>
+                    Jouni Sarvanko. All Rights Reserved.
+                </p>
+                <p>Contact information: <a href="uttumi@gmail.com">uttumi@gmail.com</a></p>
+            </div>
+            <div id='date'>
+                <time>Filled automatically</time>
+            </div>
         </footer>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. 

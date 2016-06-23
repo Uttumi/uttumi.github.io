@@ -3,34 +3,50 @@
         "articles": {
             "English Index Page": "en/en_index.html"
         },
-        "diary": {
+        "1_diary": {
             "kyoto": {
+                "title": "Kyōto",
+                "anchor": "kyoto-diary",
                 "markets": {
                     "articles": {
-                        "Kitano Tenman-gu": "en/diary/kyoto/markets/kitano_tenman-gu.html"
+                        "Kitano Tenman-gu": "en/1_diary/kyoto/markets/kitano_tenman-gu.html"
                     }
                 },
                 "temples_n_shrines": {
+                    "title": "Temples & Shrines",
+                    "anchor": "kyoto-temples-shrines",
                     "fushimi_inari-taisha": {
+                        "title": "Fushimi Inari-taisha",
+                        "anchor": "fushimi-inari-taisha",
                         "articles": {
-                            "Fushimi Inari-taisha": "en/diary/kyoto/temples_n_shrines/fushimi_inari-taisha/Day1.html"
+                            "Fushimi Inari-taisha": "en/1_diary/kyoto/temples_n_shrines/fushimi_inari-taisha/Day1.html"
                         }
                     }
+                }
+            }
+        },
+        "2_food": {
+            "okonomiyaki": {
+                "description": "en/2_food/okonomiyaki/description.html",
+                "title": "Okonomiyaki!",
+                "anchor": "this-is-anchor",
+                "articles": {
+                    "okonomiyaki": "en/2_food/okonomiyaki/okonomiyaki.html"
                 }
             }
         }
     },
     "en_test": {
         "diary": {
-            "Kyoto": {
-                "articles": {
-                    "kyoto1": "en_test/diary/Kyoto/Kyoto1.html",
-                    "kyoto2": "en_test/diary/Kyoto/Kyoto2.html",
-                    "kyoto3": "en_test/diary/Kyoto/Kyoto1.html"
-                }
-            },
             "articles": {
                 "himeji20160213": "en_test/diary/2016-02-13-Himeji.html"
+            },
+            "Kyoto": {
+                "articles": {
+                    "kyoto2": "en_test/diary/Kyoto/Kyoto2.html",
+                    "kyoto1": "en_test/diary/Kyoto/Kyoto1.html",
+                    "kyoto3": "en_test/diary/Kyoto/Kyoto1.html"
+                }
             }
         },
         "food": {
@@ -44,15 +60,15 @@
             }
         },
         "plan": {
+            "articles": {
+                "himeji": "en_test/plan/2016-02-13-Himeji.html"
+            },
             "Kyoto": {
                 "Arashiyama": {
                     "articles": {
                         "arashiyama": "en_test/plan/Kyoto/Arashiyama/Arashiyama.html"
                     }
                 }
-            },
-            "articles": {
-                "himeji": "en_test/plan/2016-02-13-Himeji.html"
             }
         }
     }

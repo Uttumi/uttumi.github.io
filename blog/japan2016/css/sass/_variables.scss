@@ -1,0 +1,205 @@
+//***************
+//* BREAKPOINTS *
+//***************
+
+// If one number, assumes min-width by default (mobile-first implementation)
+// $example-1: 500px;
+// If two numbers, assumes a set of min-width and max-width
+// $example-2: 600px 800px;
+// If one value is a string, assumes a feature-value pair
+// $example-3: max-width 1000px;
+// If string and value together within parentheses, assumes each item is a feature-value pair
+// $example-4: (min-height 1000px) (orientation portrait);
+
+$center-area-width: 800px;
+$mobile-scale: 480px;
+
+$with-side-bars: $center-area-width;
+$scaling-content: $mobile-scale;
+
+
+//**********
+//* COLORS *
+//**********
+
+/* 
+$base-color-dark: 		rgba(12,13,28,1);
+$base-color-dim: 		rgba(68,85,102,1);
+$base-color: 			rgba(139,170,172,1);
+$base-color-light:      rgba(194,237,234,1);
+$base-color-bright:     rgba(255,255,255,1);
+
+$colorful-color-dark:   rgba(10,58,60,1);
+$colorful-color-dim:    rgba(18,103,100,1);
+$colorful-color:        rgba(160,220,190,1);
+$colorful-color-light:  rgba(45,154,157,1);
+ */
+
+$base-color-dark: rgb(87,140,176);              // http://www.color-hex.com/color/578cb0
+$base-color-dim: rgb(153,191,217);              // http://www.color-hex.com/color/99bfd9
+$base-color: rgb(209,226,238);                  // http://www.color-hex.com/color/d1e2ee
+$base-color-light: rgb(228,238,245);            // http://www.color-hex.com/color/e4eef5
+
+
+$secondary-color-dim: rgb(169,98,140);          // http://www.color-hex.com/color/a9628c
+$secondary-color: rgb(203,160,186);             // http://www.color-hex.com/color/cba0ba
+$secondary-color-light: rgb(237,223,232);       // http://www.color-hex.com/color/eddfe8
+
+//$secondary-color-light: rgb(255,204,204);     // More pinkish  http://www.color-hex.com/color/ffcccc
+
+//**********
+//* MIXINS *
+//**********
+
+@mixin horizontally-centered-element()
+{
+     // Use these two to get an element in the middle of its parent
+    // Place the left border of the element on the middle line of the parent
+    left: 50%;
+    // Move the element to the left half of its size
+    // Translate uses the element's own size when using percents
+    @include transform(translateX(-50%));
+}
+
+
+//*********
+//* FONTS *
+//*********
+
+@function calculateRem($size)
+{
+    $remSize: $size / 16px;
+    @return $remSize * 1rem;
+}
+
+@mixin font-size($size)
+{
+    font-size: $size;
+    font-size: calculateRem($size);
+}
+
+/* 
+@mixin nav-font()
+{
+    color: $font-color-light;
+    text-decoration: none;
+}
+ */
+
+@font-face {
+    font-family: 'japanese';
+    src: url('fonts/japanese/Japanese Tourist.ttf');
+}
+
+@font-face {
+    font-family: 'shanghai';
+    src: url('fonts/shanghai/shanghai.ttf');
+}
+
+.japanese-font
+{
+    letter-spacing: 10px;
+    font-family: 'japanese';
+}
+
+.shanghai-font
+{
+    letter-spacing: 10px;
+    font-family: 'shanghai';
+}
+
+$myriad-font-stack: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+$lucida-font-stack: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
+$crimson-font-stack: 'Crimson Text', serif;
+$article-font-stack: Verdana, Geneva, sans-serif;
+
+$crimson-font-stack: 'Crimson Text', serif;;
+$lora-font-stack: 'Lora', serif;
+
+/* 
+@mixin base-font()
+{
+    font-family: $article-font-stack;
+
+    @include font-size(32px);
+    line-height: 48px;
+
+    text-align: center;
+
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: capitalize; 
+}
+ */
+
+
+//**********************
+//* PAGE ELEMENT SIZES *
+//**********************
+
+//$header-height: 100px;
+//$footer-height: 7rem;
+
+/* 
+$nav-width: $side-area-width;
+$nav-level-1-height: 50px;
+$nav-level-2-height: 25px;
+$nav-border-width: 5px;
+
+$content-gap: 5px;
+$border-width: 5px;
+$content-width: 800px;
+$content-area-width: $content-width - $border-width*2;
+
+@include breakpoint($collapsed-nav)
+{
+    $nav-level-1-height: 100px;
+    $nav-level-2-height: 50px;
+}
+
+@include breakpoint($full-size)
+{
+    $nav-level-1-height: 100px;
+    $nav-level-2-height: 50px;
+}
+ */
+
+//*************
+//* GRADIENTS *
+//*************
+
+
+//**************
+//* ANIMATIONS *
+//**************
+
+
+/* 
+@keyframes fadeIn
+{
+    0%   {opacity: 0.0;}
+    100% {opacity: 0.9;}
+}
+
+@keyframes fadeOut
+{
+    0%   {opacity: 0.9;}
+    100% {opacity: 0.0;}
+}
+
+@include keyframes(menu-icon-anim)
+{
+    0%
+    {
+    	background-color: rgba($base-color-dim, 0.0);
+    }
+    100%
+    {
+    	background-color: rgba($base-color-dim, 1.0);
+    }
+}
+
+ */
+
+
+

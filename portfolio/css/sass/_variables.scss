@@ -36,6 +36,21 @@ $colorful-color-light:  rgba(45,154,157,1);
 
 
 
+//**********
+//* MIXINS *
+//**********
+
+@mixin horizontally-centered-element()
+{
+     // Use these two to get an element in the middle of its parent
+    // Place the left border of the element on the middle line of the parent
+    left: 50%;
+    // Move the element to the left half of its size
+    // Translate uses the element's own size when using percents
+    @include transform(translateX(-50%));
+}
+
+
 
 //*********
 //* FONTS *

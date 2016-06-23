@@ -1,0 +1,151 @@
+header
+{
+    z-index: 200;
+
+    background-color: #000;
+
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    top: 0px;
+}
+
+#logo
+{
+    margin: 5px 20px;
+
+    color: $secondary-color-light;
+    @include font-size(18px);
+
+    position: fixed;
+    width: 100px;
+    float: left;
+
+    display: none;
+
+    @include breakpoint($with-side-bars)
+    {
+        display: block;
+    }
+}
+
+footer
+{
+    z-index: 400;
+
+    position: fixed;
+
+    bottom: 0px;
+    height: 60px;
+    width: 100%;
+
+    text-align: center;
+    @include font-size(14px);
+
+    background-color: #CCC;
+
+
+}
+
+
+/*
+header
+{
+    z-index: 20;
+
+    display: block;
+    position: absolute;
+
+    width: 100%;
+
+    @include breakpoint($collapsed-nav)
+    {
+        position: fixed;
+    }
+
+    & > #header-bar
+    {
+        z-index: 20;
+        position: absolute;
+
+        width: 100%;
+
+        color: $base-color; 
+        text-align: center;
+        vertical-align: middle;
+
+        @include header-size(50px, 24px);
+
+        @include breakpoint($collapsed-nav)
+        {
+            @include header-size(80px, 32px);
+        }
+
+        @include breakpoint($full-size)
+        {
+            @include header-size(100px, 48px);
+        }
+    }
+}
+
+footer
+{
+    z-index: 20;
+
+    display: block;
+    position: fixed;
+
+    display: table-cell;
+    vertical-align: bottom;
+
+    //background: $main-color-dark;
+    @include background-image(radial-gradient(50% 100%, 100% 100%, rgba($base-color-dark, 0.9) 85%, $base-color-dim 90%, rgba($base-color-dark, 0.0)));
+
+    //@include border-top-left-radius(200px);
+    //@include border-top-right-radius(200px);
+
+    width: 100%;
+    height: 110px;//$footer-height;
+    bottom: 0px;
+
+    color: $base-color;
+    @include font-size(16px);
+    //font-size: 16px; font-size: 1.6rem;
+    text-align: center;
+
+    & #contact_info, & #date
+    {
+        position: absolute;
+        width: 100%;
+
+        padding: 5px;
+    }
+
+    & #contact_info 
+    {
+        bottom: 2.5rem; 
+    }
+
+    & #date
+    {
+       bottom: 0.5rem; 
+    }
+
+     & #date
+    {
+        position: absolute;
+
+        // Use these two to get an element in the middle of its parent
+        // Place the left border of the element on the middle line of the parent
+        left: 50%;
+        // Move the element to the left half of its size
+        // Translate uses the element's own size when using percents
+        @include transform(translateX(-50%));
+
+        width: 100%;
+
+        padding: 5px;
+        bottom: 10px;
+    }
+}
+*/

@@ -1,6 +1,7 @@
 import os
 import json
 from os import walk
+from collections import OrderedDict
 
 def find_occurences(s, ch):
 	return [i for i, letter in enumerate(s) if letter == ch]
@@ -16,8 +17,6 @@ def check_file_for_articles(file_name, articles_dict):
 					id_indices = find_occurences(line, '\"')
 					if len(id_indices) == 2:
 						id = line[id_indices[0]+1:id_indices[1]]
-						print(id)
-
 						articles_dict[id] = file_name;
 
 
@@ -42,12 +41,38 @@ def check_file_for_articles(file_name, articles_dict):
 			
 	# return folder_content_dict
 
+def is_number(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
+
+def read_content(folder_path, file_name):
+
+	content = ''
+
+	path = folder_path[2:] +'/'+ file_name
+
+	if os.path.isfile(path):
+		# Using with statement closes the file for us without needing to remember to close
+		# explicitly, and closes even when exceptions occur
+		with open(path, encoding='utf-8') as file:
+		    #f = inf.readlines()
+
+		#if os.path.isfile(path):
+			#file = open(path, 'r')
+
+			content = file.readline()
+
+			#file.close()
+
+	return content
+
 	
 def recursive_folder_check(folder_path):
-	
-	print(folder_path)
 
-	folder_content_dict = {}
+	folder_content_dict = OrderedDict()
 	files = []
 	subfolders = []
 	
@@ -56,29 +81,52 @@ def recursive_folder_check(folder_path):
 			files.append(folder_content)
 		else:
 			subfolders.append(folder_content)
-	print(files)
-	web_page_list = get_filtered_file_list( files,  ['.html'], folder_path )
+
+	page_list = get_filtered_file_list( files,  ['.html'], folder_path )
 	image_list = get_filtered_file_list( files,  ['.png', '.jpg'], folder_path )
 	video_list = get_filtered_file_list( files,  ['.avi', '.mpg', '.mp4'], folder_path )
 
-	if len(web_page_list) > 0:
+	for page in page_list:
+		if page.endswith('description.html'):
+			folder_content_dict['description'] = page
+			page_list.remove(page)
+
+	title = read_content(folder_path, 'title.txt')
+	if len(title) > 0:
+		folder_content_dict['title'] = title
+
+	anchor = read_content(folder_path, 'anchor.txt')
+	if len(anchor) > 0:
+		folder_content_dict['anchor'] = anchor
+
+	if len(page_list) > 0:
 		articles_dict = {}
 
-		for web_page_file in web_page_list:
-			check_file_for_articles(web_page_file, articles_dict)
+		#Collect all the pages that match articles (i.e. have article tags inside)
+		for page_file in page_list:
+			check_file_for_articles(page_file, articles_dict)
 
 		folder_content_dict['articles'] = articles_dict
 
-	for subfolder in subfolders:
-		folder_content_dict[subfolder] = recursive_folder_check(folder_path +'/'+ subfolder)
+	for subfolder_name in subfolders:
+		if subfolder_name[0] == '-':
+			if 'subpages' in folder_content_dict:
+				folder_content_dict['subpages'].append( recursive_folder_check(folder_path +'/'+ subfolder_name) )
+			else:
+				folder_content_dict['subpages'] = [ recursive_folder_check(folder_path +'/'+ subfolder_name) ]
+		else:
+			folder_content_dict[subfolder_name] = recursive_folder_check(folder_path +'/'+ subfolder_name)		
 
-	folder_content_dict = dict((k, v) for k, v in folder_content_dict.items() if len(v) > 0)
+	folder_content_dict = OrderedDict((k, v) for k, v in folder_content_dict.items() if len(v) > 0)
 
 	return folder_content_dict
 
 
 folder_structure_dict = recursive_folder_check('.')
 
-with open('index.json', 'w') as outfile:
-    json.dump(folder_structure_dict, outfile, sort_keys = True, indent = 4, ensure_ascii=False)
+# with open('index.json', 'w') as outfile:
+#     json.dump(folder_structure_dict, outfile, sort_keys = True, indent = 4, ensure_ascii=False)
+
+with open('index.json', 'w', encoding='utf-8') as outfile:
+    json.dump(folder_structure_dict, outfile, indent = 4, ensure_ascii=False)
 

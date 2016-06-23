@@ -1,20 +1,17 @@
 /*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
-
 /*
  * What follows is the result of much research on cross-browser styling.
  * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
  * Kroc Camen, and the H5BP dev community and team.
  */
-
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
-
+/* line 13, sass/_html5-boilerplate-reset.scss */
 html {
-    color: #222;
-    font-size: 1em;
-    line-height: 1.4;
-}
+  color: #222;
+  font-size: 1em;
+  line-height: 1.4; }
 
 /*
  * Remove text-shadow in selection highlight:
@@ -23,689 +20,679 @@ html {
  * These selection rule sets have to be separate.
  * Customize the background color to match your design.
  */
-
+/* line 27, sass/_html5-boilerplate-reset.scss */
 ::-moz-selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
+  background: #b3d4fc;
+  text-shadow: none; }
 
+/* line 32, sass/_html5-boilerplate-reset.scss */
 ::selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
+  background: #b3d4fc;
+  text-shadow: none; }
 
 /*
  * A better looking default horizontal rule
  */
-
+/* line 41, sass/_html5-boilerplate-reset.scss */
 hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-}
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0; }
 
 /*
  * Remove the gap between audio, canvas, iframes,
  * images, videos and the bottom of their containers:
  * https://github.com/h5bp/html5-boilerplate/issues/440
  */
-
+/* line 56, sass/_html5-boilerplate-reset.scss */
 audio,
 canvas,
 iframe,
 img,
 svg,
 video {
-    vertical-align: middle;
-}
+  vertical-align: middle; }
 
 /*
  * Remove default fieldset styles.
  */
-
+/* line 69, sass/_html5-boilerplate-reset.scss */
 fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
+  border: 0;
+  margin: 0;
+  padding: 0; }
 
 /*
  * Allow only vertical resizing of textareas.
  */
-
+/* line 79, sass/_html5-boilerplate-reset.scss */
 textarea {
-    resize: vertical;
-}
+  resize: vertical; }
 
 /* ==========================================================================
    Browser Upgrade Prompt
    ========================================================================== */
-
+/* line 87, sass/_html5-boilerplate-reset.scss */
 .browserupgrade {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0; }
+
+/* line 1, sass/_custom-reset.scss */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* line 14, sass/_custom-reset.scss */
+html {
+  height: 100%; }
+
+/* line 24, sass/_custom-reset.scss */
+body {
+  min-height: 100%; }
+
+/* HTML5 display-role reset for older browsers */
+/* line 31, sass/_custom-reset.scss */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+/* line 37, sass/_custom-reset.scss */
+ol, ul {
+  list-style: none; }
+
+/* line 42, sass/_custom-reset.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* 
+$base-color-dark: 		rgba(12,13,28,1);
+$base-color-dim: 		rgba(68,85,102,1);
+$base-color: 			rgba(139,170,172,1);
+$base-color-light:      rgba(194,237,234,1);
+$base-color-bright:     rgba(255,255,255,1);
+
+$colorful-color-dark:   rgba(10,58,60,1);
+$colorful-color-dim:    rgba(18,103,100,1);
+$colorful-color:        rgba(160,220,190,1);
+$colorful-color-light:  rgba(45,154,157,1);
+ */
+/* 
+@mixin nav-font()
+{
+    color: $font-color-light;
+    text-decoration: none;
+}
+ */
+@font-face {
+  font-family: 'japanese';
+  src: url("fonts/japanese/Japanese Tourist.ttf"); }
+@font-face {
+  font-family: 'shanghai';
+  src: url("fonts/shanghai/shanghai.ttf"); }
+/* line 99, sass/_variables.scss */
+.japanese-font {
+  letter-spacing: 10px;
+  font-family: 'japanese'; }
+
+/* line 105, sass/_variables.scss */
+.shanghai-font {
+  letter-spacing: 10px;
+  font-family: 'shanghai'; }
+
+/* 
+@mixin base-font()
+{
+    font-family: $article-font-stack;
+
+    @include font-size(32px);
+    line-height: 48px;
+
+    text-align: center;
+
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: capitalize; 
+}
+ */
+/* 
+$nav-width: $side-area-width;
+$nav-level-1-height: 50px;
+$nav-level-2-height: 25px;
+$nav-border-width: 5px;
+
+$content-gap: 5px;
+$border-width: 5px;
+$content-width: 800px;
+$content-area-width: $content-width - $border-width*2;
+
+@include breakpoint($collapsed-nav)
+{
+    $nav-level-1-height: 100px;
+    $nav-level-2-height: 50px;
 }
 
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
+@include breakpoint($full-size)
+{
+    $nav-level-1-height: 100px;
+    $nav-level-2-height: 50px;
+}
+ */
+/* 
+@keyframes fadeIn
+{
+    0%   {opacity: 0.0;}
+    100% {opacity: 0.9;}
+}
 
-    *
+@keyframes fadeOut
+{
+    0%   {opacity: 0.9;}
+    100% {opacity: 0.0;}
+}
+
+@include keyframes(menu-icon-anim)
+{
+    0%
     {
-        margin: 0;
-        border: 0;
-        padding: 0;
-        color: #eee;
+    	background-color: rgba($base-color-dim, 0.0);
     }
-
-/*    html
+    100%
     {
-        min-height:100%;
-        position:relative;
-        top: 0px;
-
-         Make 1 REM and 1 EM to mach 10 px with the default 16px font size
-        font-size: 62.5%;
+    	background-color: rgba($base-color-dim, 1.0);
     }
+}
 
-    body
+ */
+/* line 1, sass/_body.scss */
+body {
+  overflow-y: auto; }
+
+/* line 7, sass/_body.scss */
+a {
+  text-decoration: none; }
+
+/* line 1, sass/_header-footer.scss */
+header {
+  z-index: 200;
+  background-color: #000;
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  top: 0px; }
+
+/* line 13, sass/_header-footer.scss */
+#logo {
+  margin: 5px 20px;
+  color: #eddfe8;
+  font-size: 18px;
+  font-size: 1.125rem;
+  position: fixed;
+  width: 100px;
+  float: left;
+  display: none; }
+  @media (min-width: 800px) {
+    /* line 13, sass/_header-footer.scss */
+    #logo {
+      display: block; } }
+
+/* line 32, sass/_header-footer.scss */
+footer {
+  z-index: 400;
+  position: fixed;
+  bottom: 0px;
+  height: 60px;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  font-size: 0.875rem;
+  background-color: #CCC; }
+
+/*
+header
+{
+    z-index: 20;
+
+    display: block;
+    position: absolute;
+
+    width: 100%;
+
+    @include breakpoint($collapsed-nav)
     {
-        height: 100%;
-
-        min-height: 100% !important;
-    }
-*/
-    html
-    {
-        /* Make sure HTML element is at least as tall as the viewport */
-        height: 100%;
-
-        /* Make 1 REM and 1 EM to mach 10 px with the default 16px font size */
-        font-size: 62.5%;
-    }
-
-    body
-    {
-        /* Force the BODY element to match the height of the HTML element */
-        min-height: 100%;
-    }
-
-    a
-    {
-        color: #FFF;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    a:hover
-    {
-        color: #FFF;
-        text-decoration: underline;
-    }
-
-    header
-    {
-        background-color: #000;
-
         position: fixed;
-        width: 100%;
-        height: 60px;
-        top: 0px;
-
-        z-index: 200;
     }
 
-    @font-face {
-        font-family: 'japanese';
-        src: url('fonts/japanese/Japanese Tourist.ttf');
-    }
-
-    @font-face {
-        font-family: 'shanghai';
-        src: url('fonts/shanghai/shanghai.ttf');
-    }
-
-
-    #logo
+    & > #header-bar
     {
-        margin: 5px 20px;
-        font-size: 18px; font-size: 1.8rem;
-        position: fixed;
-        width: 100px;
-        float: left;
-    }
-
-    .japanese-font
-    {
-        letter-spacing: 10px;
-        font-family: 'japanese';
-    }
-
-    .shanghai-font
-    {
-        letter-spacing: 10px;
-        font-family: 'shanghai';
-    }
-
-    nav
-    {
-        margin: 0 auto;
-        height: 100%;
-        width: 100%;
-    }
-
-
-    .nav-icon
-    {
+        z-index: 20;
         position: absolute;
-        background-color: #FFF;
-        /*margin: auto;*/
-        text-align: center;
-        width: 50px;
-        height: 50px;
-        top: 5px;
-        right: 5px;
 
-        border-radius: 4px;
-    }
-
-    .navbar-toggle
-    {
-        background-color: transparent;
-    }
-
-/*    .nav-icon > ul
-    {
-        background-color: transparent;
-        display: table;
-        table-layout: fixed;
         width: 100%;
-        height: 100%;
-    }
 
-    .nav-icon > ul > li
-    {
+        color: $base-color; 
         text-align: center;
-        display: table-row;
-        list-style-type: none;
-    }*/
-
-    .icon-bar
-    {
-/*        display: table-cell;
         vertical-align: middle;
-*/
-        position: absolute;
-        display: block;
-        width: 40px;
-        height: 2px;
-        background-color: #888;
-        border-radius: 4px;
 
-        margin-top: 11px;
+        @include header-size(50px, 24px);
+
+        @include breakpoint($collapsed-nav)
+        {
+            @include header-size(80px, 32px);
+        }
+
+        @include breakpoint($full-size)
+        {
+            @include header-size(100px, 48px);
+        }
     }
+}
 
-    #nav-bar
+footer
+{
+    z-index: 20;
+
+    display: block;
+    position: fixed;
+
+    display: table-cell;
+    vertical-align: bottom;
+
+    //background: $main-color-dark;
+    @include background-image(radial-gradient(50% 100%, 100% 100%, rgba($base-color-dark, 0.9) 85%, $base-color-dim 90%, rgba($base-color-dark, 0.0)));
+
+    //@include border-top-left-radius(200px);
+    //@include border-top-right-radius(200px);
+
+    width: 100%;
+    height: 110px;//$footer-height;
+    bottom: 0px;
+
+    color: $base-color;
+    @include font-size(16px);
+    //font-size: 16px; font-size: 1.6rem;
+    text-align: center;
+
+    & #contact_info, & #date
     {
-        display: table;   /* Allow the centering to work */
-
-        height: 60px;
-/*        height: 100%;*/
+        position: absolute;
         width: 100%;
 
-        text-transform:capitalize;
+        padding: 5px;
     }
 
-    #nav-bar  > ul
+    & #contact_info 
     {
-        position: relative;
-        list-style-type: none;
-        text-align: center;
-        width: 100%;
+        bottom: 2.5rem; 
     }
 
-    #nav-bar > ul > li
+    & #date
     {
-        display:inline-block;
-        float: none;
-        position: relative;
-/*        top: 0;*/
+       bottom: 0.5rem; 
     }
 
-    #nav-bar > ul > li:hover > a
+     & #date
     {
-        color: #ffcccc;
-    }
-
-    #nav-bar > ul > li > a
-    {
-        display:inline-block;
-        margin: 7px 24px;
-
-        color: #fff;
-/*        font-family: "Arial Black", Gadget, sans-serif;*/
-        font-family: 'japanese';
-        font-size: 32px; font-size: 3.2rem;
-        letter-spacing: 5px;
-    }
-
-    #nav-bar > ul > li > a:hover
-    {
-        text-decoration: none;
-    }
-
-    div.dropdown-menu
-    {
-        /*display: inline-block;*/
-        background-color: #000;
-        top: 100%;
-        left: 0%;
         position: absolute;
-        /*transform: translateX(50%);*/
-        margin: 0px 0px;
-        /*padding: 20px;*/
-        border-radius: 0px 0px 30px 20px;
 
-/*        font-size: 16px; font-size: 1.6rem;*/
-    }
-
-    @keyframes fadeIn {
-        0%   {opacity: 0.0;}
-        100% {opacity: 0.9;}
-    }
-
-    @keyframes fadeOut {
-        0%   {opacity: 0.9;}
-        100% {opacity: 0.0;}
-    }
-
-    #nav-bar > ul > li > div.dropdown-menu
-    {
-        display: none;
-
-/*        animation-name: fadeOut;
-        animation-duration: 2s;*/
-    }
-
-  	#nav-bar > ul > li:hover > div.dropdown-menu, div.dropdown-menu:hover
-    {
-        display: block;
-
-/*        animation-name: fadeIn;
-        animation-duration: 2s;*/
-    }
-
-    div.dropdown-menu > ul
-    {
-        list-style-type: none;
-        margin: 0px;
-    }
-
-    .dropdown-item
-    {
-        display: inline-block
-      /*  display: block;*/
-        text-align: left;
-        clear: both;
-
-     /*   width: 100%;*/
-        border-radius: 0px 0px 30px 20px;
-    }
-
-    .dropdown-item:hover
-    {
-        text-decoration: none;
-        background-color: #99C;
-    }
-
-    .dropdown-item > a
-    {
-        margin: 10px;
-        padding-top: 20px;
-    }
-
-    .level1 > a
-    {
-        font-size: 18px; font-size: 1.8rem;
-    }
-
-    .level2 > a
-    {
-        font-size: 16px; font-size: 1.6rem;
-        padding-left: 30px;
-    }
-
-    .level3 > a
-    {
-        font-size: 14px; font-size: 1.4rem;
-        padding-left: 60px;
-    }
-
-    /*nav ul li a {
-		display: block; padding: 25px 40px;
-		color: #757575; text-decoration: none;
-	}*/
-
-    #content-area
-    {
-        box-sizing: border-box;
-        position: absolute;
-        top: 0;
+        // Use these two to get an element in the middle of its parent
+        // Place the left border of the element on the middle line of the parent
         left: 50%;
-        /* Translate uses the element's own size with percents */
-        -ms-transform: translateX(-50%); /* IE 9 */
-        -webkit-transform: translateX(-50%); /* Safari */
-        transform: translateX(-50%);
+        // Move the element to the left half of its size
+        // Translate uses the element's own size when using percents
+        @include transform(translateX(-50%));
 
-        background-color: #FFF;
-        padding: 70px 30px;
-
-        height: auto;
-        min-height: 100%;
-
-        /* Place the content area in the middle of the page */
-       /* margin: auto;*/
-
-        z-index: 100;
-    }
-
-    #content-area > article > h1
-    {
-        /*color: #ffe5e5;*/
-        /*color: #DFBED9;*/
-        color: #A9628C;
-        font-size: 30px; font-size: 4rem;
-        text-shadow: 3px 1px 1px rgba(50, 50, 50, 0.3);
-    }
-
-    #content-area > article > h1:hover
-    {
-        color: #DFBED9;
-        font-size: 30px; font-size: 4rem;
-        text-shadow: 3px 1px 1px rgba(50, 50, 50, 0.3);
-    }
-
-    #content-area > article  > p
-    {
-        color: #000;
-        font-size: 16px; font-size: 1.6rem;
-        font-family: Verdana, Geneva, sans-serif;
-        text-align: justify;
-
-        margin-bottom: 30px; margin-bottom: 3rem;
-    }
-
-    hr
-    {
-      margin: 60px 0px;
-    }
-
-    article > hr, hr.paragraph-gap {
-        border: 0;
-        height: 2px;
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(169, 98, 140, 0.75), rgba(0, 0, 0, 0));
-    }
-
-    /* Flaired edges, by Tomas Theunissen */
-    hr.article-gap
-    {
-        height: 40px;
-        border-style: solid;
-        border-color: rgba(169, 98, 140, 0.75);
-        border-width: 1px 0 0 0;
-        border-radius: 50px;
-    }
-
-    hr.article-gap:before 
-    { /* Not really supposed to work, but does */
-        display: block;
-        content: "";
-        height: 40px;
-        margin: -41px 0 0 0;
-        border-style: solid;
-        border-color: rgba(169, 98, 140, 0.75);
-        border-width: 0 0 1px 0;
-        border-radius: 50px;
-    }
-
-    img
-    {
-        margin: 20px 0px;
-    }
-
-    img.blocking
-    {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    img.wrapping-left
-    {
-        /*clear: both;*/
-        float: left;
-        margin-right: 20px;
-    }
-
-    img.wrapping-right
-    {
-        /*clear: both;*/
-        float: right;
-        margin-left: 20px;
-    }
-
-    footer
-    {
-        position: fixed;
-
-        bottom: 0px;
-        height: 60px;
         width: 100%;
 
-        text-align: center;
-        font-size: 14px; font-size: 1.4rem;
-
-        background-color: #CCC;
-
-
-        z-index: 400;
+        padding: 5px;
+        bottom: 10px;
     }
+}
+*/
+/* line 1, sass/_navigation.scss */
+nav {
+  margin: 0 auto;
+  height: 100%;
+  width: 100%; }
 
-    .background
-    {
-/*        display: none;*/
-        position: fixed;
-        width: 100%;
-        overflow: hidden;
-        max-width:  100%;   /* Won't cause horizontal scrollbars */
-        max-height: 100%;   /* Won't cause vertical scrollbars */
-    }
+/* line 8, sass/_navigation.scss */
+.nav-icon {
+  position: absolute;
+  background-color: #FFF;
+  /*margin: auto;*/
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  top: 5px;
+  right: 5px;
+  border-radius: 4px; }
+  @media (min-width: 800px) {
+    /* line 8, sass/_navigation.scss */
+    .nav-icon {
+      display: none; } }
 
-    .background-true
-    {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        max-width:  100%;   /* Won't cause horizontal scrollbars */
-        max-height: 100%;   /* Won't cause vertical scrollbars */
-    }
+/* line 27, sass/_navigation.scss */
+.navbar-toggle {
+  background-color: transparent; }
 
-    #bg-layer-0
-    {
-        background-color: #ffecec;
-        height: 100%;
-        z-index: 0;
-    }
+/* line 32, sass/_navigation.scss */
+.icon-bar {
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 2px;
+  background-color: #888;
+  border-radius: 4px;
+  margin-top: 11px; }
 
-    #bg-layer-1
-    {
-        background-color: #ffe5e5;
-        height: 800px;
-        z-index: 1;
-    }
+/* line 44, sass/_navigation.scss */
+#nav-bar {
+  display: table;
+  /* Allow the centering to work */
+  height: 60px;
+  width: 100%;
+  text-transform: capitalize; }
+  @media (min-width: 800px) {
+    /* line 44, sass/_navigation.scss */
+    #nav-bar {
+      display: block; } }
 
-    #bg-layer-2
-    {
-        background-color: #ffcccc;
-        height: 600px;
-        z-index: 2;
-    }
+/* line 59, sass/_navigation.scss */
+#nav-bar > ul {
+  position: relative;
+  list-style-type: none;
+  text-align: center;
+  width: 100%; }
 
-    #bg-layer-3
-    {
-        background-color: #ffb3b3;
-        height: 300px;
-        z-index: 3;
-    }
+/* line 67, sass/_navigation.scss */
+#nav-bar > ul > li {
+  display: inline-block;
+  float: none;
+  position: relative; }
+  /* line 73, sass/_navigation.scss */
+  #nav-bar > ul > li > a {
+    display: inline-block;
+    margin: 7px 24px;
+    color: #cba0ba;
+    /*        font-family: "Arial Black", Gadget, sans-serif;*/
+    font-family: 'japanese';
+    font-size: 32px;
+    font-size: 2rem;
+    letter-spacing: 5px; }
+  /* line 86, sass/_navigation.scss */
+  #nav-bar > ul > li:hover {
+    background-color: #578cb0; }
+    /* line 90, sass/_navigation.scss */
+    #nav-bar > ul > li:hover > a {
+      color: #eddfe8; }
 
-    #bg-layer-4
-    {
-        background-color: #000;
-        height: 100px;
-        z-index: 4;
-    }
+/* line 97, sass/_navigation.scss */
+div.dropdown-menu {
+  display: none;
+  top: 100%;
+  left: 0%;
+  position: absolute;
+  margin: 0px 0px; }
+  /* line 107, sass/_navigation.scss */
+  div.dropdown-menu > ul {
+    background-color: #000;
+    border-radius: 0px 0px 30px 20px;
+    overflow: hidden;
+    list-style-type: none;
+    margin: 0px; }
 
-    /*MAX AREA*/
-    @media screen and (min-width: 800px) {
-        #content-area
-        {
-            width: 800px;
-            /*margin-left: -400px;*/
-        }
+/* line 118, sass/_navigation.scss */
+#nav-bar > ul > li:hover > div.dropdown-menu, div.dropdown-menu:hover {
+  display: block; }
 
-        .nav-bar
-        {
-            display: block;
-        }
+/* line 123, sass/_navigation.scss */
+.nav-dropdown-element {
+  display: block;
+  text-align: left;
+  clear: both;
+  overflow: hidden;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 15px; }
+  /* line 131, sass/_navigation.scss */
+  .nav-dropdown-element > a {
+    color: #eddfe8; }
+  /* line 136, sass/_navigation.scss */
+  .nav-dropdown-element:hover {
+    background-color: #578cb0; }
 
-        .nav-icon
-        {
-            display: none;
-        }
-    }
+/* line 154, sass/_navigation.scss */
+.nav-dropdown-level1 {
+  font-size: 18px;
+  font-size: 1.125rem;
+  padding-left: 10px; }
 
-    /*MEDIUM AREA*/
-    @media screen and (max-width: 800px) {
-        #content-area
-        {
-            width: 100%;
-        }
+/* line 160, sass/_navigation.scss */
+.nav-dropdown-level2 {
+  font-size: 16px;
+  font-size: 1rem;
+  padding-left: 25px; }
 
-        .background
-        {
-            display: none;
-        }
+/* line 166, sass/_navigation.scss */
+.nav-dropdown-level3 {
+  font-size: 14px;
+  font-size: 0.875rem;
+  padding-left: 40px; }
 
-/*        .nav-bar
-        {
-            display: none;
-        }
+/* line 1, sass/_background.scss */
+.background {
+  /*        display: none;*/
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+  max-width: 100%;
+  /* Won't cause horizontal scrollbars */
+  max-height: 100%;
+  /* Won't cause vertical scrollbars */
+  display: none; }
+  @media (min-width: 800px) {
+    /* line 1, sass/_background.scss */
+    .background {
+      display: block; } }
 
-        .nav-icon
-        {
-            display: block;
-        }*/
+/* line 18, sass/_background.scss */
+.background-true, svg {
+  z-index: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  max-width: 100%;
+  /* Won't cause horizontal scrollbars */
+  max-height: 100%;
+  /* Won't cause vertical scrollbars */ }
 
-        #logo
-        {
-            display: none;
-        }
+/* line 30, sass/_background.scss */
+#foreground0 {
+  position: absolute;
+  top: 0px;
+  width: 100%; }
 
-        img
-        {
-            width: 100%;
-        }
-    }
+/* line 37, sass/_background.scss */
+#bg-layer-0 {
+  background-color: #ffecec;
+  height: 100%;
+  z-index: 0; }
 
-    /*MIN AREA*/
-    @media screen and (max-width: 480px) {
-        #content-area
-        {
-            width: 100%;
-        }
+/* line 44, sass/_background.scss */
+#bg-layer-1 {
+  background-color: #ffe5e5;
+  height: 800px;
+  z-index: 1; }
 
-        .background
-        {
-            display: none;
-        }
+/* line 51, sass/_background.scss */
+#bg-layer-2 {
+  background-color: #ffcccc;
+  height: 600px;
+  z-index: 2; }
 
-/*        .nav-bar
-        {
-            display: none;
-        }
+/* line 58, sass/_background.scss */
+#bg-layer-3 {
+  background-color: #ffb3b3;
+  height: 300px;
+  z-index: 3; }
 
-        .nav-icon
-        {
-            display: block;
-        }*/
+/* line 65, sass/_background.scss */
+#bg-layer-4 {
+  background-color: #000;
+  height: 100px;
+  z-index: 4; }
 
-        #logo
-        {
-            display: none;
-        }
-    }
+/* line 1, sass/_content.scss */
+#content-area {
+  left: 50%;
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  background-color: #FFF;
+  padding: 70px 30px;
+  height: auto;
+  min-height: 100%;
+  /* Place the content area in the middle of the page */
+  /* margin: auto;*/
+  z-index: 100;
+  width: 100%; }
+  @media (min-width: 800px) {
+    /* line 1, sass/_content.scss */
+    #content-area {
+      width: 800px; } }
 
+/* line 30, sass/_content.scss */
+#content-area > article > h1 {
+  /*color: #ffe5e5;*/
+  /*color: #DFBED9;*/
+  color: #a9628c;
+  font-size: 42px;
+  font-size: 2.625rem;
+  text-shadow: 3px 1px 1px rgba(50, 50, 50, 0.3); }
+  /* line 38, sass/_content.scss */
+  #content-area > article > h1:hover {
+    color: #DFBED9; }
+/* line 44, sass/_content.scss */
+#content-area > article > p {
+  color: #000;
+  font-size: 16px;
+  font-size: 1rem;
+  font-family: Verdana, Geneva, sans-serif;
+  text-align: justify;
+  margin-bottom: 30px;
+  margin-bottom: 3rem; }
 
+/* line 55, sass/_content.scss */
+hr {
+  margin: 60px 0px; }
 
+/* line 60, sass/_content.scss */
+article > hr, hr.paragraph-gap {
+  border: 0;
+  height: 2px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(169, 98, 140, 0.75), rgba(0, 0, 0, 0)); }
 
+/* Flaired edges, by Tomas Theunissen */
+/* line 68, sass/_content.scss */
+hr.article-gap {
+  height: 40px;
+  border-style: solid;
+  border-color: rgba(169, 98, 140, 0.75);
+  border-width: 1px 0 0 0;
+  border-radius: 50px; }
+  /* line 76, sass/_content.scss */
+  hr.article-gap:before {
+    /* Not really supposed to work, but does */
+    display: block;
+    content: "";
+    height: 40px;
+    margin: -41px 0 0 0;
+    border-style: solid;
+    border-color: rgba(169, 98, 140, 0.75);
+    border-width: 0 0 1px 0;
+    border-radius: 50px; }
+
+/* line 89, sass/_content.scss */
+img {
+  width: 100%;
+  margin: 20px 0px; }
+  /* line 94, sass/_content.scss */
+  img.blocking {
+    display: block;
+    margin-left: auto;
+    margin-right: auto; }
+  /* line 101, sass/_content.scss */
+  img.wrapping-left {
+    /*clear: both;*/
+    float: left;
+    margin-right: 20px; }
+  /* line 108, sass/_content.scss */
+  img.wrapping-right {
+    /*clear: both;*/
+    float: right;
+    margin-left: 20px; }
 
 /* ==========================================================================
    Helper classes
    ========================================================================== */
-
 /*
  * Hide visually and from screen readers
  */
-
+/* line 9, sass/_html5-boilerplate-helper-classes.scss */
 .hidden {
-    display: none !important;
-}
+  display: none !important; }
 
 /*
  * Hide only visually, but have it available for screen readers:
  * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
  */
-
+/* line 18, sass/_html5-boilerplate-helper-classes.scss */
 .visuallyhidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-}
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
 
 /*
  * Extends the .visuallyhidden class to allow the element
  * to be focusable when navigated to via the keyboard:
  * https://www.drupal.org/node/897638
  */
-
+/* line 35, sass/_html5-boilerplate-helper-classes.scss */
 .visuallyhidden.focusable:active,
 .visuallyhidden.focusable:focus {
-    clip: auto;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    position: static;
-    width: auto;
-}
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto; }
 
 /*
  * Hide visually and from screen readers, but maintain layout
  */
-
+/* line 49, sass/_html5-boilerplate-helper-classes.scss */
 .invisible {
-    visibility: hidden;
-}
+  visibility: hidden; }
 
 /*
  * Clearfix: contain floats
@@ -718,109 +705,99 @@ textarea {
  * 2. The use of `table` rather than `block` is only necessary if using
  *    `:before` to contain the top-margins of child elements.
  */
-
+/* line 65, sass/_html5-boilerplate-helper-classes.scss */
 .clearfix:before,
 .clearfix:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
-}
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */ }
 
+/* line 71, sass/_html5-boilerplate-helper-classes.scss */
 .clearfix:after {
-    clear: both;
-}
+  clear: both; }
 
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    These examples override the primary ('mobile first') styles.
    Modify as content requires.
    ========================================================================== */
-
 @media only screen and (min-width: 35em) {
-    /* Style adjustments for viewports that meet the condition */
-}
-
-@media print,
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 1.25dppx),
-       (min-resolution: 120dpi) {
-    /* Style adjustments for high resolution devices */
-}
-
+  /* Style adjustments for viewports that meet the condition */ }
+@media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 1.25dppx), (min-resolution: 120dpi) {
+  /* Style adjustments for high resolution devices */ }
 /* ==========================================================================
    Print styles.
    Inlined to avoid the additional HTTP request:
    http://www.phpied.com/delay-loading-your-print-css/
    ========================================================================== */
-
 @media print {
-    *,
-    *:before,
-    *:after,
-    *:first-letter,
-    *:first-line {
-        background: transparent !important;
-        color: #000 !important; /* Black prints faster:
-                                   http://www.sanbeiji.com/archives/953 */
-        box-shadow: none !important;
-        text-shadow: none !important;
-    }
+  /* line 99, sass/_html5-boilerplate-helper-classes.scss */
+  *,
+  *:before,
+  *:after,
+  *:first-letter,
+  *:first-line {
+    background: transparent !important;
+    color: #000 !important;
+    /* Black prints faster:
+       http://www.sanbeiji.com/archives/953 */
+    box-shadow: none !important;
+    text-shadow: none !important; }
 
-    a,
-    a:visited {
-        text-decoration: underline;
-    }
+  /* line 111, sass/_html5-boilerplate-helper-classes.scss */
+  a,
+  a:visited {
+    text-decoration: underline; }
 
-    a[href]:after {
-        content: " (" attr(href) ")";
-    }
+  /* line 116, sass/_html5-boilerplate-helper-classes.scss */
+  a[href]:after {
+    content: " (" attr(href) ")"; }
 
-    abbr[title]:after {
-        content: " (" attr(title) ")";
-    }
+  /* line 120, sass/_html5-boilerplate-helper-classes.scss */
+  abbr[title]:after {
+    content: " (" attr(title) ")"; }
 
-    /*
-     * Don't show links that are fragment identifiers,
-     * or use the `javascript:` pseudo protocol
-     */
+  /*
+   * Don't show links that are fragment identifiers,
+   * or use the `javascript:` pseudo protocol
+   */
+  /* line 129, sass/_html5-boilerplate-helper-classes.scss */
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: ""; }
 
-    a[href^="#"]:after,
-    a[href^="javascript:"]:after {
-        content: "";
-    }
+  /* line 134, sass/_html5-boilerplate-helper-classes.scss */
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid; }
 
-    pre,
-    blockquote {
-        border: 1px solid #999;
-        page-break-inside: avoid;
-    }
+  /*
+   * Printing Tables:
+   * http://css-discuss.incutio.com/wiki/Printing_Tables
+   */
+  /* line 145, sass/_html5-boilerplate-helper-classes.scss */
+  thead {
+    display: table-header-group; }
 
-    /*
-     * Printing Tables:
-     * http://css-discuss.incutio.com/wiki/Printing_Tables
-     */
+  /* line 149, sass/_html5-boilerplate-helper-classes.scss */
+  tr,
+  img {
+    page-break-inside: avoid; }
 
-    thead {
-        display: table-header-group;
-    }
+  /* line 154, sass/_html5-boilerplate-helper-classes.scss */
+  img {
+    max-width: 100% !important; }
 
-    tr,
-    img {
-        page-break-inside: avoid;
-    }
+  /* line 158, sass/_html5-boilerplate-helper-classes.scss */
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3; }
 
-    img {
-        max-width: 100% !important;
-    }
-
-    p,
-    h2,
-    h3 {
-        orphans: 3;
-        widows: 3;
-    }
-
-    h2,
-    h3 {
-        page-break-after: avoid;
-    }
-}
+  /* line 165, sass/_html5-boilerplate-helper-classes.scss */
+  h2,
+  h3 {
+    page-break-after: avoid; } }

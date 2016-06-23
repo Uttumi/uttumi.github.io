@@ -21,12 +21,7 @@
         border: $border-width solid $colorful-color;
         @include border-radius(10px);
 
-        // Use these two to get an element in the middle of its parent
-        // Place the left border of the element on the middle line of the parent
-        left: 50%;
-        // Move the element to the left half of its size
-        // Translate uses the element's own size when using percents
-        @include transform(translateX(-50%));
+        @include horizontally-centered-element();
 
         padding-left: $content-gap;
         padding-bottom: $content-gap;

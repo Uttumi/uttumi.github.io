@@ -1,0 +1,170 @@
+nav
+{
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+}
+
+.nav-icon
+{
+    position: absolute;
+    background-color: #FFF;
+    /*margin: auto;*/
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    top: 5px;
+    right: 5px;
+
+    border-radius: 4px;
+
+    @include breakpoint($with-side-bars)
+    {
+        display: none;
+    }    
+}
+
+.navbar-toggle
+{
+    background-color: transparent;
+}
+
+.icon-bar
+{
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 2px;
+    background-color: #888;
+    border-radius: 4px;
+
+    margin-top: 11px;
+}
+
+#nav-bar
+{
+    display: table;   /* Allow the centering to work */
+
+    height: 60px;
+    width: 100%;
+
+    text-transform: capitalize;
+
+    @include breakpoint($with-side-bars)
+    {
+        display: block;
+    }
+}
+
+#nav-bar > ul
+{
+    position: relative;
+    list-style-type: none;
+    text-align: center;
+    width: 100%;
+}
+
+#nav-bar > ul > li
+{
+    display:inline-block;
+    float: none;
+    position: relative;
+
+    & > a
+    {
+        display:inline-block;
+        margin: 7px 24px;
+
+        color: $secondary-color;
+        
+    /*        font-family: "Arial Black", Gadget, sans-serif;*/
+        font-family: 'japanese';
+        @include font-size(32px);
+        letter-spacing: 5px;
+    }
+
+    &:hover
+    {
+        background-color: $base-color-dark;
+
+        & > a 
+        {
+            color: $secondary-color-light;
+        }
+    }
+}
+
+div.dropdown-menu
+{
+    display: none;
+    
+    top: 100%;
+    left: 0%;
+    position: absolute;
+
+    margin: 0px 0px;
+
+    & > ul
+    {
+        background-color: #000;
+        border-radius: 0px 0px 30px 20px;
+        overflow: hidden;
+
+        list-style-type: none;
+        margin: 0px;
+    }
+}
+
+#nav-bar > ul > li:hover > div.dropdown-menu, div.dropdown-menu:hover
+{
+    display: block;
+}
+
+.nav-dropdown-element
+{
+    display: block;
+    text-align: left;
+    clear: both;
+
+    overflow: hidden;
+
+    & > a 
+    {
+        color: $secondary-color-light;
+    }
+
+    &:hover
+    {
+        background-color: $base-color-dark;
+
+        & > a 
+        {
+            //text-decoration: underline;
+        }
+    }
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 15px;
+}
+
+$padding-initial: 10px;
+$padding-per-level: 15px;
+
+.nav-dropdown-level1
+{
+    @include font-size(18px);
+    padding-left: $padding-initial;
+}
+
+.nav-dropdown-level2
+{
+    @include font-size(16px);
+    padding-left: $padding-initial + $padding-per-level;
+}
+
+.nav-dropdown-level3
+{
+    @include font-size(14px);
+    padding-left: $padding-initial + 2 * $padding-per-level;
+}
