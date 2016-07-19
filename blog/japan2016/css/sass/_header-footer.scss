@@ -2,7 +2,7 @@ header
 {
     z-index: 200;
 
-    background-color: #000;
+    background-color: $base-color-black;
 
     position: fixed;
     width: 100%;
@@ -12,6 +12,8 @@ header
 
 #logo
 {
+    z-index: 220;
+
     margin: 5px 20px;
 
     color: $secondary-color-light;

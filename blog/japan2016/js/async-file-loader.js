@@ -57,9 +57,9 @@ var templates =
 
                 var i = 0;
 
-                console.debug('IS ARRAY: '+ $.isArray(documentArray));
-                console.debug('DOCUMENT ARRAY: ');
-                console.debug(documentArray);
+//                console.debug('IS ARRAY: '+ $.isArray(documentArray));
+//                console.debug('DOCUMENT ARRAY: ');
+//                console.debug(documentArray);
 
                 $.each(documentArray, function (index, urlValue)
                 {

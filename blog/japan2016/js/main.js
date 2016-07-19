@@ -26,7 +26,30 @@ $(document).on(
 
 		var $svgBackground = $($.parseHTML(svgData));
 
+		$svgBackground.attr( 'height', '100%' );
+		$svgBackground.attr( 'width', 'auto' );
+		//$svgBackground.attr( 'preserveAspectRatio', 'xMinYMid meet'); //'xMidYMid meet' );
+
+		//$svgBackground.find('g').attr('data-type', 'background');
+		//$svgBackground.find('g[id*="background"]').attr('data-type', 'background');
+
+		$svgBackground.find('g[id*="ground"]').each(
+			function( index )
+			{
+				$gElement = $(this);
+				$gElement.attr('data-type', 'background');
+				var id = $gElement.attr('id');
+
+				//The number in id should be after 10th index (foreground2, background6 etc.)
+				var number = id.substring(10);
+
+				$gElement.attr('data-speed', number);
+			}
+		);
+
 		$('body').append($svgBackground);
+
+		SetBGIntoMotion();
 	}
 )
 
@@ -90,11 +113,13 @@ function CheckHash ()
 
 	console.debug('ACCESSING ARTICLE LIST');
 	console.debug('LOCATION HASH :'+ location.hash);
+	console.debug('NAV OBJECT :');
+	console.debug(nav_lists);
 	console.debug('ARTICLE LIST :'+ nav_lists[location.hash].article_list);
 
 	templates.loadElements(nav_lists[location.hash].article_list, "#content-area", "elements-loaded");
 
-	$('html,body').scrollTop(0);
+	//$('html,body').scrollTop(0);
 
 	//Animation for scrolling
 /*	$("html, body").animate({ scrollTop: 0 }, 2000);*/
@@ -114,216 +139,423 @@ $(document).on(
 
         $.each (
             document_divs,
-            function( index, tempElement )
+            function( index, article_element )
             {
-                if (index > 0)
-                {
-                    $target_element.append("<span class=\"clearfix\">");
-                    $target_element.append("<hr class=\"article-gap\">");
-                }
+            	$target_element.append("<span class=\"clearfix\" />");
+            	$target_element.append("<hr class=\"article-start\" >");
 
-                $target_element.append(tempElement.html());
+                $target_element.append(article_element.html());
+
+                var $article_content = $target_element.children().last().find('.article-content');
+                //var scrollHeight = $article_content.get(0).scrollHeight;
+
+                var autoHeight = $article_content.css('height', 'auto').height(); 
+
+                var $label_element = $('<label />');
+                var $label_text_element = $('<h3 />');
+				var $input_element =
+					$(
+						'<input />', 
+						{ 
+							type: 'checkbox'
+						}
+					);
+
+            	$target_element.append($label_element);
+            	$label_element.append($label_text_element);
+            	$label_element.append($input_element);
+
+		        $input_element.on(
+					'change', 
+					function()
+					{
+						if( $(this).prop('checked') )
+						{
+							$article_content.css(
+								{
+									'height': autoHeight +'px',
+									'transition': 'height 1000ms ease-in'
+								}
+							);
+/*
+							$article_content.removeClass('closed');
+							$article_content.addClass('opened');
+*/
+							$label_text_element.text('Close article');
+						}
+						else
+						{
+							$article_content.css(
+								{
+									'height': '100px',
+									'transition': 'height 1000ms ease'
+								}
+							);
+/*
+							$article_content.removeClass('opened');
+							$article_content.addClass('closed');
+*/
+							$label_text_element.text('Open full...');
+						}
+					}
+				);
+
+				$input_element.trigger( 'change' );
+
+				$target_element.append("<span class=\"clearfix\" />");
+            	$target_element.append("<hr class=\"article-end\" >"); 
             }
         );
+
+        //var $input_elements = $target_element.find('input');
+/*
+        $input_elements.on(
+			'change', 
+			function()
+			{
+				var $article_content = $(this).parent().find('.article-content'); //$(this).next().next().next();
+
+				if( $(this).prop('checked') )
+				{
+					$article_content.css(
+						{
+							'height': $article_content.get(0).scrollHeight +'px',
+							'transition': 'height 1000ms ease-in'
+						}
+					);
+				}
+				else
+				{
+					$article_content.css(
+						{
+							'height': '100px',
+							'transition': 'height 1000ms ease'
+						}
+					);
+				}
+			}
+		);
+*/
+		//$input_elements.trigger( 'change' );
+		//$input_elements.prop('checked', false);    
 	}
 )
 
 function ProcessNavigationElement(parent_element, json_element, list_level, anchor)
 {
-	console.debug('LEVEL:'+ list_level);
-	console.debug('ANCHOR:'+ anchor);
-	console.debug('#########################');
-
+	var article_array = [];
 	var sub_json_element_list = GetComplexElementList(json_element.value);
 
+	console.debug('#########################');
+	console.debug('PROCESSING NAV ELEMENT');
+	console.debug('LEVEL:'+ list_level);
+	console.debug('ANCHOR:'+ anchor);
+	console.debug(sub_json_element_list);
+	console.debug('#######');
+/*
 	if(json_element.value.hasOwnProperty('anchor'))
 	{
-		console.debug(json_element.key +': '+ json_element.value.anchor);
-
+		console.debug('ANCHOR CHANGED: '+ json_element.key +' -> '+ json_element.value.anchor);
 		anchor = '#'+ json_element.value.anchor;
+	}
+*/
+	if(json_element.value.hasOwnProperty('articles'))
+	{
+		article_array = json_element.value.articles;
+		console.debug('HAS '+ article_array.length +' ARTICLES');
+		
 	}
 
 	switch(list_level)
 	{
 		case 1: 
-			var topics_div = $('<div />', {id: 'nav-bar'}).appendTo(parent_element);
+			var topics_div = $('<div />', {id: 'nav-bar', class: 'nav-wrap'}).appendTo(parent_element);
 			var topics_ul = $('<ul />').appendTo(topics_div);
 
-			var articles = json_element.value.articles;
-
 			$.each
 			(
 				sub_json_element_list,
 				function( index, sub_json_element )
 				{
-					if(sub_json_element.key == 'articles')
-					{
-
-					}
-					else
-					{
-						CreateNavElement(topics_ul, sub_json_element, list_level, anchor, true);
-					}
-				}
-			)
-
-			break;
-		case 2:
-			var topic_dropdown_div = $('<div />', {class: 'dropdown-menu'}).appendTo(parent_element);
-			var topic_dropdown_ul = $('<ul />').appendTo(topic_dropdown_div);
-
-			$.each
-			(
-				sub_json_element_list,
-				function( index, sub_json_element )
-				{
-					if(sub_json_element.key == 'articles')
-					{
-						CreateNavElementsFromArticles(topic_dropdown_ul, sub_json_element, list_level, anchor +'/');
-					}
-					else
-					{
-						CreateNavElement(topic_dropdown_ul, sub_json_element, list_level, anchor +'/', false);
-					}
+					CreateNavElement(topics_ul, sub_json_element, list_level, anchor, false);
 				}
 			)
 
 			break;
 		default:
+			var topic_dropdown_div = $('<div />', {class: 'nav-wrap'}).appendTo(parent_element);
+			var topic_dropdown_ul = $('<ul />').appendTo(topic_dropdown_div);
+
+			CreateNavElementsFromArticles(topic_dropdown_ul, article_array, list_level, anchor +'/');
+
 			$.each
 			(
 				sub_json_element_list,
 				function( index, sub_json_element )
 				{
-					if(sub_json_element.key == 'articles')
-					{
-						CreateNavElementsFromArticles(parent_element, sub_json_element, list_level, anchor +'/');
-					}
-					else
-					{
-						CreateNavElement(parent_element, sub_json_element, list_level, anchor +'/', false);
-					}
+					CreateNavElement(topic_dropdown_ul, sub_json_element, list_level, anchor +'/', false);
 				}
 			)
 
 			break;
+/*		default:
+
+			CreateNavElementsFromArticles(parent_element, article_array, list_level, anchor +'/');
+
+			$.each
+			(
+				sub_json_element_list,
+				function( index, sub_json_element )
+				{
+					CreateNavElement(parent_element, sub_json_element, list_level, title, anchor +'/', false);
+				}
+			)
+
+			break;*/
 	}
 }
 
-function CreateNavElement(parent_element, json_element, list_level, title, parent_anchor, append_list_item)
+function CreateNavElement(list_element, json_element, list_level, parent_anchor, append_list_item)
 {
+	var anchor = parent_anchor + json_element.key;
+
+	console.debug('PARENT ANCHOR: '+ parent_anchor);
+
+/*	if(json_element.value.hasOwnProperty('title'))
+	{
+		console.debug('TITLE CHANGED: '+ json_element.key +' -> '+ json_element.value.title);
+		title = json_element.value.title;
+	}
+
+	if(json_element.value.hasOwnProperty('anchor'))
+	{
+		console.debug('ANCHOR CHANGED: '+ parent_anchor +' -> '+ json_element.value.anchor);
+		anchor = json_element.value.anchor;
+	}*/
+
 	var title = json_element.key;
 
 	if(json_element.value.hasOwnProperty('title'))
 	{
-		console.debug(json_element.key +': '+ json_element.value.title);
+		console.debug('TITLE FOUND: '+ json_element.value.title);
 		title = json_element.value.title;
 	}
 
-	var list_item = CreateListItem(
-		parent_element, 
+	if(json_element.value.hasOwnProperty('anchor'))
+	{
+		console.debug('ANCHOR CHANGED: '+ json_element.key +' -> '+ json_element.value.anchor);
+		anchor = parent_anchor + json_element.value.anchor;
+	}
+
+	var list_item_element = CreateListItem( 
 		json_element,
 		list_level,
 		title,
-		parent_anchor + json_element.key,
+		anchor,
 		false
 		);
 
+	list_element.append(list_item_element);
+
 	if(append_list_item)
 	{
-		list_item.appendTo(parent_element);
+		list_element.append(list_item_element);
 
 		ProcessNavigationElement(
-			list_item, 
+			list_item_element, 
 			json_element, 
 			list_level+1,
-			parent_anchor + json_element.key
+			anchor
 			);
 	}
 	else
 	{
 		ProcessNavigationElement(
-			parent_element, 
+			list_item_element,
 			json_element, 
 			list_level+1,
-			parent_anchor + json_element.key
+			anchor
 			);
 	}
 }
 
-function CreateNavElementsFromArticles(parent_element, json_element, list_level, title, parent_anchor)
+function CreateNavElementsFromArticles(list_element, article_array, list_level, parent_anchor)
 {
-	var article_list = GetComplexElementList(json_element.value);
+/*	if(title == undefined)
+		title = json_element.key;*/
+
+/*	var anchor = parent_anchor + json_element.key;*/
+
+	
+
+/*	if(json_element.value.hasOwnProperty('title'))
+	{
+		console.debug('TITLE CHANGED: '+ json_element.key +' -> '+ json_element.value.title);
+		title = json_element.value.title;
+	}
+
+	if(parent_element.value.hasOwnProperty('anchor'))
+	{
+		console.debug('ANCHOR CHANGED: '+ parent_anchor +' -> '+ json_element.value.anchor);
+		anchor = json_element.value.anchor;
+	}*/
+
+	//var article_list = GetComplexElementList(json_element.value);
+
+	//console.debug('CREATING NAV ELEMENT FOR '+ Object.keys(article_map).length +' ARTICLES');
+/*	var index = 0;
 
 	$.each
 	(
-		article_list,
-		function( index, article_tuple )
+		article_map,
+		function( key, value )
 		{
+			var tuple = {};
+			tuple[key] = article_map[key];
+
+			console.debug('ARTICLE '+ ++index);
+			console.debug(tuple);
+
 			CreateListItem(
 				parent_element, 
-				article_tuple,
+				value,
 				list_level,
 				title,
-				parent_anchor + article_tuple.key,
+				parent_anchor + key,
 				true
 			);
+		}
+	)*/
+
+	console.debug('CREATING NAV ELEMENTS FOR '+ article_array.length +' ARTICLES');
+
+	var index = 0;
+
+	$.each
+	(
+		article_array,
+		function( index, article_map )
+		{
+			var id = article_map.id;
+			var title = article_map.title;
+			var path = article_map.path;
+			var anchor = parent_anchor +'/'+ id;
+
+			console.debug('ARTICLE NUMBER '+ index);
+
+			var list_item_element = CreateListItem(
+				path,
+				list_level,
+				title,
+				anchor,
+				true
+			);
+
+			list_element.append(list_item_element);
 		}
 	)
 }
 
-function CreateListItem(parent_element, json_tuple, list_level, title, anchor, is_article)
+function CreateListItem(path, list_level, title, anchor, is_article)
 {
-	anchor = anchor.replace(' ', '-').toLowerCase();
+	anchor = anchor.replace(' ', '_').toLowerCase();
 
-	var list_item = $('<li />').appendTo(parent_element);
-	var link = $('<a />', {href: anchor}).appendTo(list_item);
+	var $list_item = $('<li />');
 
-	//link.text(json_tuple.key);
-	link.text(title);
+	var $link_element = $('<a />', {href: anchor});
+	$link_element.text(title);
 
-	switch(list_level)
+	var $label_element = 
+		$(
+			'<label />', 
+			{ 
+				for: anchor +'_input' 
+			}
+		);
+	$label_element.html(title);
+
+	var $input_element =
+		$(
+			'<input />', 
+			{ 
+			//type: 'radio', 
+			type: 'checkbox', 
+			name: 'vertical_menu_'+ list_level, 
+			id: anchor +'_input',
+			}
+		);
+
+	//list_item.append(link_element);
+	$list_item.append($label_element);
+	$list_item.append($input_element);
+	
+	$input_element.on(
+		'change', 
+		function()
+		{
+			if( $(this).prop('checked') )
+			{
+				$list_item.addClass( 'menu-selection' );
+				$list_item.siblings().removeClass( 'menu-selection' );
+
+				$('input[name="'+ $(this).prop('name') +'"]').not(this).prop('checked', false);
+
+				window.location.href = anchor;
+			}
+			else
+			{
+				$list_item.removeClass( 'menu-selection' );
+
+				$list_item.find('input').prop('checked', false);
+			}
+		}
+	);
+
+	if(list_level > 1)
 	{
-		case 1: 
-				break;
-		case 2: 
-				list_item.addClass('nav-dropdown-element nav-dropdown-level1');
+		$list_item.addClass('nav-dropdown-element nav-dropdown-level'+ (list_level-1));
 
-				if(is_article)
-					AddToNavList(anchor, json_tuple, link);
+		if(is_article)
+			AddToNavList(anchor, path, $link_element);	
+	}
+	else
+	{
+		//Close the dropdown menu when mouse hovers of its bounds
+		$list_item.mouseleave(
+			function() 
+			{
+				//Uncheck input horizontally
+				$('input[name="'+ $input_element.prop('name') +'"]').prop('checked', false);
+				//Uncheck input vertically
+				$list_item.find('input').prop('checked', false);
 
-				break;
-		case 3: 
-				list_item.addClass('nav-dropdown-element nav-dropdown-level2');
-
-				if(is_article)
-					AddToNavList(anchor, json_tuple, link);
-
-				break;
-		default: 
-				list_item.addClass('nav-dropdown-element nav-dropdown-level3');
-
-				if(is_article)
-					AddToNavList(anchor, json_tuple, link);
-
-				break;		
+				//Remove selection class horizontally
+				$list_item.siblings().andSelf().removeClass( 'menu-selection' );
+				//Remove selection class vertically
+				$list_item.find('li').removeClass( 'menu-selection' );
+			}
+		);
 	}
 
-	return list_item;
+	return $list_item;
 }
 
-function AddToNavList(orig_anchor, json_element, link_element)
+function AddToNavList(orig_anchor, article_selector, link_element)
 {
 	//json_element expectations
 	//key = 
 	//value = path
 
-	console.log('Adding to nav list');
+/*	console.debug(json_element);*/
+
+	console.log('##################');
+	console.log('ADDING TO NAV LIST');
+	console.log('##################');
 
 	var folders = orig_anchor.split('/');
 	var anchor = '';
 	var article_id = folders[folders.length-1];
-	var article_selector = json_element.value; // +' #'+ article_id;  //Why was there ID?
+/*	var article_selector = json_element[1];*/ // +' #'+ article_id;  //Why was there ID?
 
 	//Go through each parent folder of the document and add it to the article list of the folder
 
@@ -379,8 +611,6 @@ function AddToNavList(orig_anchor, json_element, link_element)
 				console.debug('NAV OBJECT FROM LIST: '+ nav_lists[anchor]);
 			}
 
-			console.log(nav_lists[orig_anchor]);
-
 			$.each(
 				nav_lists,
 				function( key, value )
@@ -390,4 +620,6 @@ function AddToNavList(orig_anchor, json_element, link_element)
 			)
 		}
 	);
+
+	console.log(nav_lists[orig_anchor]);
 }

@@ -23,41 +23,159 @@
     {
         width: $center-area-width;
     }
+
+    & > label > input
+    {
+        display: none;
+        visibility: hidden;
+    }
 }
 
 #content-area > article
 {
-    & > h1
+    .article-title
     {
-        /*color: #ffe5e5;*/
-        /*color: #DFBED9;*/
         color: $secondary-color-dim;
-        @include font-size(42px);
+        //font-family: $lora-font-stack;  //Boring
+        //font-family: $crimson-font-stack;
+        //font-family: $lucida-font-stack;
+        //font-family: $myriad-font-stack;
+        font-family: $palatino-font-stack;
+
+        text-align: center;
+
         text-shadow: 3px 1px 1px rgba(50, 50, 50, 0.3);
+
+        margin: 0px;
 
         &:hover
         {
             color: #DFBED9;
         }
+
+        & > h1
+        {
+            @include font-size(32px);
+            letter-spacing: 3px;
+        }
+
+        & > h2
+        {
+            @include font-size(20px);
+            letter-spacing: 1px;
+        }        
+    }
+/* 
+    & > label + input:not(:checked) + .article-content
+    {
+        //height: 0px !important;
+
+        @include transform(scale(0));
+        opacity: 0;
+
+        transition: opacity 300ms linear, transform 600ms, height 800ms linear 900ms !important;
     }
 
-    & > p
+    & > label + input:checked + .article-content
     {
-        color: #000;
-        @include font-size(16px);
-        font-family: Verdana, Geneva, sans-serif;
-        text-align: justify;
+        //height: 0px !important;
 
-        margin-bottom: 30px; margin-bottom: 3rem;
+        @include transform(scale(1));
+        opacity: 1;
+
+        transition: opacity 300ms linear 600ms, transform 600ms linear, color 800ms ease-in-out 200ms, padding 800ms ease-in-out 200ms, height 800ms linear 200ms !important;
+    }
+ */
+    .article-content
+    {
+        overflow: hidden;
+
+/*         height: 0px;
+        transition: height 500ms linear; */
+
+        & > p
+        {
+            color: #000;
+            @include font-size(16px);
+            //font-family: Verdana, Geneva, sans-serif;
+            //font-family: $lora-font-stack;
+            font-family: $palatino-font-stack;
+            text-align: justify;
+
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        &.opened img
+        {
+            //width: 100%;
+            margin: 2% 0;
+
+            &.blocking
+            {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            &.wrapping-left
+            {
+                /*clear: both;*/
+                float: left;
+                margin-right: 2%;
+                width: 50%;
+            }
+
+            &.wrapping-right
+            {
+                /*clear: both;*/
+                float: right;
+                margin-left: 2%;
+                width: 50%;
+            }
+        }
+
+        &.closed img
+        {
+            //width: 100%;
+            margin: 2% 0;
+
+            &.blocking
+            {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            &.wrapping-left
+            {
+                /*clear: both;*/
+                float: left;
+                margin-right: 2%;
+                width: 50%;
+                //width: auto;
+                //height: 100%;
+            }
+
+            &.wrapping-right
+            {
+                /*clear: both;*/
+                float: right;
+                margin-left: 2%;
+                width: 50%;
+                //width: auto;
+                //height: 100%;
+            }
+        } 
     }
 }
 
 hr
 {
-  margin: 60px 0px;
+  margin: 10px 0px;
 }
 
-article > hr, hr.paragraph-gap
+hr.paragraph-gap
 {
     border: 0;
     height: 2px;
@@ -67,29 +185,51 @@ article > hr, hr.paragraph-gap
 /* Flaired edges, by Tomas Theunissen */
 hr.article-gap
 {
-    height: 40px;
+    height: 20px;
     border-style: solid;
     border-color: rgba(169, 98, 140, 0.75);
     border-width: 1px 0 0 0;
-    border-radius: 50px;
+    border-radius: 20px;
 
     &:before 
-    { /* Not really supposed to work, but does */
+    { 
+    // Not really supposed to work, but does
         display: block;
         content: "";
-        height: 40px;
-        margin: -41px 0 0 0;
+        height: 20px;
+        margin: -21px 0 0 0;
         border-style: solid;
         border-color: rgba(169, 98, 140, 0.75);
         border-width: 0 0 1px 0;
-        border-radius: 50px;
+        border-radius: 20px;
     }    
 }
 
+hr.article-start
+{
+    height: 20px;
+    border-style: solid;
+    border-color: rgba(169, 98, 140, 0.75);
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+}
+
+hr.article-end
+{ 
+    //display: block;
+    //content: "";
+    height: 20px;
+    //margin: -21px 0 0 0;
+    border-style: solid;
+    border-color: rgba(169, 98, 140, 0.75);
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
+}    
+
 img
 {
-    width: 100%;
-    margin: 20px 0px;
+    //width: 100%;
+    margin: 2% 0;
 
     &.blocking
     {
@@ -102,14 +242,16 @@ img
     {
         /*clear: both;*/
         float: left;
-        margin-right: 20px;
+        margin-right: 2%;
+        width: 50%;
     }
 
     &.wrapping-right
     {
         /*clear: both;*/
         float: right;
-        margin-left: 20px;
+        margin-left: 2%;
+        width: 50%;
     }
 }
 

@@ -140,12 +140,12 @@ $colorful-color-light:  rgba(45,154,157,1);
 @font-face {
   font-family: 'shanghai';
   src: url("fonts/shanghai/shanghai.ttf"); }
-/* line 99, sass/_variables.scss */
+/* line 100, sass/_variables.scss */
 .japanese-font {
   letter-spacing: 10px;
   font-family: 'japanese'; }
 
-/* line 105, sass/_variables.scss */
+/* line 106, sass/_variables.scss */
 .shanghai-font {
   letter-spacing: 10px;
   font-family: 'shanghai'; }
@@ -216,16 +216,17 @@ $content-area-width: $content-width - $border-width*2;
  */
 /* line 1, sass/_body.scss */
 body {
-  overflow-y: auto; }
+  overflow-y: auto;
+  height: 100%; }
 
-/* line 7, sass/_body.scss */
+/* line 9, sass/_body.scss */
 a {
   text-decoration: none; }
 
 /* line 1, sass/_header-footer.scss */
 header {
   z-index: 200;
-  background-color: #000;
+  background-color: #1a2a34;
   position: fixed;
   width: 100%;
   height: 60px;
@@ -233,6 +234,7 @@ header {
 
 /* line 13, sass/_header-footer.scss */
 #logo {
+  z-index: 220;
   margin: 5px 20px;
   color: #eddfe8;
   font-size: 18px;
@@ -246,7 +248,7 @@ header {
     #logo {
       display: block; } }
 
-/* line 32, sass/_header-footer.scss */
+/* line 34, sass/_header-footer.scss */
 footer {
   z-index: 400;
   position: fixed;
@@ -361,11 +363,12 @@ footer
 */
 /* line 1, sass/_navigation.scss */
 nav {
+  z-index: 210;
   margin: 0 auto;
   height: 100%;
   width: 100%; }
 
-/* line 8, sass/_navigation.scss */
+/* line 10, sass/_navigation.scss */
 .nav-icon {
   position: absolute;
   background-color: #FFF;
@@ -377,15 +380,15 @@ nav {
   right: 5px;
   border-radius: 4px; }
   @media (min-width: 800px) {
-    /* line 8, sass/_navigation.scss */
+    /* line 10, sass/_navigation.scss */
     .nav-icon {
       display: none; } }
 
-/* line 27, sass/_navigation.scss */
+/* line 29, sass/_navigation.scss */
 .navbar-toggle {
   background-color: transparent; }
 
-/* line 32, sass/_navigation.scss */
+/* line 34, sass/_navigation.scss */
 .icon-bar {
   position: absolute;
   display: block;
@@ -395,55 +398,19 @@ nav {
   border-radius: 4px;
   margin-top: 11px; }
 
-/* line 44, sass/_navigation.scss */
-#nav-bar {
-  display: table;
-  /* Allow the centering to work */
-  height: 60px;
-  width: 100%;
-  text-transform: capitalize; }
-  @media (min-width: 800px) {
-    /* line 44, sass/_navigation.scss */
-    #nav-bar {
-      display: block; } }
+/* line 46, sass/_navigation.scss */
+label + input {
+  display: none;
+  visibility: hidden; }
 
-/* line 59, sass/_navigation.scss */
-#nav-bar > ul {
-  position: relative;
-  list-style-type: none;
-  text-align: center;
-  width: 100%; }
-
-/* line 67, sass/_navigation.scss */
-#nav-bar > ul > li {
-  display: inline-block;
-  float: none;
-  position: relative; }
-  /* line 73, sass/_navigation.scss */
-  #nav-bar > ul > li > a {
-    display: inline-block;
-    margin: 7px 24px;
-    color: #cba0ba;
-    /*        font-family: "Arial Black", Gadget, sans-serif;*/
-    font-family: 'japanese';
-    font-size: 32px;
-    font-size: 2rem;
-    letter-spacing: 5px; }
-  /* line 86, sass/_navigation.scss */
-  #nav-bar > ul > li:hover {
-    background-color: #578cb0; }
-    /* line 90, sass/_navigation.scss */
-    #nav-bar > ul > li:hover > a {
-      color: #eddfe8; }
-
-/* line 97, sass/_navigation.scss */
+/* line 57, sass/_navigation.scss */
 div.dropdown-menu {
   display: none;
   top: 100%;
   left: 0%;
   position: absolute;
   margin: 0px 0px; }
-  /* line 107, sass/_navigation.scss */
+  /* line 67, sass/_navigation.scss */
   div.dropdown-menu > ul {
     background-color: #000;
     border-radius: 0px 0px 30px 20px;
@@ -451,39 +418,165 @@ div.dropdown-menu {
     list-style-type: none;
     margin: 0px; }
 
-/* line 118, sass/_navigation.scss */
-#nav-bar > ul > li:hover > div.dropdown-menu, div.dropdown-menu:hover {
+/* line 78, sass/_navigation.scss */
+.menu-selection {
+  background-color: #99bfd9 !important; }
+
+/* line 84, sass/_navigation.scss */
+.nav-wrap {
+  vertical-align: top;
+  background-color: #1a2a34;
+  /*     position: absolute;
+  
+      margin: 0px 0px; */ }
+  /* line 90, sass/_navigation.scss */
+  .nav-wrap#nav-bar {
+    display: table;
+    /* Allow the centering to work */
+    height: 60px;
+    width: 100%;
+    text-transform: capitalize; }
+    @media (min-width: 800px) {
+      /* line 90, sass/_navigation.scss */
+      .nav-wrap#nav-bar {
+        display: block; } }
+    /* line 104, sass/_navigation.scss */
+    .nav-wrap#nav-bar > ul {
+      position: relative;
+      list-style-type: none;
+      text-align: center;
+      width: 100%; }
+    /* line 112, sass/_navigation.scss */
+    .nav-wrap#nav-bar > ul > li {
+      display: inline-block;
+      float: none;
+      position: relative;
+      vertical-align: top;
+      background-color: #1a2a34; }
+      /* line 121, sass/_navigation.scss */
+      .nav-wrap#nav-bar > ul > li > a, .nav-wrap#nav-bar > ul > li > label {
+        display: inline-block;
+        margin: 7px 24px;
+        color: #cba0ba;
+        /*        font-family: "Arial Black", Gadget, sans-serif;*/
+        font-family: 'japanese';
+        font-size: 32px;
+        font-size: 2rem;
+        letter-spacing: 5px; }
+      /* line 138, sass/_navigation.scss */
+      .nav-wrap#nav-bar > ul > li:hover > a, .nav-wrap#nav-bar > ul > li:hover > label {
+        color: #eddfe8; }
+  /* line 153, sass/_navigation.scss */
+  .nav-wrap:not(#nav-bar) {
+    overflow: hidden; }
+    /* line 157, sass/_navigation.scss */
+    .nav-wrap:not(#nav-bar) > ul {
+      border-radius: 0px 0px 30px 20px;
+      overflow: hidden;
+      list-style-type: none;
+      margin: 0px; }
+    /* line 167, sass/_navigation.scss */
+    .nav-wrap:not(#nav-bar) > ul > li {
+      background-color: #1a2a34;
+      text-align: left;
+      clear: both;
+      overflow: hidden;
+      word-break: keep-all;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-right: 15px; }
+      /* line 180, sass/_navigation.scss */
+      .nav-wrap:not(#nav-bar) > ul > li > label {
+        color: #eddfe8;
+        display: block;
+        white-space: nowrap; }
+      /* line 189, sass/_navigation.scss */
+      .nav-wrap:not(#nav-bar) > ul > li:hover {
+        background-color: #578cb0; }
+    /* line 204, sass/_navigation.scss */
+    .nav-wrap:not(#nav-bar) > label {
+      margin: 7px 24px;
+      color: #cba0ba;
+      /*        font-family: "Arial Black", Gadget, sans-serif;*/
+      font-family: 'japanese';
+      font-size: 32px;
+      font-size: 2rem;
+      letter-spacing: 5px; }
+    /* line 221, sass/_navigation.scss */
+    .nav-wrap:not(#nav-bar):hover > a, .nav-wrap:not(#nav-bar):hover > label {
+      color: #eddfe8; }
+  /* line 231, sass/_navigation.scss */
+  label + input:not(:checked) + .nav-wrap ul > li > label {
+    height: 0px !important;
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
+    transition: opacity 300ms linear, transform 300ms linear, color 800ms ease-in-out 200ms, padding 800ms ease-in-out 200ms, height 800ms linear 200ms !important; }
+  /* line 242, sass/_navigation.scss */
+  label + input:not(:checked) + .nav-wrap > ul {
+    height: 0px !important;
+    transition: margin-top 800ms linear; }
+  /* line 249, sass/_navigation.scss */
+  label + input:checked + .nav-wrap > ul {
+    margin-top: 0px;
+    transition: margin-top 800ms linear; }
+
+/* line 261, sass/_navigation.scss */
+#nav-bar > ul > li:hover > div.dropdown-menu, div.dropdown-menu:hover,
+li:hover > div.dropdown-menu, div.dropdown-menu:hover {
   display: block; }
 
-/* line 123, sass/_navigation.scss */
-.nav-dropdown-element {
-  display: block;
-  text-align: left;
-  clear: both;
-  overflow: hidden;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-right: 15px; }
-  /* line 131, sass/_navigation.scss */
-  .nav-dropdown-element > a {
-    color: #eddfe8; }
-  /* line 136, sass/_navigation.scss */
-  .nav-dropdown-element:hover {
-    background-color: #578cb0; }
+/* 
+.nav-dropdown-element
+{
+    //display: block;
+    text-align: left;
+    clear: both;
 
-/* line 154, sass/_navigation.scss */
+    overflow: hidden;
+    word-break: keep-all;
+
+    //width: 100%;
+
+    & > a, & > label
+    {
+        color: $secondary-color-light;
+
+        //width: 100%;
+        display: block;
+        white-space: nowrap;
+    }
+
+    &:hover
+    {
+        background-color: $base-color-dark;
+
+        & > a, & > label
+        {
+            //text-decoration: underline;
+        }
+    }
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 15px;
+}
+ */
+/* line 305, sass/_navigation.scss */
 .nav-dropdown-level1 {
   font-size: 18px;
   font-size: 1.125rem;
   padding-left: 10px; }
 
-/* line 160, sass/_navigation.scss */
+/* line 311, sass/_navigation.scss */
 .nav-dropdown-level2 {
   font-size: 16px;
   font-size: 1rem;
   padding-left: 25px; }
 
-/* line 166, sass/_navigation.scss */
+/* line 317, sass/_navigation.scss */
 .nav-dropdown-level3 {
   font-size: 14px;
   font-size: 0.875rem;
@@ -506,7 +599,7 @@ div.dropdown-menu {
       display: block; } }
 
 /* line 18, sass/_background.scss */
-.background-true, svg {
+.background-true {
   z-index: 0;
   position: fixed;
   width: 100%;
@@ -517,38 +610,84 @@ div.dropdown-menu {
   max-height: 100%;
   /* Won't cause vertical scrollbars */ }
 
-/* line 30, sass/_background.scss */
+/* g
+{
+    @include svg-element();
+}
+
+svg
+{
+    @include horizontally-centered-element();
+
+    width: 100%;
+}
+ */
+/* 
+svg
+{
+    position: fixed;
+    //top: 0;
+}
+ */
+/* line 57, sass/_background.scss */
+svg {
+  /*     display: block;
+      margin: auto; */
+  overflow: visible;
+  /*     width: 100%; */
+  max-width: 100%;
+  position: fixed; }
+
+/* line 68, sass/_background.scss */
 #foreground0 {
+  /*     @include horizontally-centered-element();
+  
+      width: 100%; */
   position: absolute;
   top: 0px;
   width: 100%; }
 
-/* line 37, sass/_background.scss */
-#bg-layer-0 {
+/* line 77, sass/_background.scss */
+#bg-layer-0, #background0 {
+  /*     @include horizontally-centered-element();
+  
+      width: 100%; */
   background-color: #ffecec;
   height: 100%;
   z-index: 0; }
 
-/* line 44, sass/_background.scss */
-#bg-layer-1 {
+/* line 86, sass/_background.scss */
+#bg-layer-1, #background1 {
+  /*     @include horizontally-centered-element();
+  
+      width: 100%; */
   background-color: #ffe5e5;
   height: 800px;
   z-index: 1; }
 
-/* line 51, sass/_background.scss */
-#bg-layer-2 {
+/* line 95, sass/_background.scss */
+#bg-layer-2, #background2 {
+  /*     @include horizontally-centered-element();
+  
+      width: 100%; */
   background-color: #ffcccc;
   height: 600px;
   z-index: 2; }
 
-/* line 58, sass/_background.scss */
-#bg-layer-3 {
+/* line 104, sass/_background.scss */
+#bg-layer-3, #background3 {
+  /*     @include horizontally-centered-element();
+  
+      width: 100%; */
   background-color: #ffb3b3;
   height: 300px;
   z-index: 3; }
 
-/* line 65, sass/_background.scss */
-#bg-layer-4 {
+/* line 113, sass/_background.scss */
+#bg-layer-4, #background4 {
+  /*     @include horizontally-centered-element();
+  
+      width: 100%; */
   background-color: #000;
   height: 100px;
   z-index: 4; }
@@ -575,77 +714,174 @@ div.dropdown-menu {
     /* line 1, sass/_content.scss */
     #content-area {
       width: 800px; } }
+  /* line 27, sass/_content.scss */
+  #content-area > label > input {
+    display: none;
+    visibility: hidden; }
 
-/* line 30, sass/_content.scss */
-#content-area > article > h1 {
-  /*color: #ffe5e5;*/
-  /*color: #DFBED9;*/
-  color: #a9628c;
-  font-size: 42px;
-  font-size: 2.625rem;
-  text-shadow: 3px 1px 1px rgba(50, 50, 50, 0.3); }
-  /* line 38, sass/_content.scss */
-  #content-area > article > h1:hover {
-    color: #DFBED9; }
-/* line 44, sass/_content.scss */
-#content-area > article > p {
-  color: #000;
-  font-size: 16px;
-  font-size: 1rem;
-  font-family: Verdana, Geneva, sans-serif;
-  text-align: justify;
-  margin-bottom: 30px;
-  margin-bottom: 3rem; }
+/* line 34, sass/_content.scss */
+#content-area > article {
+  /* 
+      & > label + input:not(:checked) + .article-content
+      {
+          //height: 0px !important;
+  
+          @include transform(scale(0));
+          opacity: 0;
+  
+          transition: opacity 300ms linear, transform 600ms, height 800ms linear 900ms !important;
+      }
+  
+      & > label + input:checked + .article-content
+      {
+          //height: 0px !important;
+  
+          @include transform(scale(1));
+          opacity: 1;
+  
+          transition: opacity 300ms linear 600ms, transform 600ms linear, color 800ms ease-in-out 200ms, padding 800ms ease-in-out 200ms, height 800ms linear 200ms !important;
+      }
+   */ }
+  /* line 36, sass/_content.scss */
+  #content-area > article .article-title {
+    color: #a9628c;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    text-align: center;
+    text-shadow: 3px 1px 1px rgba(50, 50, 50, 0.3);
+    margin: 0px; }
+    /* line 51, sass/_content.scss */
+    #content-area > article .article-title:hover {
+      color: #DFBED9; }
+    /* line 56, sass/_content.scss */
+    #content-area > article .article-title > h1 {
+      font-size: 32px;
+      font-size: 2rem;
+      letter-spacing: 3px; }
+    /* line 62, sass/_content.scss */
+    #content-area > article .article-title > h2 {
+      font-size: 20px;
+      font-size: 1.25rem;
+      letter-spacing: 1px; }
+  /* line 89, sass/_content.scss */
+  #content-area > article .article-content {
+    overflow: hidden;
+    /*         height: 0px;
+            transition: height 500ms linear; */ }
+    /* line 96, sass/_content.scss */
+    #content-area > article .article-content > p {
+      color: #000;
+      font-size: 16px;
+      font-size: 1rem;
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      text-align: justify;
+      margin-top: 10px;
+      margin-bottom: 10px; }
+    /* line 109, sass/_content.scss */
+    #content-area > article .article-content.opened img {
+      margin: 2% 0; }
+      /* line 114, sass/_content.scss */
+      #content-area > article .article-content.opened img.blocking {
+        display: block;
+        margin-left: auto;
+        margin-right: auto; }
+      /* line 121, sass/_content.scss */
+      #content-area > article .article-content.opened img.wrapping-left {
+        /*clear: both;*/
+        float: left;
+        margin-right: 2%;
+        width: 50%; }
+      /* line 129, sass/_content.scss */
+      #content-area > article .article-content.opened img.wrapping-right {
+        /*clear: both;*/
+        float: right;
+        margin-left: 2%;
+        width: 50%; }
+    /* line 138, sass/_content.scss */
+    #content-area > article .article-content.closed img {
+      margin: 2% 0; }
+      /* line 143, sass/_content.scss */
+      #content-area > article .article-content.closed img.blocking {
+        display: block;
+        margin-left: auto;
+        margin-right: auto; }
+      /* line 150, sass/_content.scss */
+      #content-area > article .article-content.closed img.wrapping-left {
+        /*clear: both;*/
+        float: left;
+        margin-right: 2%;
+        width: 50%; }
+      /* line 160, sass/_content.scss */
+      #content-area > article .article-content.closed img.wrapping-right {
+        /*clear: both;*/
+        float: right;
+        margin-left: 2%;
+        width: 50%; }
 
-/* line 55, sass/_content.scss */
+/* line 173, sass/_content.scss */
 hr {
-  margin: 60px 0px; }
+  margin: 10px 0px; }
 
-/* line 60, sass/_content.scss */
-article > hr, hr.paragraph-gap {
+/* line 178, sass/_content.scss */
+hr.paragraph-gap {
   border: 0;
   height: 2px;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(169, 98, 140, 0.75), rgba(0, 0, 0, 0)); }
 
 /* Flaired edges, by Tomas Theunissen */
-/* line 68, sass/_content.scss */
+/* line 186, sass/_content.scss */
 hr.article-gap {
-  height: 40px;
+  height: 20px;
   border-style: solid;
   border-color: rgba(169, 98, 140, 0.75);
   border-width: 1px 0 0 0;
-  border-radius: 50px; }
-  /* line 76, sass/_content.scss */
+  border-radius: 20px; }
+  /* line 194, sass/_content.scss */
   hr.article-gap:before {
-    /* Not really supposed to work, but does */
     display: block;
     content: "";
-    height: 40px;
-    margin: -41px 0 0 0;
+    height: 20px;
+    margin: -21px 0 0 0;
     border-style: solid;
     border-color: rgba(169, 98, 140, 0.75);
     border-width: 0 0 1px 0;
-    border-radius: 50px; }
+    border-radius: 20px; }
 
-/* line 89, sass/_content.scss */
+/* line 208, sass/_content.scss */
+hr.article-start {
+  height: 20px;
+  border-style: solid;
+  border-color: rgba(169, 98, 140, 0.75);
+  border-width: 1px 0 0 0;
+  border-radius: 20px; }
+
+/* line 217, sass/_content.scss */
+hr.article-end {
+  height: 20px;
+  border-style: solid;
+  border-color: rgba(169, 98, 140, 0.75);
+  border-width: 0 0 1px 0;
+  border-radius: 20px; }
+
+/* line 229, sass/_content.scss */
 img {
-  width: 100%;
-  margin: 20px 0px; }
-  /* line 94, sass/_content.scss */
+  margin: 2% 0; }
+  /* line 234, sass/_content.scss */
   img.blocking {
     display: block;
     margin-left: auto;
     margin-right: auto; }
-  /* line 101, sass/_content.scss */
+  /* line 241, sass/_content.scss */
   img.wrapping-left {
     /*clear: both;*/
     float: left;
-    margin-right: 20px; }
-  /* line 108, sass/_content.scss */
+    margin-right: 2%;
+    width: 50%; }
+  /* line 249, sass/_content.scss */
   img.wrapping-right {
     /*clear: both;*/
     float: right;
-    margin-left: 20px; }
+    margin-left: 2%;
+    width: 50%; }
 
 /* ==========================================================================
    Helper classes

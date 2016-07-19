@@ -9,15 +9,39 @@ def find_occurences(s, ch):
 def get_filtered_file_list(file_list, filters, folder_path):
 	return [folder_path[2:] +'/'+ file_name for file_name in file_list if any( [file_name.endswith(filter) for filter in filters] ) ]
 
-def check_file_for_articles(file_name, articles_dict):
-	with open(file_name) as f:
+def check_file_for_articles(file_name, articles_array): #articles_dict):
+
+	id = ''
+	title = ''
+	path = file_name
+
+	stored_lines = ''
+
+	with open(file_name, encoding="utf8") as f:
 		for lineno, line in enumerate(f, 1):
+			stored_lines += line
 			if '<article' in line:
 				if 'id' in line:
 					id_indices = find_occurences(line, '\"')
 					if len(id_indices) == 2:
 						id = line[id_indices[0]+1:id_indices[1]]
-						articles_dict[id] = file_name;
+						#articles_dict[id] = file_name;
+			if '</h1>' in line:
+				#print(stored_lines)
+				start_index = stored_lines.find('<h1>')
+				end_index = stored_lines.find('</h1>')
+				title = stored_lines[start_index+4:end_index]
+				title = title.replace('\n', '').replace('\t', '')
+				#All the necessary things should have been found by now
+				break
+
+	article_dict = {
+		'id': id,
+		'title': title,
+		'path': path
+	}
+
+	articles_array.append(article_dict)
 
 
 # def walk_folder_check(folder_path):
@@ -100,13 +124,14 @@ def recursive_folder_check(folder_path):
 		folder_content_dict['anchor'] = anchor
 
 	if len(page_list) > 0:
-		articles_dict = {}
+		#articles_dict = {}
+		articles_array = []
 
 		#Collect all the pages that match articles (i.e. have article tags inside)
 		for page_file in page_list:
-			check_file_for_articles(page_file, articles_dict)
+			check_file_for_articles(page_file, articles_array)
 
-		folder_content_dict['articles'] = articles_dict
+		folder_content_dict['articles'] = articles_array
 
 	for subfolder_name in subfolders:
 		if subfolder_name[0] == '-':

@@ -35,11 +35,12 @@ $colorful-color:        rgba(160,220,190,1);
 $colorful-color-light:  rgba(45,154,157,1);
  */
 
+
+$base-color-black: rgb(26,42,52);               // http://www.color-hex.com/color/1a2a34
 $base-color-dark: rgb(87,140,176);              // http://www.color-hex.com/color/578cb0
 $base-color-dim: rgb(153,191,217);              // http://www.color-hex.com/color/99bfd9
 $base-color: rgb(209,226,238);                  // http://www.color-hex.com/color/d1e2ee
 $base-color-light: rgb(228,238,245);            // http://www.color-hex.com/color/e4eef5
-
 
 $secondary-color-dim: rgb(169,98,140);          // http://www.color-hex.com/color/a9628c
 $secondary-color: rgb(203,160,186);             // http://www.color-hex.com/color/cba0ba
@@ -113,8 +114,10 @@ $lucida-font-stack: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
 $crimson-font-stack: 'Crimson Text', serif;
 $article-font-stack: Verdana, Geneva, sans-serif;
 
-$crimson-font-stack: 'Crimson Text', serif;;
 $lora-font-stack: 'Lora', serif;
+
+$palatino-font-stack: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+$bookantiqua-font-stack: 'Book Antiqua', Palatino, serif;
 
 /* 
 @mixin base-font()

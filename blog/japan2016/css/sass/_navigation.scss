@@ -1,5 +1,7 @@
 nav
 {
+    z-index: 210;
+
     margin: 0 auto;
     height: 100%;
     width: 100%;
@@ -41,57 +43,15 @@ nav
     margin-top: 11px;
 }
 
-#nav-bar
+label + input
 {
-    display: table;   /* Allow the centering to work */
-
-    height: 60px;
-    width: 100%;
-
-    text-transform: capitalize;
-
-    @include breakpoint($with-side-bars)
-    {
-        display: block;
-    }
-}
-
-#nav-bar > ul
-{
-    position: relative;
-    list-style-type: none;
-    text-align: center;
-    width: 100%;
+    display: none;
+    visibility: hidden;
 }
 
 #nav-bar > ul > li
 {
-    display:inline-block;
-    float: none;
-    position: relative;
 
-    & > a
-    {
-        display:inline-block;
-        margin: 7px 24px;
-
-        color: $secondary-color;
-        
-    /*        font-family: "Arial Black", Gadget, sans-serif;*/
-        font-family: 'japanese';
-        @include font-size(32px);
-        letter-spacing: 5px;
-    }
-
-    &:hover
-    {
-        background-color: $base-color-dark;
-
-        & > a 
-        {
-            color: $secondary-color-light;
-        }
-    }
 }
 
 div.dropdown-menu
@@ -115,39 +75,230 @@ div.dropdown-menu
     }
 }
 
-#nav-bar > ul > li:hover > div.dropdown-menu, div.dropdown-menu:hover
+.menu-selection
+{
+   background-color: $base-color-dim !important; 
+}
+
+
+.nav-wrap
+{
+    vertical-align: top;
+
+    background-color: $base-color-black;
+
+    &#nav-bar 
+    {
+        display: table;   /* Allow the centering to work */
+
+        height: 60px;
+        width: 100%;
+
+        text-transform: capitalize;
+
+        @include breakpoint($with-side-bars)
+        {
+            display: block;
+        }
+
+        & > ul
+        {
+            position: relative;
+            list-style-type: none;
+            text-align: center;
+            width: 100%;
+        }
+
+        & > ul > li
+        {
+            display:inline-block;
+            float: none;
+            position: relative;
+            vertical-align: top;
+
+            background-color: $base-color-black;
+
+            & > a, & > label
+            {
+                display:inline-block;
+                margin: 7px 24px;
+
+                color: $secondary-color;
+                
+        /*        font-family: "Arial Black", Gadget, sans-serif;*/
+                font-family: 'japanese';
+                @include font-size(32px);
+                letter-spacing: 5px;
+            }
+
+            &:hover
+            {
+                //background-color: $base-color-dark;
+
+                & > a, & > label
+                {
+                    
+                    color: $secondary-color-light;
+                }
+            }
+        }
+    }
+
+    //top: 100%;
+    //left: 0%;
+/*     position: absolute;
+
+    margin: 0px 0px; */
+
+    &:not(#nav-bar)
+    {
+        overflow: hidden;
+
+        & > ul
+        {
+            //background-color: $base-color-black;
+            border-radius: 0px 0px 30px 20px;
+            overflow: hidden;
+
+            list-style-type: none;
+            margin: 0px;
+        }
+
+        & > ul > li
+        {
+            background-color: $base-color-black;
+
+            //display: block;
+            text-align: left;
+            clear: both;
+
+            overflow: hidden;
+            word-break: keep-all;
+
+            //width: 100%;
+
+            & > label
+            {
+                color: $secondary-color-light;
+
+                //width: 100%;
+                display: block;
+                white-space: nowrap;
+            }
+
+            &:hover
+            {
+                background-color: $base-color-dark;
+
+                & > a, & > label
+                {
+                    //text-decoration: underline;
+                }
+            }
+
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-right: 15px;
+        }
+    
+        & > label
+        {
+            //display:inline-block;
+            margin: 7px 24px;
+
+            color: $secondary-color;
+            
+    /*        font-family: "Arial Black", Gadget, sans-serif;*/
+            font-family: 'japanese';
+            @include font-size(32px);
+            letter-spacing: 5px;
+        }
+
+        &:hover
+        {
+            //background-color: $base-color-dark;
+
+            & > a, & > label
+            {
+                
+                color: $secondary-color-light;
+            }
+        }
+    }
+
+    label + input:not(:checked) + & ul > li
+    {
+        & > label
+        {
+            height: 0px !important;
+
+            @include transform(scale(0));
+            opacity: 0;
+
+            transition: opacity 300ms linear, transform 300ms linear, color 800ms ease-in-out 200ms, padding 800ms ease-in-out 200ms, height 800ms linear 200ms !important;
+        }
+    }
+
+    label + input:not(:checked) + & > ul
+    {
+        //margin-top: -100%;
+        height: 0px !important;
+        transition: margin-top 800ms linear;
+    }
+
+    label + input:checked + & > ul
+    {
+        margin-top: 0px;
+        transition: margin-top 800ms linear; //ease-in-out;
+
+        & > li
+        {
+            //background-color: $base-color-dark;
+        }
+    }
+}
+
+#nav-bar > ul > li:hover > div.dropdown-menu, div.dropdown-menu:hover,
+li:hover > div.dropdown-menu, div.dropdown-menu:hover
 {
     display: block;
 }
-
+/* 
 .nav-dropdown-element
 {
-    display: block;
+    //display: block;
     text-align: left;
     clear: both;
 
     overflow: hidden;
+    word-break: keep-all;
 
-    & > a 
+    //width: 100%;
+
+    & > a, & > label
     {
         color: $secondary-color-light;
+
+        //width: 100%;
+        display: block;
+        white-space: nowrap;
     }
 
     &:hover
     {
         background-color: $base-color-dark;
 
-        & > a 
+        & > a, & > label
         {
             //text-decoration: underline;
         }
     }
 
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     padding-right: 15px;
 }
-
+ */
 $padding-initial: 10px;
 $padding-per-level: 15px;
 
