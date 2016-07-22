@@ -5,7 +5,8 @@ var $document = $(document);
 
 var modification_date = new Date(document.lastModified);
 
-var nav_lists = {};
+var nav_map = {};
+var articles_map = {};
 
 $(document).ready(function()
 {
@@ -22,7 +23,7 @@ $(document).on(
 	'svg-fetched', 
 	function (event, svgData)
 	{
-		console.debug('SVG succesfully fetched');
+		//console.debug('SVG succesfully fetched');
 
 		var $svgBackground = $($.parseHTML(svgData));
 
@@ -103,7 +104,7 @@ function CheckHash ()
 	console.debug('INITIAL HASH: '+ hash +' - '+ location.hash);
 
 	$.each( 
-		nav_lists, 
+		nav_map, 
 		function( key, value )
 		{
 			console.log( key + ": " + value );
@@ -111,13 +112,24 @@ function CheckHash ()
 		}
 	);
 
-	console.debug('ACCESSING ARTICLE LIST');
-	console.debug('LOCATION HASH :'+ location.hash);
-	console.debug('NAV OBJECT :');
-	console.debug(nav_lists);
-	console.debug('ARTICLE LIST :'+ nav_lists[location.hash].article_list);
+	//console.debug('ACCESSING ARTICLE LIST');
+	//console.debug('LOCATION HASH :'+ location.hash);
+	//console.debug('NAV OBJECT :');
+	//console.debug(nav_map);
+	//console.debug('ARTICLE LIST :'+ nav_map[location.hash].article_list);
 
-	templates.loadElements(nav_lists[location.hash].article_list, "#content-area", "elements-loaded");
+	var article_paths = [];
+
+	$.each(
+		nav_map[location.hash].article_list,
+		function(index, article_anchor)
+		{
+			var article_tuple = articles_map[article_anchor];
+			article_paths.push(article_tuple.path);
+		}
+	);
+
+	templates.loadElements(article_paths, nav_map[location.hash].article_list, "#content-area", "elements-loaded");
 
 	//$('html,body').scrollTop(0);
 
@@ -127,29 +139,37 @@ function CheckHash ()
 /*	$document.scrollTop();*/
 }
 
+var closed_article_content_height = 200;
+var article_animation_duration_ms = 1000;
+
 $(document).on(
 	"elements-loaded", 
-	function (event, document_divs, target_id)
+	function (event, article_divs, article_ids, target_element_id)
 	{
 	    console.debug('Files loaded');
 
-	    $target_element = $(target_id);
+	    $target_element = $(target_element_id);
 
 	    $target_element.empty();
 
         $.each (
-            document_divs,
-            function( index, article_element )
+            article_divs,
+            function( index, article_div )
             {
             	$target_element.append("<span class=\"clearfix\" />");
             	$target_element.append("<hr class=\"article-start\" >");
 
-                $target_element.append(article_element.html());
+            	$last_modified_element = $('<time class="article_last_modified" />');
+            	$last_modified_element.text(articles_map[article_ids[index]].last_modified);
+
+            	$target_element.append($last_modified_element);
+                $target_element.append(article_div.html());
 
                 var $article_content = $target_element.children().last().find('.article-content');
                 //var scrollHeight = $article_content.get(0).scrollHeight;
 
-                var autoHeight = $article_content.css('height', 'auto').height(); 
+                var autoHeight = $article_content.css('height', 'auto').height();
+                $article_content.height('100px');
 
                 var $label_element = $('<label />');
                 var $label_text_element = $('<h3 />');
@@ -171,30 +191,144 @@ $(document).on(
 					{
 						if( $(this).prop('checked') )
 						{
-							$article_content.css(
-								{
-									'height': autoHeight +'px',
-									'transition': 'height 1000ms ease-in'
+					        $article_content.animate(
+					        	{
+									height: autoHeight
+								},
+								{ 
+									duration: article_animation_duration_ms,
+									complete: function()
+									{
+								    	$article_content.height('auto');
+									},
+									step: function()
+									{       
+										$(window).trigger('resize');
+									}
 								}
 							);
-/*
+
+							$article_content.find('img').each( 
+								function( index, image ) 
+								{
+									var $image = $(image);
+
+									var curHeight = $image.height();
+									var curWidth = $image.width();
+
+									console.debug('Image old width value: '+ $image.attr('width') );
+
+									var outcomeImage = $image.css(
+										{
+											'width': $image.attr('width'),
+											'height': 'auto'
+										}
+									);
+
+									var outcomeHeight = outcomeImage.height();
+									var outcomeWidth = outcomeImage.width();
+
+
+									console.debug('Image width: '+ curWidth +' -> '+ outcomeWidth);
+									console.debug('Image height: '+ curHeight +' -> '+ outcomeHeight);
+
+									$image.height(curHeight).width(curWidth).animate(
+										{
+											height: outcomeHeight,
+											width: outcomeWidth
+										}, 
+										article_animation_duration_ms
+									);
+								}
+							);
+
 							$article_content.removeClass('closed');
 							$article_content.addClass('opened');
-*/
+
 							$label_text_element.text('Close article');
 						}
 						else
 						{
-							$article_content.css(
-								{
-									'height': '100px',
-									'transition': 'height 1000ms ease'
+							$article_content.animate(
+					        	{
+									height: closed_article_content_height +'px'
+								}, 
+								{ 
+									duration: article_animation_duration_ms,
+									complete: function()
+									{
+								    	$article_content.height(closed_article_content_height +'px');
+									},
+									step: function()
+									{       
+										$(window).trigger('resize');
+									}
 								}
 							);
 /*
+							$article_content.find('img').each( 
+								function( index, image ) 
+								{
+									var $image = $(image);
+									var newSizeTuple = CalculateAspectRatioFit($image.width(), $image.height(), 10000, 100);
+
+									console.debug(newSizeTuple);
+
+									$image.animate(
+							        	{
+											height: newSizeTuple.height +'px',
+											width: newSizeTuple.width +'px'
+										},
+										1000
+									);
+
+									var curHeight = $image.height();
+									var autoHeight = $image.css('height', 'auto').height();
+									el.height(curHeight).animate({height: autoHeight}, 1000);
+								}
+							);
+*/
+
+							$article_content.find('img').each( 
+								function( index, image ) 
+								{
+									var $image = $(image);
+
+									var curHeight = $image.height();
+									var curWidth = $image.width();
+
+									var outcomeImage = $image.css(
+										{
+											'width': 'auto',
+											'height': closed_article_content_height +'px'
+										}
+									);
+
+									var outcomeHeight = outcomeImage.height();
+									var outcomeWidth = outcomeImage.width();
+
+
+									if(outcomeWidth != 0 && outcomeHeight != 0)
+									{
+										$image.height(curHeight).width(curWidth).animate(
+											{
+												height: outcomeHeight,
+												width: outcomeWidth
+											}, 
+											article_animation_duration_ms
+										);
+									}
+
+									console.debug('Image width: '+ curWidth +' -> '+ outcomeWidth);
+									console.debug('Image height: '+ curHeight +' -> '+ outcomeHeight);
+									
+
+								}
+							);
+
 							$article_content.removeClass('opened');
 							$article_content.addClass('closed');
-*/
+
 							$label_text_element.text('Open full...');
 						}
 					}
@@ -439,15 +573,18 @@ function CreateNavElementsFromArticles(list_element, article_array, list_level, 
 			var id = article_map.id;
 			var title = article_map.title;
 			var path = article_map.path;
+			var last_modified = article_map.last_modified;
 			var anchor = parent_anchor +'/'+ id;
 
 			console.debug('ARTICLE NUMBER '+ index);
+			console.debug('LAST MODIFIED '+ last_modified);
 
 			var list_item_element = CreateListItem(
 				path,
 				list_level,
 				title,
 				anchor,
+				last_modified,
 				true
 			);
 
@@ -456,7 +593,7 @@ function CreateNavElementsFromArticles(list_element, article_array, list_level, 
 	)
 }
 
-function CreateListItem(path, list_level, title, anchor, is_article)
+function CreateListItem(path, list_level, title, anchor, last_modified, is_article)
 {
 	anchor = anchor.replace(' ', '_').toLowerCase();
 
@@ -516,7 +653,7 @@ function CreateListItem(path, list_level, title, anchor, is_article)
 		$list_item.addClass('nav-dropdown-element nav-dropdown-level'+ (list_level-1));
 
 		if(is_article)
-			AddToNavList(anchor, path, $link_element);	
+			AddToNavList(anchor, path, last_modified, $link_element);	
 	}
 	else
 	{
@@ -540,7 +677,7 @@ function CreateListItem(path, list_level, title, anchor, is_article)
 	return $list_item;
 }
 
-function AddToNavList(orig_anchor, article_selector, link_element)
+function AddToNavList(orig_anchor, article_selector, last_modified, link_element)
 {
 	//json_element expectations
 	//key = 
@@ -551,6 +688,13 @@ function AddToNavList(orig_anchor, article_selector, link_element)
 	console.log('##################');
 	console.log('ADDING TO NAV LIST');
 	console.log('##################');
+
+	if(articles_map.hasOwnProperty(orig_anchor))
+		console.debug('DUPLICATE ARTICLE ANCHOR!');
+
+	articles_map[orig_anchor] = {path: article_selector, last_modified: last_modified};
+
+	console.debug(articles_map[orig_anchor]);
 
 	var folders = orig_anchor.split('/');
 	var anchor = '';
@@ -575,51 +719,52 @@ function AddToNavList(orig_anchor, article_selector, link_element)
 				anchor += '/'+ folder;
 			}
 
-			if(nav_lists.hasOwnProperty(anchor))
+			if(nav_map.hasOwnProperty(anchor))
 			{
-				console.debug('PUSHING TO NAV ELEMENT: \nANCHOR: '+ anchor +'\nSELECTOR: '+ article_selector);
+				//console.debug('PUSHING TO NAV ELEMENT: \nANCHOR: '+ anchor +'\nSELECTOR: '+ article_selector);
 
-				nav_object = nav_lists[anchor];
+				nav_object = nav_map[anchor];
 
-				nav_object.article_list.push(article_selector);
+				nav_object.article_list.push(orig_anchor);
 
 				if(last_folder)
 					nav_object.own_articles += 1;
 				else
 					nav_object.child_articles += 1;
 
-				console.log(nav_lists[anchor]);
+				//console.log(nav_map[anchor]);
 			}
 			else
 			{
-				console.debug('INITIALISING NAV ELEMENT: \nANCHOR: '+ anchor +'\nSELECTOR: '+ article_selector);
+				//console.debug('INITIALISING NAV ELEMENT: \nANCHOR: '+ anchor +'\nSELECTOR: '+ article_selector);
 
-				var nav_object = {article_list: [article_selector], own_articles: 0, child_articles: 0, element: link_element};
+				var nav_object = {article_list: [orig_anchor], own_articles: 0, child_articles: 0, element: link_element};
 
 				if(last_folder)
 					nav_object.own_articles = 1;
 				else
 					nav_object.child_articles = 1;
 
-				console.debug('NAV OBJECT:');
-				console.debug(nav_object);
-				console.debug('NAV OBJECT ARTICLES: '+ nav_object.article_list);
-				console.debug('NAV OBJECT ARTICLES IS ARRAY: '+ $.isArray(nav_object.article_list));
+				//console.debug('NAV OBJECT:');
+				//console.debug(nav_object);
+				//console.debug('NAV OBJECT ARTICLES: '+ nav_object.article_list);
+				//console.debug('NAV OBJECT ARTICLES IS ARRAY: '+ $.isArray(nav_object.article_list));
 
-				nav_lists[anchor] = nav_object;
+				nav_map[anchor] = nav_object;
 
-				console.debug('NAV OBJECT FROM LIST: '+ nav_lists[anchor]);
+				//console.debug('NAV OBJECT FROM LIST: '+ nav_map[anchor]);
 			}
-
+/*
 			$.each(
-				nav_lists,
+				nav_map,
 				function( key, value )
 				{
 					console.log(key +' - '+ value);
 				}
 			)
+*/
 		}
 	);
 
-	console.log(nav_lists[orig_anchor]);
+//	console.log(nav_map[orig_anchor]);
 }

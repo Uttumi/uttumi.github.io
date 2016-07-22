@@ -35,27 +35,27 @@ function SetBGIntoMotion ()
 
 	$window.scroll(function()
 	{
-		console.debug('Scroll triggered');
+		//console.debug('Scroll triggered');
 		UpdateBGElements ();
 	});
 
 	$window.resize(function()
 	{
-		console.debug('WINDOW RESIZE TRIGGERED');
+		//console.debug('WINDOW RESIZE TRIGGERED');
 		ScaleSVGBackground ();
 		UpdateBGElements ();
 	});
 
 	$('#content-area').resize(function()
 	{
-		console.debug('CONTENT AREA RESIZE TRIGGERED');
+		//console.debug('CONTENT AREA RESIZE TRIGGERED');
 		ScaleSVGBackground ();
 		UpdateBGElements ();
 	});
 
     $window.bind( 'hashchange', function(event)
     {
-    	console.debug('HASH CHANGE TRIGGERED');
+    	//console.debug('HASH CHANGE TRIGGERED');
     	$body[0].scrollTop = 0;
 
 		UpdateBGElements ();
@@ -109,7 +109,7 @@ function SetBGIntoMotion ()
 
 function ScaleSVGBackground ()
 {
-	console.debug('SCALING SVG BACKGROUND');
+	//console.debug('SCALING SVG BACKGROUND');
 
 	var svgWidthScale = viewBoxWidth / $svgBackground.width();
 	var svgHeightScale = viewBoxHeight / $svgBackground.height();

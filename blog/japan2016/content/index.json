@@ -4,7 +4,8 @@
             {
                 "title": "Japan 2016 Blog",
                 "path": "en/en_index.html",
-                "id": "English Index Page"
+                "id": "English Index Page",
+                "last_modified": "06.07.2016"
             }
         ],
         "1_diary": {
@@ -20,7 +21,8 @@
                         {
                             "title": "Geiko & Maiko",
                             "path": "en/1_diary/kyoto/geisha/geiko_maiko.html",
-                            "id": "geiko_maiko"
+                            "id": "geiko_maiko",
+                            "last_modified": "19.07.2016"
                         }
                     ]
                 },
@@ -29,7 +31,8 @@
                         {
                             "title": "Kitano Tenman-gū",
                             "path": "en/1_diary/kyoto/markets/kitano_tenman-gu.html",
-                            "id": "kitano_tenmangu"
+                            "id": "kitano_tenmangu",
+                            "last_modified": "06.07.2016"
                         }
                     ]
                 },
@@ -43,12 +46,14 @@
                             {
                                 "title": "Fushimi Inari-taisha 1",
                                 "path": "en/1_diary/kyoto/temples_n_shrines/fushimi_inari-taisha/day_1.html",
-                                "id": "fushimi_inaritaisha_1"
+                                "id": "fushimi_inaritaisha_1",
+                                "last_modified": "18.07.2016"
                             },
                             {
                                 "title": "Fushimi Inari-taisha 2",
                                 "path": "en/1_diary/kyoto/temples_n_shrines/fushimi_inari-taisha/day_2.html",
-                                "id": "fushimi_inaritaista_2"
+                                "id": "fushimi_inaritaista_2",
+                                "last_modified": "18.07.2016"
                             }
                         ]
                     }
@@ -66,7 +71,8 @@
                     {
                         "title": "Okonomiyaki",
                         "path": "en/3_food/okonomiyaki/okonomiyaki.html",
-                        "id": "okonomiyaki"
+                        "id": "okonomiyaki",
+                        "last_modified": "06.07.2016"
                     }
                 ]
             }
@@ -78,7 +84,8 @@
                 {
                     "title": "ticle id=\"himeji20160213\">  <h1 class=\"japanese-font\" >  Himeji  ",
                     "path": "en_test/diary/2016-02-13-Himeji.html",
-                    "id": "himeji20160213"
+                    "id": "himeji20160213",
+                    "last_modified": "25.06.2016"
                 }
             ],
             "Kyoto": {
@@ -86,12 +93,14 @@
                     {
                         "title": "ticle id=\"kyoto1\">  <h1 class=\"japanese-font\" >  Kyoto 1  ",
                         "path": "en_test/diary/Kyoto/Kyoto1.html",
-                        "id": "kyoto1"
+                        "id": "kyoto1",
+                        "last_modified": "25.06.2016"
                     },
                     {
                         "title": "ticle id=\"kyoto2\">  <h1 class=\"japanese-font\" >  Kyoto 2  ",
                         "path": "en_test/diary/Kyoto/Kyoto2.html",
-                        "id": "kyoto2"
+                        "id": "kyoto2",
+                        "last_modified": "25.06.2016"
                     }
                 ]
             }
@@ -101,7 +110,8 @@
                 {
                     "title": "title\": \"Nishiki market - food heaven\",\"places\": [  \"Kyoto / Nishiki market\"],\"content\":\"<article id=\"nishiki\">  <h1 class=\"japanese-font\">  Nishiki  ",
                     "path": "en_test/food/2016-02-13-Nishiki.html",
-                    "id": "nishiki"
+                    "id": "nishiki",
+                    "last_modified": "25.06.2016"
                 }
             ]
         },
@@ -110,7 +120,8 @@
                 {
                     "title": "ticle id=\"shopshop\">  <h1 class=\"japanese-font\">  Himeji PLAN  ",
                     "path": "en_test/gifts/Shopshop.html",
-                    "id": "shopshop"
+                    "id": "shopshop",
+                    "last_modified": "25.06.2016"
                 }
             ]
         },
@@ -119,7 +130,8 @@
                 {
                     "title": "ticle id=\"himeji\">  <h1 class=\"japanese-font\">  Himeji PLAN  ",
                     "path": "en_test/plan/2016-02-13-Himeji.html",
-                    "id": "himeji"
+                    "id": "himeji",
+                    "last_modified": "25.06.2016"
                 }
             ],
             "Kyoto": {
@@ -128,7 +140,8 @@
                         {
                             "title": "ticle id=\"arashiyama\">  <h1 class=\"japanese-font\">  Arashiyama PLAN  ",
                             "path": "en_test/plan/Kyoto/Arashiyama/Arashiyama.html",
-                            "id": "arashiyama"
+                            "id": "arashiyama",
+                            "last_modified": "25.06.2016"
                         }
                     ]
                 }

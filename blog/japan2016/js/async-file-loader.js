@@ -12,6 +12,7 @@ var templates =
                             //The task was finished succesfully without errors
 
                             //console.debug(JSON.stringify(jsonData));
+
                             $(host).trigger(event, [jsonData]);
                     	}
                     )
@@ -50,10 +51,10 @@ var templates =
                     );
             }
             ,
-            loadElements: function (documentArray, target_id, event)
+            loadElements: function (element_url_array, element_id_array, target_id, event)
             {
-                var defferArray = [];
-                var tempElements = [];
+                var deffer_array = [];
+                var temp_element_array = [];
 
                 var i = 0;
 
@@ -61,27 +62,42 @@ var templates =
 //                console.debug('DOCUMENT ARRAY: ');
 //                console.debug(documentArray);
 
-                $.each(documentArray, function (index, urlValue)
+                $.each(element_url_array, function (index, url_value)
                 {
-                    defferArray.push(new $.Deferred());
+                    deffer_array.push(new $.Deferred());
 
-                    var tempElement = $('<div />');
-                    tempElements.push( tempElement );
+                    var temp_element = $('<div />');
+                    temp_element_array.push( temp_element );
                     
-                    tempElement.load(
-                        'content/'+ urlValue, 
+                    temp_element.load(
+                        'content/'+ url_value, 
                         function() 
                         {
-                            defferArray[i].resolve();
+                            deffer_array[i].resolve();
+
                             i++;
                         }
                     );
                 })
 
-                $.when.apply(null, defferArray).done(
+                $.when.apply(null, deffer_array).done(
                     function ()
                     {
-                        $(host).trigger(event, [tempElements, target_id]);
+/*                        var client = new XMLHttpRequest();
+                        client.open("GET", 'content/'+ urlArray[0], true);
+                        client.onreadystatechange = function() 
+                        {
+                            if(this.readyState == 2) 
+                            {
+                                console.debug('LAST MODIFIED JSON: '+ client.getResponseHeader("Last-Modified"));
+
+                                
+                                
+                            }
+                        }
+                        client.send();*/
+                        
+                        $(host).trigger(event, [temp_element_array, element_id_array, target_id]);
                     }
                 );
             }

@@ -1,6 +1,8 @@
 import os
 import json
 from os import walk
+import os.path, time
+from datetime import datetime
 from collections import OrderedDict
 
 def find_occurences(s, ch):
@@ -14,10 +16,12 @@ def check_file_for_articles(file_name, articles_array): #articles_dict):
 	id = ''
 	title = ''
 	path = file_name
+	last_modified_ctime = ''
 
 	stored_lines = ''
 
 	with open(file_name, encoding="utf8") as f:
+		last_modified_ctime = time.ctime(os.path.getmtime(file_name))
 		for lineno, line in enumerate(f, 1):
 			stored_lines += line
 			if '<article' in line:
@@ -38,7 +42,8 @@ def check_file_for_articles(file_name, articles_array): #articles_dict):
 	article_dict = {
 		'id': id,
 		'title': title,
-		'path': path
+		'path': path,
+		'last_modified':  datetime.strptime(last_modified_ctime, '%a %b %d %H:%M:%S %Y').strftime('%d.%m.%Y')
 	}
 
 	articles_array.append(article_dict)
