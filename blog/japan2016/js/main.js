@@ -164,9 +164,10 @@ $(document).on(
 
             	$target_element.append($last_modified_element);
                 $target_element.append(article_div.html());
-
                 var $article_content = $target_element.children().last().find('.article-content');
                 //var scrollHeight = $article_content.get(0).scrollHeight;
+
+                $target_element.append( GetFacebookButton('uttumi.github.io/blog/japan2016') );
 
                 var autoHeight = $article_content.css('height', 'auto').height();
                 $article_content.height('100px');
