@@ -42,8 +42,9 @@
             {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/fi_FI/sdk.js#xfbml=1&version=v2.7";
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
@@ -56,6 +57,16 @@
         <script src='js/social-media-buttons.js'></script>
         <script src='js/utilities.js'></script>
         <script src="js/main.js"></script>
+
+        <script>
+            $("#fb-root").bind(
+                "facebook:init", 
+                function() 
+                {
+                  console.debug("FACEBOOK SDK IS ON");
+                }
+            );
+        </script>
 
         <header>
             <a id="logo" href="#">
