@@ -744,95 +744,122 @@ svg {
    */ }
   /* line 36, sass/_content.scss */
   #content-area > article .article-title {
+    left: 50%;
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    display: inline-block;
+    position: relative;
     color: #a9628c;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     text-align: center;
     text-shadow: 3px 1px 1px rgba(50, 50, 50, 0.3);
-    margin: 0px; }
-    /* line 51, sass/_content.scss */
+    width: auto;
+    margin: -30px 0 0 0;
+    padding: 0 30px;
+    padding-bottom: 10px;
+    border-style: solid;
+    border-color: #a9628c;
+    border-width: 0 0 1px 0; }
+    /* line 64, sass/_content.scss */
     #content-area > article .article-title:hover {
       color: #DFBED9; }
-    /* line 56, sass/_content.scss */
+    /* line 69, sass/_content.scss */
     #content-area > article .article-title > h1 {
+      width: auto;
       font-size: 32px;
       font-size: 2rem;
       letter-spacing: 3px; }
-    /* line 62, sass/_content.scss */
+    /* line 78, sass/_content.scss */
     #content-area > article .article-title > h2 {
+      width: auto;
       font-size: 20px;
       font-size: 1.25rem;
       letter-spacing: 1px; }
-  /* line 89, sass/_content.scss */
+  /* line 87, sass/_content.scss */
+  #content-area > article time {
+    width: 100%;
+    color: #a9628c;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 16px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 0 0 10px;
+    padding-bottom: 10px;
+    display: block; }
+  /* line 122, sass/_content.scss */
   #content-area > article .article-content {
     overflow: hidden;
     /*         height: 0px;
             transition: height 500ms linear; */ }
-    /* line 96, sass/_content.scss */
+    /* line 129, sass/_content.scss */
     #content-area > article .article-content > p {
       color: #000;
-      font-size: 16px;
-      font-size: 1rem;
+      font-size: 18px;
+      font-size: 1.125rem;
       font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
       text-align: justify;
       margin-top: 10px;
       margin-bottom: 10px; }
-    /* line 109, sass/_content.scss */
+    /* line 142, sass/_content.scss */
     #content-area > article .article-content.opened img {
       margin: 2% 0;
       transition: height 1000; }
-      /* line 115, sass/_content.scss */
+      /* line 148, sass/_content.scss */
       #content-area > article .article-content.opened img.blocking {
         display: block;
         margin-left: auto;
         margin-right: auto; }
-      /* line 122, sass/_content.scss */
+      /* line 155, sass/_content.scss */
       #content-area > article .article-content.opened img.wrapping-left {
         /*clear: both;*/
         float: left;
         margin-right: 2%; }
-      /* line 130, sass/_content.scss */
+      /* line 163, sass/_content.scss */
       #content-area > article .article-content.opened img.wrapping-right {
         /*clear: both;*/
         float: right;
         margin-left: 2%; }
-    /* line 139, sass/_content.scss */
+    /* line 172, sass/_content.scss */
     #content-area > article .article-content.closed img {
       margin: 2% 0; }
-      /* line 145, sass/_content.scss */
+      /* line 178, sass/_content.scss */
       #content-area > article .article-content.closed img.blocking {
         display: block;
         margin-left: auto;
         margin-right: auto; }
-      /* line 152, sass/_content.scss */
+      /* line 185, sass/_content.scss */
       #content-area > article .article-content.closed img.wrapping-left {
         /*clear: both;*/
         float: left;
         margin-right: 2%; }
-      /* line 160, sass/_content.scss */
+      /* line 193, sass/_content.scss */
       #content-area > article .article-content.closed img.wrapping-right {
         /*clear: both;*/
         float: right;
         margin-left: 2%; }
 
-/* line 171, sass/_content.scss */
+/* line 204, sass/_content.scss */
 hr {
-  margin: 10px 0px; }
+  margin: 0px 0px; }
 
-/* line 176, sass/_content.scss */
+/* line 209, sass/_content.scss */
 hr.paragraph-gap {
   border: 0;
   height: 2px;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(169, 98, 140, 0.75), rgba(0, 0, 0, 0)); }
 
 /* Flaired edges, by Tomas Theunissen */
-/* line 184, sass/_content.scss */
+/* line 217, sass/_content.scss */
 hr.article-gap {
   height: 20px;
   border-style: solid;
   border-color: rgba(169, 98, 140, 0.75);
-  border-width: 1px 0 0 0;
+  border-width: 2px 0 0 0;
   border-radius: 20px; }
-  /* line 192, sass/_content.scss */
+  /* line 225, sass/_content.scss */
   hr.article-gap:before {
     display: block;
     content: "";
@@ -840,23 +867,23 @@ hr.article-gap {
     margin: -21px 0 0 0;
     border-style: solid;
     border-color: rgba(169, 98, 140, 0.75);
-    border-width: 0 0 1px 0;
+    border-width: 0 0 2px 0;
     border-radius: 20px; }
 
-/* line 206, sass/_content.scss */
+/* line 239, sass/_content.scss */
 hr.article-start {
-  height: 20px;
+  height: 40px;
   border-style: solid;
   border-color: rgba(169, 98, 140, 0.75);
-  border-width: 1px 0 0 0;
+  border-width: 2px 0 0 0;
   border-radius: 20px; }
 
-/* line 215, sass/_content.scss */
+/* line 248, sass/_content.scss */
 hr.article-end {
-  height: 20px;
+  height: 40px;
   border-style: solid;
   border-color: rgba(169, 98, 140, 0.75);
-  border-width: 0 0 1px 0;
+  border-width: 0 0 2px 0;
   border-radius: 20px; }
 
 /* 

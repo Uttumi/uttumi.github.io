@@ -159,10 +159,10 @@ $(document).on(
             	$target_element.append("<span class=\"clearfix\" />");
             	$target_element.append("<hr class=\"article-start\" >");
 
-            	$last_modified_element = $('<time class="article_last_modified" />');
-            	$last_modified_element.text(articles_map[article_ids[index]].last_modified);
+            	//$last_modified_element = $('<time class="article_last_modified" />');
+            	//$last_modified_element.text(articles_map[article_ids[index]].last_modified);
 
-            	$target_element.append($last_modified_element);
+            	//$target_element.append($last_modified_element);
                 $target_element.append(article_div.html());
                 var $article_content = $target_element.children().last().find('.article-content');
                 //var scrollHeight = $article_content.get(0).scrollHeight;
