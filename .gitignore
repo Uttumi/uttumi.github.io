@@ -6,6 +6,7 @@
 *.exe
 *.o
 *.so
+*.scssc
 
 # Packages #
 ############
@@ -38,4 +39,3 @@ Thumbs.db
 desktop.ini
 
 
-*.scssc
