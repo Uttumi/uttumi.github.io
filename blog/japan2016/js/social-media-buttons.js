@@ -7,10 +7,12 @@ function GetFacebookButton (url)
 			{
 				'class': 'fb-like',
 	//			data-href: 'http://uttumi.github.io/blog/japan2016/',
-				'data-width': '200',
+				'data-width': 200,
 				'data-layout': 'button_count',
 				'data-show-faces': 'false',
-				'data-share': 'false'
+				'data-share': 'false',
+				'width': 200,
+				'height': 50
 			}
 		);
 
