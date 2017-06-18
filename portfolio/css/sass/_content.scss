@@ -44,7 +44,7 @@ body.template
     //font-family: $crimson-font-stack; // P-   TITLE P+
     //font-family: $lora-font-stack; //P--
     //font-family: $myriad-font-stack;  //P-
-    font-family: $lucida-font-stack;  // P+
+    //font-family: $lucida-font-stack;  // P+
 
     & > h1
     {
@@ -52,8 +52,6 @@ body.template
         display: block;
 
         width: 100%;
-
-
 
         font-family: $crimson-font-stack;
         //font-family: $article-font-stack;

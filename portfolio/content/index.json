@@ -5,9 +5,9 @@
                 "1_home/1_welcome/description.html"
             ]
         },
-        "Who? What?": {
+        "Questions?": {
             "description": [
-                "1_home/2_me_who/description.html"
+                "1_home/2_questions/description.html"
             ]
         },
         "web_page": {
