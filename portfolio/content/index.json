@@ -69,6 +69,9 @@
         "breakout": {
             "pages": [
                 "3_unity/1_breakout/index.html"
+            ],
+            "description": [
+                "3_unity/1_breakout/description.html"
             ]
         },
         "space_combat": {
