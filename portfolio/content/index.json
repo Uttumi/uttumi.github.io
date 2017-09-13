@@ -66,12 +66,17 @@
         }
     },
     "unity": {
+        "breakout": {
+            "pages": [
+                "3_unity/1_breakout/index.html"
+            ]
+        },
         "space_combat": {
             "pages": [
-                "3_unity/space_combat/index.html"
+                "3_unity/2_space_combat/index.html"
             ],
             "description": [
-                "3_unity/space_combat/description.html"
+                "3_unity/2_space_combat/description.html"
             ]
         }
     },
