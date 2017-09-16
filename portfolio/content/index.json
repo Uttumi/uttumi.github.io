@@ -74,12 +74,17 @@
                 "3_unity/1_breakout/description.html"
             ]
         },
+        "space_man": {
+            "pages": [
+                "3_unity/2_space_man/index.html"
+            ]
+        },
         "space_combat": {
             "pages": [
-                "3_unity/2_space_combat/index.html"
+                "3_unity/3_space_combat/index.html"
             ],
             "description": [
-                "3_unity/2_space_combat/description.html"
+                "3_unity/3_space_combat/description.html"
             ]
         }
     },
