@@ -26,6 +26,7 @@ $(document).ready(function()
 
 $(document).load(function()
 {
+	console.debug('Loading');
 	$('html,body').scrollTop(0);
 });
 
@@ -82,7 +83,7 @@ function CreateNavigationElement(own_list_item, json_tuple, list_level, is_home_
 
 		own_list_item.find('input').click(
 			function ()
-			{ 
+			{
 				console.debug('Clicked: '+ title);
 				NavigationClick(title, description, images, videos, pages, subpages) 
 			}
@@ -150,6 +151,8 @@ function NavigationClick(key, description, images, videos, pages, subpages)
 {
 	//console.debug('Clicked '+ key);
 	
+	$window.trigger("navigation-event");
+
 	if(key == current_key)
 		return;
 

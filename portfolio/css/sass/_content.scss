@@ -22,6 +22,7 @@ body.template
 
     @include breakpoint($collapsed-nav)
     {
+        //width: 80vw; 
         width: $content-area-width;
 
         border: $border-width solid $colorful-color;
@@ -53,15 +54,16 @@ body.template
 
         width: 100%;
 
-        font-family: $crimson-font-stack;
-        //font-family: $article-font-stack;
+        //font-family: $crimson-font-stack;
+        font-family: $title-font-stack;
+        font-weight: bold;
 
         @include font-size(40px);
         line-height: 60px;
         text-align: center;
         //padding-left: 32px;
 
-        //font-weight: bold;
+        
         
         padding-top: 20px;
         
@@ -102,7 +104,22 @@ body.template
         & > p
         {
             @include font-size(20px);
-            line-height: 24px;
+
+            @include breakpoint($high-resolution)
+            {
+                 @include font-size(24px);
+            }
+
+            @include breakpoint($super-high-resolution)
+            {
+                 @include font-size(32px);
+            }
+
+            
+            //line-height: 24px;
+            //font-size: 1.6vw;
+            //line-height: 1.7vw;
+
             text-align: justify;
 
             //color: $font-color-light;
@@ -127,6 +144,10 @@ body.template
         & > h2
         {
             //font-family: $article-font-stack;
+
+            font-family: $title-font-stack;
+            font-weight: bold;
+
 
             @include font-size(32px);
             line-height: 48px;

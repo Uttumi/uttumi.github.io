@@ -7,6 +7,7 @@
     //margin-top: 50%;
     //@include transform(translateY(-50%));
 
+
     @include border-radius(10px);
 
     & span
@@ -219,6 +220,9 @@ label + input
         line-height: $element-height;
         vertical-align: middle;
         
+        font-family: $title-font-stack;
+        font-weight: bold;
+
         color: $text-color;
         text-decoration: none;
 
@@ -291,6 +295,9 @@ label + input
         @include font-size(20px);
         line-height: $element-height;
         vertical-align: middle;
+
+        font-family: $title-font-stack;
+        font-weight: bold;
 
         text-decoration: none;
         color: $text-color;

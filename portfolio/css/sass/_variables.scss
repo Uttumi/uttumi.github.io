@@ -1,3 +1,13 @@
+//**************
+//* PAGE SIZES *
+//**************
+
+$center-area-width: 800px;
+$side-area-width: 350px;
+
+$fluid-center-width: 80vw;
+
+
 //***************
 //* BREAKPOINTS *
 //***************
@@ -11,13 +21,16 @@
 // If string and value together within parentheses, assumes each item is a feature-value pair
 // $example-4: (min-height 1000px) (orientation portrait);
 
-$center-area-width: 800px;
-$side-area-width: 350px;
+
+$hidpi: min-resolution 1.5dppx;
+$high-resolution: min-width 2048px;
+$super-high-resolution: min-width 4096px;
 
 $full-size: $center-area-width + $side-area-width*2;
 $collapsed-nav: $center-area-width;
 
-
+$fluid-point: min-width $center-area-width / 0.8;
+$transition-point: min-width $center-area-width;
 
 //**********
 //* COLORS *
@@ -56,22 +69,37 @@ $colorful-color-light:  rgba(45,154,157,1);
 //* FONTS *
 //*********
 
+$base-font-size: 16px;
+
 @function calculateRem($size)
 {
-    $remSize: $size / 16px;
-    @return $remSize * 1rem;
+    $remSize: $size / $base-font-size;
+    @return $remSize +'rem';
 }
 
 @mixin font-size($size)
 {
+    //$newsize: $size + 6 * ((100vw - 320px) / 680);
     font-size: $size;
-    font-size: calculateRem($size);
+    font-size: calculateRem(size);
+    line-height: $size * 1.2;
 }
 
 @mixin nav-font()
 {
     color: $font-color-light;
     text-decoration: none;
+}
+
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+  }
+}
+@media screen and (min-width: 1000px) {
+  html {
+    font-size: 22px;
+  }
 }
 
 /* 
@@ -101,10 +129,13 @@ $colorful-color-light:  rgba(45,154,157,1);
 $myriad-font-stack: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
 $lucida-font-stack: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
 $crimson-font-stack: 'Crimson Text', serif;
-$article-font-stack: Verdana, Geneva, sans-serif;
 
 $crimson-font-stack: 'Crimson Text', serif;;
 $lora-font-stack: 'Lora', serif;
+
+$title-font-stack: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+$article-font-stack: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+//$article-font-stack: Verdana, Geneva, sans-serif;
 
 
 @mixin base-font()
@@ -120,8 +151,6 @@ $lora-font-stack: 'Lora', serif;
     text-decoration: none;
     text-transform: capitalize; 
 }
-
-
 
 //**********************
 //* PAGE ELEMENT SIZES *

@@ -33,6 +33,8 @@ header
         z-index: 20;
         position: absolute;
 
+
+
         width: 100%;
 
         color: $base-color; 
@@ -49,6 +51,14 @@ header
         @include breakpoint($full-size)
         {
             @include header-size(100px, 48px);
+        }
+
+        & > h1
+        {
+            font-family: $title-font-stack;
+            font-weight: bold;
+
+            margin-top: 1rem;
         }
     }
 }
@@ -73,6 +83,9 @@ footer
     height: 110px;//$footer-height;
     bottom: 0px;
 
+
+    font-family: $title-font-stack;
+    font-weight: bold;
     color: $base-color;
     @include font-size(16px);
     //font-size: 16px; font-size: 1.6rem;
@@ -88,7 +101,7 @@ footer
 
     & #contact_info 
     {
-        bottom: 2.5rem; 
+        bottom: 1.5rem; 
     }
 
     & #date

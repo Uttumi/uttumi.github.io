@@ -3,16 +3,34 @@
     //display: none;
     position: fixed;
     width: 100%;
-//    height: 100%;
+    height: 100%;
     overflow: hidden;
 //    max-width:  100%;   // Won't cause horizontal scrollbars
 //    max-height: 100%;   // Won't cause vertical scrollbars
 
+    background-repeat: repeat-y;
+    background-position: 0px 0px;
+    background-image: url("./img/green_nebula_2048.jpg");
+
+    @include breakpoint($high-resolution)
+    {
+        background-image: url("./img/green_nebula_4096.jpg");
+    }
+
+/*
     & > img
     {
         width: 100%;
-        object-fit: cover;
+        //object-fit: cover;
+
+        content:url("./img/green_nebula_2048.jpg");
+
+        @include breakpoint($super-high-resolution)
+        {
+            content:url("./img/green_nebula_4096.jpg");
+        }
     }
+*/
 }
 
 .background-true
