@@ -76,11 +76,19 @@ function UpdateBGElement ($bgElement)
 	//var previousPos = $bgElement.data('position');
 	var currentPosition = $bgElement.data('baseline') + scrollPosition * $bgElement.data('speed');
 
-	var topPosition = currentPosition +'px';
+	var topPosition = -currentPosition +'px';
 
 	$bgElement.data('position', currentPosition);
 	//$bgElement.css({ top: topPosition });
-	$bgElement.css('background-position', '0px ' + topPosition);
+
+	if($bgElement.data('anchor') == 'bottom')
+	{
+		bgElement.css('bottom', topPosition);
+	}
+	else
+	{
+		$bgElement.css('background-position', '0px ' + topPosition);
+	}
 
 	//var currentPos = - scrollLeft * bgElement.data('speed') - bgBaseline;
 

@@ -36,16 +36,18 @@ $transition-point: min-width $center-area-width;
 //* COLORS *
 //**********
 
-$base-color-dark: 		rgba(12,13,28,1);
-$base-color-dim: 		rgba(68,85,102,1);
-$base-color: 			rgba(139,170,172,1);
-$base-color-light:      rgba(194,237,234,1);
-$base-color-bright:     rgba(255,255,255,1);
+$base-color-darkest:    rgba(0, 0, 5, 1);
+$base-color-dark: 		rgba(12, 13, 28, 1);
+$base-color-dim: 		rgba(68, 85, 102, 1);
+$base-color: 			rgba(139, 170, 172, 1);
+$base-color-light:      rgba(194, 237, 234, 1);
+$base-color-bright:     rgba(255, 255, 255, 1);
 
-$colorful-color-dark:   rgba(10,58,60,1);
-$colorful-color-dim:    rgba(18,103,100,1);
-$colorful-color:        rgba(160,220,190,1);
-$colorful-color-light:  rgba(45,154,157,1);
+$colorful-color-darkest:    rgba(3, 27, 28, 1);
+$colorful-color-dark:       rgba(10, 58, 60, 1);
+$colorful-color-dim:        rgba(18, 103, 100, 1);
+$colorful-color:            rgba(160, 220, 190, 1);
+$colorful-color-light:      rgba(45, 154, 157, 1);
 
 
 
@@ -187,7 +189,10 @@ $content-area-width: $content-width - $border-width*2;
 //*************
 
 $left-color: $base-color-dark;
-$right-color: $base-color;
+//$right-color: $base-color;
+//$right-color: $colorful-color-darkest;
+$right-color: $base-color-darkest;
+
 $left-focus-color: $base-color-dark;
 $right-focus-color: $base-color-light;
 

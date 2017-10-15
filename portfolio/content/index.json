@@ -1,13 +1,27 @@
 {
+    "subpages": [
+        {
+            "5_flash": {
+                "snow_war": {
+                    "pages": [
+                        "-5_flash/snow_war/SnowWar.html"
+                    ],
+                    "description": [
+                        "-5_flash/snow_war/description.html"
+                    ]
+                }
+            }
+        }
+    ],
     "home": {
         "welcome": {
             "description": [
                 "1_home/1_welcome/description.html"
             ]
         },
-        "Questions?": {
+        "About": {
             "description": [
-                "1_home/2_questions/description.html"
+                "1_home/2_about/description.html"
             ]
         },
         "web_page": {
@@ -16,35 +30,69 @@
             ]
         }
     },
+    "unity": {
+        "breakout": {
+            "pages": [
+                "2_unity/1_breakout/index.html"
+            ],
+            "description": [
+                "2_unity/1_breakout/description.html"
+            ]
+        },
+        "2D_light_prototype": {
+            "pages": [
+                "2_unity/2_2D_light_prototype/index.html"
+            ],
+            "description": [
+                "2_unity/2_2D_light_prototype/description.html"
+            ]
+        },
+        "gravity_field_prototype": {
+            "pages": [
+                "2_unity/3_gravity_field_prototype/index.html"
+            ],
+            "description": [
+                "2_unity/3_gravity_field_prototype/description.html"
+            ]
+        },
+        "space_combat": {
+            "pages": [
+                "2_unity/4_space_combat/index.html"
+            ],
+            "description": [
+                "2_unity/4_space_combat/description.html"
+            ]
+        }
+    },
     "blender": {
         "house_model": {
             "description": [
-                "2_blender/house_model/description.html"
+                "3_blender/house_model/description.html"
             ],
             "subpages": [
                 {
                     "furniture": {
                         "images": [
-                            "2_blender/house_model/-furniture/arm_chair.png",
-                            "2_blender/house_model/-furniture/desk.png",
-                            "2_blender/house_model/-furniture/kitchen_table.png",
-                            "2_blender/house_model/-furniture/sofa.png"
+                            "3_blender/house_model/-furniture/arm_chair.png",
+                            "3_blender/house_model/-furniture/desk.png",
+                            "3_blender/house_model/-furniture/kitchen_table.png",
+                            "3_blender/house_model/-furniture/sofa.png"
                         ]
                     }
                 },
                 {
                     "house": {
                         "images": [
-                            "2_blender/house_model/-house/perspective_view.png",
-                            "2_blender/house_model/-house/top_view.png"
+                            "3_blender/house_model/-house/perspective_view.png",
+                            "3_blender/house_model/-house/top_view.png"
                         ]
                     }
                 },
                 {
                     "render": {
                         "images": [
-                            "2_blender/house_model/-render/bedroom.png",
-                            "2_blender/house_model/-render/kitchen_table_in_room.png"
+                            "3_blender/house_model/-render/bedroom.png",
+                            "3_blender/house_model/-render/kitchen_table_in_room.png"
                         ]
                     }
                 }
@@ -52,49 +100,46 @@
         },
         "ram": {
             "images": [
-                "2_blender/ram/wireframe.png",
-                "2_blender/ram/wireframe_angle.png"
+                "3_blender/ram/wireframe.png",
+                "3_blender/ram/wireframe_angle.png"
             ]
         },
         "starship_enterprise_animation": {
             "videos": [
-                "2_blender/starship_enterprise_animation/starship-enterprise-animation-x264.mp4"
+                "3_blender/starship_enterprise_animation/starship-enterprise-animation-x264.mp4"
             ],
             "description": [
-                "2_blender/starship_enterprise_animation/description.html"
+                "3_blender/starship_enterprise_animation/description.html"
             ]
         }
     },
-    "unity": {
-        "breakout": {
-            "pages": [
-                "3_unity/1_breakout/index.html"
+    "art": {
+        "animal_citizens": {
+            "images": [
+                "4_art/1_animal_citizens/1_Panda.png",
+                "4_art/1_animal_citizens/2_Weasel.png",
+                "4_art/1_animal_citizens/3_Cat.png"
             ],
             "description": [
-                "3_unity/1_breakout/description.html"
+                "4_art/1_animal_citizens/description.html"
             ]
         },
-        "space_man": {
-            "pages": [
-                "3_unity/2_space_man/index.html"
+        "oil_paintings": {
+            "images": [
+                "4_art/2_oil_paintings/1_sunset.png",
+                "4_art/2_oil_paintings/2_puppies.jpg",
+                "4_art/2_oil_paintings/3_giraffes.jpg"
             ]
         },
-        "space_combat": {
-            "pages": [
-                "3_unity/3_space_combat/index.html"
-            ],
-            "description": [
-                "3_unity/3_space_combat/description.html"
+        "fantasy": {
+            "images": [
+                "4_art/3_fantasy/1_dagger.jpg",
+                "4_art/3_fantasy/2_flight.jpg"
             ]
-        }
-    },
-    "flash": {
-        "snow_war": {
-            "pages": [
-                "4_flash/snow_war/SnowWar.html"
-            ],
-            "description": [
-                "4_flash/snow_war/description.html"
+        },
+        "vector_art": {
+            "images": [
+                "4_art/4_vector_art/dragonfly_by_uttumi-da3lnmj.png"
             ]
         }
     }
