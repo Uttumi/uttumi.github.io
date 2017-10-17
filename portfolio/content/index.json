@@ -137,9 +137,17 @@
                 "4_art/3_fantasy/2_flight.jpg"
             ]
         },
+        "poster_people": {
+            "images": [
+                "4_art/4_poster_people/1_poster_people.png"
+            ],
+            "description": [
+                "4_art/4_poster_people/description.html"
+            ]
+        },
         "vector_art": {
             "images": [
-                "4_art/4_vector_art/dragonfly_by_uttumi-da3lnmj.png"
+                "4_art/5_vector_art/dragonfly_by_uttumi-da3lnmj.png"
             ]
         }
     }
