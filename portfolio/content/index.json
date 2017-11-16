@@ -31,20 +31,20 @@
         }
     },
     "unity": {
-        "breakout": {
-            "pages": [
-                "2_unity/1_breakout/index.html"
-            ],
-            "description": [
-                "2_unity/1_breakout/description.html"
-            ]
-        },
         "2D_light_prototype": {
             "pages": [
-                "2_unity/2_2D_light_prototype/index.html"
+                "2_unity/1_2D_light_prototype/index.html"
             ],
             "description": [
-                "2_unity/2_2D_light_prototype/description.html"
+                "2_unity/1_2D_light_prototype/description.html"
+            ]
+        },
+        "breakout": {
+            "pages": [
+                "2_unity/2_breakout/index.html"
+            ],
+            "description": [
+                "2_unity/2_breakout/description.html"
             ]
         },
         "gravity_field_prototype": {
