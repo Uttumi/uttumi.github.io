@@ -27,15 +27,11 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <!-- Add your site or application content here -->
-
-        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
-		<script src="js/lib/plugins.js"></script>
-		<script src="js/lib/jquery.ba-resize.min.js"></script>
-		<script src='js/async-file-loader.js'></script>	
-		<script src='js/main.js'></script>
-		<script src='js/paralax-background.js'></script>	
+        <!-- 
+        If JS scripts are here (or in head) they will load before the contents of the page
+        This place could be used if script changes CSS and doesn't rely on DOM elements
+        Still, it's supposedly better to place scripts at the end of body
+    	-->
 
 		<header>
 			<div id='header-bar'>
@@ -55,21 +51,12 @@
 		<!--</nav>/-->	
 		</header>
 		
-		<chapter id='content-area'>
-			<!--<img src="content/Blender/House Model/bedroom.png" alt="Mountain View" style="width:600px;">-->
-		<!--
-			<video width="600" controls>
-				<source src="starship_enterprise_2.mp4" type="video/mp4">
-				Your browser does not support the video tag.
-			</video>
-			-->
-		</chapter>
+		<chapter id='content-area'></chapter>
 		
         <div class="background" id="bg-layer-0" data-type="background" data-speed="0.1">
         	<img/>
         </div>
 
-<!--		<footer id="bg-layer-4" data-type="background" data-speed="0.8">	-->
 		<footer>
 			<div id='contact_info'>
 				<p>
@@ -87,5 +74,32 @@
 				<time>Filled automatically</time>
 			</div>
 		</footer>
+
+        <!-- 
+        If JS scripts are here they will load after the contents of the page 
+        This place should be used if scripts use DOM elements
+        It might also be more performant because page doesn't hang when scripts are loaded
+    	-->
+
+
+
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+		<script src="js/lib/plugins.js"></script>
+		<script src="js/lib/jquery.ba-resize.min.js"></script>
+
+		<script src='js/namespaces.js'></script>
+		<script src='js/settings.js'></script>
+		<!--<script src='js/enums.js'></script>-->
+
+		<script src='js/utility.js'></script>	
+		<script src='js/async-file-loader.js'></script>
+
+		<script src='js/game.js'></script>
+		<script src='js/content.js'></script>
+		<script src='js/navigation.js'></script>
+		<script src='js/paralax-background.js'></script>	
+		<script src='js/main.js'></script>
+
 	</body>
 </html>

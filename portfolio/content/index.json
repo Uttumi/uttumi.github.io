@@ -116,7 +116,8 @@
     "art": {
         "animal_citizens": {
             "images": [
-                "4_art/1_animal_citizens/1_Panda.png",
+                "4_art/1_animal_citizens/0_Panda.png",
+                "4_art/1_animal_citizens/1_Panda_Vector.png",
                 "4_art/1_animal_citizens/2_Weasel.png",
                 "4_art/1_animal_citizens/3_Cat.png"
             ],
