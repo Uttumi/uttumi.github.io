@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
 
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="../../js/vendor/modernizr-2.8.3.min.js"></script>
 
          <!-- You can use open graph tags to customize link previews.
         Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
@@ -38,7 +38,7 @@
         <!-- Load Facebook SDK for JavaScript -->
         <div id="fb-root"></div>
         <script>
-            (function(d, s, id) 
+            (function(d, s, id)
             {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
@@ -51,18 +51,15 @@
         </script>
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src='js/async-file-loader.js'></script>
-        <script src='js/paralax-svg-background.js'></script>
-        <script src='js/social-media-buttons.js'></script>
-        <script src='js/utilities.js'></script>
-        <script src="js/main.js"></script>
+        <script>window.jQuery || document.write('<script src="../../js/lib/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <script src="../../js/lib/plugins.js"></script>
+
+
 
         <script>
             $("#fb-root").bind(
-                "facebook:init", 
-                function() 
+                "facebook:init",
+                function()
                 {
                   console.debug("FACEBOOK SDK IS ON");
                 }
@@ -74,8 +71,7 @@
                 <span class="japanese-font">JAPAN</span>
                 <span class="shanghai-font">2016</span>
             </a>
-            <nav>
-            </nav>
+            <nav id='navigation-menu'></nav>
         </header>
 
         <div id="content-area"></div>
@@ -84,8 +80,8 @@
         <article></article>
         <aside></aside>
     -->
-    
-<!-- 
+
+<!--
         <div class="background" id="bg-layer-0" data-type="background" data-speed="0"></div>
         <div class="background" id="bg-layer-1" data-type="background" data-speed="0.1"></div>
         <div class="background" id="bg-layer-2" data-type="background" data-speed="0.2"></div>
@@ -94,7 +90,7 @@
  -->
 
 <!--         <img class="background-true" xmlns="http://www.w3.org/2000/svg" src="img/Background_plain.svg" alt="Background image"/> -->
-<!-- 
+
         <footer>
             <div id='contact_info'>
                 <p>
@@ -112,8 +108,8 @@
                 <time>Filled automatically</time>
             </div>
         </footer>
- -->
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. 
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
             function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
@@ -136,5 +132,15 @@
             ga('create', 'UA-74365626-1', 'auto');
             ga('send', 'pageview');
         </script>
+
+        <script src='../../js/namespaces.js'></script>
+        <script src='../../js/async-file-loader.js'></script>
+        <script src='../../js/utility.js'></script>
+
+        <script src='js/parallaxbackgroundsvg.js'></script>
+        <script src='js/socialmediabuttons.js'></script>
+        <script src='js/content.js'></script>
+        <script src='js/navigation.js'></script>
+        <script src="js/main.js"></script>
     </body>
 </html>

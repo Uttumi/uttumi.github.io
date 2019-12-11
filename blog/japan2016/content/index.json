@@ -82,7 +82,7 @@
         "diary": {
             "articles": [
                 {
-                    "title": "ticle id=\"himeji20160213\">  <h1 class=\"japanese-font\" >  Himeji  ",
+                    "title": "title id=\"himeji20160213\">  <h1 class=\"japanese-font\" >  Himeji  ",
                     "path": "en_test/diary/2016-02-13-Himeji.html",
                     "id": "himeji20160213",
                     "last_modified": "25.06.2016"
@@ -91,13 +91,13 @@
             "Kyoto": {
                 "articles": [
                     {
-                        "title": "ticle id=\"kyoto1\">  <h1 class=\"japanese-font\" >  Kyoto 1  ",
+                        "title": "title id=\"kyoto1\">  <h1 class=\"japanese-font\" >  Kyoto 1  ",
                         "path": "en_test/diary/Kyoto/Kyoto1.html",
                         "id": "kyoto1",
                         "last_modified": "25.06.2016"
                     },
                     {
-                        "title": "ticle id=\"kyoto2\">  <h1 class=\"japanese-font\" >  Kyoto 2  ",
+                        "title": "title id=\"kyoto2\">  <h1 class=\"japanese-font\" >  Kyoto 2  ",
                         "path": "en_test/diary/Kyoto/Kyoto2.html",
                         "id": "kyoto2",
                         "last_modified": "25.06.2016"
@@ -118,7 +118,7 @@
         "gifts": {
             "articles": [
                 {
-                    "title": "ticle id=\"shopshop\">  <h1 class=\"japanese-font\">  Himeji PLAN  ",
+                    "title": "title id=\"shopshop\">  <h1 class=\"japanese-font\">  Himeji PLAN  ",
                     "path": "en_test/gifts/Shopshop.html",
                     "id": "shopshop",
                     "last_modified": "25.06.2016"
@@ -128,7 +128,7 @@
         "plan": {
             "articles": [
                 {
-                    "title": "ticle id=\"himeji\">  <h1 class=\"japanese-font\">  Himeji PLAN  ",
+                    "title": "title id=\"himeji\">  <h1 class=\"japanese-font\">  Himeji PLAN  ",
                     "path": "en_test/plan/2016-02-13-Himeji.html",
                     "id": "himeji",
                     "last_modified": "25.06.2016"
@@ -138,7 +138,7 @@
                 "Arashiyama": {
                     "articles": [
                         {
-                            "title": "ticle id=\"arashiyama\">  <h1 class=\"japanese-font\">  Arashiyama PLAN  ",
+                            "title": "title id=\"arashiyama\">  <h1 class=\"japanese-font\">  Arashiyama PLAN  ",
                             "path": "en_test/plan/Kyoto/Arashiyama/Arashiyama.html",
                             "id": "arashiyama",
                             "last_modified": "25.06.2016"

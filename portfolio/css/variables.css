@@ -1,0 +1,104 @@
+:root
+{
+
+    /*********
+    * COLORS *
+    *********/
+
+    --header-font-color: rgb(139, 170, 172);
+
+    --menu-bg-color: rgb(12, 13, 28);
+    --menu-selected-color: rgb(68, 85, 102);
+    --menu-icon-line-color: rgb(160, 220, 190);
+    --menu-icon-line-selected-color: rgb(194, 237, 234);
+
+    --content-font-color: rgb(10, 58, 60);
+
+    --menu-border-color: rgb(0, 0, 5);
+
+    --menu-opacity: 0.9;
+
+    /*****************
+    * MENU ANIMATION *
+    ******************/
+
+    --label-transition-duration: 100ms;
+    --menu-close-duration: 300ms;
+
+    /********
+    * FONTS *
+    ********/
+
+    --menu-font: "Myriad Pro", Calibri, Helvetica, Arial, sans-serif;
+
+    --base-font-size: 16;
+
+    --font-size-10: calc(10rem / var(--base-font-size));
+    --line-height-10: calc(var(--font-size-10) * 1.2);
+
+    --font-size-12: calc(12rem / var(--base-font-size));
+    --line-height-12: calc(var(--font-size-12) * 1.2);
+
+    --font-size-14: calc(14rem / var(--base-font-size));
+    --line-height-14: calc(var(--font-size-14) * 1.2);
+
+    --font-size-16: calc(16rem / var(--base-font-size));
+    --line-height-16: calc(var(--font-size-16) * 1.2);
+
+    --font-size-18: calc(18rem / var(--base-font-size));
+    --line-height-18: calc(var(--font-size-18) * 1.2);
+
+    --font-size-20: calc(20rem / var(--base-font-size));
+    --line-height-20: calc(var(--font-size-20) * 1.2);
+
+    --font-size-24: calc(24rem / var(--base-font-size));
+    --line-height-24: calc(var(--font-size-24) * 1.2);
+
+    --font-size-28: calc(28rem / var(--base-font-size));
+    --line-height-28: calc(var(--font-size-28) * 1.2);
+
+    --font-size-32: calc(32rem / var(--base-font-size));
+    --line-height-32: calc(var(--font-size-32) * 1.2);
+
+    --font-size-36: calc(36rem / var(--base-font-size));
+    --line-height-36: calc(var(--font-size-36) * 1.2);
+
+    --font-size-40: calc(40rem / var(--base-font-size));
+    --line-height-40: calc(var(--font-size-40) * 1.2);
+
+    --font-size-48: calc(48rem / var(--base-font-size));
+    --line-height-48: calc(var(--font-size-48) * 1.2);
+}
+
+
+/********
+* SIZES *
+********/
+
+:root
+{
+
+    --mobile-width: 800px;
+    --full-width: 1500px;
+
+    --header-height: 50px;
+    --footer-height: 70px;
+}
+
+@media (min-width: 800px)
+{
+    :root
+    {
+        --header-height: 60px;
+        --footer-height: 90px;
+    }
+}
+
+@media (min-width: 1500px)
+{
+    :root
+    {
+        --header-height: 80px;
+        --footer-height: 100px;
+    }
+}

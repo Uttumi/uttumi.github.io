@@ -1,204 +1,203 @@
 "use strict";
 
 (function($)
-{	
-	$.currentKey = "";
+{
+	$.currentAnchor = "";
 
-	$.createNavigationFromIndexJson = function(indexUrl)
+	$.navigationMap = {};
+
+	$.menuIconButton = document.querySelector('#menu-icon-button');
+
+	$.checkHash = function()
 	{
-		//templates.loadJSON(content_path + 'index.json', "json-loaded");
+		//Remove the #! and # from the hash, as different browsers may or may not include them
+		let anchor = location.hash.replace('#!','').replace('#','');
 
+		if(anchor === '')
+		{
+			location.href = '#welcome';
+
+			let homeInput = document.querySelector('#home_input');
+			homeInput.checked = true;
+		}
+
+		$.navigationClick(anchor);
+	};
+
+	$.setupNavigation = function(indexUrl)
+	{
 		$.utility.fetchJson(indexUrl).then(data =>
-			{ 
-				$.createNavigationElement(null, {key: 'root', value: data}, 1);
+			{
+				console.log('DATA JSON RECEIVED');
+
+				const navigationMenuElement = document.querySelector('#navigation-menu');
+				$.createNavigationLevel(navigationMenuElement, 'root', data, 1);
+
+				console.log('NAVIGATION CREATED');
+
+			    // The hashchange event is only triggered when the hash changes
+				//  we need to trigger
+			    // the event now, to handle the hash with which the page may have loaded.
+				$.checkHash();
+				// let event = new Event('hashchange');
+				// window.dispatchEvent(event);
 			}
 		);
 	};
 
-	$.createNavigationElement = function(ownListItem, jsonTuple, listLevel, is_home_page=false)
+	$.createNavigationLevel = function(parent, parentTitle, value, level)
 	{
-		let description = $.utility.getArrayByKey(jsonTuple.value, 'description');
-		let pages 		= $.utility.getArrayByKey(jsonTuple.value, 'pages');
-		let images 		= $.utility.getArrayByKey(jsonTuple.value, 'images');
-		let videos 		= $.utility.getArrayByKey(jsonTuple.value, 'videos');
-		let subpages 	= $.utility.getArrayByKey(jsonTuple.value, 'subpages');
-		
-		if(description == null) description = [];
-		if(pages == null) pages = [];
-		if(images == null) images = [];
-		if(videos == null) videos = [];
-		if(subpages == null) subpages = [];
-		
-		let subelements = $.utility.getNestedObjects(jsonTuple.value);
-		
-		if(ownListItem != null)
+		let sublevels = $.utility.getNestedObjects(value);
+
+		switch(level)
 		{
-			let title = jsonTuple.key;
+			case 1:
+				// Start level. Container
 
-			if(title == 'welcome')
-			{
-				$.navigationClick(title, description, images, videos, pages, subpages);
-
-				let homeInput = document.querySelector('#home_input');
-				homeInput.checked = true;
-				//$('#home_input').prop('checked', true);
-			}
-
-			let inputElement = ownListItem.querySelector('input');
-
-			$.utility.addEvent(
-				inputElement, 'click',  
-				function()
+				if(sublevels.length > 0)
 				{
-					console.debug('Clicked: '+ title);
-					$.navigationClick(title, description, images, videos, pages, subpages);
-				}, 
-				true);
-		}
+					const navList = document.createElement('UL');
+					navList.setAttribute('id', 'level_'+ level);
+					parent.appendChild(navList);
 
-		if(subelements.length > 0)
-		{
-			let navSublist = null; 
-			
-			if(ownListItem == null)
-			{
-				navSublist = document.querySelector('#level_1');
-			}
-			else
-			{
-				navSublist = document.createElement('UL');
-				navSublist.setAttribute('id', 'level_'+ listLevel);
+					let first = true;
 
-				let div = document.createElement('DIV');
-				div.setAttribute('class', 'nav-wrap');
-
-				div.appendChild(navSublist);
-				ownListItem.appendChild(div);
-			}
-		
-			for(let index = 0; index < subelements.length; index++)
-			{
-				let tuple = subelements[index];
-
-				let childListItem = document.createElement('LI'); 
-				navSublist.appendChild(childListItem);
-
-				let label = document.createElement('LABEL');
-				label.setAttribute('for', tuple.key +'_input');
-				label.innerHTML = tuple.key.replace(/_/g, ' ');
-				childListItem.appendChild(label);
-
-				if(listLevel === 1)
-				{
-					if(index === 0)
+					for(let sublevel of sublevels)
 					{
-						childListItem.setAttribute('id', 'first_nav_element');
+						const title = sublevel.key;
+						const data = sublevel.value;
+
+						const navCategory = $.createNavigationElement(navList, parentTitle, title, level);
+
+						if(first)
+						{
+							navCategory.setAttribute('id', 'first_nav_element');
+							first = false;
+						}
+
+						$.createNavigationLevel(navCategory, sublevel.key, sublevel.value, level + 1);
 					}
 
-					if(index + 1 === subelements.length)
+					let lastNavElement = document.createElement('LI');
+					lastNavElement.setAttribute('id', 'last_nav_element');
+
+					navList.appendChild(lastNavElement);
+				}
+
+				break;
+
+			case 2:
+				// Category level
+
+				if(sublevels.length > 0)
+				{
+					const div = document.createElement('DIV');
+					div.classList.add('nav-wrap');
+
+					parent.appendChild(div);
+					parent = div;
+
+					const navList = document.createElement('UL');
+					navList.setAttribute('id', 'level_'+ level);
+					parent.appendChild(navList);
+
+					for(let sublevel of sublevels)
 					{
-						let lastListItem  = document.createElement('LI'); 
-						navSublist.appendChild(lastListItem );
-						lastListItem.setAttribute('id', 'last_nav_element');
+						const title = sublevel.key;
+						const data = sublevel.value;
+
+						const navListItem = $.createNavigationElement(navList, parentTitle, title, level, false);
+
+						$.createNavigationLevel(navListItem, title, data, level + 1);
 					}
 				}
 
-				let input = document.createElement('INPUT');
-				input.setAttribute('id', tuple.key +'_input');
-				input.setAttribute('type', 'checkbox');
-				input.setAttribute('name', 'vertical_menu_'+ listLevel);
-				childListItem.appendChild(input);
+				break;
 
-				$.createNavigationElement(childListItem, tuple, listLevel + 1);
-			}
-
-			// subelements.foreach(
-			// 	function (tuple, index)
-			// 	{
-			// 		let childListItem = document.createElement('LI'); 
-			// 		navSublist.appendChild(childListItem);
-
-			// 		let label = document.createElement('LABEL');
-			// 		label.setAttribute('for', tuple.key +'_input');
-			// 		labelE.innerHTML = tuple.key.replace(/_/g, ' ');
-			// 		childListItem.appendChild(label);
-
-			// 		if(listLevel === 1)
-			// 		{
-			// 			if(index === 0)
-			// 			{
-			// 				childListItem.setAttribute('id', 'first_nav_element');
-			// 			}
-
-			// 			if(index + 1 === subelements.length)
-			// 			{
-			// 				let lastListItem  = document.createElement('LI'); 
-			// 				navigationSublist.appendChild(lastListItem );
-			// 				lastListItem.setAttribute('id', 'last_nav_element');
-			// 			}
-			// 		}
-
-			// 		let input = document.createElement('INPUT');
-			// 		input.setAttribute('id', tuple.key +'_input');
-			// 		input.setAttribute('type', 'checkbox');
-			// 		input.setAttribute('name', 'vertical_menu_'+ list_level);
-			// 		childListItem.appendChild(input);
-
-			// 		CreateNavigationElement(childListItem, tuple, listLevel + 1);
-			// 	}
-			// )
+			case 3:
+				// Button level
+				$.createNavigationButton(parent, parentTitle, value);
+				break;
 		}
 	};
 
-	$.navigationClick = function(key, description, images, videos, pages, subpages)
+	$.createNavigationElement = function(parentList, groupId, title, level, hidable = true)
 	{
-		//console.debug('Clicked '+ key);
-		
-		// $window.trigger("navigation-event");
+		const listItem = document.createElement('LI');
+
+		const navigationButton = new $.NavigationButton(listItem, groupId, title, level, hidable);
+
+		parentList.appendChild(listItem);
+
+		return listItem;
+	};
+
+	$.createNavigationButton = function(parent, title, value)
+	{
+		let content =
+		{
+			description : $.utility.getArrayByKey(value, 'description'),
+			pages 		: $.utility.getArrayByKey(value, 'pages'),
+			images 		: $.utility.getArrayByKey(value, 'images'),
+			videos 		: $.utility.getArrayByKey(value, 'videos'),
+			subpages 	: $.utility.getArrayByKey(value, 'subpages')
+		};
+
+		if(!content.description) content.description = [];
+		if(!content.pages) content.pages = [];
+		if(!content.images) content.images = [];
+		if(!content.videos) content.videos = [];
+		if(!content.subpages) content.subpages = [];
+
+		let anchor = title.toLowerCase();
+
+		if($.navigationMap.hasOwnProperty(anchor))
+			console.error('Navigation menu has multiple items with identical anchor: '+ anchor);
+		else
+			$.navigationMap[anchor] = {title: title, content: content};
+
+		let input = parent.querySelector('input');
+
+		$.utility.addEvent(
+			input,
+			'click',
+			function()
+			{
+				console.debug('Clicked: '+ title);
+				location.href = '#!'+ anchor;
+			},
+			true);
+	};
+
+	$.navigationClick = function(anchor)
+	{
+		console.log('OPENING '+ anchor);
+
+		const navigationItem = $.navigationMap[anchor];
+		const content = navigationItem.content;
+		let title = navigationItem.title ? navigationItem.title : anchor;
+
+		title = title.replace(/_/g,' ');
 
 		window.dispatchEvent(new Event('navigation-event'));
 
-		if(key === $.currentKey)
+		if(anchor === $.currentAnchor)
 			return;
 
-		$.currentKey = key;
+		$.currentAnchor = anchor;
 
-		let totalElementCount = description.length + images.length + videos.length + pages.length + subpages.length;
+		const totalElementCount =
+			content.description.length +
+			content.images.length +
+			content.videos.length +
+			content.pages.length +
+			content.subpages.length;
 
 		if(totalElementCount > 0)
 		{
-			//console.debug(description);
-			//console.debug(images);
-			//console.debug(videos);
-			//console.debug(pages);
-			//console.debug(subpages);
+			$.menuIconButton.checked = false;
 
-			// let contentArea = $('#content-area');
-			let contentArea = document.getElementById('content-area');
-
-			// Might consider removing child nodes element by element 
-			// https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
-			contentArea.innerHTML = '';
-			// contentArea.empty();
-
-			// $('<h1>'+ key.replace(/_/g,' ') +'</h1>').appendTo(contentArea);
-			let headerElement = document.createElement('H1');
-			let textNode = document.createTextNode(key.replace(/_/g,' '));
-			headerElement.appendChild(textNode);
-
-			contentArea.appendChild(headerElement);
-
-			// $('<div class=\'title-underline\'/>').appendTo(contentArea);
-			let divElement = document.createElement('DIV');
-			divElement.class = 'title-underline';
-
-			contentArea.appendChild(divElement);
-
-			// $('<hr />').appendTo(contentArea);
-			// let hrElement = document.createElement('HR');
-			// contentArea.appendChild(hrElement);
-
-			$.processContent($.currentKey, contentArea, description, images, videos, pages, subpages);
+			$.loadNewContent($.currentAnchor, title, content);
 		}
 	};
 

@@ -50,8 +50,8 @@
 				window, 'scroll',  
 				function()
 				{
-					console.debug('Scroll triggered '+ window.scrollTop);
-					console.debug(bgElement.dataset.position);
+					//console.debug('Scroll triggered '+ window.scrollTop);
+					//console.debug(bgElement.dataset.position);
 					$.updateBGElement(bgElement);
 				}, 
 				true);

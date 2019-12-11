@@ -19,7 +19,7 @@
                 "1_home/1_welcome/description.html"
             ]
         },
-        "About": {
+        "about": {
             "description": [
                 "1_home/2_about/description.html"
             ]

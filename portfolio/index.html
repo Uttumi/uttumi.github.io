@@ -5,7 +5,7 @@
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+
 		<title>Portfolio of Jouni Sarvanko</title>
 
 		<link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -15,9 +15,15 @@
 		<link href='http://fonts.googleapis.com/css?family=Crimson+Text:700' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Lora:700' rel='stylesheet' type='text/css'>
 
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/variables.css">
 		<link rel="stylesheet" href="css/main.css">
-		
-		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
+		<link rel="stylesheet" href="css/container.css">
+		<link rel="stylesheet" href="css/marginals.css">
+		<link rel="stylesheet" href="css/navigation.css">
+		<link rel="stylesheet" href="css/content.css">
+
+		<script src="../js/vendor/modernizr-2.8.3.min.js"></script>
 
 	</head>
 
@@ -27,7 +33,7 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <!-- 
+        <!--
         If JS scripts are here (or in head) they will load before the contents of the page
         This place could be used if script changes CSS and doesn't rely on DOM elements
         Still, it's supposedly better to place scripts at the end of body
@@ -37,68 +43,69 @@
 			<div id='header-bar'>
 				<h1>Portfolio of Jouni Sarvanko</h1>
 			</div>
-		
+
 		<!--<nav id='portfolio-navigation'>/-->
-			<label for="hamburger-menu" id="menu-icon">
+			<label for="menu-icon-button" id="menu-icon">
 				<span></span>
 				<span></span>
 				<span></span>
 			</label>
-			<input type="checkbox" name="menu-opener" id="hamburger-menu" checked>
-			<nav id='navigation-menu' class='nav-wrap'>
-				<ul id='level_1'></ul>
-			</nav>
-		<!--</nav>/-->	
+			<input type="checkbox" name="menu-opener" id="menu-icon-button">
+			<nav id='navigation-menu' class='nav-wrap'></nav>
+		<!--</nav>/-->
 		</header>
-		
-		<chapter id='content-area'></chapter>
-		
-        <div class="background" id="bg-layer-0" data-type="background" data-speed="0.1">
-        	<img/>
-        </div>
 
-		<footer>
-			<div id='contact_info'>
-				<p>
-				Copyright &copy;
-                <script language="javascript" type="text/javascript">
-                    var today = new Date()
-                    var year = today.getFullYear()
-                    document.write(year)
-                </script>
-                Jouni Sarvanko. All Rights Reserved.
-            	</p>
-				<p>Contact information: <a href="uttumi@gmail.com">uttumi@gmail.com</a></p>
-			</div>
-			<div id='date'>
-				<time>Filled automatically</time>
-			</div>
-		</footer>
+		<div id="container">
+			
+			<chapter id='content-area'></chapter>
 
-        <!-- 
-        If JS scripts are here they will load after the contents of the page 
+			<footer>
+				<p id='contact'>
+					Contact information: <a href="uttumi@gmail.com">uttumi@gmail.com</a>
+				</p>
+				<time id='date'>
+					Filled automatically
+				</time>
+				<p id='copyright'>
+					Copyright &copy;
+					<script language="javascript" type="text/javascript">
+						const today = new Date();
+				 		const year = today.getFullYear();
+						document.write(year);
+					</script>
+					Jouni Sarvanko. All Rights Reserved.
+				</p>
+			</footer>
+		</div>
+
+		<div class="background" id="bg-layer-0" data-type="background" data-speed="0.1">
+			<img/>
+		</div>
+
+        <!--
+        If JS scripts are here they will load after the contents of the page
         This place should be used if scripts use DOM elements
         It might also be more performant because page doesn't hang when scripts are loaded
     	-->
 
+        <!-- <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+		<script src="../js/lib/plugins.js"></script>
+		<script src="../js/lib/jquery.ba-resize.min.js"></script> -->
 
-
-        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
-		<script src="js/lib/plugins.js"></script>
-		<script src="js/lib/jquery.ba-resize.min.js"></script>
-
-		<script src='js/namespaces.js'></script>
-		<script src='js/settings.js'></script>
+		<script src='../js/namespaces.js'></script>
 		<!--<script src='js/enums.js'></script>-->
 
-		<script src='js/utility.js'></script>	
-		<script src='js/async-file-loader.js'></script>
+		<script src='../js/utility.js'></script>
+		<script src='../js/async-file-loader.js'></script>
+
+		<script src='js/settings.js'></script>
 
 		<script src='js/game.js'></script>
 		<script src='js/content.js'></script>
+		<script src='js/navigation.button.js'></script>
 		<script src='js/navigation.js'></script>
-		<script src='js/paralax-background.js'></script>	
+		<script src='js/paralax-background.js'></script>
 		<script src='js/main.js'></script>
 
 	</body>

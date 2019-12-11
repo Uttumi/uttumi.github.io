@@ -115,7 +115,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-/* 
+/*
 $base-color-dark: 		rgba(12,13,28,1);
 $base-color-dim: 		rgba(68,85,102,1);
 $base-color: 			rgba(139,170,172,1);
@@ -127,7 +127,7 @@ $colorful-color-dim:    rgba(18,103,100,1);
 $colorful-color:        rgba(160,220,190,1);
 $colorful-color-light:  rgba(45,154,157,1);
  */
-/* 
+/*
 @mixin nav-font()
 {
     color: $font-color-light;
@@ -150,7 +150,7 @@ $colorful-color-light:  rgba(45,154,157,1);
   letter-spacing: 10px;
   font-family: 'shanghai'; }
 
-/* 
+/*
 @mixin base-font()
 {
     font-family: $article-font-stack;
@@ -162,10 +162,10 @@ $colorful-color-light:  rgba(45,154,157,1);
 
     font-weight: bold;
     text-decoration: none;
-    text-transform: capitalize; 
+    text-transform: capitalize;
 }
  */
-/* 
+/*
 $nav-width: $side-area-width;
 $nav-level-1-height: 50px;
 $nav-level-2-height: 25px;
@@ -188,7 +188,7 @@ $content-area-width: $content-width - $border-width*2;
     $nav-level-2-height: 50px;
 }
  */
-/* 
+/*
 @keyframes fadeIn
 {
     0%   {opacity: 0.0;}
@@ -282,7 +282,7 @@ header
 
         width: 100%;
 
-        color: $base-color; 
+        color: $base-color;
         text-align: center;
         vertical-align: middle;
 
@@ -333,14 +333,14 @@ footer
         padding: 5px;
     }
 
-    & #contact_info 
+    & #contact_info
     {
-        bottom: 2.5rem; 
+        bottom: 2.5rem;
     }
 
     & #date
     {
-       bottom: 0.5rem; 
+       bottom: 0.5rem;
     }
 
      & #date
@@ -361,81 +361,96 @@ footer
     }
 }
 */
-/* line 1, sass/_navigation.scss */
-nav {
-  z-index: 210;
-  margin: 0 auto;
-  height: 100%;
-  width: 100%; }
 
-/* line 10, sass/_navigation.scss */
-.nav-icon {
-  position: absolute;
-  background-color: #FFF;
-  /*margin: auto;*/
-  text-align: center;
-  width: 50px;
-  height: 50px;
-  top: 5px;
-  right: 5px;
-  border-radius: 4px; }
-  @media (min-width: 800px) {
-    /* line 10, sass/_navigation.scss */
-    .nav-icon {
-      display: none; } }
+nav
+{
+    z-index: 210;
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+}
 
-/* line 29, sass/_navigation.scss */
-.navbar-toggle {
-  background-color: transparent; }
+.nav-icon
+{
+    position: absolute;
+    background-color: #FFF;
+    /*margin: auto;*/
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    top: 5px;
+    right: 5px;
+    border-radius: 4px;
+}
 
-/* line 34, sass/_navigation.scss */
-.icon-bar {
-  position: absolute;
-  display: block;
-  width: 40px;
-  height: 2px;
-  background-color: #888;
-  border-radius: 4px;
-  margin-top: 11px; }
+@media (min-width: 800px)
+{
+    .nav-icon
+    {
+        display: none;
+    }
+}
 
-/* line 46, sass/_navigation.scss */
-label + input {
-  display: none;
-  visibility: hidden; }
+.navbar-toggle
+{
+    background-color: transparent;
+}
 
-/* line 57, sass/_navigation.scss */
-div.dropdown-menu {
-  display: none;
-  top: 100%;
-  left: 0%;
-  position: absolute;
-  margin: 0px 0px; }
-  /* line 67, sass/_navigation.scss */
-  div.dropdown-menu > ul {
+.icon-bar
+{
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 2px;
+    background-color: #888;
+    border-radius: 4px;
+    margin-top: 11px;
+}
+
+label + input
+{
+    display: none;
+    visibility: hidden;
+}
+
+div.dropdown-menu
+{
+    display: none;
+    top: 100%;
+    left: 0%;
+    position: absolute;
+    margin: 0px 0px;
+}
+
+div.dropdown-menu > ul
+{
     background-color: #000;
     border-radius: 0px 0px 30px 20px;
     overflow: hidden;
     list-style-type: none;
-    margin: 0px; }
+    margin: 0px;
+}
 
-/* line 78, sass/_navigation.scss */
-.menu-selection {
-  background-color: #99bfd9 !important; }
+.menu-selection
+{
+    /*background-color: #99bfd9 !important;*/
+}
 
-/* line 84, sass/_navigation.scss */
-.nav-wrap {
-  vertical-align: top;
-  background-color: #1a2a34;
-  /*     position: absolute;
-  
-      margin: 0px 0px; */ }
-  /* line 90, sass/_navigation.scss */
-  .nav-wrap#nav-bar {
+.nav-wrap
+{
+    vertical-align: top;
+    background-color: #1a2a34;
+}
+
+.nav-wrap#nav-bar
+{
     display: table;
     /* Allow the centering to work */
     height: 60px;
     width: 100%;
-    text-transform: capitalize; }
+    text-transform: capitalize;
+}
+
     @media (min-width: 800px) {
       /* line 90, sass/_navigation.scss */
       .nav-wrap#nav-bar {
@@ -528,7 +543,7 @@ div.dropdown-menu {
 li:hover > div.dropdown-menu, div.dropdown-menu:hover {
   display: block; }
 
-/* 
+/*
 .nav-dropdown-element
 {
     //display: block;
@@ -622,7 +637,7 @@ svg
     width: 100%;
 }
  */
-/* 
+/*
 svg
 {
     position: fixed;
@@ -641,7 +656,7 @@ svg {
 /* line 68, sass/_background.scss */
 #foreground0 {
   /*     @include horizontally-centered-element();
-  
+
       width: 100%; */
   position: absolute;
   top: 0px;
@@ -650,7 +665,7 @@ svg {
 /* line 77, sass/_background.scss */
 #bg-layer-0, #background0 {
   /*     @include horizontally-centered-element();
-  
+
       width: 100%; */
   background-color: #ffecec;
   height: 100%;
@@ -659,7 +674,7 @@ svg {
 /* line 86, sass/_background.scss */
 #bg-layer-1, #background1 {
   /*     @include horizontally-centered-element();
-  
+
       width: 100%; */
   background-color: #ffe5e5;
   height: 800px;
@@ -668,7 +683,7 @@ svg {
 /* line 95, sass/_background.scss */
 #bg-layer-2, #background2 {
   /*     @include horizontally-centered-element();
-  
+
       width: 100%; */
   background-color: #ffcccc;
   height: 600px;
@@ -677,7 +692,7 @@ svg {
 /* line 104, sass/_background.scss */
 #bg-layer-3, #background3 {
   /*     @include horizontally-centered-element();
-  
+
       width: 100%; */
   background-color: #ffb3b3;
   height: 300px;
@@ -686,7 +701,7 @@ svg {
 /* line 113, sass/_background.scss */
 #bg-layer-4, #background4 {
   /*     @include horizontally-centered-element();
-  
+
       width: 100%; */
   background-color: #000;
   height: 100px;
@@ -721,24 +736,24 @@ svg {
 
 /* line 34, sass/_content.scss */
 #content-area > article {
-  /* 
+  /*
       & > label + input:not(:checked) + .article-content
       {
           //height: 0px !important;
-  
+
           @include transform(scale(0));
           opacity: 0;
-  
+
           transition: opacity 300ms linear, transform 600ms, height 800ms linear 900ms !important;
       }
-  
+
       & > label + input:checked + .article-content
       {
           //height: 0px !important;
-  
+
           @include transform(scale(1));
           opacity: 1;
-  
+
           transition: opacity 300ms linear 600ms, transform 600ms linear, color 800ms ease-in-out 200ms, padding 800ms ease-in-out 200ms, height 800ms linear 200ms !important;
       }
    */ }
@@ -886,7 +901,7 @@ hr.article-end {
   border-width: 0 0 2px 0;
   border-radius: 20px; }
 
-/* 
+/*
 img
 {
     //width: 100%;
