@@ -7,7 +7,7 @@
 
     --header-font-color: rgb(139, 170, 172);
 
-    --menu-bg-color: rgb(12, 13, 28);
+    --menu-bg-color: rgb(0, 5, 15);
     --menu-selected-color: rgb(68, 85, 102);
     --menu-icon-line-color: rgb(160, 220, 190);
     --menu-icon-line-selected-color: rgb(194, 237, 234);
@@ -32,6 +32,9 @@
     --menu-font: "Myriad Pro", Calibri, Helvetica, Arial, sans-serif;
 
     --base-font-size: 16;
+
+    --font-size-8: calc(8rem / var(--base-font-size));
+    --line-height-8: calc(var(--font-size-8) * 1.2);
 
     --font-size-10: calc(10rem / var(--base-font-size));
     --line-height-10: calc(var(--font-size-10) * 1.2);

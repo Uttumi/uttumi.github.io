@@ -55,6 +55,8 @@ body
     background-repeat: repeat-y;
     background-position: 0px 0px;
     background-image: url("./img/green_nebula_2048.jpg");
+
+    transition: background-position ease 100;
 }
 
 @media (min-width: 4096px)

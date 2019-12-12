@@ -17,8 +17,8 @@
 		{
 			location.href = '#welcome';
 
-			let homeInput = document.querySelector('#home_input');
-			homeInput.checked = true;
+			// let homeInput = document.querySelector('#home_input');
+			// homeInput.checked = true;
 		}
 
 		$.navigationClick(anchor);
@@ -198,6 +198,8 @@
 			$.menuIconButton.checked = false;
 
 			$.loadNewContent($.currentAnchor, title, content);
+
+			// window.scrollTop = 0;
 		}
 	};
 

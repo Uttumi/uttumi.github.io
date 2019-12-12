@@ -3,9 +3,15 @@ header
     z-index: 20;
     display: block;
     position: absolute;
+
     width: 100%;
 
+    background-color: var(--menu-bg-color);
+
     opacity: var(--menu-opacity);
+
+    transition:
+        border-radius var(--menu-close-duration) linear;
 }
 
 @media (min-width: 800px)
@@ -13,44 +19,50 @@ header
     header
     {
         position: fixed;
+        border-radius: 0px 0px 40% 0%;
     }
 }
+
+/* @media (min-width: 1500px)
+{
+    header
+    {
+        border-radius: 0px 0px 40% 0%;
+    }
+} */
 
 header > #header-bar
 {
     z-index: 20;
-    position: absolute;
-    width: 100%;
-    color: var(--header-font-color);
-    text-align: center;
-    vertical-align: middle;
-
     display: flex;
     justify-content: center;
+    align-items: center;
 
-    height: calc(var(--header-height) * 2);
-    margin-top: calc(var(--header-height) * -1);
+    width: 100%;
+    height: var(--header-height);
 
-    background-color: var(--menu-bg-color);
+    margin-top: 0px;
+    padding-left: 50px;
 
-    /* box-shadow: 0 5px rgba(0, 0, 0, 1); */
+    color: var(--header-font-color);
 
     transition:
         height var(--menu-close-duration) linear,
-        margin-top var(--menu-close-duration) linear,
-        border-radius var(--menu-close-duration) linear;
+        margin-top var(--menu-close-duration) linear;
 }
 
 header > #header-bar > h1
 {
-    align-self: flex-end;
+    z-index: 20;
+    display: inline;
 
     font-family: var(--menu-font);
     font-weight: bold;
-    margin-bottom: 10px;
+    text-align: center;
+    vertical-align: middle;
 
-    font-size: var(--font-size-24);
-    line-height: var(--line-height-24);
+    font-size: var(--font-size-18);
+    line-height: var(--line-height-18);
 
     transition:
         font-size var(--menu-close-duration) linear,
@@ -62,11 +74,13 @@ header > #header-bar > h1
 {
     header > #header-bar
     {
-        border-radius: 0px 0px 40% 0%;
+        justify-content: center;
     }
 
     header > #header-bar > h1
     {
+        text-align: center;
+
         font-size: var(--font-size-32);
         line-height: var(--line-height-32);
 
@@ -76,10 +90,10 @@ header > #header-bar > h1
 
 @media (min-width: 1500px)
 {
-    header > #header-bar
+    /* header > #header-bar
     {
         border-radius: 0px 0px 40% 0%;
-    }
+    } */
 
     header > #header-bar > h1
     {
@@ -94,6 +108,11 @@ footer
 {
     z-index: 20;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+
     background-color: var(--menu-bg-color);
     border-radius: 40% 40% 0px 0px;
 
@@ -103,58 +122,80 @@ footer
     margin-bottom: calc(var(--footer-height) * -2);
 
     text-align: center;
-
 }
 
-footer #contact,
 footer #date,
+footer #contact,
 footer #copyright
 {
+    /* position: relative; */
+
     padding: 3px;
-    padding-right: 40px;
-    padding-left: 40px;
+
+    padding-right: 60px;
+    padding-left: 60px;
 
     font-family: var(--menu-font);
     font-weight: bold;
     color: var(--header-font-color);
 
-    font-size: var(--font-size-12);
-    line-height: var(--line-height-12);
+    white-space: nowrap;
+
+    font-size: var(--font-size-10);
+    line-height: var(--line-height-10);
 }
 
-footer #contact
+footer #copyright > p
 {
-    padding-top: calc( (var(--footer-height) - (var(--line-height-12) + 3px) * 3) / 3 * 2);
+    font-size: var(--font-size-8);
+    line-height: var(--line-height-8);
+
+    padding: 0px;
+}
+
+footer #date
+{
+    padding-top: calc( (var(--footer-height) - var(--line-height-10) * 2 - var(--line-height-8) * 2 - 3px * 3) / 3 * 2);
 }
 
 @media (min-width: 800px)
 {
-    footer #contact,
     footer #date,
-    footer #copyright
+    footer #contact
     {
         font-size: var(--font-size-14);
         line-height: var(--line-height-14);
     }
 
-    footer #contact
+    footer #copyright > p
     {
-        padding-top: calc( (var(--footer-height) - (var(--line-height-14) + 3px) * 3)  / 3 * 2);
+        font-size: var(--font-size-10);
+        line-height: var(--line-height-10);
+    }
+
+    footer #date
+    {
+        padding-top: calc( (var(--footer-height) - var(--line-height-14) * 2 - var(--line-height-10) * 2 - 3px * 3) / 3 * 2);
     }
 }
 
 @media (min-width: 1500px)
 {
-    footer #contact,
     footer #date,
-    footer #copyright
+    footer #contact
     {
         font-size: var(--font-size-16);
         line-height: var(--line-height-16);
     }
 
-    footer #contact
+    footer #copyright > p
     {
-        padding-top: calc( (var(--footer-height) - (var(--line-height-16) + 3px) * 3)  / 3 * 2);
+        font-size: var(--font-size-12);
+        line-height: var(--line-height-12);
+    }
+
+    footer #date
+    {
+        padding-top: calc( (var(--footer-height) - var(--line-height-16) * 2 - var(--line-height-12) * 2 - 3px * 3) / 3 * 2);
     }
 }

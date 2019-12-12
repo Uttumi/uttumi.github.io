@@ -11,19 +11,6 @@
 	{
 		$.setupNavigation($.indexUrl);
 
-		// window.onload
-		// Called when the entire page has loaded (including DOM(?), scripts and images etc.)
-
-		// document.onload
-		// Called when DOM is ready
-		// Images and external content might still be under the process of loading
-
-		// document.onload = function()
-		// {
-		// 	console.debug('Loading');
-		// 	$('html,body').scrollTop(0);
-		// };
-
 		// Called when DOM is ready
 		// Images and external content might still be under the process of loading
 		$.utility.addEvent(
@@ -32,7 +19,9 @@
 			function()
 			{
 				console.log('DOM DOCUMENT LOADED');
-				$.setBGIntoMotion();
+
+				$.background = new $.ParalaxBackground();
+
 				$.fillModificationDate();
 			}
 		);
@@ -46,6 +35,8 @@
 				console.log('WHOLE PAGE LOADED');
 				// $('html,body').scrollTop(0);
 				document.body.scrollTop = 0;
+
+				$.background.init();
 			}
 		);
 
