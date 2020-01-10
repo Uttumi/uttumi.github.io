@@ -1,13 +1,13 @@
 {
     "subpages": [
         {
-            "5_flash": {
+            "6_flash": {
                 "snow_war": {
                     "pages": [
-                        "-5_flash/snow_war/SnowWar.html"
+                        "-6_flash/snow_war/SnowWar.html"
                     ],
                     "description": [
-                        "-5_flash/snow_war/description.html"
+                        "-6_flash/snow_war/description.html"
                     ]
                 }
             }
@@ -23,76 +23,88 @@
             "description": [
                 "1_home/2_about/description.html"
             ]
-        },
-        "web_page": {
+        }
+    },
+    "web_page": {
+        "design": {
             "description": [
-                "1_home/3_web_page/description.html"
+                "2_web_page/1_design/description.html"
+            ]
+        },
+        "javascript": {
+            "description": [
+                "2_web_page/2_javascript/description.html"
+            ]
+        },
+        "style": {
+            "description": [
+                "2_web_page/3_style/description.html"
             ]
         }
     },
     "unity": {
         "2D_light_prototype": {
             "pages": [
-                "2_unity/1_2D_light_prototype/index.html"
+                "3_unity/1_2D_light_prototype/index.html"
             ],
             "description": [
-                "2_unity/1_2D_light_prototype/description.html"
+                "3_unity/1_2D_light_prototype/description.html"
             ]
         },
         "breakout": {
             "pages": [
-                "2_unity/2_breakout/index.html"
+                "3_unity/2_breakout/index.html"
             ],
             "description": [
-                "2_unity/2_breakout/description.html"
+                "3_unity/2_breakout/description.html"
             ]
         },
         "gravity_field_prototype": {
             "pages": [
-                "2_unity/3_gravity_field_prototype/index.html"
+                "3_unity/3_gravity_field_prototype/index.html"
             ],
             "description": [
-                "2_unity/3_gravity_field_prototype/description.html"
+                "3_unity/3_gravity_field_prototype/description.html"
             ]
         },
         "space_combat": {
             "pages": [
-                "2_unity/4_space_combat/index.html"
+                "3_unity/4_space_combat/index.html"
             ],
             "description": [
-                "2_unity/4_space_combat/description.html"
+                "3_unity/4_space_combat/description.html"
             ]
         }
     },
     "blender": {
         "house_model": {
             "description": [
-                "3_blender/house_model/description.html"
+                "4_blender/house_model/description.html"
             ],
             "subpages": [
                 {
                     "furniture": {
                         "images": [
-                            "3_blender/house_model/-furniture/arm_chair.png",
-                            "3_blender/house_model/-furniture/desk.png",
-                            "3_blender/house_model/-furniture/kitchen_table.png",
-                            "3_blender/house_model/-furniture/sofa.png"
+                            "4_blender/house_model/-furniture/arm_chair.png",
+                            "4_blender/house_model/-furniture/desk.png",
+                            "4_blender/house_model/-furniture/kitchen_table.png",
+                            "4_blender/house_model/-furniture/sofa.png"
                         ]
                     }
                 },
                 {
                     "house": {
                         "images": [
-                            "3_blender/house_model/-house/perspective_view.png",
-                            "3_blender/house_model/-house/top_view.png"
+                            "4_blender/house_model/-house/perspective_view.png",
+                            "4_blender/house_model/-house/top_view.png"
                         ]
                     }
                 },
                 {
                     "render": {
                         "images": [
-                            "3_blender/house_model/-render/bedroom.png",
-                            "3_blender/house_model/-render/kitchen_table_in_room.png"
+                            "4_blender/house_model/-render/bedroom.png",
+                            "4_blender/house_model/-render/kitchen_table_in_room.png"
                         ]
                     }
                 }
@@ -100,55 +112,55 @@
         },
         "ram": {
             "images": [
-                "3_blender/ram/wireframe.png",
-                "3_blender/ram/wireframe_angle.png"
+                "4_blender/ram/wireframe.png",
+                "4_blender/ram/wireframe_angle.png"
             ]
         },
         "starship_enterprise_animation": {
             "videos": [
-                "3_blender/starship_enterprise_animation/starship-enterprise-animation-x264.mp4"
+                "4_blender/starship_enterprise_animation/starship-enterprise-animation-x264.mp4"
             ],
             "description": [
-                "3_blender/starship_enterprise_animation/description.html"
+                "4_blender/starship_enterprise_animation/description.html"
             ]
         }
     },
     "art": {
         "animal_citizens": {
             "images": [
-                "4_art/1_animal_citizens/0_Panda.png",
-                "4_art/1_animal_citizens/1_Panda_Vector.png",
-                "4_art/1_animal_citizens/2_Weasel.png",
-                "4_art/1_animal_citizens/3_Cat.png"
+                "5_art/1_animal_citizens/0_Panda.png",
+                "5_art/1_animal_citizens/1_Panda_Vector.png",
+                "5_art/1_animal_citizens/2_Weasel.png",
+                "5_art/1_animal_citizens/3_Cat.png"
             ],
             "description": [
-                "4_art/1_animal_citizens/description.html"
+                "5_art/1_animal_citizens/description.html"
             ]
         },
         "oil_paintings": {
             "images": [
-                "4_art/2_oil_paintings/1_sunset.png",
-                "4_art/2_oil_paintings/2_puppies.jpg",
-                "4_art/2_oil_paintings/3_giraffes.jpg"
+                "5_art/2_oil_paintings/1_sunset.png",
+                "5_art/2_oil_paintings/2_puppies.jpg",
+                "5_art/2_oil_paintings/3_giraffes.jpg"
             ]
         },
         "fantasy": {
             "images": [
-                "4_art/3_fantasy/1_dagger.jpg",
-                "4_art/3_fantasy/2_flight.jpg"
+                "5_art/3_fantasy/1_dagger.jpg",
+                "5_art/3_fantasy/2_flight.jpg"
             ]
         },
         "poster_people": {
             "images": [
-                "4_art/4_poster_people/1_poster_people.png"
+                "5_art/4_poster_people/1_poster_people.png"
             ],
             "description": [
-                "4_art/4_poster_people/description.html"
+                "5_art/4_poster_people/description.html"
             ]
         },
         "vector_art": {
             "images": [
-                "4_art/5_vector_art/dragonfly_by_uttumi-da3lnmj.png"
+                "5_art/5_vector_art/dragonfly_by_uttumi-da3lnmj.png"
             ]
         }
     }

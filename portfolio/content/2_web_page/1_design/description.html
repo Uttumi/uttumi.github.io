@@ -1,0 +1,19 @@
+<p>
+	Obviously, the contents of the page are its main focus, yet the page itself must be given its due. It's definitely one of the biggest projects you see here and it has tested my sanity. So let's talk a little how I did it and what were the design choices behind it.
+</p>
+<p>
+	Since the basic idea was to create a way for anyone to access my chosen pieces of work, I didn't have a need to unnecessarily restrict the access to the content. Therefore, my aim was to focus on making the content management as easy as possible. I chose to build a static page which means that there is no web server and database voodoo happening here. I decided to cut off all the unnecessary dependencies and make the develepment and update process lean and simple.
+</p>
+<p>
+	Of course, things don't go as smoothly as we'd like on the first or even the second try. The page design has gone through many changes and overhauls. While the look has retained the major aspects, the tools have switched from deceptifully helpful libraries into pure native simplicity.
+
+	But the positive thing is that I don't need a database to access the contents. Everything is transfered into github servers and the indexer file is used to access the contents from there.
+</p>
+<h2>Index</h2>
+<p>
+	To achieve my aims, I had to face one insurmountable problem: how to find my content.
+	That is, how to build the page based on the folder hierarchy of the project. To accomplish this, I had to decice the structure of the content folder and create an index file to describe the contents. The file was then to be used on the page to know what there is on the page and where it is located.
+</p>
+<p>
+	I chose to store the index file in JSON format and to create it using an indexer script written in Python. This added an extra step of running the script when I add/remove content or change the location of contents. Luckily there's no need to run it if I change the text of a text file.
+</p>
