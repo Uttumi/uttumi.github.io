@@ -1,9 +1,0 @@
-<p>
-	Obviously the contents of the page are its main focus, yet the page itself must be given its due. It's definitely one of the biggest projects you see here and it has tested my sanity. So let's talk a little how I did it and what were the design choices behind it.
-</p>
-<p>
-	Since the basic idea was to create a way for people to access my chosen pieces of work, I didn't have a need to unnecessarily restrict the access to the content. Therefore my aim was to focus on making the content management as easy as possible. I chose to build a static page which means that there is no web server magic happening here. I wanted to cut off unnecessary dependancies and to make it as straightforward as possible to update the contents of the page. 
-</p>
-<p>
-	To accomplist this, I've build functionality to produce the page based on the folder hierarchy of the project. The down side was that, to achieve this, I had to write an indexer script to create a JSON file which defines the structure of the page. But the positive thing is that I don't need a database to access the contents. Everything is transfered into github servers and the indexer file is used to access the contents from there. 
-</p>
