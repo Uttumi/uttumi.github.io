@@ -1,19 +1,19 @@
 <p>
-	Obviously, the contents of the page are its main focus, yet the page itself must be given its due. It's definitely one of the biggest projects you see here and it has tested my sanity. So let's talk a little how I did it and what were the design choices behind it.
+	The projects I present on this web page are its main focus, obviously. Yet the page itself must be given its fair due. It has been one of the biggest projects I have ever done in my free time, and there were moments when it put my motivation to a test. So, let us talk a little about how I did it and what were the design choices behind it.
 </p>
 <p>
-	Since the basic idea was to create a way for anyone to access my chosen pieces of work, I didn't have a need to unnecessarily restrict the access to the content. Therefore, my aim was to focus on making the content management as easy as possible. I chose to build a static page which means that there is no web server and database voodoo happening here. I decided to cut off all the unnecessary dependencies and make the develepment and update process lean and simple.
+	Since the basic idea was to create a way for anyone to access my chosen pieces of work, I didn't need to unnecessarily restrict access to the content. Therefore, I aimed to focus on making content management as easy as possible. I chose to build a static page which means that there is no web server and database voodoo happening in the background. I decided to cut off all the unnecessary dependencies and make the development and update process lean and simple.
 </p>
 <p>
-	Of course, things don't go as smoothly as we'd like on the first or even the second try. The page design has gone through many changes and overhauls. While the look has retained the major aspects, the tools have switched from deceptifully helpful libraries into pure native simplicity.
-
-	But the positive thing is that I don't need a database to access the contents. Everything is transfered into github servers and the indexer file is used to access the contents from there.
+	Of course, things did not go as smoothly as I would have liked on the first or even on the second try. The page design has gone through many changes and overhauls. While the look has retained its major aspects, the tools have switched from deceptively helpful libraries into pure native simplicity.
 </p>
 <h2>Index</h2>
 <p>
-	To achieve my aims, I had to face one insurmountable problem: how to find my content.
-	That is, how to build the page based on the folder hierarchy of the project. To accomplish this, I had to decice the structure of the content folder and create an index file to describe the contents. The file was then to be used on the page to know what there is on the page and where it is located.
+	To achieve my aims, I had to face one insurmountable problem: how to find my content. That is, how to build the page based on the folder hierarchy of the project. To accomplish this, I had to decide the structure of the content folders and create an index file to describe that structure. The file was then to be used on the page to know what to show and from where to fetch it.
 </p>
 <p>
-	I chose to store the index file in JSON format and to create it using an indexer script written in Python. This added an extra step of running the script when I make changes inside the folder hierarchy, like add or remove a file or move them around. Luckily, there's no need to run the indexer if I only modify the contents of the files.
+	The positive thing is that the page does not need a database to access its contents. Everything is transferred into GitHub servers and the indexer file is used to load the contents from there using URLs.
+</p>
+<p>
+	I chose to store the index structure in JSON format and to create the index file with a Python script. This added an extra step of running the script when I make any changes concerning the folder hierarchy, like add or remove a file or move them around. Luckily, there is no need to run the indexer if I only modify the contents of the files.
 </p>
