@@ -1,9 +1,20 @@
 <p>
-	Obviously the contents of the page are its main focus, yet the page itself must be given its due. It's definitely one of the biggest projects you see here and it has tested my sanity. So let's talk a little how I did it and what were the design choices behind it.
+	The contents of the web page are the main focus, yet the page itself must be given its due. It is definitely one of the biggest projects you see here and it has tested my sanity. So, let's talk a little how I did it and what were the design choices behind it.
 </p>
 <p>
-	Since the basic idea was to create a way for people to access my chosen pieces of work, I didn't have a need to unnecessarily restrict the access to the content. Therefore my aim was to focus on making the content management as easy as possible. I chose to build a static page which means that there is no web server magic happening here. I wanted to cut off unnecessary dependancies and to make it as straightforward as possible to update the contents of the page.
+	Since the basic idea was to create a way for people to access my chosen pieces of work, I didn't have a need to unnecessarily restrict the access to the content. Therefore my aim was to focus on making the content management as easy as possible. I chose to build a static page which means that there is no web server magic happening here. I wanted to cut off unnecessary dependancies and make it as straightforward as possible to update the contents of the page.
 </p>
 <p>
-	To accomplist this, I've build functionality to produce the page based on the folder hierarchy of the project. The down side was that, to achieve this, I had to write an indexer script to create a JSON file which defines the structure of the page. But the positive thing is that I don't need a database to access the contents. Everything is transfered into github servers and the indexer file is used to access the contents from there.
+	To accomplish this, the page was designed to reflect the folder hierarchy of the project. The down side was that, to achieve this, I had to write an indexer script to create a JSON file which defines the structure of the page. But the positive thing is that I don't need a database to access the contents. Everything is transfered into github servers and the indexer file is used to fetch the contents from there.
+</p>
+
+
+<p>
+	I started the project with jQuery and a couple of CSS libraries (SASS, Compass etc.). The idea was to practice using the commonly used technologies. I even tried Bootstrap but ditched it after noticing that the rigid layouts didn't work well for my intented design. Customization was far more tedious than building the page with pure JS and CSS.
+</p>
+<p>
+	Later, I got rid of jQuery as well. It wasn't because of the capabilities of jQuery were lacking or that it hindered the development. It was merely because the modern ECMAScript versions were making the library reduntant. It stayed as a good source for a few features, but the library as a whole was removed from the project. I also wanted to practice using the new JS features. It gives better understanding to the technology than sticking to whatever framework is popular at the given moment. 
+</p>
+<p>
+	All this meant, in combination to having no build process, that the support for old browsers was going to be neglible. I look at you IE. I didn't want to restrict myself to features that were introduced 5-10 years the ago, the latest. Then again, I considered that the potential visitors are most likely the kind who prefer better maintained browsers.
 </p>

@@ -1,3 +1,12 @@
 <p>
-	Poor things wondering what the heck is going on. We need to think of the browsers!
+	When I started to build the page, I had high hopes of improving the readability of the CSS definitions. After many hours of research and testing, I chose to try out SASS and some additional SASS libraries. All worked well until I forgot the project for a year or two and returned to it. Naturally, I wanted to update my tools to get the latest, brandest, the most chrome features available. Little did I know that the libraries had dropped support for newer SASS versions. Either I was stuck with an older version of SASS or I had to remove the libraries. My solution was simple, I removed both. 
+</p>
+<p>
+	I knew that, without SASS and the libraries, I was going to have to solve some difficult situations with pure CSS. Then again, as with JS, I wanted to see, what I could do with the latest additions to the CSS definitions. The benefits of the choice came ever more clear when I opened the CSS files which SASS had generated: it was a mess. I started to clean up the project and it was quickly evident that over half of the CSS content was redundant. It repeated the same class definitions for all the tiny variations instead of using CSS the smart way. Well, what could I expect from machine-generated stuff. It was going to be far more work than I had anticipated. Nevertheless, I continued my chosen path. 
+</p>
+<p>
+	Now that it's done, I am happy with the result. A few things were problematic but modern CSS is quite capable on its own. Also, I don't think the readability of the files suffered at all. I learned new things about CSS, and now my page is free from unnecessary dependencies to CSS libraries. Additionally, I could remove one more build phase from my update cycle and make it easier to modify the page on the fly.
+</p>
+<p>
+	It was a long journey but I am happy I took it.
 </p>
