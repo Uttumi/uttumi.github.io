@@ -5,7 +5,8 @@
     * COLORS *
     *********/
 
-    --header-font-color: rgb(139, 170, 172);
+	--header-font-color: rgb(256, 256, 256);
+    #--header-font-color: rgb(139, 170, 172);
 	
 	--footer-link-color: rgb(160, 220, 190);
 

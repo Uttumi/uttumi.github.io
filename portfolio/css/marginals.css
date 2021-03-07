@@ -44,7 +44,7 @@ header > #header-bar
     margin-top: 0px;
     padding-left: 50px;
 
-    color: var(--header-font-color);
+    
 
     transition:
         height var(--menu-close-duration) linear,
@@ -55,6 +55,8 @@ header > #header-bar > h1
 {
     z-index: 20;
     display: inline;
+
+	color: var(--header-font-color);
 
     font-family: var(--menu-font);
     font-weight: bold;
@@ -128,16 +130,15 @@ footer #date,
 footer #contact,
 footer #copyright
 {
-    /* position: relative; */
-
     padding: 3px;
 
     padding-right: 60px;
     padding-left: 60px;
 
+	color: var(--header-font-color);
+
     font-family: var(--menu-font);
     font-weight: bold;
-    color: var(--header-font-color);
 
     white-space: nowrap;
 
@@ -145,6 +146,7 @@ footer #copyright
     line-height: var(--line-height-10);
 }
 
+footer #date,
 footer #copyright > p
 {
     font-size: var(--font-size-8);
@@ -155,18 +157,19 @@ footer #copyright > p
 
 footer #contact
 {
-    #padding-top: calc( (var(--footer-height) - var(--line-height-10) * 2 - var(--line-height-8) * 2 - 3px * 3) / 3 * 2);
+    padding-top: calc( (var(--footer-height) - var(--line-height-10) - var(--line-height-8) * 3 - 5px * 3) / 3 * 2);
 }
 
 @media (min-width: 800px)
 {
-    footer #date,
+    
     footer #contact
     {
         font-size: var(--font-size-14);
         line-height: var(--line-height-14);
     }
 
+	footer #date,
     footer #copyright > p
     {
         font-size: var(--font-size-10);
@@ -175,19 +178,19 @@ footer #contact
 
     footer #contact
     {
-        padding-top: calc( (var(--footer-height) - var(--line-height-14) * 2 - var(--line-height-10) * 2 - 3px * 3) / 3 * 2);
+        padding-top: calc( (var(--footer-height) - var(--line-height-14) - var(--line-height-10) * 3 - 5px * 3) / 3 * 2);
     }
 }
 
 @media (min-width: 1500px)
 {
-    footer #date,
     footer #contact
     {
         font-size: var(--font-size-16);
         line-height: var(--line-height-16);
     }
 
+	footer #date,
     footer #copyright > p
     {
         font-size: var(--font-size-12);
@@ -196,6 +199,6 @@ footer #contact
 
     footer #contact
     {
-        padding-top: calc( (var(--footer-height) - var(--line-height-16) * 2 - var(--line-height-12) * 2 - 3px * 3) / 3 * 2);
+        padding-top: calc( (var(--footer-height) - var(--line-height-16) - var(--line-height-12) * 3 - 5px * 3) / 3 * 2);
     }
 }
