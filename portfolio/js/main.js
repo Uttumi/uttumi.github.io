@@ -21,8 +21,6 @@
 				console.log('DOM DOCUMENT LOADED');
 
 				$.background = new $.ParalaxBackground();
-
-				$.fillModificationDate();
 			}
 		);
 
@@ -49,22 +47,7 @@
 			}
 		);
 	};
-
-	$.fillModificationDate = function()
-	{
-		let modificationDate = new Date(document.lastModified);
-		let timeElement = document.querySelector('#date');
-
-		let date = modificationDate.getDate();
-		let month = modificationDate.getMonth() + 1;
-		let year = modificationDate.getFullYear();
-
-		let timeString = 'Last modified '+ date +'.'+ month +'.'+ year;
-
-		// timeElement.innerHTML = timeString;
-		timeElement.textContent = timeString;
-	};
-
+	
 	$.addToNavList = function(originalAnchor, articleSelector, lastModified, element)
 	{
 		console.log('##################');

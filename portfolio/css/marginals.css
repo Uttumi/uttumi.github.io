@@ -153,9 +153,9 @@ footer #copyright > p
     padding: 0px;
 }
 
-footer #date
+footer #contact
 {
-    padding-top: calc( (var(--footer-height) - var(--line-height-10) * 2 - var(--line-height-8) * 2 - 3px * 3) / 3 * 2);
+    #padding-top: calc( (var(--footer-height) - var(--line-height-10) * 2 - var(--line-height-8) * 2 - 3px * 3) / 3 * 2);
 }
 
 @media (min-width: 800px)
@@ -173,7 +173,7 @@ footer #date
         line-height: var(--line-height-10);
     }
 
-    footer #date
+    footer #contact
     {
         padding-top: calc( (var(--footer-height) - var(--line-height-14) * 2 - var(--line-height-10) * 2 - 3px * 3) / 3 * 2);
     }
@@ -194,7 +194,7 @@ footer #date
         line-height: var(--line-height-12);
     }
 
-    footer #date
+    footer #contact
     {
         padding-top: calc( (var(--footer-height) - var(--line-height-16) * 2 - var(--line-height-12) * 2 - 3px * 3) / 3 * 2);
     }

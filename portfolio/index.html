@@ -61,19 +61,29 @@
 			<chapter id='content-area'></chapter>
 
 			<footer>
-				<time id='date'>
-					Filled automatically
-				</time>
 				<p id='contact'>
-					Contact information: <a href="uttumi@gmail.com">uttumi@gmail.com</a>
+					<a href="mailto:uttumi@gmail.com">uttumi@gmail.com</a>
 				</p>
+				<time id='date'>
+					Last modified 
+					<script language="javascript" type="text/javascript">
+						const modificationDate = new Date(document.lastModified);
+
+						const date = modificationDate.getDate();
+						const month = modificationDate.getMonth() + 1;
+						const year = modificationDate.getFullYear();
+
+						const timeString = 'Last modified '+ date +'.'+ month +'.'+ year;
+
+						document.write(date +'.'+ month +'.'+ year);
+					</script>
+				</time>
 				<div id='copyright'>
 					<p>
 						Copyright &copy;
 						<script language="javascript" type="text/javascript">
 							const today = new Date();
-					 		const year = today.getFullYear();
-							document.write(year);
+							document.write(today.getFullYear());
 						</script>
 						Jouni Sarvanko.
 					</p>
@@ -84,7 +94,7 @@
 			</footer>
 		</div>
 
-		<div class="background" id="bg-layer-0" data-type="background" data-speed="1">
+		<div class="background" id="bg-layer-0" data-type="background" data-speed="0.3">
 			<img/>
 		</div>
 

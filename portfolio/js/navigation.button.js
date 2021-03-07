@@ -2,14 +2,24 @@
 
 (function($)
 {
-    $.NavigationButton = function(parentElement, groupId, title, level, hidable = true, checked = false)
+    $.NavigationButton = function(parentElement, groupId, buttonId, title, level, {navigable = false, hidable = true, checked = false} = {})
 	{
-        this.checked = checked;
+		this.navigable = navigable;
         this.hidable = hidable;
+		this.checked = checked;
 
         this.parent = parentElement;
 
         this.group = $.NavigationButton.groups[groupId];
+
+		this.anchor = buttonId.toLowerCase().replace(' ', '_');
+		
+		if(title == null)
+		{
+			title = buttonId.replace(/_/g, ' ');
+		}		
+		
+		this.title = title;
 
         if(!this.group)
         {
@@ -18,11 +28,11 @@
 
         this.group.push(this);
 
-        const inputId = title +'_input';
+        const inputId = buttonId +'_input';
 
         this.label = document.createElement('LABEL');
         this.input = document.createElement('INPUT');
-        this.labelText = document.createTextNode(title.replace(/_/g, ' '));
+        this.labelText = document.createTextNode(this.title);
 
         this.label.setAttribute('for', inputId);
         this.label.appendChild(this.labelText);
@@ -43,6 +53,12 @@
         this.resetGroup();
         this.setState(myState);
         this.checkHide(myState);
+		
+		if(this.navigable)
+		{
+			console.debug('Clicked: '+ this.title);
+			location.href = '#!'+ this.anchor;
+		}
     };
 
     $.NavigationButton.prototype.setState = function(state)

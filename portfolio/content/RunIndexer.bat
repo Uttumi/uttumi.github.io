@@ -1,2 +1,2 @@
 @echo off
-python indexer.py
+python3 indexer.py

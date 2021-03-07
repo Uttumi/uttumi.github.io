@@ -65,18 +65,32 @@
     order: 1000;
 }
 
-#content-area > article > p
+#content-area > article > p,
+#content-area > article > a
 {
     font-size: var(--font-size-20);
     line-height: var(--line-height-20);
 
     text-align: justify;
     text-decoration: none;
+	#word-spacing: 0.1em;
 
     padding-top:    0px;
     padding-bottom: 20px;
     padding-left:   20px;
     padding-right:  20px;
+}
+
+#content-area > article > a,
+#content-area > article > p > a
+{
+    color: var(--content-link-color);
+}
+
+#content-area > article > a:hover,
+#content-area > article > p > a:hover
+{
+    color: white;
 }
 
 .signature
@@ -136,8 +150,10 @@
     height: 50px;
     width: 100px;
 
-    background-color: white;
+    background-color: var(--menu-selected-color);
 
+	color: var(--menu-icon-line-color);
+	font-size: var(--font-size-20);
     text-align: center;
     line-height: 50px;
 
@@ -149,7 +165,10 @@
 
 .play-button:hover
 {
-    background-color: var(--menu-selected-color);
+	color: white;
+	font-size: var(--font-size-24);
+	border: 2px solid white;
+    background-color: var(--menu-icon-line-color);
 }
 
 input:not(:checked) + .play-button

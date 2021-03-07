@@ -15,10 +15,7 @@
 
 		if(anchor === '')
 		{
-			location.href = '#welcome';
-
-			// let homeInput = document.querySelector('#home_input');
-			// homeInput.checked = true;
+			location.href = '#!welcome';
 		}
 
 		$.navigationClick(anchor);
@@ -35,25 +32,19 @@
 
 				console.log('NAVIGATION CREATED');
 
-			    // The hashchange event is only triggered when the hash changes
-				//  we need to trigger
-			    // the event now, to handle the hash with which the page may have loaded.
+				// Check the initial hash
 				$.checkHash();
-				// let event = new Event('hashchange');
-				// window.dispatchEvent(event);
 			}
 		);
 	};
 
-	$.createNavigationLevel = function(parent, parentTitle, value, level)
+	$.createNavigationLevel = function(parent, parentId, value, level)
 	{
 		let sublevels = $.utility.getNestedObjects(value);
 
 		switch(level)
 		{
 			case 1:
-				// Start level. Container
-
 				if(sublevels.length > 0)
 				{
 					const navList = document.createElement('UL');
@@ -64,18 +55,23 @@
 
 					for(let sublevel of sublevels)
 					{
-						const title = sublevel.key;
+						const id = sublevel.key;
 						const data = sublevel.value;
+						const title = data.title;
 
-						const navCategory = $.createNavigationElement(navList, parentTitle, title, level);
+						//const navCategory = $.createNavigationElement(navList, parentId, id, title, level);
+
+						const listItem = document.createElement('LI');
+						const navigationButton = new $.NavigationButton(listItem, parentId, id, title, level, {navigable: false, hidable: true});
+						navList.appendChild(listItem);
 
 						if(first)
 						{
-							navCategory.setAttribute('id', 'first_nav_element');
+							listItem.setAttribute('id', 'first_nav_element');
 							first = false;
 						}
 
-						$.createNavigationLevel(navCategory, sublevel.key, sublevel.value, level + 1);
+						$.createNavigationLevel(listItem, sublevel.key, sublevel.value, level + 1);
 					}
 
 					let lastNavElement = document.createElement('LI');
@@ -87,8 +83,6 @@
 				break;
 
 			case 2:
-				// Category level
-
 				if(sublevels.length > 0)
 				{
 					const div = document.createElement('DIV');
@@ -103,44 +97,31 @@
 
 					for(let sublevel of sublevels)
 					{
-						const title = sublevel.key;
+						const id = sublevel.key;
 						const data = sublevel.value;
+						const title = data.title;
 
-						const navListItem = $.createNavigationElement(navList, parentTitle, title, level, false);
+						const listItem = document.createElement('LI');
+						const navigationButton = new $.NavigationButton(listItem, parentId, id, title, level, {navigable: true, hidable: false});
+						navList.appendChild(listItem);
 
-						$.createNavigationLevel(navListItem, title, data, level + 1);
+						$.createNavigationItem(navigationButton.anchor, title, data);
 					}
 				}
 
 				break;
-
-			case 3:
-				// Button level
-				$.createNavigationButton(parent, parentTitle, value);
-				break;
 		}
 	};
 
-	$.createNavigationElement = function(parentList, groupId, title, level, hidable = true)
-	{
-		const listItem = document.createElement('LI');
-
-		const navigationButton = new $.NavigationButton(listItem, groupId, title, level, hidable);
-
-		parentList.appendChild(listItem);
-
-		return listItem;
-	};
-
-	$.createNavigationButton = function(parent, title, value)
+	$.createNavigationItem = function(anchor, title, data)
 	{
 		let content =
 		{
-			description : $.utility.getArrayByKey(value, 'description'),
-			pages 		: $.utility.getArrayByKey(value, 'pages'),
-			images 		: $.utility.getArrayByKey(value, 'images'),
-			videos 		: $.utility.getArrayByKey(value, 'videos'),
-			subpages 	: $.utility.getArrayByKey(value, 'subpages')
+			description : $.utility.getArrayByKey(data, 'description'),
+			pages 		: $.utility.getArrayByKey(data, 'pages'),
+			images 		: $.utility.getArrayByKey(data, 'images'),
+			videos 		: $.utility.getArrayByKey(data, 'videos'),
+			subpages 	: $.utility.getArrayByKey(data, 'subpages')
 		};
 
 		if(!content.description) content.description = [];
@@ -149,24 +130,10 @@
 		if(!content.videos) content.videos = [];
 		if(!content.subpages) content.subpages = [];
 
-		let anchor = title.toLowerCase();
-
 		if($.navigationMap.hasOwnProperty(anchor))
-			console.error('Navigation menu has multiple items with identical anchor: '+ anchor);
+			console.error('Navigation menu has multiple items with identical anchors: '+ anchor);
 		else
 			$.navigationMap[anchor] = {title: title, content: content};
-
-		let input = parent.querySelector('input');
-
-		$.utility.addEvent(
-			input,
-			'click',
-			function()
-			{
-				console.debug('Clicked: '+ title);
-				location.href = '#!'+ anchor;
-			},
-			true);
 	};
 
 	$.navigationClick = function(anchor)
@@ -198,8 +165,6 @@
 			$.menuIconButton.checked = false;
 
 			$.loadNewContent($.currentAnchor, title, content);
-
-			// window.scrollTop = 0;
 		}
 	};
 

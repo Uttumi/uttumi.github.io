@@ -1,15 +1,3 @@
-/* @keyframes menu-icon-show
-{
-    0%      { opacity: 0 }
-    100%    { opacity: 1 }
-}
-
-@keyframes menu-icon-hide
-{
-    0%      { opacity: 0 }
-    100%    { opacity: 1 }
-} */
-
 /*****************
 * HAMBURGER ICON *
 *****************/
@@ -60,44 +48,76 @@
 
 /***********************
 * HAMBURGER ICON LINES *
-************************/
+***********************/
 
 #menu-icon span
 {
     display: block;
+	position: absolute;
 
-    width: 80%;
+	left: 4px; 
+	right: 4px; 
+
+    width: 32px;
     height: 4px;
 
     border-radius: 2px;
-    margin-top: 7px;
-
-    margin-left: 10%;
-    margin-right: 10%;
+    
+	#margin-top: 0px;
+	margin-left: auto;
+	margin-right: auto;
 
     background-color: var(--menu-icon-line-color);
 
-    transition: all 0.2s linear;
+    transition: 
+		background-color 0.2s ease 1s,
+		width 0.2s 0.2s,
+		height 0.2s 0s,
+		margin-top 0.2s 0s;
 }
 
 #menu-icon:hover span
 {
-    width: 10%;
-
-    margin-left: 45%;
-    margin-right: 45%;
-
+	margin-top: 4px !important;
+	
+	width: 4px;
+	height: 32px;
+	
     background-color: var(--menu-icon-line-selected-color);
+	
+    transition: 
+		background-color 1s ease 0s,
+		width 0.2s 0s,
+		height 0.2s 0.2s,
+		margin-top 0.2s 0.2s;
 }
 
-@media (min-width: 800px)
+#menu-icon span:nth-child(1)
 {
-    #menu-icon span
-    {
-        height: 4px;
-        border-radius: 2px;
-        margin-top: 7px;
-    }
+	margin-top: 4px;
+	
+	margin-left: 0px;
+}
+
+#menu-icon span:nth-child(2)
+{
+	margin-top: calc(4px + 4px + 8px);
+}
+
+#menu-icon span:nth-child(3)
+{
+	margin-top: calc(4px + 4px + 8px + 4px + 8px);
+	
+	margin-right: 0px;
+}
+
+#menu-icon:hover span:nth-child(2)
+{
+	#margin-top: 7px;
+	#height: 24px;
+    #transform: rotate(-45deg);
+	#transform-origin: left;
+
 }
 
 /******************
@@ -210,21 +230,13 @@ label:not(#menu-icon) + input:not(:checked) + .nav-wrap ul > li,
 
 #menu-icon-button:checked ~ #navigation-menu > #level_1 > li:hover
 {
-    background-image: linear-gradient(90deg, var(--menu-bg-color) 120px, var(--menu-icon-line-selected-color));
+    #background-image: linear-gradient(90deg, var(--menu-bg-color) 120px, var(--menu-icon-line-selected-color));
 }
 
 #menu-icon-button:not(:checked) ~ #navigation-menu #level_1 > li:hover,
 #menu-icon-button:not(:checked) ~ #navigation-menu #level_2 > li:hover
 {
     background-image: none
-}
-
-@media (min-width: 1500px)
-{
-    #level_1 > li:hover
-    {
-        background-image: linear-gradient(90deg, var(--menu-bg-color) 120px, var(--menu-icon-line-selected-color)) !important;
-    }
 }
 
 #level_1 > li > label
@@ -266,11 +278,22 @@ label:not(#menu-icon) + input:not(:checked) + .nav-wrap ul > li,
         height var(--menu-close-duration) linear var(--label-transition-duration);
 }
 
+#level_1 > li:hover > label
+{
+	# Use this when hovering on top of the subelements or the title
+	#background-image: linear-gradient(90deg, var(--menu-bg-color) 120px, var(--menu-icon-line-selected-color)) !important;
+}
+
+#level_1 > li > label:hover
+{
+	font-size: var(--font-size-28);
+	background-image: linear-gradient(90deg, var(--menu-bg-color) 120px, var(--menu-icon-line-selected-color)) !important;
+}
+
 @media (min-width: 800px)
 {
     #level_1 > li > label
     {
-        font-size: var(--font-size-24);
         line-height: 75px;
     }
 
@@ -291,6 +314,11 @@ label:not(#menu-icon) + input:not(:checked) + .nav-wrap ul > li,
         font-size: var(--font-size-28);
         line-height: 100px;
     }
+	
+	#level_1 > li > label:hover
+	{
+		font-size: var(--font-size-32);
+	}	
 }
 
 /*******************
@@ -360,6 +388,13 @@ label:not(#menu-icon) + input:not(:checked) + .nav-wrap ul > li,
         height var(--menu-close-duration) linear;
 }
 
+#level_2 > li:hover > label,
+#level_3 > li:hover > label
+{
+	color: white;
+	font-size: var(--font-size-22);
+}
+
 @media (min-width: 800px)
 {
     #level_2 > li > label,
@@ -384,11 +419,13 @@ label:not(#menu-icon) + input:not(:checked) + .nav-wrap ul > li,
         font-size: var(--font-size-24);
         line-height: 50px;
     }
+	
+	#level_2 > li:hover > label,
+	#level_3 > li:hover > label
+	{
+		color: white;
+		font-size: var(--font-size-26);
+	}
 }
 
-#level_2 > li:hover > label,
-#level_3 > li:hover > label
-{
-    color: white;
-    padding: 0px 0px 0px 40px;
-}
+

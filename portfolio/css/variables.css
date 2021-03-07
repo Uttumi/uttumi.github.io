@@ -6,6 +6,8 @@
     *********/
 
     --header-font-color: rgb(139, 170, 172);
+	
+	--footer-link-color: rgb(160, 220, 190);
 
     --menu-bg-color: rgb(0, 5, 15);
     --menu-selected-color: rgb(68, 85, 102);
@@ -13,6 +15,7 @@
     --menu-icon-line-selected-color: rgb(194, 237, 234);
 
     --content-font-color: rgb(10, 58, 60);
+	--content-link-color: rgb(128, 176, 152);
 
     --menu-border-color: rgb(0, 0, 5);
 
@@ -54,8 +57,14 @@
     --font-size-20: calc(20rem / var(--base-font-size));
     --line-height-20: calc(var(--font-size-20) * 1.2);
 
+    --font-size-22: calc(22rem / var(--base-font-size));
+    --line-height-22: calc(var(--font-size-22) * 1.2);
+
     --font-size-24: calc(24rem / var(--base-font-size));
     --line-height-24: calc(var(--font-size-24) * 1.2);
+
+    --font-size-26: calc(26rem / var(--base-font-size));
+    --line-height-26: calc(var(--font-size-26) * 1.2);
 
     --font-size-28: calc(28rem / var(--base-font-size));
     --line-height-28: calc(var(--font-size-28) * 1.2);
