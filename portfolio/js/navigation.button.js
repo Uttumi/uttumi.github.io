@@ -2,11 +2,12 @@
 
 (function($)
 {
-    $.NavigationButton = function(parentElement, groupId, buttonId, title, level, {navigable = false, hidable = true, checked = false} = {})
+    $.NavigationButton = function(parentElement, groupId, buttonId, title, level, {navigable = false, hidable = true, checked = false, folded = false} = {})
 	{
 		this.navigable = navigable;
         this.hidable = hidable;
 		this.checked = checked;
+		this.folded = folded;
 
         this.parent = parentElement;
 
@@ -77,17 +78,20 @@
 
     $.NavigationButton.prototype.checkHide = function()
     {
-        for(let button of this.group)
-        {
-            if(this.checked)
-            {
-                if(!button.checked) button.hide();
-            }
-            else
-            {
-                button.unhide();
-            }
-        }
+		if(this.folded) 
+		{
+			for(let button of this.group)
+			{
+				if(this.checked)
+				{
+					if(!button.checked) button.hide();
+				}
+				else
+				{
+					button.unhide();
+				}
+			}
+		}
     };
 
     $.NavigationButton.prototype.hide = function()

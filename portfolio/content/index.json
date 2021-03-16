@@ -1,6 +1,21 @@
 {
     "subpages": [
         {
+            "1_home": {
+                "welcome": {
+                    "description": [
+                        "-1_home/1_welcome/description.html"
+                    ]
+                },
+                "about": {
+                    "title": "About",
+                    "description": [
+                        "-1_home/2_about/description.html"
+                    ]
+                }
+            }
+        },
+        {
             "6_flash": {
                 "snow_war": {
                     "pages": [
@@ -13,18 +28,16 @@
             }
         }
     ],
-    "home": {
-        "welcome": {
-            "description": [
-                "1_home/1_welcome/description.html"
-            ]
-        },
-        "about": {
-            "title": "About",
-            "description": [
-                "1_home/2_about/description.html"
-            ]
-        }
+    "welcome": {
+        "description": [
+            "0_welcome/description.html"
+        ]
+    },
+    "about": {
+        "title": "About",
+        "description": [
+            "1_about/description.html"
+        ]
     },
     "web_page": {
         "design": {
@@ -43,69 +56,35 @@
             ]
         }
     },
-    "unity": {
-        "2D_light_prototype": {
-            "pages": [
-                "3_unity/1_2D_light_prototype/index.html"
-            ],
-            "description": [
-                "3_unity/1_2D_light_prototype/description.html"
-            ]
-        },
-        "breakout": {
-            "pages": [
-                "3_unity/2_breakout/index.html"
-            ],
-            "description": [
-                "3_unity/2_breakout/description.html"
-            ]
-        },
-        "gravity_field_prototype": {
-            "pages": [
-                "3_unity/3_gravity_field_prototype/index.html"
-            ],
-            "description": [
-                "3_unity/3_gravity_field_prototype/description.html"
-            ]
-        },
-        "space_combat": {
-            "pages": [
-                "3_unity/4_space_combat/index.html"
-            ],
-            "description": [
-                "3_unity/4_space_combat/description.html"
-            ]
-        }
-    },
     "blender": {
         "house_model": {
             "description": [
-                "4_blender/1_house_model/description.html"
+                "3_blender/1_house_model/description.html"
             ],
             "subpages": [
                 {
                     "furniture": {
                         "images": [
-                            "4_blender/1_house_model/-furniture/arm_chair.png",
-                            "4_blender/1_house_model/-furniture/desk.png",
-                            "4_blender/1_house_model/-furniture/kitchen_table.png",
-                            "4_blender/1_house_model/-furniture/sofa.png"
+                            "3_blender/1_house_model/-furniture/arm_chair.png",
+                            "3_blender/1_house_model/-furniture/desk.png",
+                            "3_blender/1_house_model/-furniture/kitchen_table.png",
+                            "3_blender/1_house_model/-furniture/sofa.png"
                         ]
                     }
                 },
                 {
                     "house": {
                         "images": [
-                            "4_blender/1_house_model/-house/perspective_view.png",
-                            "4_blender/1_house_model/-house/top_view.png"
+                            "3_blender/1_house_model/-house/perspective_view.png",
+                            "3_blender/1_house_model/-house/top_view.png"
                         ]
                     }
                 },
                 {
                     "render": {
                         "images": [
-                            "4_blender/1_house_model/-render/bedroom.png",
-                            "4_blender/1_house_model/-render/kitchen_table_in_room.png"
+                            "3_blender/1_house_model/-render/bedroom.png",
+                            "3_blender/1_house_model/-render/kitchen_table_in_room.png"
                         ]
                     }
                 }
@@ -113,17 +92,51 @@
         },
         "ram": {
             "images": [
-                "4_blender/2_ram/wireframe.png",
-                "4_blender/2_ram/wireframe_angle.png"
+                "3_blender/2_ram/wireframe.png",
+                "3_blender/2_ram/wireframe_angle.png"
             ]
         },
         "starship_enterprise_animation": {
             "title": "Enterprise Animation",
             "videos": [
-                "4_blender/3_starship_enterprise_animation/starship-enterprise-animation-x264.mp4"
+                "3_blender/3_starship_enterprise_animation/starship-enterprise-animation-x264.mp4"
             ],
             "description": [
-                "4_blender/3_starship_enterprise_animation/description.html"
+                "3_blender/3_starship_enterprise_animation/description.html"
+            ]
+        }
+    },
+    "unity": {
+        "2D_light_prototype": {
+            "pages": [
+                "4_unity/1_2D_light_prototype/index.html"
+            ],
+            "description": [
+                "4_unity/1_2D_light_prototype/description.html"
+            ]
+        },
+        "breakout": {
+            "pages": [
+                "4_unity/2_breakout/index.html"
+            ],
+            "description": [
+                "4_unity/2_breakout/description.html"
+            ]
+        },
+        "gravity_field_prototype": {
+            "pages": [
+                "4_unity/3_gravity_field_prototype/index.html"
+            ],
+            "description": [
+                "4_unity/3_gravity_field_prototype/description.html"
+            ]
+        },
+        "space_combat": {
+            "pages": [
+                "4_unity/4_space_combat/index.html"
+            ],
+            "description": [
+                "4_unity/4_space_combat/description.html"
             ]
         }
     },

@@ -52,6 +52,7 @@
 					parent.appendChild(navList);
 
 					let first = true;
+					let second = false;
 
 					for(let sublevel of sublevels)
 					{
@@ -59,13 +60,34 @@
 						const data = sublevel.value;
 						const title = data.title;
 
-						//const navCategory = $.createNavigationElement(navList, parentId, id, title, level);
-
-						const listItem = document.createElement('LI');
-						const navigationButton = new $.NavigationButton(listItem, parentId, id, title, level, {navigable: false, hidable: true});
-						navList.appendChild(listItem);
+						const content = $.getContent(data);
+						const hasContent = $.hasContent(content);
 
 						if(first)
+						{
+							first = false;
+							second = true;
+							
+							$.createNavigationItem('welcome', title, content);
+							
+							continue;
+						}
+
+						const listItem = document.createElement('LI');
+						
+						if(hasContent)
+						{
+							const navigationButton = new $.NavigationButton(listItem, parentId, id, title, level, {navigable: true, hidable: true, folded: false});
+							$.createNavigationItem(navigationButton.anchor, title, content);	
+						}
+						else
+						{
+							const navigationButton = new $.NavigationButton(listItem, parentId, id, title, level, {navigable: false, hidable: true, folded: true});
+						}
+
+						navList.appendChild(listItem);
+
+						if(second)
 						{
 							listItem.setAttribute('id', 'first_nav_element');
 							first = false;
@@ -101,11 +123,14 @@
 						const data = sublevel.value;
 						const title = data.title;
 
+						const content = $.getContent(data);
+						const hasContent = $.hasContent(content);
+
 						const listItem = document.createElement('LI');
-						const navigationButton = new $.NavigationButton(listItem, parentId, id, title, level, {navigable: true, hidable: false});
+						const navigationButton = new $.NavigationButton(listItem, parentId, id, title, level, {navigable: true, hidable: false, folded: false});
 						navList.appendChild(listItem);
 
-						$.createNavigationItem(navigationButton.anchor, title, data);
+						$.createNavigationItem(navigationButton.anchor, title, content);
 					}
 				}
 
@@ -113,9 +138,9 @@
 		}
 	};
 
-	$.createNavigationItem = function(anchor, title, data)
+	$.getContent = function(data)
 	{
-		let content =
+		const content =
 		{
 			description : $.utility.getArrayByKey(data, 'description'),
 			pages 		: $.utility.getArrayByKey(data, 'pages'),
@@ -130,6 +155,23 @@
 		if(!content.videos) content.videos = [];
 		if(!content.subpages) content.subpages = [];
 
+		return content;
+	};
+
+	$.hasContent = function(content)
+	{
+		const hasContent = 
+			content.description.length 		> 0 || 
+			content.description.pages 		> 0 || 
+			content.description.images 		> 0 || 
+			content.description.videos 		> 0 || 
+			content.description.subpages 	> 0;		
+		
+		return hasContent;
+	};
+
+	$.createNavigationItem = function(anchor, title, content)
+	{
 		if($.navigationMap.hasOwnProperty(anchor))
 			console.error('Navigation menu has multiple items with identical anchors: '+ anchor);
 		else
