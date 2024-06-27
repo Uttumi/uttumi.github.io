@@ -4,31 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Character Sheet</title>
+	<script src="https://apis.google.com/js/api.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Courier New', monospace;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            background-color: #f0f0f0;
         }
-        h1, h2 {
+        h1 {
             text-align: center;
+            text-transform: uppercase;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+        h2 {
+            text-transform: uppercase;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
         }
         .section {
             margin-bottom: 20px;
+            background-color: #fff;
+            padding: 15px;
+            border: 1px solid #000;
         }
         label {
             display: inline-block;
             width: 150px;
             margin-bottom: 5px;
+            font-weight: bold;
         }
         input[type="text"], input[type="number"] {
             width: 100px;
             padding: 5px;
+            border: 1px solid #000;
+            background-color: #f8f8f8;
         }
         textarea {
             width: 100%;
             height: 100px;
+            border: 1px solid #000;
+            background-color: #f8f8f8;
         }
         .attributes, .skills {
             display: grid;
@@ -37,18 +55,27 @@
         }
         .weapons, .gear, .talents {
             width: 100%;
+            border-collapse: collapse;
         }
         .weapons th, .weapons td, .gear th, .gear td, .talents th, .talents td {
             text-align: left;
             padding: 5px;
+            border: 1px solid #000;
         }
         button {
             margin-top: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #000;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e0e0e0;
         }
     </style>
 </head>
 <body>
-    <h1>Interactive Character Sheet</h1>
+    <h1>Character Sheet</h1>
 
     <div class="section">
         <h2>Basic Information</h2>
@@ -263,6 +290,54 @@
     </div>
 
     <script>
+		// Replace with your Google Drive API key
+        const API_KEY = 'AIzaSyAj85tNtqNMhdHnpa3k5b26t1bH7ifzPGc';
+
+        function initClient() {
+            gapi.client.init({
+                apiKey: API_KEY,
+                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
+            });
+        }
+
+        function fetchJSON() {
+            const fileId = document.getElementById('fileId').value;
+            gapi.client.drive.files.get({
+                fileId: fileId,
+                alt: 'media'
+            }).then(function(response) {
+                document.getElementById('jsonContent').value = JSON.stringify(response.result, null, 2);
+            }, function(error) {
+                console.error("Error fetching JSON:", error);
+            });
+        }
+
+        function updateJSON() {
+            const fileId = document.getElementById('fileId').value;
+            const content = document.getElementById('jsonContent').value;
+
+            const blob = new Blob([content], {type: 'application/json'});
+            const metadata = {
+                'mimeType': 'application/json',
+            };
+
+            const form = new FormData();
+            form.append('metadata', new Blob([JSON.stringify(metadata)], {type: 'application/json'}));
+            form.append('file', blob);
+
+            fetch(`https://www.googleapis.com/upload/drive/v3/files/${fileId}?uploadType=multipart`, {
+                method: 'PATCH',
+                headers: new Headers({'Authorization': 'Bearer ' + gapi.auth.getToken().access_token}),
+                body: form
+            }).then(response => {
+                console.log("File updated successfully");
+            }).catch(error => {
+                console.error("Error updating file:", error);
+            });
+        }
+
+        gapi.load('client', initClient);
+	
         function addWeapon() {
             const table = document.getElementById("weapons-table");
             const row = table.insertRow(-1);
@@ -510,6 +585,13 @@ function saveCharacter() {
     <div class="section">
         <button onclick="saveCharacter()">Save Character</button>
         <button onclick="loadCharacter()">Load Character</button>
-    </div>	
+    </div>
+	
+    <input type="text" id="fileId" placeholder="Enter Google Drive File ID">
+    <button onclick="fetchJSON()">Fetch JSON</button>
+    <br><br>
+    <textarea id="jsonContent" rows="10" cols="50"></textarea>
+    <br>
+    <button onclick="updateJSON()">Update JSON</button>	
 </body>
 </html>
