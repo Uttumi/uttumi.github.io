@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Character Sheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        label {
+            display: inline-block;
+            width: 150px;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100px;
+            padding: 5px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+        }
+        .attributes, .skills {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .weapons, .gear, .talents {
+            width: 100%;
+        }
+        .weapons th, .weapons td, .gear th, .gear td, .talents th, .talents td {
+            text-align: left;
+            padding: 5px;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Character Sheet</h1>
+
+    <div class="section">
+        <h2>Basic Information</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br>
+        <label for="background">Background:</label>
+        <input type="text" id="background" name="background"><br>
+        <label for="concept">Concept:</label>
+        <input type="text" id="concept" name="concept"><br>
+        <label for="icon">Icon:</label>
+        <input type="text" id="icon" name="icon"><br>
+        <label for="group-concept">Group Concept:</label>
+        <input type="text" id="group-concept" name="group-concept"><br>
+        <label for="reputation">Reputation:</label>
+        <input type="text" id="reputation" name="reputation"><br>
+        <label for="personal-problem">Personal Problem:</label>
+        <input type="text" id="personal-problem" name="personal-problem">
+    </div>
+
+    <div class="section">
+        <h2>Attributes</h2>
+        <div class="attributes">
+            <div>
+                <label for="strength">Strength:</label>
+                <input type="number" id="strength-original" name="strength-original" min="0" placeholder="Original">
+                <input type="number" id="strength-current" name="strength-current" min="0" placeholder="Current">
+            </div>
+            <div>
+                <label for="agility">Agility:</label>
+                <input type="number" id="agility-original" name="agility-original" min="0" placeholder="Original">
+                <input type="number" id="agility-current" name="agility-current" min="0" placeholder="Current">
+            </div>
+            <div>
+                <label for="wits">Wits:</label>
+                <input type="number" id="wits-original" name="wits-original" min="0" placeholder="Original">
+                <input type="number" id="wits-current" name="wits-current" min="0" placeholder="Current">
+            </div>
+            <div>
+                <label for="empathy">Empathy:</label>
+                <input type="number" id="empathy-original" name="empathy-original" min="0" placeholder="Original">
+                <input type="number" id="empathy-current" name="empathy-current" min="0" placeholder="Current">
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Appearance</h2>
+        <label for="face">Face:</label>
+        <input type="text" id="face" name="face"><br>
+        <label for="clothing">Clothing:</label>
+        <input type="text" id="clothing" name="clothing">
+    </div>
+
+    <div class="section">
+        <h2>Trauma</h2>
+        <label for="hit-points">Hit Points (Strength + Agility):</label>
+        <input type="number" id="hit-points" name="hit-points" min="0"><br>
+        <label for="mind-points">Mind Points (Wits + Empathy):</label>
+        <input type="number" id="mind-points" name="mind-points" min="0"><br>
+        <label for="critical-injuries">Critical Injuries:</label>
+        <textarea id="critical-injuries" name="critical-injuries"></textarea>
+    </div>
+
+    <div class="section">
+        <h2>Relationships</h2>
+        <label for="buddy">Buddy:</label>
+        <input type="text" id="buddy" name="buddy"><br>
+        <label for="pc1">PC 1:</label>
+        <input type="text" id="pc1" name="pc1"><br>
+        <label for="pc2">PC 2:</label>
+        <input type="text" id="pc2" name="pc2"><br>
+        <label for="pc3">PC 3:</label>
+        <input type="text" id="pc3" name="pc3"><br>
+        <label for="pc4">PC 4:</label>
+        <input type="text" id="pc4" name="pc4">
+    </div>
+
+    <div class="section">
+        <h2>Radiation</h2>
+        <input type="number" id="radiation" name="radiation" min="0">
+    </div>
+
+    <div class="section">
+        <h2>Experience</h2>
+        <input type="number" id="experience" name="experience" min="0">
+    </div>
+
+    <div class="section">
+        <h2>Skills</h2>
+        <div class="skills">
+            <div>
+                <h3>General Skills</h3>
+                <label for="dexterity">Dexterity (Agility):</label>
+                <input type="number" id="dexterity" name="dexterity" min="0"><br>
+                <label for="force">Force (Strength):</label>
+                <input type="number" id="force" name="force" min="0"><br>
+                <label for="infiltration">Infiltration (Agility):</label>
+                <input type="number" id="infiltration" name="infiltration" min="0"><br>
+                <label for="manipulation">Manipulation (Empathy):</label>
+                <input type="number" id="manipulation" name="manipulation" min="0"><br>
+                <label for="melee-combat">Melee Combat (Strength):</label>
+                <input type="number" id="melee-combat" name="melee-combat" min="0"><br>
+                <label for="observation">Observation (Wits):</label>
+                <input type="number" id="observation" name="observation" min="0"><br>
+                <label for="ranged-combat">Ranged Combat (Agility):</label>
+                <input type="number" id="ranged-combat" name="ranged-combat" min="0"><br>
+                <label for="survival">Survival (Wits):</label>
+                <input type="number" id="survival" name="survival" min="0">
+            </div>
+            <div>
+                <h3>Advanced Skills</h3>
+                <label for="command">Command (Empathy):</label>
+                <input type="number" id="command" name="command" min="0"><br>
+                <label for="culture">Culture (Empathy):</label>
+                <input type="number" id="culture" name="culture" min="0"><br>
+                <label for="data-djinn">Data Djinn (Wits):</label>
+                <input type="number" id="data-djinn" name="data-djinn" min="0"><br>
+                <label for="medicurgy">Medicurgy (Wits):</label>
+                <input type="number" id="medicurgy" name="medicurgy" min="0"><br>
+                <label for="mystic-powers">Mystic Powers (Empathy):</label>
+                <input type="number" id="mystic-powers" name="mystic-powers" min="0"><br>
+                <label for="pilot">Pilot (Agility):</label>
+                <input type="number" id="pilot" name="pilot" min="0"><br>
+                <label for="science">Science (Wits):</label>
+                <input type="number" id="science" name="science" min="0"><br>
+                <label for="technology">Technology (Wits):</label>
+                <input type="number" id="technology" name="technology" min="0">
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Talents</h2>
+        <table class="talents" id="talents-table">
+            <tr>
+                <th>Talent</th>
+                <th>Description</th>
+            </tr>
+        </table>
+        <button onclick="addTalent()">Add Talent</button>
+    </div>
+
+    <div class="section">
+        <h2>Weapons</h2>
+        <table class="weapons" id="weapons-table">
+            <tr>
+                <th>Name</th>
+                <th>Bonus</th>
+                <th>Init</th>
+                <th>Damage</th>
+                <th>Crit</th>
+                <th>Range</th>
+                <th>Comments</th>
+                <th>Reloads</th>
+            </tr>
+        </table>
+        <button onclick="addWeapon()">Add Weapon</button>
+    </div>
+
+    <div class="section">
+        <h2>Gear</h2>
+        <table class="gear" id="gear-table">
+            <tr>
+                <th>Item</th>
+                <th>Bonus</th>
+            </tr>
+        </table>
+        <button onclick="addGear()">Add Gear</button>
+    </div>
+
+    <div class="section">
+        <h2>Armor</h2>
+        <label for="armor-rating">Rating:</label>
+        <input type="number" id="armor-rating" name="armor-rating" min="0"><br>
+        <label for="armor-comment">Comment:</label>
+        <input type="text" id="armor-comment" name="armor-comment">
+    </div>
+
+    <div class="section">
+        <h2>Notes</h2>
+        <textarea id="notes" name="notes"></textarea>
+    </div>
+
+    <div class="section">
+        <h2>People I've Met</h2>
+        <textarea id="people-met" name="people-met"></textarea>
+    </div>
+
+    <div class="section">
+        <h2>Concept Notes</h2>
+        <textarea id="concept-notes" name="concept-notes"></textarea>
+    </div>
+
+    <div class="section">
+        <h2>My Cabin</h2>
+        <label for="cabin-description">Description:</label>
+        <textarea id="cabin-description" name="cabin-description"></textarea><br>
+        <label for="cabin-gear">Gear:</label>
+        <textarea id="cabin-gear" name="cabin-gear"></textarea><br>
+        <label for="cabin-other">Other:</label>
+        <textarea id="cabin-other" name="cabin-other"></textarea>
+    </div>
+
+    <div class="section">
+        <h2>Tiny Items</h2>
+        <textarea id="tiny-items" name="tiny-items"></textarea>
+    </div>
+
+    <div class="section">
+        <h2>Birr</h2>
+        <input type="number" id="birr" name="birr" min="0">
+    </div>
+
+    <script>
+        function addWeapon() {
+            const table = document.getElementById("weapons-table");
+            const row = table.insertRow(-1);
+            for (let i = 0; i < 8; i++) {
+                const cell = row.insertCell(i);
+                cell.innerHTML = '<input type="text">';
+            }
+        }
+
+        function addGear() {
+            const table = document.getElementById("gear-table");
+            const row = table.insertRow(-1);
+            for (let i = 0; i < 2; i++) {
+                const cell = row.insertCell(i);
+                cell.innerHTML = '<input type="text">';
+            }
+        }
+
+        function addTalent() {
+            const table = document.getElementById("talents-table");
+            const row = table.insertRow(-1);
+            for (let i = 0; i < 2; i++) {
+                const cell = row.insertCell(i);
+                cell.innerHTML = '<input type="text">';
+            }
+        }
+function saveCharacter() {
+            const character = {
+                basicInfo: {
+                    name: document.getElementById('name').value,
+                    background: document.getElementById('background').value,
+                    concept: document.getElementById('concept').value,
+                    icon: document.getElementById('icon').value,
+                    groupConcept: document.getElementById('group-concept').value,
+                    reputation: document.getElementById('reputation').value,
+                    personalProblem: document.getElementById('personal-problem').value
+                },
+                attributes: {
+                    strength: {
+                        original: parseInt(document.getElementById('strength-original').value) || 0,
+                        current: parseInt(document.getElementById('strength-current').value) || 0
+                    },
+                    agility: {
+                        original: parseInt(document.getElementById('agility-original').value) || 0,
+                        current: parseInt(document.getElementById('agility-current').value) || 0
+                    },
+                    wits: {
+                        original: parseInt(document.getElementById('wits-original').value) || 0,
+                        current: parseInt(document.getElementById('wits-current').value) || 0
+                    },
+                    empathy: {
+                        original: parseInt(document.getElementById('empathy-original').value) || 0,
+                        current: parseInt(document.getElementById('empathy-current').value) || 0
+                    }
+                },
+                appearance: {
+                    face: document.getElementById('face').value,
+                    clothing: document.getElementById('clothing').value
+                },
+                trauma: {
+                    hitPoints: parseInt(document.getElementById('hit-points').value) || 0,
+                    mindPoints: parseInt(document.getElementById('mind-points').value) || 0,
+                    criticalInjuries: document.getElementById('critical-injuries').value
+                },
+                relationships: {
+                    buddy: document.getElementById('buddy').value,
+                    pc1: document.getElementById('pc1').value,
+                    pc2: document.getElementById('pc2').value,
+                    pc3: document.getElementById('pc3').value,
+                    pc4: document.getElementById('pc4').value
+                },
+                radiation: parseInt(document.getElementById('radiation').value) || 0,
+                experience: parseInt(document.getElementById('experience').value) || 0,
+                skills: {
+                    general: {
+                        dexterity: parseInt(document.getElementById('dexterity').value) || 0,
+                        force: parseInt(document.getElementById('force').value) || 0,
+                        infiltration: parseInt(document.getElementById('infiltration').value) || 0,
+                        manipulation: parseInt(document.getElementById('manipulation').value) || 0,
+                        meleeCombat: parseInt(document.getElementById('melee-combat').value) || 0,
+                        observation: parseInt(document.getElementById('observation').value) || 0,
+                        rangedCombat: parseInt(document.getElementById('ranged-combat').value) || 0,
+                        survival: parseInt(document.getElementById('survival').value) || 0
+                    },
+                    advanced: {
+                        command: parseInt(document.getElementById('command').value) || 0,
+                        culture: parseInt(document.getElementById('culture').value) || 0,
+                        dataDjinn: parseInt(document.getElementById('data-djinn').value) || 0,
+                        medicurgy: parseInt(document.getElementById('medicurgy').value) || 0,
+                        mysticPowers: parseInt(document.getElementById('mystic-powers').value) || 0,
+                        pilot: parseInt(document.getElementById('pilot').value) || 0,
+                        science: parseInt(document.getElementById('science').value) || 0,
+                        technology: parseInt(document.getElementById('technology').value) || 0
+                    }
+                },
+                talents: Array.from(document.getElementById('talents-table').rows).slice(1).map(row => ({
+                    name: row.cells[0].querySelector('input').value,
+                    description: row.cells[1].querySelector('input').value
+                })),
+                weapons: Array.from(document.getElementById('weapons-table').rows).slice(1).map(row => ({
+                    name: row.cells[0].querySelector('input').value,
+                    bonus: row.cells[1].querySelector('input').value,
+                    init: row.cells[2].querySelector('input').value,
+                    damage: row.cells[3].querySelector('input').value,
+                    crit: row.cells[4].querySelector('input').value,
+                    range: row.cells[5].querySelector('input').value,
+                    comments: row.cells[6].querySelector('input').value,
+                    reloads: row.cells[7].querySelector('input').value
+                })),
+                gear: Array.from(document.getElementById('gear-table').rows).slice(1).map(row => ({
+                    item: row.cells[0].querySelector('input').value,
+                    bonus: row.cells[1].querySelector('input').value
+                })),
+                armor: {
+                    rating: parseInt(document.getElementById('armor-rating').value) || 0,
+                    comment: document.getElementById('armor-comment').value
+                },
+                notes: document.getElementById('notes').value,
+                peopleMet: document.getElementById('people-met').value,
+                conceptNotes: document.getElementById('concept-notes').value,
+                cabin: {
+                    description: document.getElementById('cabin-description').value,
+                    gear: document.getElementById('cabin-gear').value,
+                    other: document.getElementById('cabin-other').value
+                },
+                tinyItems: document.getElementById('tiny-items').value,
+                birr: parseInt(document.getElementById('birr').value) || 0
+            };
+
+            const jsonData = JSON.stringify(character);
+            localStorage.setItem('characterData', jsonData);
+            alert('Character saved successfully!');
+        }
+
+        function loadCharacter() {
+            const jsonData = localStorage.getItem('characterData');
+            if (jsonData) {
+                const character = JSON.parse(jsonData);
+
+                // Load basic info
+                document.getElementById('name').value = character.basicInfo.name;
+                document.getElementById('background').value = character.basicInfo.background;
+                document.getElementById('concept').value = character.basicInfo.concept;
+                document.getElementById('icon').value = character.basicInfo.icon;
+                document.getElementById('group-concept').value = character.basicInfo.groupConcept;
+                document.getElementById('reputation').value = character.basicInfo.reputation;
+                document.getElementById('personal-problem').value = character.basicInfo.personalProblem;
+
+                // Load attributes
+                document.getElementById('strength-original').value = character.attributes.strength.original;
+                document.getElementById('strength-current').value = character.attributes.strength.current;
+                document.getElementById('agility-original').value = character.attributes.agility.original;
+                document.getElementById('agility-current').value = character.attributes.agility.current;
+                document.getElementById('wits-original').value = character.attributes.wits.original;
+                document.getElementById('wits-current').value = character.attributes.wits.current;
+                document.getElementById('empathy-original').value = character.attributes.empathy.original;
+                document.getElementById('empathy-current').value = character.attributes.empathy.current;
+
+                // Load appearance
+                document.getElementById('face').value = character.appearance.face;
+                document.getElementById('clothing').value = character.appearance.clothing;
+
+                // Load trauma
+                document.getElementById('hit-points').value = character.trauma.hitPoints;
+                document.getElementById('mind-points').value = character.trauma.mindPoints;
+                document.getElementById('critical-injuries').value = character.trauma.criticalInjuries;
+
+                // Load relationships
+                document.getElementById('buddy').value = character.relationships.buddy;
+                document.getElementById('pc1').value = character.relationships.pc1;
+                document.getElementById('pc2').value = character.relationships.pc2;
+                document.getElementById('pc3').value = character.relationships.pc3;
+                document.getElementById('pc4').value = character.relationships.pc4;
+
+                // Load radiation and experience
+                document.getElementById('radiation').value = character.radiation;
+                document.getElementById('experience').value = character.experience;
+
+                // Load skills
+                for (const [skill, value] of Object.entries(character.skills.general)) {
+                    document.getElementById(skill).value = value;
+                }
+                for (const [skill, value] of Object.entries(character.skills.advanced)) {
+                    document.getElementById(skill.replace(/([A-Z])/g, '-$1').toLowerCase()).value = value;
+                }
+
+                // Load talents
+                const talentsTable = document.getElementById('talents-table');
+                talentsTable.innerHTML = '<tr><th>Talent</th><th>Description</th></tr>';
+                character.talents.forEach(talent => {
+                    const row = talentsTable.insertRow(-1);
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    cell1.innerHTML = `<input type="text" value="${talent.name}">`;
+                    cell2.innerHTML = `<input type="text" value="${talent.description}">`;
+                });
+
+                // Load weapons
+                const weaponsTable = document.getElementById('weapons-table');
+                weaponsTable.innerHTML = '<tr><th>Name</th><th>Bonus</th><th>Init</th><th>Damage</th><th>Crit</th><th>Range</th><th>Comments</th><th>Reloads</th></tr>';
+                character.weapons.forEach(weapon => {
+                    const row = weaponsTable.insertRow(-1);
+                    Object.values(weapon).forEach(value => {
+                        const cell = row.insertCell(-1);
+                        cell.innerHTML = `<input type="text" value="${value}">`;
+                    });
+                });
+
+                // Load gear
+                const gearTable = document.getElementById('gear-table');
+                gearTable.innerHTML = '<tr><th>Item</th><th>Bonus</th></tr>';
+                character.gear.forEach(item => {
+                    const row = gearTable.insertRow(-1);
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    cell1.innerHTML = `<input type="text" value="${item.item}">`;
+                    cell2.innerHTML = `<input type="text" value="${item.bonus}">`;
+                });
+
+                // Load armor
+                document.getElementById('armor-rating').value = character.armor.rating;
+                document.getElementById('armor-comment').value = character.armor.comment;
+
+                // Load notes and other text areas
+                document.getElementById('notes').value = character.notes;
+                document.getElementById('people-met').value = character.peopleMet;
+                document.getElementById('concept-notes').value = character.conceptNotes;
+                document.getElementById('cabin-description').value = character.cabin.description;
+                document.getElementById('cabin-gear').value = character.cabin.gear;
+                document.getElementById('cabin-other').value = character.cabin.other;
+                document.getElementById('tiny-items').value = character.tinyItems;
+
+                // Load birr
+                document.getElementById('birr').value = character.birr;
+
+                alert('Character loaded successfully!');
+            } else {
+                alert('No saved character data found!');
+            }
+        }			
+		
+    </script>
+	
+    <!-- Add these buttons at the end of the body -->
+    <div class="section">
+        <button onclick="saveCharacter()">Save Character</button>
+        <button onclick="loadCharacter()">Load Character</button>
+    </div>	
+</body>
+</html>
