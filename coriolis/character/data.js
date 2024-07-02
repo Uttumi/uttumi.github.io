@@ -154,40 +154,49 @@ function saveCharacter() {
         console.error("Talents table not found");
     }
 
-    // Experience, Trauma, Radiation
+    // Experience
     character.experience = parseInt(safeGetValue('experience')) || 0;
-    character.trauma = {
-        stamina: parseInt(safeGetValue('stamina')) || 0,
-        fatigue: parseInt(safeGetValue('fatigue')) || 0,
-        mindPoints: parseInt(safeGetValue('mind-points')) || 0,
-        criticalInjuries: safeGetValue('critical-injuries')
-    };
-    character.radiation = parseInt(safeGetValue('radiation')) || 0;
+
+	// Trauma
+	character.trauma = {
+		stamina: parseInt(safeGetValue('stamina')) || 0,
+		fatigue: parseInt(safeGetValue('fatigue')) || 0,
+		resolve: parseInt(safeGetValue('resolve')) || 0,
+		stress: parseInt(safeGetValue('stress')) || 0,
+		radiation: parseInt(safeGetValue('radiation')) || 0,
+		criticalInjuries: safeGetValue('critical-injuries'),
+	};
 
     // Inventory
-    character.inventory.totalWeight = parseFloat(safeGetValue('total-weight')) || 0;
-    character.inventory.birr = parseInt(safeGetValue('birr')) || 0;
+	character.inventory = {
+		carryingCapacity: parseFloat(safeGetValue('carrying-capacity')) || 1,
+		totalWeight: parseFloat(safeGetValue('total-weight')) || 0,
+		encumbrance: parseFloat(safeGetValue('encumbrance')) || 0,
+		birr: parseInt(safeGetValue('birr')) || 0,
+		weapons: [],
+		gear: [],
+		armor: [],
+		tinyItems: safeGetValue('tiny-items')
+	};
 
     // Weapons, Gear, Armor
-    ['weapons', 'gear', 'armor'].forEach(type => {
-        const table = document.getElementById(`${type}-table`);
-        if (table) {
-            character.inventory[type] = Array.from(table.rows).slice(1).map(row => {
-                const rowData = {};
-                Array.from(row.cells).slice(0, -1).forEach((cell, index) => {
-                    const input = cell.querySelector('input');
-                    if (input) {
-                        rowData[table.rows[0].cells[index].textContent.toLowerCase()] = input.type === 'number' ? parseFloat(input.value) || 0 : input.value;
-                    }
-                });
-                return rowData;
-            });
-        } else {
-            console.error(`${type} table not found`);
-        }
-    });
-
-    character.inventory.tinyItems = safeGetValue('tiny-items');
+    // ['weapons', 'gear', 'armor'].forEach(type => {
+        // const table = document.getElementById(`${type}-table`);
+        // if (table) {
+            // character.inventory[type] = Array.from(table.rows).slice(1).map(row => {
+                // const rowData = {};
+                // Array.from(row.cells).slice(0, -1).forEach((cell, index) => {
+                    // const input = cell.querySelector('input');
+                    // if (input) {
+                        // rowData[table.rows[0].cells[index].textContent.toLowerCase()] = input.type === 'number' ? parseFloat(input.value) || 0 : input.value;
+                    // }
+                // });
+                // return rowData;
+            // });
+        // } else {
+            // console.error(`${type} table not found`);
+        // }
+    // });
 
     // Notes and other text areas
     character.notes = safeGetValue('notes');
@@ -246,12 +255,11 @@ function processCharacterData(jsonData)
 		// Load trauma
 		document.getElementById('stamina').value = character.trauma.stamina;
 		document.getElementById('fatigue').value = character.trauma.fatigue;
-		document.getElementById('mind-points').value = character.trauma.mindPoints;
+		document.getElementById('resolve').value = character.trauma.resolve;
+		document.getElementById('stress').value = character.trauma.stress;
+		document.getElementById('radiation').value = character.radiation;
 		document.getElementById('critical-injuries').value = character.trauma.criticalInjuries;
 
-		// Load radiation
-		document.getElementById('radiation').value = character.radiation;
-		
 		// Load experience
 		document.getElementById('experience').value = character.experience;				
 		
@@ -271,7 +279,9 @@ function processCharacterData(jsonData)
 		);
 
 		// Load inventory
+		document.getElementById('carrying-capacity').value = character.inventory.carryingCapacity;
 		document.getElementById('total-weight').value = character.inventory.totalWeight;
+		document.getElementById('encumbrance').value = character.inventory.encumbrance;
 		document.getElementById('birr').value = character.inventory.birr;
 
 		// Load weapons
@@ -337,10 +347,31 @@ function processCharacterData(jsonData)
 		document.getElementById('cabin-gear').value = character.cabin.gear;
 		document.getElementById('cabin-other').value = character.cabin.other;
 		
-		//alert('Character loaded successfully!');
+	    // Set default values for attributes and skills if they're not present in the loaded data
+        for (const [attribute, data] of Object.entries(character.attributesAndSkills)) {
+            document.getElementById(`${attribute}-original`).value = data.original || 1;
+            document.getElementById(`${attribute}-current`).value = data.current || 1;
+
+            for (const [skillKey, skillValue] of Object.entries(data.skills)) {
+                document.getElementById(skillKey).value = skillValue || 0;
+            }
+        }
+
+        // Set default values for other fields
+        document.getElementById('stamina').value = character.trauma.stamina || 1;
+        document.getElementById('fatigue').value = character.trauma.fatigue || 0;
+        document.getElementById('resolve').value = character.trauma.resolve || 1;
+        document.getElementById('stress').value = character.trauma.stress || 0;
+        document.getElementById('radiation').value = character.radiation || 0;
+        document.getElementById('experience').value = character.experience || 0;
+        document.getElementById('birr').value = character.inventory.birr || 0;
+        document.getElementById('carrying-capacity').value = character.inventory.carryingCapacity || 1;
+	
 		
 		initializeHP();
+		initializeMP();
 		initializeTables();
+		updateEncumbrance();
 	}
 	else
 	{

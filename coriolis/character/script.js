@@ -42,6 +42,7 @@ document.addEventListener(
 		generateAttributeSkillHTML();
 
 		initializeHP();
+		initializeMP();
 
 		// initializeTables();
 
@@ -80,40 +81,82 @@ function initializeTable(tableId, headers)
 function addRow(tableId, inputTypes) {
     const table = document.getElementById(tableId);
     const row = table.insertRow(-1);
-    inputTypes.forEach(
-		(type, index) => {
-			const cell = row.insertCell();
-			const input = document.createElement('input');
-			input.type = type;
-			input.name = table.rows[0].cells[index].textContent.toLowerCase();
-			if (type === 'number') {
-				input.step = '0.1';
-				input.min = '0';
-			}
-			cell.appendChild(input);
-		}
-	);
+    inputTypes.forEach((type, index) => {
+        const cell = row.insertCell();
+        const input = document.createElement('input');
+        input.type = type;
+        input.name = table.rows[0].cells[index].textContent.toLowerCase();
+        if (type === 'number') {
+            input.min = 0;
+            input.value = 0;
+        }
+        cell.appendChild(input);
+    });
     addRemoveButton(row);
-    if (tableId !== 'talents-table')
-	{
-        calculateTotalWeight();
-    }
+    return row;
 }
 
-function addWeapon() {
-    addRow('weapons-table', ['text', 'text', 'text', 'text', 'text', 'text', 'text', 'number']);
-}
-
-function addGear() {
-    addRow('gear-table', ['text', 'text', 'number']);
-}
-
-function addArmor() {
-    addRow('armor-table', ['text', 'number', 'text', 'number']);
-}
+// function addRow(tableId, inputTypes) {
+    // const table = document.getElementById(tableId);
+    // const row = table.insertRow(-1);
+    // inputTypes.forEach(
+		// (type, index) => {
+			// const cell = row.insertCell();
+			// const input = document.createElement('input');
+			// input.type = type;
+			// input.name = table.rows[0].cells[index].textContent.toLowerCase();
+			// if (type === 'number') {
+				// input.step = '0.1';
+				// input.min = '0';
+			// }
+			// cell.appendChild(input);
+		// }
+	// );
+    // addRemoveButton(row);
+    // if (tableId !== 'talents-table')
+	// {
+        // calculateTotalWeight();
+    // }
+// }
 
 function addTalent() {
     addRow('talents-table', ['text', 'text']);
+}
+
+function removeTalent(button)
+{
+	const row = button.parentNode.parentNode;
+	row.parentNode.removeChild(row);
+}
+
+function addWeapon() {
+    const row = addRow('weapons-table', ['text', 'text', 'number', 'number', 'text', 'text', 'text', 'number']);
+    row.cells[2].querySelector('input').min = 0; // Damage
+    row.cells[2].querySelector('input').value = 0;
+    row.cells[3].querySelector('input').min = 0; // Crit
+    row.cells[3].querySelector('input').value = 0;
+    row.cells[7].querySelector('input').min = 0; // Weight
+    row.cells[7].querySelector('input').value = 0;
+    row.cells[7].querySelector('input').step = 0.1;
+    calculateTotalWeight();
+}
+
+function addGear() {
+    const row = addRow('gear-table', ['text', 'text', 'number']);
+    row.cells[2].querySelector('input').min = 0; // Weight
+    row.cells[2].querySelector('input').value = 0;
+    row.cells[2].querySelector('input').step = 0.1;
+    calculateTotalWeight();
+}
+
+function addArmor() {
+    const row = addRow('armor-table', ['text', 'number', 'text', 'number']);
+    row.cells[1].querySelector('input').min = 0; // Rating
+    row.cells[1].querySelector('input').value = 0;
+    row.cells[3].querySelector('input').min = 0; // Weight
+    row.cells[3].querySelector('input').value = 0;
+    row.cells[3].querySelector('input').step = 0.1;
+    calculateTotalWeight();
 }
 
 function removeWeapon(button)
@@ -121,12 +164,6 @@ function removeWeapon(button)
 	const row = button.parentNode.parentNode;
 	row.parentNode.removeChild(row);
 	calculateTotalWeight();
-}
-
-function removeTalent(button)
-{
-	const row = button.parentNode.parentNode;
-	row.parentNode.removeChild(row);
 }
 
 function removeGear(button)
@@ -178,36 +215,44 @@ function calculateTotalWeight()
     });
 
     document.getElementById('total-weight').value = totalWeight.toFixed(1);
+	updateEncumbrance();
 }
 
-function generateAttributeSkillHTML()
-{
-	const container = document.getElementById('attributes-skills-container');
-	let html = '';
+function updateEncumbrance() {
+    const totalWeight = parseFloat(document.getElementById('total-weight').value) || 0;
+    const carryingCapacity = Math.max(1, parseFloat(document.getElementById('carrying-capacity').value) || 1);
+    const encumbrance = Math.max(0, Math.ceil(totalWeight / carryingCapacity) - 1); //.toFixed(0);
+    document.getElementById('encumbrance').value = encumbrance;
+}
 
-	for (const [attribute, skills] of Object.entries(skillsByAttribute)) {
-		html += `
-			<div class="attribute-section">
-				<div class="attribute-header">
-					<h3>${attribute.charAt(0).toUpperCase() + attribute.slice(1)}</h3>
-					<div class="attribute-values">
-						<input type="number" id="${attribute}-original" name="${attribute}-original" min="1" value="1">
-						<input type="number" id="${attribute}-current" name="${attribute}-current" min="1" value="1">
-					</div>
-				</div>
-				<div class="skills-subsection">
-					${Object.entries(skills).map(([key, value]) => `
-						<div class="skill-row">
-							<label for="${key}">${value.label}</label>
-							<input type="number" id="${key}" name="${key}" min="0" value="0">
-						</div>
-					`).join('')}
-				</div>
-			</div>
-		`;
-	}
 
-	container.innerHTML = html;
+function generateAttributeSkillHTML() {
+    const container = document.getElementById('attributes-skills-container');
+    let html = '';
+
+    for (const [attribute, skills] of Object.entries(skillsByAttribute)) {
+        html += `
+            <div class="attribute-section">
+                <div class="attribute-header">
+                    <h3>${attribute.charAt(0).toUpperCase() + attribute.slice(1)}</h3>
+                    <div class="attribute-values">
+                        <input type="number" id="${attribute}-original" name="${attribute}-original" min="1" value="1">
+                        <input type="number" id="${attribute}-current" name="${attribute}-current" min="1" value="1">
+                    </div>
+                </div>
+                <div class="skills-subsection">
+                    ${Object.entries(skills).map(([key, value]) => `
+                        <div class="skill-row">
+                            <label for="${key}">${value.label}</label>
+                            <input type="number" id="${key}" name="${key}" min="0" value="0">
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    container.innerHTML = html;
 }
 
 function generateSkillHTML(container, items)
@@ -258,17 +303,22 @@ function initializeHP() {
 function createHPBoxes() {
     const container = document.getElementById('hp-boxes');
     container.innerHTML = '';
-    for (let i = 0; i < 20; i++) {
-        const box = document.createElement('div');
-        box.className = 'hp-box';
-        container.appendChild(box);
+    for (let i = 0; i < 4; i++) {  // Create 4 groups
+        const group = document.createElement('div');
+        group.className = 'box-group';
+        for (let j = 0; j < 5; j++) {  // 5 boxes per group
+            const box = document.createElement('div');
+            box.className = 'box';
+            group.appendChild(box);
+        }
+        container.appendChild(group);
     }
-}
+}		
 
 function updateHPBoxes() {
     const originalHP = parseInt(document.getElementById('stamina').value) || 0;
     const fatigue = parseInt(document.getElementById('fatigue').value) || 0;
-    const boxes = document.querySelectorAll('.hp-box');
+    const boxes = document.getElementById('hp-boxes').querySelectorAll('.box');
 
     let remainingHP = originalHP - (fatigue % originalHP);
     let exhaustion = Math.floor(fatigue / originalHP);
@@ -278,12 +328,55 @@ function updateHPBoxes() {
     boxes.forEach((box, index) => {
         if (index < originalHP) {
             if (index < remainingHP) {
-                box.className = 'hp-box hp-green';
+                box.className = 'box full-box';
             } else {
-                box.className = 'hp-box hp-red';
+                box.className = 'box empty-box';
             }
         } else {
-            box.className = 'hp-box';
+            box.className = 'box';
+        }
+    });
+}
+
+function initializeMP() {
+    createMPBoxes();
+    updateMPBoxes();
+}
+
+function createMPBoxes() {
+    const container = document.getElementById('mp-boxes');
+    container.innerHTML = '';
+    for (let i = 0; i < 4; i++) {
+        const group = document.createElement('div');
+        group.className = 'box-group ';
+        for (let j = 0; j < 5; j++) {
+            const box = document.createElement('div');
+            box.className = 'box';
+            group.appendChild(box);
+        }
+        container.appendChild(group);
+    }
+}
+
+function updateMPBoxes() {
+    const originalMP = parseInt(document.getElementById('resolve').value) || 0;
+    const stress = parseInt(document.getElementById('stress').value) || 0;
+    const boxes = document.getElementById('mp-boxes').querySelectorAll('.box'); // document.querySelectorAll('.mp-box');
+
+    let remainingMP = originalMP - (stress % originalMP);
+    let panic = Math.floor(stress / originalMP);
+
+    document.getElementById('panic').value = panic;
+
+    boxes.forEach((box, index) => {
+        if (index < originalMP) {
+            if (index < remainingMP) {
+                box.className = 'box full-box';
+            } else {
+                box.className = 'box empty-box';
+            }
+        } else {
+            box.className = 'box';
         }
     });
 }

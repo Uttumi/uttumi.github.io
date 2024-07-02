@@ -81,39 +81,56 @@
 	</div>
 
 	<div class="section">
+	
 		<h2>
 			<i class="fas fa-skull"></i>
 			<span class="title-text">Trauma</span>			
 		</h2>
+		
 		<div class="subsection">
 			<div class="subsection-header">
 				<div class="stamina-info">
 					<h3>Stamina (HP)</h3>
-					<input type="number" id="stamina" name="stamina" min="0" oninput="updateHPBoxes()">
+					<input type="number" id="stamina" name="stamina" min="1" value="1" oninput="updateHPBoxes()">
 				</div>
-				<div class="hp-container">
-					<div class="hp-boxes" id="hp-boxes"></div>
+				<div class="box-container">
+					<div class="boxes" id="hp-boxes"></div>
 				</div>
 			</div>
 			<div class="stamina-inputs">
-				<label for="fatigue">Fatigue</label>
-				<input type="number" id="fatigue" name="fatigue" min="0" oninput="updateHPBoxes()">
-				<label for="exhaustion">Exhaustion</label>
-				<input type="number" id="exhaustion" name="exhaustion" readonly>
+				<div class="input-pair">
+					<label for="fatigue">Fatigue</label>
+					<input type="number" id="fatigue" name="fatigue" min="0" value="0" oninput="updateHPBoxes()">
+				</div>
+				<div class="input-pair">
+					<label for="exhaustion">Exhaustion</label>
+					<input type="number" id="exhaustion" name="exhaustion" readonly>
+				</div>			
 			</div>
 		</div>
+
 		<div class="subsection">
-			<h3>Resolve</h3>
-			<label for="mind-points">Mind Points (MP)</label>
-			<input type="number" id="mind-points" name="mind-points" min="0">
-			<label for="stress">Stress</label>
-			<input type="number" id="stress" name="stress" min="0">
-		</div>
-		<div class="subsection">
-			<h3>Radiation</h3>
-			<label for="radiation">Radiation Level</label>
-			<input type="number" id="radiation" name="radiation" min="0">
-		</div>
+			<div class="subsection-header">
+				<div class="resolve-info">
+					<h3>Resolve (MP)</h3>
+					<input type="number" id="resolve" name="resolve" min="1" value="1" oninput="updateMPBoxes()">
+				</div>
+				<div class="box-container">
+					<div class="boxes" id="mp-boxes"></div>
+				</div>
+			</div>
+			<div class="resolve-inputs">
+				<div class="input-pair">
+					<label for="stress">Stress</label>
+					<input type="number" id="stress" name="stress" min="0" value="0" oninput="updateMPBoxes()">
+				</div>
+				<div class="input-pair">
+					<label for="panic">Panic</label>
+					<input type="number" id="panic" name="panic" readonly>
+				</div>
+			</div>
+		</div>		
+		
 		<div class="subsection">
 			<h3>Critical Injuries</h3>
 			<textarea id="critical-injuries" name="critical-injuries" onkeyup="textAreaAdjust(this)"></textarea>
@@ -125,10 +142,27 @@
 			<i class="fas fa-toolbox"></i>
 			<span class="title-text">Inventory</span>
 			<span class="inventory-info">
-				Birr <input type="number" id="birr" name="birr" min="0"> 
-				Total Weight <input type="number" id="total-weight" name="total-weight" readonly>
-			</span>				
+				<input type="number" id="birr" name="birr" value="0">
+			</span>
 		</h2>
+
+		<div class="subsection">
+			<h3>Carrying Capacity</h3>
+			<div class="carrying-capacity-info">
+				<div class="input-pair">
+					<label for="carrying-capacity">Carrying Capacity</label>
+					<input type="number" id="carrying-capacity" name="carrying-capacity" min="1" value="1" oninput="updateEncumbrance()">
+				</div>
+				<div class="input-pair">
+					<label for="total-weight">Total Weight</label>
+					<input type="number" id="total-weight" name="total-weight" readonly>
+				</div>
+				<div class="input-pair">
+					<label for="encumbrance">Encumbrance</label>
+					<input type="number" id="encumbrance" name="encumbrance" readonly>
+				</div>
+			</div>
+		</div>
 
 		<div class="subsection">
 			<h3>Weapons</h3>
