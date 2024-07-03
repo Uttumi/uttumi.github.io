@@ -1,37 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
 body {
-	font-family: 'Orbitron', sans-serif;
-	#font-family: 'Courier New', monospace;
-	max-width: 800px;
-	margin: 0 auto;
-	padding: 20px;
-	
-	#background-color: #f0f0f0;
+    font-family: 'Orbitron', sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
     background-color: #0a0a1a;
 }
-
-/*
-h1 {
-	text-align: center;
-	text-transform: uppercase;
-	border-bottom: 2px solid #000;
-	padding-bottom: 10px;
-}
-
-h2 {
-	margin-bottom: 20px;
-	text-transform: uppercase;
-	border-bottom: 1px solid #000;
-	padding-bottom: 5px;
-}
-
-h1, h2, h3
-{
-	color: #00ffff;
-    text-shadow: 0 0 10px #00ffff;
-}
-*/
 
 h1, h2, h3 {
     color: #00ffff;
@@ -53,42 +28,21 @@ h3 {
 }
 
 .section {
-	margin-bottom: 20px;
-	padding: 15px;
-	
-	#background-color: #fff;
-	#border: 1px solid #000;
-	
-	# Sci-fi
-	#background-color: #1a1a2e;
-	background-color: rgba(26, 26, 46, 0.8);
-    #border: 1px solid #4a4a7f;
-	
-	border: 2px solid #00ffff;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(26, 26, 46, 0.8);
+    border: 2px solid #00ffff;
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
     border-radius: 15px;
 }
 
 .subsection {
-	margin-bottom: 20px;
-	padding: 15px;
-	
-	#background-color: #f9f9f9;
-	#border: 1px solid #ccc;
-	
-	#background-color: #1a1a2e;
-	background-color: rgba(26, 26, 46, 0.8);
-	
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(26, 26, 46, 0.8);
     border: 1px solid #4a4a7f;
-	border-radius: 10px;
+    border-radius: 10px;
 }
-
-/* .section h2 { */
-	/* display: flex; */
-	/* justify-content: space-between; */
-	/* align-items: center; */
-	/* margin-bottom: 20px; */
-/* } */
 
 .section h2 {
     display: flex;
@@ -120,16 +74,10 @@ h3 {
     margin-left: 10px;
 }
 
-
-
 .subsection h3 {
-	
-	#border-bottom: 1px solid #4a4a7f;
-	#padding-bottom: 5px;
-	
-	color: #00ffff;
+    color: #00ffff;
     text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
-	margin: 0;
+    margin: 0;
     margin-bottom: 20px;
 }
 
@@ -143,83 +91,6 @@ h3 {
     width: 60px;
     margin-right: 20px;
 }
-
-/*
-.section h2 {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #4a4a7f;
-    padding-bottom: 10px;
-}
-
-.section h2 i {
-    margin-right: 10px;
-    font-size: 1.2em;
-    color: #00ffff;
-}
-
-.section h2 .title-text
-{
-    flex-grow: 1;
-}
-
-.section h2 .experience-container,
-.section h2 .inventory-info
-{
-    margin-left: auto;
-    font-size: 0.8em;
-    font-weight: normal;
-    display: flex;
-    align-items: center;
-}
-
-.section h2 .experience-container input,
-.section h2 .inventory-info input {
-    width: 60px;
-    margin-left: 5px;
-}
-*/
-
-
-.section h2 {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #4a4a7f;
-    padding-bottom: 10px;
-}
-
-.section h2 i {
-    margin-right: 10px;
-    font-size: 1.2em;
-    color: #00ffff;
-}
-
-.section h2 .title-text {
-    flex-grow: 1;
-}
-
-.section h2 .experience-container,
-.section h2 .inventory-info {
-    margin-left: auto;
-    font-size: 0.8em;
-    font-weight: normal;
-    display: flex;
-    align-items: center;
-}
-
-.section h2 .experience-container input,
-.section h2 .inventory-info input {
-    width: 60px;
-    margin-left: 5px;
-}
-
-.section h2 .inventory-info input {
-    margin-right: 15px;
-}
-
-
 
 .experience-container {
 	font-size: 0.8em;
@@ -279,27 +150,6 @@ label {
     resize: none; /* Disable manual resizing */
     overflow: hidden; /* Hide scrollbars */
 }
-
-@media (max-width: 768px) {
-    .basic-info-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .info-item {
-        flex-wrap: wrap;
-    }
-
-    .info-item label {
-        flex: 0 0 100%;
-        margin-bottom: 5px;
-    }
-
-    .info-item input,
-    .info-item textarea {
-        width: 100%;
-    }
-}
-
 
 
 .attributes, .skills {
@@ -391,12 +241,13 @@ label {
 .skill-row label {
     flex: 1;
     margin-right: 10px;
+	margin-bottom: 5px;
 	
-	/* width: auto; */
-    /* text-align: left; */
-    /* font-weight: normal; */
-    /* color: #e0e0ff; */
-    /* text-shadow: none; */
+	width: auto;
+    text-align: left;
+    font-weight: normal;
+    color: #e0e0ff;
+    text-shadow: none;
 }
 
 .skill-row input {
@@ -438,11 +289,9 @@ label {
 .armor th, .armor td,
 .talents th, .talents td
 {
-    #border: 1px solid #4a4a7f;
     padding: 5px;
     text-align: center;
     overflow: hidden;
-    #background-color: rgba(42, 42, 62, 0.8);
     color: #e0e0ff;
 }
 
@@ -513,8 +362,7 @@ label {
 .weapons th:nth-child(5), .weapons td:nth-child(5),
 .weapons th:nth-child(6), .weapons td:nth-child(6) { width: 10%; }
 .weapons th:nth-child(7), .weapons td:nth-child(7) { width: 15%; }
-.weapons th:nth-child(8), .weapons td:nth-child(8),
-/* .weapons th:nth-child(9), .weapons td:nth-child(9) { width: 8%; } */
+.weapons th:nth-child(8), .weapons td:nth-child(8) { width: 8%; } 
 
 /* Set specific widths for each column in the gear table */
 .gear th:nth-child(1), .gear td:nth-child(1) { width: 50%; }
@@ -537,10 +385,6 @@ label {
     -moz-appearance: textfield;
     appearance: textfield;
 }
-
-
-
-
 
 .weapons td input[type="number"]::-webkit-inner-spin-button,
 .weapons td input[type="number"]::-webkit-outer-spin-button,
@@ -567,14 +411,6 @@ label {
 .armor td input[type="number"]:focus::-webkit-outer-spin-button {
     -webkit-appearance: inner-spin-button;
 }
-
-
-
-
-/* #armor-weight, */
-/* #total-weight { */
-	/* width: 70px; /* Wider for 3 digits plus comma */ */
-/* } */
 
 .attributes-grid {
 	display: grid;
@@ -725,23 +561,6 @@ input[type="number"]:focus::-webkit-outer-spin-button {
 .talents td:last-child {
     border: none;
     background: none;
-}
-
-@media (max-width: 768px) {
-    .weapons, .gear, .armor, .talents {
-        font-size: 14px;
-    }
-
-    .weapons input, .gear input, .armor input, .talents input {
-        font-size: 14px;
-    }
-
-    .remove-btn {
-        width: 25px;
-        height: 25px;
-        font-size: 16px;
-        line-height: 25px;
-    }
 }
 
 .subsection-header {
@@ -903,10 +722,24 @@ input[type="number"]:focus::-webkit-outer-spin-button {
     width: 80px;
 }
 
-@media (max-width: 1024px)
-{
-    #attributes-skills-container {
-        grid-template-columns: 1fr;
+@media (max-width: 864px) {
+    .boxes {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 10px;
+        max-width: none;
+    }
+
+    .box-group {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .box {
+        width: 12px;
+        height: 12px;
     }
 }
 
@@ -941,45 +774,8 @@ input[type="number"]:focus::-webkit-outer-spin-button {
         width: 100%;
     }	
 	
-	/* .section h2 { */
-        /* flex-direction: column; */
-        /* align-items: flex-start; */
-    /* } */
-
-    /* .section h2 .experience-container, */
-    /* .section h2 .inventory-info { */
-        /* margin-left: 0; */
-        /* margin-top: 10px; */
-    /* }		 */
-	
-    .subsection-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .box-container {
-        width: 100%;
-        justify-content: flex-start;
-    }
-
-    /* .boxes { */
-        /* max-width: 100%; */
-    /* } */
-	
-	.boxes {
-        justify-content: flex-start;
-    }
 	.attribute-section {
         margin-bottom: 20px;
-    }
-
-    .skill-row {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .skill-row label {
-        margin-bottom: 5px;
     }
 
     input[type="text"], input[type="number"], textarea {
@@ -1004,19 +800,58 @@ input[type="number"]:focus::-webkit-outer-spin-button {
         align-items: flex-start;
     }
     
+    .weapons, .gear, .armor, .talents {
+        font-size: 14px;
+    }
+
+    .weapons input, .gear input, .armor input, .talents input {
+        font-size: 14px;
+    }
+
+    .remove-btn {
+        width: 25px;
+        height: 25px;
+        font-size: 16px;
+        line-height: 25px;
+    }
+	
+	.basic-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-item {
+        flex-wrap: wrap;
+    }
+
+    .info-item label {
+        flex: 0 0 100%;
+        margin-bottom: 5px;
+    }
+
+    .info-item input,
+    .info-item textarea {
+        width: 100%;
+    }	
+	
     .input-pair {
         width: 100%;
         margin-right: 0;
     }	
 }
 
-@media (max-width: 480px) {
-    .skill-row {
-        flex-direction: column;
-        align-items: flex-start;
+@media (max-width: 560px) {
+	
+    .box-container {
+        width: 100%;
+        justify-content: flex-start;
     }
-    
-    .skill-row label {
-        margin-bottom: 5px;
-    }
+
+	/* .boxes { */
+        /* justify-content: flex-start; */
+    /* } */
+	
+    /* .boxes { */
+        /* grid-template-columns: 1fr; */
+        /* grid-template-rows: repeat(4, 1fr); */
+    /* }		 */
 }
