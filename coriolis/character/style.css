@@ -30,7 +30,7 @@ h3 {
 .section {
     margin-bottom: 20px;
     padding: 15px;
-    background-color: rgba(26, 26, 46, 0.8);
+    background-color: rgba(26, 26, 46);
     border: 2px solid #00ffff;
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
     border-radius: 15px;
@@ -38,8 +38,8 @@ h3 {
 
 .subsection {
     margin-bottom: 20px;
-    padding: 15px;
-    background-color: rgba(26, 26, 46, 0.8);
+    padding: 10px;
+    background-color: rgba(26, 26, 46);
     border: 1px solid #4a4a7f;
     border-radius: 10px;
 }
@@ -151,7 +151,6 @@ label {
     overflow: hidden; /* Hide scrollbars */
 }
 
-
 .attributes, .skills {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -159,29 +158,84 @@ label {
 }
 
 .attribute-section {
-	border: 1px solid #ccc;
-	padding: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 .attribute-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 10px;
-	border-bottom: 1px solid #ccc;
-	padding-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
 }
 
 .attribute-header h3 {
-	margin: 0;
+    margin: 0;
     color: #00ffff;
     text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
 }
 
-.attribute-values {
-	display: flex;
-	gap: 5px;
+.attribute-base {
+    display: flex;
+    gap: 5px;
 }
+
+.attribute-values {
+    display: flex;
+	border-bottom: 1px solid #4a4a7f;
+}
+
+.attribute-modifiers {
+    display: flex;
+    justify-content: flex-start;
+	flex: 1;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.attribute-modifiers input {
+    width: 50px;
+    text-align: center;
+}
+
+.attribute-current {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.modifiers-label {
+    margin-right: 10px;
+    color: #00ffff;
+}
+
+.modifiers-inputs {
+    display: flex;
+    gap: 5px;
+}
+
+.attribute-modifiers input,
+.attribute-current input {
+    width: 50px;
+    text-align: center;
+}
+
+
+
+.attribute-current span {
+    margin-right: 10px;
+    color: #00ffff;
+}
+
+/* .attribute-modifiers input[readonly], */
+/* .attribute-current input[readonly] { */
+    /* background-color: rgba(42, 42, 62, 0.8); */
+    /* color: #e0e0ff; */
+/* } */
 
 .attribute-row {
 	display: flex;
@@ -223,6 +277,10 @@ label {
 	width: 48%;
 }
 
+.skill-row input {
+    width: 40px;
+}
+
 .skills-subsection {
 	display: grid;
 	gap: 5px;
@@ -241,9 +299,8 @@ label {
 .skill-row label {
     flex: 1;
     margin-right: 10px;
-	margin-bottom: 5px;
-	
-	width: auto;
+    margin-bottom: 5px;
+    width: auto;
     text-align: left;
     font-weight: normal;
     color: #e0e0ff;
@@ -289,7 +346,8 @@ label {
 .armor th, .armor td,
 .talents th, .talents td
 {
-    padding: 5px;
+	font-size: 14px;
+    padding: 4px;
     text-align: center;
     overflow: hidden;
     color: #e0e0ff;
@@ -300,8 +358,12 @@ label {
 .armor td, 
 .talents td {
     border: 1px solid #4a4a7f;
-    padding: 0;
-    height: 35px; /* Adjust this value as needed */
+    height: 35px;
+}
+
+.weapons td {
+    vertical-align: top;
+    padding: 5px;
 }
 
 .weapons td input, 
@@ -320,12 +382,19 @@ label {
     color: inherit;
 }
 
-.weapons td input:focus, 
-.gear td input:focus, 
-.armor td input:focus, 
-.talents td input:focus {
+.weapons td select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.weapons td input:focus, .weapons td select:focus,
+.gear td input:focus, .gear td select:focus,
+.armor td input:focus, .armor td select:focus,
+.talents td input:focus, .talents td select:focus {
     outline: none;
-    background-color: rgba(0, 255, 255, 0.1);
+    #background-color: rgba(0, 255, 255, 0.1);
+	#background-color: rgba(0, 0, 0, 1);
+	background-color:  rgba(26, 26, 46);
 }
 
 .weapons input, .gear input, .armor input, .talents input {
@@ -338,46 +407,214 @@ label {
     margin: 0;
 }
 
-.weapons th:last-child, .weapons td:last-child,
-.gear th:last-child, .gear td:last-child,
-.armor th:last-child, .armor td:last-child,
-.talents th:last-child, .talents td:last-child {
-    width: 30px;
+.weapons td:nth-child(2) input,
+.weapons td:nth-child(3) input {
+    width: 48%;
+    margin-right: 2%;
 }
 
-/* Adjust width for rating and weight cells */
-.weapons td:nth-child(8),
-.weapons td:nth-child(9),
-.gear td:nth-child(3),
-.armor td:nth-child(2),
-.armor td:nth-child(4) {
-    width: 60px;
+.weapon-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
 }
 
-/* Set specific widths for each column in the weapons table */
-.weapons th:nth-child(1), .weapons td:nth-child(1) { width: 15%; }
-.weapons th:nth-child(2), .weapons td:nth-child(2),
-.weapons th:nth-child(3), .weapons td:nth-child(3),
-.weapons th:nth-child(4), .weapons td:nth-child(4),
-.weapons th:nth-child(5), .weapons td:nth-child(5),
-.weapons th:nth-child(6), .weapons td:nth-child(6) { width: 10%; }
-.weapons th:nth-child(7), .weapons td:nth-child(7) { width: 15%; }
-.weapons th:nth-child(8), .weapons td:nth-child(8) { width: 8%; } 
+.stat-label {
+    font-size: 0.8em;
+    color: #00ffff;
+    margin-right: 5px;
+}
 
-/* Set specific widths for each column in the gear table */
-.gear th:nth-child(1), .gear td:nth-child(1) { width: 50%; }
-.gear th:nth-child(2), .gear td:nth-child(2) { width: 30%; }
-.gear th:nth-child(3), .gear td:nth-child(3) { width: 15%; }
+.weapons td input {
+    width: 60%;
+}
 
-/* Set specific widths for each column in the armor table */
-.armor th:nth-child(1), .armor td:nth-child(1) { width: 30%; }
-.armor th:nth-child(2), .armor td:nth-child(2),
-.armor th:nth-child(4), .armor td:nth-child(4) { width: 15%; }
-.armor th:nth-child(3), .armor td:nth-child(3) { width: 35%; }
+.weapons td {
+    vertical-align: middle;
+    padding: 5px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
 
-/* Set specific widths for each column in the talents table */
-.talents th:nth-child(1), .talents td:nth-child(1) { width: 30%; }
-.talents th:nth-child(2), .talents td:nth-child(2) { width: 65%; }
+.weapons td:first-child input {
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word;
+}
+
+.weapons td:first-child {
+    width: 25%;
+    padding: 0;
+}
+
+.weapons td [contenteditable] {
+    width: 100%;
+    height: 100%;
+    min-height: 40px;
+    box-sizing: border-box;
+    padding: 5px;
+    font-size: inherit;
+    font-family: inherit;
+    background: transparent;
+    border: none;
+    color: inherit;
+    resize: none;
+    overflow: hidden;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    
+    display: inline;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
+	
+	white-space: pre-wrap;
+}
+
+.weapons td [contenteditable]:focus-visible {
+    outline: none;
+}
+
+.weapons td textarea:focus {
+    outline: none;
+    background-color: rgba(0, 255, 255, 0.1);
+}
+
+/* Ensure consistent styling for other inputs and selects */
+.weapons td input,
+.weapons td select {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    font-size: inherit;
+    font-family: inherit;
+    background: transparent;
+    border: none;
+    color: inherit;
+}
+
+.weapons td select {
+    text-align-last: center;
+    text-align: center;
+}
+
+.weapons td:nth-child(4) select,
+.weapons td:nth-child(4) .range-value {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.8em;
+    padding: 2px;
+}
+
+.weapons td:nth-child(4) select {
+    margin-bottom: 2px;
+}
+
+.weapons td:nth-child(4) .range-value {
+    border: none;
+    background-color: transparent;
+    text-align: center;
+}
+
+.weapons td input,
+.weapons td select,
+.weapons td .range-container {
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.weapons td select {
+    text-align-last: center;
+    text-align: center;
+}
+
+.weapons td input,
+.weapons td select {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    font-size: inherit;
+    font-family: inherit;
+    background: transparent;
+    border: none;
+    color: inherit;
+}
+
+.range-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.range-container select,
+.range-container .range-value {
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2px;
+    margin: 0;
+    font-size: 0.8em;
+    border: none;
+    background-color: transparent;
+    color: inherit;
+}
+
+.range-container select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    #background-color: rgba(42, 42, 62, 0.8);
+}
+
+.range-container .range-value {
+    text-align: center;
+    border-top: 1px solid #4a4a7f;
+}
+
+.weapons td:nth-child(4) {
+	padding: 0;
+    width: 20%;
+}
+
+@media (max-width: 768px) {
+    .range-container select,
+    .range-container .range-value {
+        font-size: 0.7em;
+    }
+}
+
+.talents th:nth-child(1), .talents td:nth-child(1) { width: 30%; } /*Name*/
+.talents th:nth-child(2), .talents td:nth-child(2) { width: 65%; } /*Description*/
+.talents th:nth-child(3), .talents td:nth-child(3) { width: 5%; } /*Remove*/
+
+.weapons th:nth-child(1), .weapons td:nth-child(1) { width: 24%; } /*Name*/
+.weapons th:nth-child(2), .weapons td:nth-child(2) { width: 10%; } /*Modifiers*/
+.weapons th:nth-child(3), .weapons td:nth-child(3) { width: 10%; } /*Damage*/
+.weapons th:nth-child(4), .weapons td:nth-child(4) { width: 15%; } /*Range*/
+.weapons th:nth-child(5), .weapons td:nth-child(5) { width: 15%; } /*Notes*/
+.weapons th:nth-child(6), .weapons td:nth-child(6) { width: 15%; } /*Reload*/
+.weapons th:nth-child(7), .weapons td:nth-child(7) { width: 6%; }  /*Size*/
+.weapons th:nth-child(8), .weapons td:nth-child(8) { width: 5%; } /*Remove*/
+
+.gear th:nth-child(1), .gear td:nth-child(1) { width: 41% } /*Name*/
+.gear th:nth-child(2), .gear td:nth-child(2) { width: 8%; } /*Bonus*/
+.gear th:nth-child(3), .gear td:nth-child(3) { width: 40%; } /*Notes*/
+.gear th:nth-child(4), .gear td:nth-child(4) { width: 6%; } /*Size*/
+.gear th:nth-child(5), .gear td:nth-child(5) { width: 5%; } /*Remove*/
+
+.armor th:nth-child(1), .armor td:nth-child(1) { width: 45%; } /*Name*/
+.armor th:nth-child(2), .armor td:nth-child(2) { width: 8%; } /*AR*/
+.armor th:nth-child(3), .armor td:nth-child(3) { width: 8%; } /*Cover*/
+.armor th:nth-child(4), .armor td:nth-child(4) { width: 38%; } /*Notes*/
+.armor th:nth-child(5), .armor td:nth-child(5) { width: 6%; } /*Size*/
+.armor th:nth-child(6), .armor td:nth-child(6) { width: 5%; } /*Remove*/
 
 .weapons td input[type="number"], 
 .gear td input[type="number"], 
@@ -464,14 +701,6 @@ input[type="number"], input[type="text"] {
 	padding: 5px 2px;
 }
 
-
-input[type="text"], input[type="number"] {
-	#width: 100px;
-	padding: 5px;
-	#border: 1px solid #000;
-	#background-color: #f8f8f8;
-}
-
 input[type="text"],
 input[type="number"],
 textarea {
@@ -482,19 +711,17 @@ textarea {
     padding: 8px;
     font-size: 14px;
     font-family: 'Orbitron', sans-serif;
-    #width: 100%;
     box-sizing: border-box;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-input[type="text"]:focus,
-input[type="number"]:focus,
-textarea:focus {
+input[type="text"]:not([readonly]):focus,
+input[type="number"]:not([readonly]):focus,
+textarea:not([readonly]):focus {
     outline: none;
     border-color: #00ffff;
     box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
 }
-
 
 td input[type="number"], td input[type="text"] {
 	width: 100%;
@@ -511,11 +738,18 @@ input[type="number"]:focus::-webkit-outer-spin-button {
 	-webkit-appearance: inner-spin-button;
 }
 
+input[readonly] {
+    background-color: rgba(42, 42, 62, 0.5);
+    color: #8080a0;
+    border: 1px solid #3a3a5f;
+    cursor: not-allowed;
+}
+
 #birr {
 	width: 120px; /* Wider for 9 digits */
 }
 
-#total-weight {
+#total-load {
 	width: 80px;
 }
 
@@ -537,7 +771,7 @@ input[type="number"]:focus::-webkit-outer-spin-button {
     padding: 0;
     line-height: 30px;
     /* display: block; */
-    margin: 0 auto;
+    margin: 0 0 0 5px;
 	
 	display: flex;
 	
@@ -585,18 +819,18 @@ input[type="number"]:focus::-webkit-outer-spin-button {
     margin-right: 10px;
 }
 
-.stamina-inputs {
+.trauma-inputs {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 }
 
-.stamina-inputs label {
+.trauma-inputs label {
     flex: 0 0 80px; /* Adjust this width as needed */
     margin-right: 10px;
 }
 
-.stamina-inputs input {
+.trauma-inputs input {
     width: 60px;
     margin-right: 20px;
 }
@@ -635,21 +869,21 @@ input[type="number"]:focus::-webkit-outer-spin-button {
     max-width: 440px;
 }
 
-.box:nth-child(5n) {
-    margin-right: 6px; /* Add a larger gap after every 5th box */
-}
-
-.box-group {
-    display: flex;
-    gap: 2px;
-}
-
 .box {
     width: 15px;
     height: 15px;
     border: 1px solid #4a4a7f;
     background-color: transparent;
     transition: background 0.3s ease;
+}
+
+.box:nth-child(5n) {
+    margin-right: 6px;
+}
+
+.box-group {
+    display: flex;
+    gap: 2px;
 }
 
 .full-box {
@@ -662,15 +896,44 @@ input[type="number"]:focus::-webkit-outer-spin-button {
     box-shadow: 0 0 5px rgba(255, 61, 0, 0.7);
 }
 
+.full-box , .empty-box{
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.radiation-box {
+    border: 1px solid #7fff00;
+    box-shadow: 0 0 5px rgba(127, 255, 0, 0.5);
+    animation: radiate 2s infinite ease-in-out;
+}
+
+.radiation-box.full-box {
+    background: linear-gradient(135deg, #7fff00 0%, #32cd32 100%);
+    box-shadow: 0 0 10px rgba(127, 255, 0, 0.7);
+	animation: radiate 2s infinite ease-in-out, glow 2s infinite alternate;
+}
+
+.radiation-box.empty-box {
+    background: linear-gradient(135deg, #32cd32 0%, #006400 100%);
+    box-shadow: 0 0 5px rgba(50, 205, 50, 0.5);
+}
+
 @keyframes pulse {
     0% { opacity: 1; }
     50% { opacity: 0.7; }
     100% { opacity: 1; }
 }
 
-.full-box , .empty-box{
-    animation: pulse 2s infinite ease-in-out;
+@keyframes radiate {
+    0% { box-shadow: 0 0 5px rgba(127, 255, 0, 0.5); }
+    50% { box-shadow: 0 0 15px rgba(127, 255, 0, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(127, 255, 0, 0.5); }
 }
+
+@keyframes glow {
+    from { filter: brightness(1); }
+    to { filter: brightness(1.5); }
+}
+
 
 .resolve-info {
     display: flex;
@@ -682,12 +945,6 @@ input[type="number"]:focus::-webkit-outer-spin-button {
 .resolve-info h3 {
     margin: 0;
     margin-right: 10px;
-}
-
-.resolve-inputs {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
 }
 
 .section:last-child {
@@ -703,24 +960,31 @@ input[type="number"]:focus::-webkit-outer-spin-button {
 
 .carrying-capacity-info {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 10px;
-}
-
-.carrying-capacity-info .input-pair {
-    display: flex;
     align-items: center;
+    margin-right: 20px;
+    margin-bottom: 10px;
 }
 
-.carrying-capacity-info label {
+.carrying-capacity-info h3 {
+    margin: 0;
     margin-right: 10px;
-    white-space: nowrap;
 }
 
 .carrying-capacity-info input {
-    width: 80px;
+    width: 60px;
 }
+
+.capacity-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.capacity-inputs .input-pair {
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
 
 @media (max-width: 864px) {
     .boxes {
@@ -782,24 +1046,6 @@ input[type="number"]:focus::-webkit-outer-spin-button {
         font-size: 16px; /* Prevents zooming on mobile when focusing inputs */
     }
 	
-    .stamina-inputs {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .stamina-inputs label {
-        margin-bottom: 5px;
-    }
-    
-    .stamina-inputs input {
-        margin-bottom: 10px;
-    }
-	
-    .stamina-inputs {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
     .weapons, .gear, .armor, .talents {
         font-size: 14px;
     }
@@ -828,14 +1074,19 @@ input[type="number"]:focus::-webkit-outer-spin-button {
         margin-bottom: 5px;
     }
 
+    .capacity-inputs {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .capacity-inputs .input-pair {
+        width: 100%;
+        margin-right: 0;
+    }
+
     .info-item input,
     .info-item textarea {
         width: 100%;
-    }	
-	
-    .input-pair {
-        width: 100%;
-        margin-right: 0;
     }	
 }
 
@@ -846,12 +1097,21 @@ input[type="number"]:focus::-webkit-outer-spin-button {
         justify-content: flex-start;
     }
 
-	/* .boxes { */
-        /* justify-content: flex-start; */
-    /* } */
+    .trauma-inputs {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .trauma-inputs label {
+        margin-bottom: 5px;
+    }
+    
+    .trauma-inputs input {
+        margin-bottom: 10px;
+    }
 	
-    /* .boxes { */
-        /* grid-template-columns: 1fr; */
-        /* grid-template-rows: repeat(4, 1fr); */
-    /* }		 */
+    .input-pair {
+        width: 100%;
+        margin-right: 0;
+    }		
 }

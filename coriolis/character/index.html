@@ -97,7 +97,7 @@
 					<div class="boxes" id="hp-boxes"></div>
 				</div>
 			</div>
-			<div class="stamina-inputs">
+			<div class="trauma-inputs">
 				<div class="input-pair">
 					<label for="fatigue">Fatigue</label>
 					<input type="number" id="fatigue" name="fatigue" min="0" value="0" oninput="updateHPBoxes()">
@@ -119,7 +119,7 @@
 					<div class="boxes" id="mp-boxes"></div>
 				</div>
 			</div>
-			<div class="resolve-inputs">
+			<div class="trauma-inputs">
 				<div class="input-pair">
 					<label for="stress">Stress</label>
 					<input type="number" id="stress" name="stress" min="0" value="0" oninput="updateMPBoxes()">
@@ -127,6 +127,27 @@
 				<div class="input-pair">
 					<label for="panic">Panic</label>
 					<input type="number" id="panic" name="panic" readonly>
+				</div>
+			</div>
+		</div>		
+		
+		<div class="subsection">
+			<div class="subsection-header">
+				<div class="resolve-info">
+					<h3>Radiation</h3>
+				</div>
+				<div class="box-container">
+					<div class="boxes" id="radiation-boxes"></div>
+				</div>
+			</div>
+			<div class="trauma-inputs">
+				<div class="input-pair">
+					<label for="current-radiation">Current</label>
+					<input type="number" id="current-radiation" name="current-radiation" min="0" value="0" oninput="updateRadiationBoxes()">
+				</div>
+				<div class="input-pair">
+					<label for="permanent-radiation">Permanent</label>
+					<input type="number" id="permanent-radiation" name="permanent-radiation" min="0" value="0" oninput="updateRadiationBoxes()">
 				</div>
 			</div>
 		</div>		
@@ -147,15 +168,16 @@
 		</h2>
 
 		<div class="subsection">
-			<h3>Carrying Capacity</h3>
-			<div class="carrying-capacity-info">
-				<div class="input-pair">
-					<label for="carrying-capacity">Carrying Capacity</label>
+			<div class="subsection-header">
+				<div class="carrying-capacity-info">
+					<h3>Carrying Capacity</h3>
 					<input type="number" id="carrying-capacity" name="carrying-capacity" min="1" value="1" oninput="updateEncumbrance()">
 				</div>
+			</div>
+			<div class="capacity-inputs">
 				<div class="input-pair">
-					<label for="total-weight">Total Weight</label>
-					<input type="number" id="total-weight" name="total-weight" readonly>
+					<label for="total-load">Total Load</label>
+					<input type="number" id="total-load" name="total-load" readonly>
 				</div>
 				<div class="input-pair">
 					<label for="encumbrance">Encumbrance</label>
@@ -169,16 +191,15 @@
 			<table class="weapons" id="weapons-table">
 				<tr>
 					<th>Name</th>
-					<th>Bonus</th>
+					<th>Modifiers</th>
 					<th>Damage</th>
-					<th>Crit</th>
 					<th>Range</th>
-					<th>Comments</th>
+					<th>Other</th>
 					<th>Reloads</th>
-					<th>Weight</th>
+					<th>Size</th>
 					<th></th>
 				</tr>
-			</table>
+			</table>			
 			<button onclick="addWeapon()">Add Weapon</button>
 		</div>
 
@@ -186,9 +207,10 @@
 			<h3>Gear</h3>
 			<table class="gear" id="gear-table">
 				<tr>
-					<th>Item</th>
+					<th>Name</th>
 					<th>Bonus</th>
-					<th>Weight</th>
+					<th>Notes</th>
+					<th>Size</th>
 					<th></th>
 				</tr>
 			</table>
@@ -200,9 +222,10 @@
 			<table class="armor" id="armor-table">
 				<tr>
 					<th>Name</th>
-					<th>Rating</th>
-					<th>Comment</th>
-					<th>Weight</th>
+					<th>AR</th>
+					<th>Cover</th>
+					<th>Notes</th>
+					<th>Size</th>
 					<th></th>
 				</tr>
 			</table>
@@ -220,12 +243,13 @@
 		<h2>
 			<i class="fas fa-book"></i>
 			<span class="title-text">Notes</span>
-		</h2>	
-        <textarea id="notes" name="notes" onkeyup="textAreaAdjust(this)"></textarea>
-		<label for="people-met">People I've Met</label>
-        <textarea id="people-met" name="people-met" onkeyup="textAreaAdjust(this)"></textarea>
-		<label for="concept-notes">Concept Notes</label>
-        <textarea id="concept-notes" name="concept-notes" onkeyup="textAreaAdjust(this)"></textarea>
+		</h2>
+		<label for="general-notes">General</label>
+        <textarea id="general-notes" name="general-notes" onkeyup="textAreaAdjust(this)"></textarea>
+		<label for="people-notes">People</label>
+        <textarea id="people-notes" name="people-notes" onkeyup="textAreaAdjust(this)"></textarea>
+		<label for="place-notes">Places</label>
+        <textarea id="place-notes" name="place-notes" onkeyup="textAreaAdjust(this)"></textarea>
     </div>
 
     <div class="section">
@@ -246,22 +270,6 @@
         <button onclick="saveCharacter()">Save Character</button>
         <button onclick="loadCharacter()">Load Character</button>
     </div>
-	
-	<!--
-    <input type="text" id="fileId" placeholder="Enter Google Drive File ID">
-    <button onclick="fetchNPointJSON()">Fetch JSON</button>
-    <br><br>
-    <textarea id="jsonContent" rows="10" cols="50" onkeyup="textAreaAdjust(this)"></textarea>
-    <br>
-    <button onclick="updateNPointJSON()">Update JSON</button>	
-	-->
-	
-	<!--
-	<button id="signin-button" onclick="handleSignInClick()" style="display: none;">Sign In</button>
-	<button id="signout-button" onclick="handleSignOutClick()" style="display: none;">Sign Out</button>
-	<button onclick="fetchJSONGoogle()">Load Character</button>
-	<button onclick="saveCharacter()">Save Character</button>
-	-->
-	
+
 </body>
 </html>

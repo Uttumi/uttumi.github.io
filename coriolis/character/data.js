@@ -5,19 +5,18 @@ let saveTimeout;
 
 document.addEventListener('DOMContentLoaded', () => {
 	
-	// Parse the URL parameter
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
     
     if (id)
 	{
-        // If we have a document ID, set it and load the character
         documentId = id;
         loadCharacter();
     }
 	else
 	{
         console.log('No document ID provided. Using local storage.');
+		loadFromLocalStorage();
     }
 	
     const inputs = document.querySelectorAll('input, textarea');
@@ -46,7 +45,7 @@ async function fetchNPointJSON()
         const data = await response.json();
         processCharacterData(data);
     } catch (error) {
-        console.error('Error fetching JSON:', error);
+        console.log('Error fetching JSON:', error);
         alert('Failed to fetch character data. Loading from local storage.');
         loadFromLocalStorage();
     }
@@ -73,7 +72,7 @@ async function updateNPointJSON(jsonData)
         lastSaveTime = Date.now();
         saveToLocalStorage(jsonData);
     } catch (error) {
-        console.error('Error updating JSON:', error);
+        console.log('Error updating JSON:', error);
         alert('Failed to save character data to npoint. Saved to local storage.');
         saveToLocalStorage(jsonData);
     }
@@ -101,15 +100,12 @@ function saveCharacter() {
         talents: [],
         experience: 0,
         trauma: {},
-        radiation: 0,
         inventory: {
             weapons: [],
             gear: [],
             armor: [],
         },
-        notes: '',
-        peopleMet: '',
-        conceptNotes: '',
+        notes: {},
         cabin: {}
     };
 
@@ -124,16 +120,24 @@ function saveCharacter() {
     }
 
     // Basic Info
-    ['name', 'background', 'concept', 'icon', 'group-concept', 'reputation', 'personal-problem', 'appearance', 'character-notes'].forEach(id => {
-        character.basicInfo[id.replace('-', '')] = safeGetValue(id);
-    });
+	character.basicInfo = {
+		name: safeGetValue('name'),
+		background: safeGetValue('background'),
+		concept: safeGetValue('concept'),
+		icon: safeGetValue('icon'),
+		groupConcept: safeGetValue('group-concept'),
+		reputation: safeGetValue('reputation'),
+		personalProblem: safeGetValue('personal-problem'),
+		appearance: safeGetValue('appearance'),
+		notes: safeGetValue('character-notes')
+	};	
 
     // Attributes and Skills
     for (const [attribute, skills] of Object.entries(skillsByAttribute)) {
         console.log(`Processing attribute: ${attribute}`);
         character.attributesAndSkills[attribute] = {
-            original: parseInt(safeGetValue(`${attribute}-original`)) || 0,
-            current: parseInt(safeGetValue(`${attribute}-current`)) || 0,
+            base: parseInt(safeGetValue(`${attribute}-base`)) || 0,
+            modifier: parseInt(safeGetValue(`${attribute}-mod1`)) || 0,
             skills: {}
         };
 
@@ -163,14 +167,17 @@ function saveCharacter() {
 		fatigue: parseInt(safeGetValue('fatigue')) || 0,
 		resolve: parseInt(safeGetValue('resolve')) || 0,
 		stress: parseInt(safeGetValue('stress')) || 0,
-		radiation: parseInt(safeGetValue('radiation')) || 0,
+		radiation: {
+			current:  parseInt(safeGetValue('current-radiation')) || 0,
+			permanent:  parseInt(safeGetValue('permanent-radiation')) || 0
+		},
 		criticalInjuries: safeGetValue('critical-injuries'),
 	};
 
     // Inventory
 	character.inventory = {
 		carryingCapacity: parseFloat(safeGetValue('carrying-capacity')) || 1,
-		totalWeight: parseFloat(safeGetValue('total-weight')) || 0,
+		totalLoad: parseFloat(safeGetValue('total-load')) || 0,
 		encumbrance: parseFloat(safeGetValue('encumbrance')) || 0,
 		birr: parseInt(safeGetValue('birr')) || 0,
 		weapons: [],
@@ -179,29 +186,56 @@ function saveCharacter() {
 		tinyItems: safeGetValue('tiny-items')
 	};
 
-    // Weapons, Gear, Armor
-    // ['weapons', 'gear', 'armor'].forEach(type => {
-        // const table = document.getElementById(`${type}-table`);
-        // if (table) {
-            // character.inventory[type] = Array.from(table.rows).slice(1).map(row => {
-                // const rowData = {};
-                // Array.from(row.cells).slice(0, -1).forEach((cell, index) => {
-                    // const input = cell.querySelector('input');
-                    // if (input) {
-                        // rowData[table.rows[0].cells[index].textContent.toLowerCase()] = input.type === 'number' ? parseFloat(input.value) || 0 : input.value;
-                    // }
-                // });
-                // return rowData;
-            // });
-        // } else {
-            // console.error(`${type} table not found`);
-        // }
-    // });
+	// Weapons
+	const weaponsTable = document.getElementById('weapons-table');
+	character.inventory.weapons = Array.from(weaponsTable.rows).slice(1).map(row => ({
+		name: row.cells[0].querySelector('div[contenteditable]').textContent,
+		bonus: row.cells[1].querySelectorAll('input')[0].value,
+		ap: row.cells[1].querySelectorAll('input')[1].value,
+		damage: row.cells[2].querySelectorAll('input')[0].value,
+		crit: row.cells[2].querySelectorAll('input')[1].value,
+		range: row.cells[3].querySelector('select').value,
+		rangeValue: row.cells[3].querySelector('input[type="text"]').value,
+		comments: row.cells[4].querySelector('input').value,
+		reloads: row.cells[5].querySelector('input').value,
+		weight: parseFloat(row.cells[6].querySelector('input').value) || 0
+	}));
+
+    // Gear
+	const gearTable = document.getElementById('gear-table');
+	character.inventory.gear = Array.from(gearTable.rows).slice(1).map(row => ({
+		name: row.cells[0].querySelector('input').value,
+		bonus: parseInt(row.cells[1].querySelector('input').value) || 0,
+		notes: row.cells[2].querySelector('input').value,
+		size: parseFloat(row.cells[3].querySelector('input').value) || 0
+	}));
+	
+	// Armor
+    ['armor'].forEach(type => {
+        const table = document.getElementById(`${type}-table`);
+        if (table) {
+            character.inventory[type] = Array.from(table.rows).slice(1).map(row => {
+                const rowData = {};
+                Array.from(row.cells).slice(0, -1).forEach((cell, index) => {
+                    const input = cell.querySelector('input');
+                    if (input) {
+                        rowData[table.rows[0].cells[index].textContent.toLowerCase()] = input.type === 'number' ? parseFloat(input.value) || 0 : input.value;
+                    }
+                });
+                return rowData;
+            });
+        } else {
+            console.error(`${type} table not found`);
+        }
+    });
 
     // Notes and other text areas
-    character.notes = safeGetValue('notes');
-    character.peopleMet = safeGetValue('people-met');
-    character.conceptNotes = safeGetValue('concept-notes');
+	character.notes = {
+		general: safeGetValue('general-notes'),
+		people: safeGetValue('people-notes'),
+		places: safeGetValue('place-notes')
+	};
+	
     character.cabin = {
         description: safeGetValue('cabin-description'),
         gear: safeGetValue('cabin-gear'),
@@ -243,8 +277,8 @@ function processCharacterData(jsonData)
 		// Load attributes and skills
 		for (const [attribute, data] of Object.entries(character.attributesAndSkills))
 		{
-			document.getElementById(`${attribute}-original`).value = data.original;
-			document.getElementById(`${attribute}-current`).value = data.current;
+			document.getElementById(`${attribute}-base`).value = data.base;
+			document.getElementById(`${attribute}-mod1`).value = data.modifier;
 
 			for (const [skillKey, skillValue] of Object.entries(data.skills))
 			{
@@ -257,99 +291,96 @@ function processCharacterData(jsonData)
 		document.getElementById('fatigue').value = character.trauma.fatigue;
 		document.getElementById('resolve').value = character.trauma.resolve;
 		document.getElementById('stress').value = character.trauma.stress;
-		document.getElementById('radiation').value = character.radiation;
+		document.getElementById('current-radiation').value = character.trauma.radiation.current;
+		document.getElementById('permanent-radiation').value = character.trauma.radiation.permanent;
 		document.getElementById('critical-injuries').value = character.trauma.criticalInjuries;
 
 		// Load experience
 		document.getElementById('experience').value = character.experience;				
 		
 		// Load talents
-		const talentsTable = document.getElementById('talents-table');
-		talentsTable.innerHTML = '<tr><th>Talent</th><th>Description</th><th>Action</th></tr>';
-		character.talents.forEach(
-			talent => {
-				const row = talentsTable.insertRow(-1);
-				const cell1 = row.insertCell(0);
-				const cell2 = row.insertCell(1);
-				const cell3 = row.insertCell(2);
-				cell1.innerHTML = `<input type="text" value="${talent.name}">`;
-				cell2.innerHTML = `<input type="text" value="${talent.description}">`;
-				cell3.innerHTML = `<button onclick="removeTalent(this)">Remove</button>`;
-			}
-		);
+        const talentsTable = document.getElementById('talents-table');
+        // Clear existing rows except the header
+        while (talentsTable.rows.length > 1) {
+            talentsTable.deleteRow(1);
+        }
+        character.talents.forEach(talent => {
+            addTalent();
+            const lastRow = talentsTable.rows[talentsTable.rows.length - 1];
+            lastRow.cells[0].querySelector('input').value = talent.name;
+            lastRow.cells[1].querySelector('input').value = talent.description;
+        });
 
 		// Load inventory
 		document.getElementById('carrying-capacity').value = character.inventory.carryingCapacity;
-		document.getElementById('total-weight').value = character.inventory.totalWeight;
+		document.getElementById('total-load').value = character.inventory.totalLoad;
 		document.getElementById('encumbrance').value = character.inventory.encumbrance;
 		document.getElementById('birr').value = character.inventory.birr;
+		document.getElementById('tiny-items').value = character.inventory.tinyItems;
 
 		// Load weapons
 		const weaponsTable = document.getElementById('weapons-table');
-		weaponsTable.innerHTML = '<tr><th>Name</th><th>Bonus</th><th>Damage</th><th>Crit</th><th>Range</th><th>Comments</th><th>Reloads</th><th>Weight</th></tr>';
-		character.inventory.weapons.forEach(
-			weapon => {
-				const row = weaponsTable.insertRow(-1);
-				Object.values(weapon).forEach(
-					(value, index) => {
-						const cell = row.insertCell(index);
-						const input = document.createElement('input');
-						input.type = index === 8 ? 'number' : 'text';
-						input.value = value;
-						input.step = index === 8 ? '0.1' : '1';
-						input.min = '0';
-						cell.appendChild(input);
-					}
-				);
-			}
-		);
+		// Clear existing rows except the header
+		while (weaponsTable.rows.length > 1) {
+			weaponsTable.deleteRow(1);
+		}
+		character.inventory.weapons.forEach(weapon => {
+			addWeapon();
+			const lastRow = weaponsTable.rows[weaponsTable.rows.length - 1];
+			lastRow.cells[0].querySelector('div[contenteditable]').textContent = weapon.name;
+			lastRow.cells[1].querySelectorAll('input')[0].value = weapon.bonus;
+			lastRow.cells[1].querySelectorAll('input')[1].value = weapon.ap;
+			lastRow.cells[2].querySelectorAll('input')[0].value = weapon.damage;
+			lastRow.cells[2].querySelectorAll('input')[1].value = weapon.crit;
+			lastRow.cells[3].querySelector('select').value = weapon.range;
+			updateRangeValue(lastRow.cells[3].querySelector('select'));
+			lastRow.cells[4].querySelector('input').value = weapon.comments;
+			lastRow.cells[5].querySelector('input').value = weapon.reloads;
+			lastRow.cells[6].querySelector('input').value = weapon.weight;
+		});
 
 		// Load gear
 		const gearTable = document.getElementById('gear-table');
-		gearTable.innerHTML = '<tr><th>Item</th><th>Bonus</th><th>Weight</th></tr>';
-		character.inventory.gear.forEach(
-			item => {
-				const row = gearTable.insertRow(-1);
-				const cell1 = row.insertCell(0);
-				const cell2 = row.insertCell(1);
-				const cell3 = row.insertCell(2);
-				cell1.innerHTML = `<input type="text" value="${item.item}">`;
-				cell2.innerHTML = `<input type="text" value="${item.bonus}">`;
-				cell3.innerHTML = `<input type="number" value="${item.weight}" step="0.1" min="0">`;
-			}
-		);
-
-		// Load armor
-		const armorTable = document.getElementById('armor-table');
-		armorTable.innerHTML = '<tr><th>Name</th><th>Rating</th><th>Comment</th><th>Weight</th><th></th></tr>';
-		character.inventory.armor.forEach(armor => {
-			const row = armorTable.insertRow(-1);
-			Object.values(armor).forEach((value, index) => {
-				const cell = row.insertCell(index);
-				const input = document.createElement('input');
-				input.type = index === 1 || index === 3 ? 'number' : 'text';
-				input.value = value;
-				input.step = index === 3 ? '0.1' : '1';
-				input.min = '0';
-				cell.appendChild(input);
-			});
-			const actionCell = row.insertCell(-1);
-			actionCell.innerHTML = '<button onclick="removeArmor(this)">Remove</button>';
+		// Clear existing rows except the header
+		while (gearTable.rows.length > 1) {
+			gearTable.deleteRow(1);
+		}
+		character.inventory.gear.forEach(item => {
+			addGear();
+			const lastRow = gearTable.rows[gearTable.rows.length - 1];
+			lastRow.cells[0].querySelector('input').value = item.name;
+			lastRow.cells[1].querySelector('input').value = item.bonus;
+			lastRow.cells[2].querySelector('input').value = item.notes;
+			lastRow.cells[3].querySelector('input').value = item.size;
 		});
-		
-		document.getElementById('tiny-items').value = character.tinyItems;
+
+        // Load armor
+        const armorTable = document.getElementById('armor-table');
+        // Clear existing rows except the header
+        while (armorTable.rows.length > 1) {
+            armorTable.deleteRow(1);
+        }
+        character.inventory.armor.forEach(armor => {
+            addArmor();
+            const lastRow = armorTable.rows[armorTable.rows.length - 1];
+            lastRow.cells[0].querySelector('input').value = armor.name;
+            lastRow.cells[1].querySelector('input').value = armor.ar;
+            lastRow.cells[2].querySelector('input').value = armor.cover;
+            lastRow.cells[3].querySelector('input').value = armor.notes;
+            lastRow.cells[4].querySelector('input').value = armor.size;
+        });
 
 		// Load notes and other text areas
-		document.getElementById('notes').value = character.notes;
-		document.getElementById('people-met').value = character.peopleMet;
-		document.getElementById('concept-notes').value = character.conceptNotes;
+		document.getElementById('general-notes').value = character.notes.general;
+		document.getElementById('people-notes').value = character.notes.people;
+		document.getElementById('place-notes').value = character.notes.places;
 		document.getElementById('cabin-description').value = character.cabin.description;
 		document.getElementById('cabin-gear').value = character.cabin.gear;
 		document.getElementById('cabin-other').value = character.cabin.other;
 		
 	    // Set default values for attributes and skills if they're not present in the loaded data
         for (const [attribute, data] of Object.entries(character.attributesAndSkills)) {
-            document.getElementById(`${attribute}-original`).value = data.original || 1;
+            document.getElementById(`${attribute}-base`).value = data.base || 1;
             document.getElementById(`${attribute}-current`).value = data.current || 1;
 
             for (const [skillKey, skillValue] of Object.entries(data.skills)) {
@@ -362,7 +393,8 @@ function processCharacterData(jsonData)
         document.getElementById('fatigue').value = character.trauma.fatigue || 0;
         document.getElementById('resolve').value = character.trauma.resolve || 1;
         document.getElementById('stress').value = character.trauma.stress || 0;
-        document.getElementById('radiation').value = character.radiation || 0;
+        document.getElementById('current-radiation').value = character.trauma.radiation.current || 0;
+		document.getElementById('permanent-radiation').value = character.trauma.radiation.permanent || 0;
         document.getElementById('experience').value = character.experience || 0;
         document.getElementById('birr').value = character.inventory.birr || 0;
         document.getElementById('carrying-capacity').value = character.inventory.carryingCapacity || 1;
@@ -370,8 +402,11 @@ function processCharacterData(jsonData)
 		
 		initializeHP();
 		initializeMP();
-		initializeTables();
-		updateEncumbrance();
+		initializeRadiation();
+
+		calculateTotalLoad();
+		
+		updateAttributeModifiers();
 	}
 	else
 	{

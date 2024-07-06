@@ -43,40 +43,14 @@ document.addEventListener(
 
 		initializeHP();
 		initializeMP();
-
-		// initializeTables();
+		initializeRadiation();
 
 		// Add event listeners for weight calculation
-		document.getElementById('weapons-table').addEventListener('input', calculateTotalWeight);
-		document.getElementById('gear-table').addEventListener('input', calculateTotalWeight);
-		document.getElementById('armor-table').addEventListener('input', calculateTotalWeight);
+		document.getElementById('weapons-table').addEventListener('input', calculateTotalLoad);
+		document.getElementById('gear-table').addEventListener('input', calculateTotalLoad);
+		document.getElementById('armor-table').addEventListener('input', calculateTotalLoad);
 	}
 );
-
-function initializeTables()
-{
-    initializeTable('weapons-table', ['Name', 'Bonus', 'Damage', 'Crit', 'Range', 'Comments', 'Reloads', 'Weight']);
-    initializeTable('gear-table', ['Item', 'Bonus', 'Weight']);
-    initializeTable('armor-table', ['Name', 'Rating', 'Comment', 'Weight']);
-    initializeTable('talents-table', ['Talent', 'Description']);
-}
-
-function initializeTable(tableId, headers)
-{
-    const table = document.getElementById(tableId);
-	table.textContent = '';
-    const headerRow = table.insertRow(0);
-    headers.forEach(
-	header => 
-		{
-			const th = document.createElement('th');
-			th.textContent = header;
-			headerRow.appendChild(th);
-		}
-	);
-    const removeHeader = document.createElement('th');
-    headerRow.appendChild(removeHeader);
-}
 
 function addRow(tableId, inputTypes) {
     const table = document.getElementById(tableId);
@@ -96,29 +70,6 @@ function addRow(tableId, inputTypes) {
     return row;
 }
 
-// function addRow(tableId, inputTypes) {
-    // const table = document.getElementById(tableId);
-    // const row = table.insertRow(-1);
-    // inputTypes.forEach(
-		// (type, index) => {
-			// const cell = row.insertCell();
-			// const input = document.createElement('input');
-			// input.type = type;
-			// input.name = table.rows[0].cells[index].textContent.toLowerCase();
-			// if (type === 'number') {
-				// input.step = '0.1';
-				// input.min = '0';
-			// }
-			// cell.appendChild(input);
-		// }
-	// );
-    // addRemoveButton(row);
-    // if (tableId !== 'talents-table')
-	// {
-        // calculateTotalWeight();
-    // }
-// }
-
 function addTalent() {
     addRow('talents-table', ['text', 'text']);
 }
@@ -130,54 +81,126 @@ function removeTalent(button)
 }
 
 function addWeapon() {
-    const row = addRow('weapons-table', ['text', 'text', 'number', 'number', 'text', 'text', 'text', 'number']);
-    row.cells[2].querySelector('input').min = 0; // Damage
-    row.cells[2].querySelector('input').value = 0;
-    row.cells[3].querySelector('input').min = 0; // Crit
-    row.cells[3].querySelector('input').value = 0;
-    row.cells[7].querySelector('input').min = 0; // Weight
-    row.cells[7].querySelector('input').value = 0;
-    row.cells[7].querySelector('input').step = 0.1;
-    calculateTotalWeight();
+    const row = addRow('weapons-table', ['text', 'text', 'text', 'text', 'text', 'text', 'number']);
+    
+    // Name cell
+	//row.cells[0].innerHTML = '<textarea placeholder="Name" rows="2" style="resize: none;"></textarea>';
+	row.cells[0].innerHTML = '<div contenteditable="true">Name</div>';
+
+    // Modifiers cell
+    row.cells[1].innerHTML = `
+        <div class="weapon-stat">
+            <span class="stat-label">Bonus</span>
+            <input type="number" placeholder=0>
+        </div>
+        <div class="weapon-stat">
+            <span class="stat-label">AP</span>
+            <input type="number" placeholder="0">
+        </div>
+    `;
+
+    // Damage cell
+    row.cells[2].innerHTML = `
+        <div class="weapon-stat">
+            <span class="stat-label">Dmg</span>
+            <input type="number" placeholder=0>
+        </div>
+        <div class="weapon-stat">
+            <span class="stat-label">Crit</span>
+            <input type="number" placeholder=0>
+        </div>
+    `;
+
+    // Range cell
+	row.cells[3].innerHTML = `
+		<div class="range-container">
+			<select onchange="updateRangeValue(this)">
+				<option value="engaged">ENGAGED</option>
+				<option value="short">SHORT</option>
+				<option value="medium" selected>MEDIUM</option>
+				<option value="long">LONG</option>
+				<option value="far">FAR</option>
+				<option value="extreme">EXTREME</option>
+				<option value="extreme+">EXTREME+</option>
+				<option value="extreme++">EXTREME++</option>
+				<option value="extreme+++">EXTREME+++</option>
+			</select>
+			<input type="text" class="range-value" readonly>
+		</div>
+	`;
+
+    // Comments cell
+    row.cells[4].innerHTML = '<input type="text" placeholder="Comments">';
+
+    // Reloads cell
+    row.cells[5].innerHTML = '<input type="text" placeholder="Reloads">';
+
+    // Weight cell
+    row.cells[6].querySelector('input').step = 0.1;
+    row.cells[6].querySelector('input').min = 0;
+    row.cells[6].querySelector('input').placeholder = 'Weight';
+
+    // Initialize the range value
+    updateRangeValue(row.cells[3].querySelector('select'));
+
+    calculateTotalLoad();
+}
+
+function updateRangeValue(selectElement) {
+    const rangeValues = {
+        'engaged': '2,5m [1]',
+        'short': '5m [2]',
+        'medium': '25m [10]',
+        'long': '50m [20]',
+        'far': '100m [40]',
+        'extreme': '1000m [400]',
+		'extreme+': '2000m [800]',
+		'extreme++': '3000m [1200]',
+		'extreme+++': '4000m [1600]'
+    };
+    const valueInput = selectElement.parentNode.querySelector('.range-value');
+    valueInput.value = rangeValues[selectElement.value];
 }
 
 function addGear() {
-    const row = addRow('gear-table', ['text', 'text', 'number']);
-    row.cells[2].querySelector('input').min = 0; // Weight
-    row.cells[2].querySelector('input').value = 0;
-    row.cells[2].querySelector('input').step = 0.1;
-    calculateTotalWeight();
+    const row = addRow('gear-table', ['text', 'number', 'text', 'number']);
+    row.cells[3].querySelector('input').min = 0; // Size
+    row.cells[3].querySelector('input').value = 0;
+    row.cells[3].querySelector('input').step = 0.1;
+    calculateTotalLoad();
 }
 
 function addArmor() {
-    const row = addRow('armor-table', ['text', 'number', 'text', 'number']);
-    row.cells[1].querySelector('input').min = 0; // Rating
+    const row = addRow('armor-table', ['text', 'number', 'number', 'text', 'number']);
+    row.cells[1].querySelector('input').min = 0; // AR
     row.cells[1].querySelector('input').value = 0;
-    row.cells[3].querySelector('input').min = 0; // Weight
-    row.cells[3].querySelector('input').value = 0;
-    row.cells[3].querySelector('input').step = 0.1;
-    calculateTotalWeight();
+    row.cells[2].querySelector('input').min = 0; // Cover
+    row.cells[2].querySelector('input').value = 0;	
+    row.cells[4].querySelector('input').min = 0; // Size
+    row.cells[4].querySelector('input').value = 0;
+    row.cells[4].querySelector('input').step = 0.1;
+    calculateTotalLoad();
 }
 
 function removeWeapon(button)
 {
 	const row = button.parentNode.parentNode;
 	row.parentNode.removeChild(row);
-	calculateTotalWeight();
+	calculateTotalLoad();
 }
 
 function removeGear(button)
 {
 	const row = button.parentNode.parentNode;
 	row.parentNode.removeChild(row);
-	calculateTotalWeight();
+	calculateTotalLoad();
 }
 
 function removeArmor(button)
 {
     const row = button.parentNode.parentNode;
     row.parentNode.removeChild(row);
-    calculateTotalWeight();
+    calculateTotalLoad();
 }
 
 function addRemoveButton(row) {
@@ -187,44 +210,45 @@ function addRemoveButton(row) {
     button.className = 'remove-btn';
     button.onclick = function() {
         row.parentNode.removeChild(row);
-        calculateTotalWeight();
+        calculateTotalLoad();
     };
     cell.appendChild(button);
 }
 
-function calculateTotalWeight()
+function calculateTotalLoad()
 {
-    let totalWeight = 0;
+    let totalLoad = 0;
 
     // Calculate weapons weight
     const weaponsTable = document.getElementById("weapons-table");
     Array.from(weaponsTable.rows).slice(1).forEach(row => {
-        totalWeight += parseFloat(row.cells[7].querySelector('input').value) || 0;
+        totalLoad += parseFloat(row.cells[6].querySelector('input').value) || 0;
     });
 
     // Calculate gear weight
     const gearTable = document.getElementById("gear-table");
     Array.from(gearTable.rows).slice(1).forEach(row => {
-        totalWeight += parseFloat(row.cells[2].querySelector('input').value) || 0;
+        totalLoad += parseFloat(row.cells[3].querySelector('input').value) || 0;
     });
 
     // Calculate armor weight
     const armorTable = document.getElementById("armor-table");
     Array.from(armorTable.rows).slice(1).forEach(row => {
-        totalWeight += parseFloat(row.cells[3].querySelector('input').value) || 0;
+        totalLoad += parseFloat(row.cells[4].querySelector('input').value) || 0;
     });
 
-    document.getElementById('total-weight').value = totalWeight.toFixed(1);
+    document.getElementById('total-load').value = totalLoad.toFixed(1);
 	updateEncumbrance();
 }
 
 function updateEncumbrance() {
-    const totalWeight = parseFloat(document.getElementById('total-weight').value) || 0;
+    const totalLoad = parseFloat(document.getElementById('total-load').value) || 0;
     const carryingCapacity = Math.max(1, parseFloat(document.getElementById('carrying-capacity').value) || 1);
-    const encumbrance = Math.max(0, Math.ceil(totalWeight / carryingCapacity) - 1); //.toFixed(0);
+    const encumbrance = Math.max(0, Math.ceil(totalLoad / carryingCapacity) - 1); //.toFixed(0);
     document.getElementById('encumbrance').value = encumbrance;
+	
+	updateAttributeModifiers();
 }
-
 
 function generateAttributeSkillHTML() {
     const container = document.getElementById('attributes-skills-container');
@@ -235,11 +259,23 @@ function generateAttributeSkillHTML() {
             <div class="attribute-section">
                 <div class="attribute-header">
                     <h3>${attribute.charAt(0).toUpperCase() + attribute.slice(1)}</h3>
-                    <div class="attribute-values">
-                        <input type="number" id="${attribute}-original" name="${attribute}-original" min="1" value="1">
-                        <input type="number" id="${attribute}-current" name="${attribute}-current" min="1" value="1">
+                    <div class="attribute-base">
+                        <input type="number" id="${attribute}-base" name="${attribute}-base" min="0" value="0">
                     </div>
                 </div>
+				<div class="attribute-values">
+					<div class="attribute-modifiers">
+						<span class="modifiers-label">Modifiers</span>
+						<div class="modifiers-inputs">
+							<input type="number" id="${attribute}-mod1" name="${attribute}-mod1" value="0">
+							<input type="number" id="${attribute}-mod2" name="${attribute}-mod2" value="0" readonly>
+						</div>
+					</div>
+					<div class="attribute-current">
+						<span>Current</span>
+						<input type="number" id="${attribute}-current" name="${attribute}-current" value="0" readonly>
+					</div>
+				</div>
                 <div class="skills-subsection">
                     ${Object.entries(skills).map(([key, value]) => `
                         <div class="skill-row">
@@ -253,40 +289,71 @@ function generateAttributeSkillHTML() {
     }
 
     container.innerHTML = html;
+
+    // Add event listeners to update current value
+    for (const attribute of Object.keys(skillsByAttribute)) {
+        const base = document.getElementById(`${attribute}-base`);
+        const mod1 = document.getElementById(`${attribute}-mod1`);
+        const mod2 = document.getElementById(`${attribute}-mod2`);
+        const current = document.getElementById(`${attribute}-current`);
+
+        function updateCurrent() {
+            const baseValue = Math.max(0, parseInt(base.value) || 0);
+            const mod1Value = parseInt(mod1.value) || 0;
+            const mod2Value = parseInt(mod2.value) || 0;
+            current.value = Math.max(0, baseValue + mod1Value + mod2Value);
+        }
+
+        base.addEventListener('input', updateCurrent);
+        mod1.addEventListener('input', updateCurrent);
+
+        // Initial update
+        updateCurrent();
+    }
+
+	document.getElementById('strength').addEventListener('input', updateCarryingCapacity);
+	document.getElementById('constitution-base').addEventListener('input', updateCarryingCapacity);
+
+    // Add event listeners for exhaustion, encumbrance, and panic
+    document.getElementById('exhaustion').addEventListener('input', updateAttributeModifiers);
+    document.getElementById('encumbrance').addEventListener('input', updateAttributeModifiers);
+    document.getElementById('panic').addEventListener('input', updateAttributeModifiers);
+
+    updateAttributeModifiers();
 }
 
-function generateSkillHTML(container, items)
-{
-	let html = '';
-	for (const [key, value] of Object.entries(items)) {
-		html += `
-			<div class="skill-row">
-				<label for="${key}">${value.label}:</label>
-				<input type="number" id="${key}" name="${key}" min="0" value="0">
-			</div>
-		`;
-	}
-	document.getElementById(container).innerHTML = html;
-}
+// function updateModifiers() {
+    // const exhaustion = parseInt(document.getElementById('exhaustion').value) || 0;
+    // const encumbrance = parseInt(document.getElementById('encumbrance').value) || 0;
+    // const panic = parseInt(document.getElementById('panic').value) || 0;
 
-function getAttributeSkillValues(items)
-{
-	const values = {};
-	for (const key of Object.keys(items)) {
-		values[key] = {
-			original: parseInt(document.getElementById(`${key}-original`).value) || 0,
-			current: parseInt(document.getElementById(`${key}-current`).value) || 0
-		};
-	}
-	return values;
-}
+    // const physicalPenalty = -(exhaustion + encumbrance);
+    // const mentalPenalty = -panic;
 
-function setAttributeSkillValues(items, values)
-{
-	for (const key of Object.keys(items)) {
-		document.getElementById(`${key}-original`).value = values[key].original;
-		document.getElementById(`${key}-current`).value = values[key].current;
-	}
+    // document.getElementById('constitution-mod2').value = physicalPenalty;
+    // document.getElementById('grace-mod2').value = physicalPenalty;
+    // document.getElementById('wits-mod2').value = mentalPenalty;
+    // document.getElementById('empathy-mod2').value = mentalPenalty;
+
+//    Update current values
+    // for (const attribute of Object.keys(skillsByAttribute)) {
+        // const base = document.getElementById(`${attribute}-base`);
+        // const mod1 = document.getElementById(`${attribute}-mod1`);
+        // const mod2 = document.getElementById(`${attribute}-mod2`);
+        // const current = document.getElementById(`${attribute}-current`);
+
+        // const baseValue = Math.max(0, parseInt(base.value) || 0);
+        // const mod1Value = parseInt(mod1.value) || 0;
+        // const mod2Value = parseInt(mod2.value) || 0;
+        // current.value = Math.max(0, baseValue + mod1Value + mod2Value);
+    // }
+// }
+
+function updateCarryingCapacity() {
+	const strength = parseInt(document.getElementById('strength').value) || 0;
+	const constitution = parseInt(document.getElementById('constitution-base').value) || 0;
+
+	document.getElementById('carrying-capacity').value = strength + constitution;
 }
 
 function textAreaAdjust(element)
@@ -336,6 +403,8 @@ function updateHPBoxes() {
             box.className = 'box';
         }
     });
+	
+	updateAttributeModifiers();
 }
 
 function initializeMP() {
@@ -379,4 +448,91 @@ function updateMPBoxes() {
             box.className = 'box';
         }
     });
+	
+	updateAttributeModifiers();
+}
+
+function initializeRadiation() {
+    createRadiationBoxes();
+    updateRadiationBoxes();
+}
+
+function createRadiationBoxes() {
+    const container = document.getElementById('radiation-boxes');
+    container.innerHTML = '';
+    for (let i = 0; i < 4; i++) {
+        const group = document.createElement('div');
+        group.className = 'box-group ';
+        for (let j = 0; j < 5; j++) {
+            const box = document.createElement('div');
+            box.className = 'box';
+            group.appendChild(box);
+        }
+        container.appendChild(group);
+    }
+}
+
+function updateRadiationBoxes()
+{
+    let current = parseInt(document.getElementById('current-radiation').value);
+    const permanent = parseInt(document.getElementById('permanent-radiation').value) || 0;
+    const boxes = document.getElementById('radiation-boxes').querySelectorAll('.box');
+
+	if(current == NaN)
+	{
+		current = permanent;
+	}
+		
+	if(current < permanent)
+	{		
+		current = permanent;
+		document.getElementById('current-radiation').value = permanent;
+	}
+
+    boxes.forEach((box, index) => {
+        if (index < current) {
+            if (index < permanent) {
+                box.className = 'box radiation-box full-box';
+            } else {
+                box.className = 'box radiation-box empty-box';
+            }
+        } else {
+            box.className = 'box';
+        }
+    });
+}
+
+function updateAttributeModifiers()
+{
+	const constitution = document.getElementById('constitution-mod2');
+	const grace = document.getElementById('grace-mod2');
+	const empathy = document.getElementById('empathy-mod2');
+	const wits = document.getElementById('wits-mod2');
+	
+	const exhaustion = parseInt(document.getElementById('exhaustion').value) || 0;
+	const panic = parseInt(document.getElementById('panic').value) || 0;
+	const encumbrance = parseInt(document.getElementById('encumbrance').value) || 0;
+	
+	constitution.value = -(exhaustion + encumbrance);
+	grace.value = -(exhaustion + encumbrance);
+	empathy.value = -(panic);
+	wits.value = -(panic);
+	
+	updateAttributeCurrentValues();
+}
+
+function updateAttributeCurrentValues()
+{
+    for (const attribute of Object.keys(skillsByAttribute))
+	{
+        const base = document.getElementById(`${attribute}-base`);
+        const mod1 = document.getElementById(`${attribute}-mod1`);
+        const mod2 = document.getElementById(`${attribute}-mod2`);
+        const current = document.getElementById(`${attribute}-current`);
+
+        const baseValue = Math.max(0, parseInt(base.value) || 0);
+        const mod1Value = parseInt(mod1.value) || 0;
+        const mod2Value = parseInt(mod2.value) || 0;
+        current.value = Math.max(0, baseValue + mod1Value + mod2Value);
+    }
 }
