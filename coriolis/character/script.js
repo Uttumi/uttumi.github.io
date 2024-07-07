@@ -81,16 +81,11 @@ function removeTalent(button)
 }
 
 function addWeapon() {
-    const row = addRow('weapons-table', ['text', 'text', 'text', 'text', 'text', 'text', 'number']);
+    const row = addRow('weapons-table', ['text', 'text', 'text', 'text', 'text', 'number']);
     
     // Name cell
-	row.cells[0].innerHTML = '<textarea placeholder="Name" rows="1"></textarea>';
+	row.cells[0].innerHTML = '<textarea placeholder="Name" rows="1" onkeyup="textAreaAdjust(this)"></textarea>';
 	//row.cells[0].innerHTML = '<div contenteditable="true">Name</div>';
-
-	let area = row.cells[0].childNodes[0];
-
-	area.addEventListener("input", textAreaAdjust);
-	area.addEventListener("focus", textAreaAdjust);
 
     // Modifiers cell
     row.cells[1].innerHTML = `
@@ -136,16 +131,11 @@ function addWeapon() {
 
     // Notes cell
     //row.cells[4].innerHTML = '<input type="text" placeholder="Comments">';
-	row.cells[4].innerHTML = '<textarea placeholder="" rows="1" onfocus="centerScroll()"></textarea>';
-
-    // Reloads cell
-    //row.cells[5].innerHTML = '<input type="text" placeholder="Reloads">';
-	row.cells[5].innerHTML = '<textarea placeholder="" rows="1" onfocus="centerScroll()"></textarea>';
+	row.cells[4].innerHTML = '<textarea placeholder="" rows="1" onkeyup="textAreaAdjust(this)"></textarea>';
 
     // Weight cell
-    row.cells[6].querySelector('input').step = 0.1;
-    row.cells[6].querySelector('input').min = 0;
-    row.cells[6].querySelector('input').placeholder = 'Weight';
+    row.cells[5].querySelector('input').step = 0.5;
+    row.cells[5].querySelector('input').min = 0;
 
     // Initialize the range value
     updateRangeValue(row.cells[3].querySelector('select'));
@@ -229,7 +219,7 @@ function calculateTotalLoad()
     // Calculate weapons weight
     const weaponsTable = document.getElementById("weapons-table");
     Array.from(weaponsTable.rows).slice(1).forEach(row => {
-        totalLoad += parseFloat(row.cells[6].querySelector('input').value) || 0;
+        totalLoad += parseFloat(row.cells[5].querySelector('input').value) || 0;
     });
 
     // Calculate gear weight
@@ -523,19 +513,28 @@ function centerScroll(e)
 	target.scrollTo(0, (target.scrollHeight - target.offsetHeight) / 2);
 }
 
-function textAreaAdjust(e) {
+function updateTextAreas()
+{
+	const textAreas = document.querySelectorAll('textarea');
 	
-	const element = e.currentTarget;
-	
-    element.style.height = "auto";
-    element.style.height = (element.scrollHeight) + "px";
-    
-    // Center text vertically if content height is less than minimum height
-    if (element.scrollHeight < parseInt(getComputedStyle(element).minHeight)) {
-        element.style.display = "flex";
-        element.style.alignItems = "center";
-    } else {
-        element.style.display = "block";
-        element.style.alignItems = "normal";
-    }
+	textAreas.forEach(textArea => {
+		textAreaAdjust(textArea);
+	});
 }
+
+// function textAreaAdjust(e) {
+	
+	// const element = e.currentTarget;
+	
+    // element.style.height = "auto";
+    // element.style.height = (element.scrollHeight) + "px";
+    
+    // // Center text vertically if content height is less than minimum height
+    // if (element.scrollHeight < parseInt(getComputedStyle(element).minHeight)) {
+        // element.style.display = "flex";
+        // element.style.alignItems = "center";
+    // } else {
+        // element.style.display = "block";
+        // element.style.alignItems = "normal";
+    // }
+// }

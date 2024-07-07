@@ -38,7 +38,11 @@ function scheduleAutoSave()
 async function fetchNPointJSON()
 {
     try {
-        const response = await fetch(`https://api.npoint.io/${documentId}`);
+		const url = `https://api.npoint.io/${documentId}`;
+
+		console.log(`Trying to get json from ${url}`);
+		
+        const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -189,16 +193,16 @@ function saveCharacter() {
 	// Weapons
 	const weaponsTable = document.getElementById('weapons-table');
 	character.inventory.weapons = Array.from(weaponsTable.rows).slice(1).map(row => ({
-		name: row.cells[0].querySelector('div[contenteditable]').textContent,
+		// name: row.cells[0].querySelector('div[contenteditable]').textContent,
+		name: row.cells[0].querySelector('textarea').value,
 		bonus: row.cells[1].querySelectorAll('input')[0].value,
 		ap: row.cells[1].querySelectorAll('input')[1].value,
 		damage: row.cells[2].querySelectorAll('input')[0].value,
 		crit: row.cells[2].querySelectorAll('input')[1].value,
 		range: row.cells[3].querySelector('select').value,
 		rangeValue: row.cells[3].querySelector('input[type="text"]').value,
-		comments: row.cells[4].querySelector('input').value,
-		reloads: row.cells[5].querySelector('input').value,
-		weight: parseFloat(row.cells[6].querySelector('input').value) || 0
+		comments: row.cells[4].querySelector('textarea').value,
+		weight: parseFloat(row.cells[5].querySelector('input').value) || 0
 	}));
 
     // Gear
@@ -259,8 +263,6 @@ function processCharacterData(jsonData)
 {
 	if (jsonData)
 	{
-		//const character = JSON.parse(jsonData);
-
 		const character = jsonData;
 
 		// Load basic info
@@ -327,16 +329,15 @@ function processCharacterData(jsonData)
 		character.inventory.weapons.forEach(weapon => {
 			addWeapon();
 			const lastRow = weaponsTable.rows[weaponsTable.rows.length - 1];
-			lastRow.cells[0].querySelector('div[contenteditable]').textContent = weapon.name;
+			lastRow.cells[0].querySelector('textarea').textContent = weapon.name;
 			lastRow.cells[1].querySelectorAll('input')[0].value = weapon.bonus;
 			lastRow.cells[1].querySelectorAll('input')[1].value = weapon.ap;
 			lastRow.cells[2].querySelectorAll('input')[0].value = weapon.damage;
 			lastRow.cells[2].querySelectorAll('input')[1].value = weapon.crit;
 			lastRow.cells[3].querySelector('select').value = weapon.range;
 			updateRangeValue(lastRow.cells[3].querySelector('select'));
-			lastRow.cells[4].querySelector('input').value = weapon.comments;
-			lastRow.cells[5].querySelector('input').value = weapon.reloads;
-			lastRow.cells[6].querySelector('input').value = weapon.weight;
+			lastRow.cells[4].querySelector('textarea').value = weapon.comments;
+			lastRow.cells[5].querySelector('input').value = weapon.weight;
 		});
 
 		// Load gear
@@ -407,6 +408,8 @@ function processCharacterData(jsonData)
 		calculateTotalLoad();
 		
 		updateAttributeModifiers();
+		
+		updateTextAreas();
 	}
 	else
 	{
