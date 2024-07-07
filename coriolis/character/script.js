@@ -57,21 +57,42 @@ function addRow(tableId, inputTypes) {
     const row = table.insertRow(-1);
     inputTypes.forEach((type, index) => {
         const cell = row.insertCell();
-        const input = document.createElement('input');
-        input.type = type;
-        input.name = table.rows[0].cells[index].textContent.toLowerCase();
-        if (type === 'number') {
-            input.min = 0;
-            input.value = 0;
-        }
-        cell.appendChild(input);
+		
+		if(type === 'textarea')
+		{
+	        // const textarea = document.createElement('textarea');
+
+			// textarea.innerHTML = '<textarea placeholder="Name" rows="1" onchange="scheduleAutoSave"></textarea>';
+
+			// // input.addEventListener('change', scheduleAutoSave);
+			
+			// cell.appendChild(textarea);
+			
+			cell.innerHTML = '<textarea placeholder="Name" rows="1" onkeyup="textAreaAdjust(this)"></textarea>';
+		}
+		else
+		{
+	        const input = document.createElement('input');
+			input.type = type;
+			input.name = table.rows[0].cells[index].textContent.toLowerCase();
+			if (type === 'number') {
+				input.min = 0;
+				input.value = 0;
+			}
+
+			input.addEventListener('change', scheduleAutoSave);
+
+			cell.appendChild(input);
+		} 
     });
     addRemoveButton(row);
     return row;
 }
 
 function addTalent() {
-    addRow('talents-table', ['text', 'text']);
+    const row = addRow('talents-table', ['textarea', 'textarea']);
+	
+	addChangeListeners(row);
 }
 
 function removeTalent(button)
@@ -81,12 +102,8 @@ function removeTalent(button)
 }
 
 function addWeapon() {
-    const row = addRow('weapons-table', ['text', 'text', 'text', 'text', 'text', 'number']);
+    const row = addRow('weapons-table', ['textarea', 'text', 'text', 'text', 'textarea', 'number']);
     
-    // Name cell
-	row.cells[0].innerHTML = '<textarea placeholder="Name" rows="1" onkeyup="textAreaAdjust(this)"></textarea>';
-	//row.cells[0].innerHTML = '<div contenteditable="true">Name</div>';
-
     // Modifiers cell
     row.cells[1].innerHTML = `
         <div class="weapon-stat">
@@ -129,18 +146,17 @@ function addWeapon() {
 		</div>
 	`;
 
-    // Notes cell
-    //row.cells[4].innerHTML = '<input type="text" placeholder="Comments">';
-	row.cells[4].innerHTML = '<textarea placeholder="" rows="1" onkeyup="textAreaAdjust(this)"></textarea>';
-
-    // Weight cell
+    // Size cell
     row.cells[5].querySelector('input').step = 0.5;
+	row.cells[5].querySelector('input').value = 1;
     row.cells[5].querySelector('input').min = 0;
 
     // Initialize the range value
     updateRangeValue(row.cells[3].querySelector('select'));
 
     calculateTotalLoad();
+	
+	addChangeListeners(row);
 }
 
 function updateRangeValue(selectElement) {
@@ -160,23 +176,33 @@ function updateRangeValue(selectElement) {
 }
 
 function addGear() {
-    const row = addRow('gear-table', ['text', 'number', 'text', 'number']);
+    const row = addRow('gear-table', ['textarea', 'number', 'textarea', 'number']);
+	
     row.cells[3].querySelector('input').min = 0; // Size
-    row.cells[3].querySelector('input').value = 0;
-    row.cells[3].querySelector('input').step = 0.1;
+    row.cells[3].querySelector('input').value = 1;
+    row.cells[3].querySelector('input').step = 0.5;
+	
     calculateTotalLoad();
+	
+	addChangeListeners(row);
 }
 
 function addArmor() {
-    const row = addRow('armor-table', ['text', 'number', 'number', 'text', 'number']);
+    const row = addRow('armor-table', ['textarea', 'number', 'number', 'textarea', 'number']);
+	
     row.cells[1].querySelector('input').min = 0; // AR
     row.cells[1].querySelector('input').value = 0;
+	
     row.cells[2].querySelector('input').min = 0; // Cover
-    row.cells[2].querySelector('input').value = 0;	
+    row.cells[2].querySelector('input').value = 6;	
+	
     row.cells[4].querySelector('input').min = 0; // Size
-    row.cells[4].querySelector('input').value = 0;
-    row.cells[4].querySelector('input').step = 0.1;
+    row.cells[4].querySelector('input').value = 1;
+    row.cells[4].querySelector('input').step = 0.5;
+	
     calculateTotalLoad();
+	
+	addChangeListeners(row);
 }
 
 function removeWeapon(button)

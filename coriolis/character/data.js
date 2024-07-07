@@ -19,11 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		loadFromLocalStorage();
     }
 	
-    const inputs = document.querySelectorAll('input, textarea');
+	addChangeListeners(document);
+});
+
+function addChangeListeners(element)
+{
+	const inputs = element.querySelectorAll('input, textarea, select');
     inputs.forEach(input => {
         input.addEventListener('change', scheduleAutoSave);
-    });
-});
+    });	
+}
 
 function scheduleAutoSave()
 {
@@ -155,8 +160,8 @@ function saveCharacter() {
     const talentsTable = document.getElementById('talents-table');
     if (talentsTable) {
         character.talents = Array.from(talentsTable.rows).slice(1).map(row => ({
-            name: row.cells[0].querySelector('input').value,
-            description: row.cells[1].querySelector('input').value
+            name: row.cells[0].querySelector('textarea').value,
+            description: row.cells[1].querySelector('textarea').value
         }));
     } else {
         console.error("Talents table not found");
@@ -201,37 +206,46 @@ function saveCharacter() {
 		crit: row.cells[2].querySelectorAll('input')[1].value,
 		range: row.cells[3].querySelector('select').value,
 		rangeValue: row.cells[3].querySelector('input[type="text"]').value,
-		comments: row.cells[4].querySelector('textarea').value,
+		notes: row.cells[4].querySelector('textarea').value,
 		weight: parseFloat(row.cells[5].querySelector('input').value) || 0
 	}));
 
     // Gear
 	const gearTable = document.getElementById('gear-table');
 	character.inventory.gear = Array.from(gearTable.rows).slice(1).map(row => ({
-		name: row.cells[0].querySelector('input').value,
+		name: row.cells[0].querySelector('textarea').value,
 		bonus: parseInt(row.cells[1].querySelector('input').value) || 0,
-		notes: row.cells[2].querySelector('input').value,
+		notes: row.cells[2].querySelector('textarea').value,
 		size: parseFloat(row.cells[3].querySelector('input').value) || 0
 	}));
 	
 	// Armor
-    ['armor'].forEach(type => {
-        const table = document.getElementById(`${type}-table`);
-        if (table) {
-            character.inventory[type] = Array.from(table.rows).slice(1).map(row => {
-                const rowData = {};
-                Array.from(row.cells).slice(0, -1).forEach((cell, index) => {
-                    const input = cell.querySelector('input');
-                    if (input) {
-                        rowData[table.rows[0].cells[index].textContent.toLowerCase()] = input.type === 'number' ? parseFloat(input.value) || 0 : input.value;
-                    }
-                });
-                return rowData;
-            });
-        } else {
-            console.error(`${type} table not found`);
-        }
-    });
+	const armorTable = document.getElementById('armor-table');
+	character.inventory.armor = Array.from(armorTable.rows).slice(1).map(row => ({
+		name: row.cells[0].querySelector('textarea').value,
+		ar: parseInt(row.cells[1].querySelector('input').value) || 0,
+		cover: parseInt(row.cells[2].querySelector('input').value) || 0,
+		notes: row.cells[3].querySelector('textarea').value,
+		size: parseFloat(row.cells[4].querySelector('input').value) || 0
+	}));
+	
+    // ['armor'].forEach(type => {
+        // const table = document.getElementById(`${type}-table`);
+        // if (table) {
+            // character.inventory[type] = Array.from(table.rows).slice(1).map(row => {
+                // const rowData = {};
+                // Array.from(row.cells).slice(0, -1).forEach((cell, index) => {
+                    // const input = cell.querySelector('input');
+                    // if (input) {
+                        // rowData[table.rows[0].cells[index].textContent.toLowerCase()] = input.type === 'number' ? parseFloat(input.value) || 0 : input.value;
+                    // }
+                // });
+                // return rowData;
+            // });
+        // } else {
+            // console.error(`${type} table not found`);
+        // }
+    // });
 
     // Notes and other text areas
 	character.notes = {
@@ -309,8 +323,8 @@ function processCharacterData(jsonData)
         character.talents.forEach(talent => {
             addTalent();
             const lastRow = talentsTable.rows[talentsTable.rows.length - 1];
-            lastRow.cells[0].querySelector('input').value = talent.name;
-            lastRow.cells[1].querySelector('input').value = talent.description;
+            lastRow.cells[0].querySelector('textarea').value = talent.name;
+            lastRow.cells[1].querySelector('textarea').value = talent.description;
         });
 
 		// Load inventory
@@ -336,7 +350,7 @@ function processCharacterData(jsonData)
 			lastRow.cells[2].querySelectorAll('input')[1].value = weapon.crit;
 			lastRow.cells[3].querySelector('select').value = weapon.range;
 			updateRangeValue(lastRow.cells[3].querySelector('select'));
-			lastRow.cells[4].querySelector('textarea').value = weapon.comments;
+			lastRow.cells[4].querySelector('textarea').value = weapon.notes;
 			lastRow.cells[5].querySelector('input').value = weapon.weight;
 		});
 
@@ -349,9 +363,9 @@ function processCharacterData(jsonData)
 		character.inventory.gear.forEach(item => {
 			addGear();
 			const lastRow = gearTable.rows[gearTable.rows.length - 1];
-			lastRow.cells[0].querySelector('input').value = item.name;
+			lastRow.cells[0].querySelector('textarea').value = item.name;
 			lastRow.cells[1].querySelector('input').value = item.bonus;
-			lastRow.cells[2].querySelector('input').value = item.notes;
+			lastRow.cells[2].querySelector('textarea').value = item.notes;
 			lastRow.cells[3].querySelector('input').value = item.size;
 		});
 
@@ -364,10 +378,10 @@ function processCharacterData(jsonData)
         character.inventory.armor.forEach(armor => {
             addArmor();
             const lastRow = armorTable.rows[armorTable.rows.length - 1];
-            lastRow.cells[0].querySelector('input').value = armor.name;
+            lastRow.cells[0].querySelector('textarea').value = armor.name;
             lastRow.cells[1].querySelector('input').value = armor.ar;
             lastRow.cells[2].querySelector('input').value = armor.cover;
-            lastRow.cells[3].querySelector('input').value = armor.notes;
+            lastRow.cells[3].querySelector('textarea').value = armor.notes;
             lastRow.cells[4].querySelector('input').value = armor.size;
         });
 
