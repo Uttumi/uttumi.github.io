@@ -361,9 +361,37 @@ label {
     height: 35px;
 }
 
-.weapons td {
-    vertical-align: top;
-    padding: 5px;
+.weapons td textarea {
+	/* --table-row-height: 60px; */
+	  /* #height: var(--table-row-height); */
+	  /* min-height: 15px; */
+	  /* padding: calc(var(--table-row-height) / 2) 0; */
+	  /* text-align: center; */
+	  /* overflow: hidden; */
+	  /* box-sizing: border-box; */
+	  /* resize: none; */
+	  
+	  
+textarea {
+    width: 100%;
+    resize: none;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    line-height: 1.5;
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: 30px;
+    background-color: rgba(42, 42, 62, 0.8);
+    color: #e0e0ff;
+    border: 1px solid #4a4a7f;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 14px;
+    font-family: 'Orbitron', sans-serif;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}	  
 }
 
 .weapons td input, 
@@ -442,11 +470,6 @@ label {
     white-space: normal;
     word-wrap: break-word !important;
     overflow-wrap: break-word;
-}
-
-.weapons td:first-child {
-    width: 25%;
-    padding: 0;
 }
 
 .weapons td [contenteditable] {
@@ -747,10 +770,6 @@ input[readonly] {
 
 #birr {
 	width: 120px; /* Wider for 9 digits */
-}
-
-#total-load {
-	width: 80px;
 }
 
 @media (max-width: 768px) {

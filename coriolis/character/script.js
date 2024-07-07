@@ -84,13 +84,18 @@ function addWeapon() {
     const row = addRow('weapons-table', ['text', 'text', 'text', 'text', 'text', 'text', 'number']);
     
     // Name cell
-	//row.cells[0].innerHTML = '<textarea placeholder="Name" rows="2" style="resize: none;"></textarea>';
-	row.cells[0].innerHTML = '<div contenteditable="true">Name</div>';
+	row.cells[0].innerHTML = '<textarea placeholder="Name" rows="1"></textarea>';
+	//row.cells[0].innerHTML = '<div contenteditable="true">Name</div>';
+
+	let area = row.cells[0].childNodes[0];
+
+	area.addEventListener("input", textAreaAdjust);
+	area.addEventListener("focus", textAreaAdjust);
 
     // Modifiers cell
     row.cells[1].innerHTML = `
         <div class="weapon-stat">
-            <span class="stat-label">Bonus</span>
+            <span class="stat-label">+/-</span>
             <input type="number" placeholder=0>
         </div>
         <div class="weapon-stat">
@@ -129,11 +134,13 @@ function addWeapon() {
 		</div>
 	`;
 
-    // Comments cell
-    row.cells[4].innerHTML = '<input type="text" placeholder="Comments">';
+    // Notes cell
+    //row.cells[4].innerHTML = '<input type="text" placeholder="Comments">';
+	row.cells[4].innerHTML = '<textarea placeholder="" rows="1" onfocus="centerScroll()"></textarea>';
 
     // Reloads cell
-    row.cells[5].innerHTML = '<input type="text" placeholder="Reloads">';
+    //row.cells[5].innerHTML = '<input type="text" placeholder="Reloads">';
+	row.cells[5].innerHTML = '<textarea placeholder="" rows="1" onfocus="centerScroll()"></textarea>';
 
     // Weight cell
     row.cells[6].querySelector('input').step = 0.1;
@@ -322,33 +329,6 @@ function generateAttributeSkillHTML() {
     updateAttributeModifiers();
 }
 
-// function updateModifiers() {
-    // const exhaustion = parseInt(document.getElementById('exhaustion').value) || 0;
-    // const encumbrance = parseInt(document.getElementById('encumbrance').value) || 0;
-    // const panic = parseInt(document.getElementById('panic').value) || 0;
-
-    // const physicalPenalty = -(exhaustion + encumbrance);
-    // const mentalPenalty = -panic;
-
-    // document.getElementById('constitution-mod2').value = physicalPenalty;
-    // document.getElementById('grace-mod2').value = physicalPenalty;
-    // document.getElementById('wits-mod2').value = mentalPenalty;
-    // document.getElementById('empathy-mod2').value = mentalPenalty;
-
-//    Update current values
-    // for (const attribute of Object.keys(skillsByAttribute)) {
-        // const base = document.getElementById(`${attribute}-base`);
-        // const mod1 = document.getElementById(`${attribute}-mod1`);
-        // const mod2 = document.getElementById(`${attribute}-mod2`);
-        // const current = document.getElementById(`${attribute}-current`);
-
-        // const baseValue = Math.max(0, parseInt(base.value) || 0);
-        // const mod1Value = parseInt(mod1.value) || 0;
-        // const mod2Value = parseInt(mod2.value) || 0;
-        // current.value = Math.max(0, baseValue + mod1Value + mod2Value);
-    // }
-// }
-
 function updateCarryingCapacity() {
 	const strength = parseInt(document.getElementById('strength').value) || 0;
 	const constitution = parseInt(document.getElementById('constitution-base').value) || 0;
@@ -534,5 +514,28 @@ function updateAttributeCurrentValues()
         const mod1Value = parseInt(mod1.value) || 0;
         const mod2Value = parseInt(mod2.value) || 0;
         current.value = Math.max(0, baseValue + mod1Value + mod2Value);
+    }
+}
+
+function centerScroll(e)
+{
+	const target = e.currentTarget;
+	target.scrollTo(0, (target.scrollHeight - target.offsetHeight) / 2);
+}
+
+function textAreaAdjust(e) {
+	
+	const element = e.currentTarget;
+	
+    element.style.height = "auto";
+    element.style.height = (element.scrollHeight) + "px";
+    
+    // Center text vertically if content height is less than minimum height
+    if (element.scrollHeight < parseInt(getComputedStyle(element).minHeight)) {
+        element.style.display = "flex";
+        element.style.alignItems = "center";
+    } else {
+        element.style.display = "block";
+        element.style.alignItems = "normal";
     }
 }
