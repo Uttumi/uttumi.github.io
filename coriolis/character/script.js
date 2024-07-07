@@ -60,14 +60,6 @@ function addRow(tableId, inputTypes) {
 		
 		if(type === 'textarea')
 		{
-	        // const textarea = document.createElement('textarea');
-
-			// textarea.innerHTML = '<textarea placeholder="Name" rows="1" onchange="scheduleAutoSave"></textarea>';
-
-			// // input.addEventListener('change', scheduleAutoSave);
-			
-			// cell.appendChild(textarea);
-			
 			cell.innerHTML = '<textarea placeholder="Name" rows="1" onkeyup="textAreaAdjust(this)"></textarea>';
 		}
 		else
@@ -547,20 +539,3 @@ function updateTextAreas()
 		textAreaAdjust(textArea);
 	});
 }
-
-// function textAreaAdjust(e) {
-	
-	// const element = e.currentTarget;
-	
-    // element.style.height = "auto";
-    // element.style.height = (element.scrollHeight) + "px";
-    
-    // // Center text vertically if content height is less than minimum height
-    // if (element.scrollHeight < parseInt(getComputedStyle(element).minHeight)) {
-        // element.style.display = "flex";
-        // element.style.alignItems = "center";
-    // } else {
-        // element.style.display = "block";
-        // element.style.alignItems = "normal";
-    // }
-// }

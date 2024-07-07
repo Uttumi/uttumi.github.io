@@ -229,24 +229,6 @@ function saveCharacter() {
 		size: parseFloat(row.cells[4].querySelector('input').value) || 0
 	}));
 	
-    // ['armor'].forEach(type => {
-        // const table = document.getElementById(`${type}-table`);
-        // if (table) {
-            // character.inventory[type] = Array.from(table.rows).slice(1).map(row => {
-                // const rowData = {};
-                // Array.from(row.cells).slice(0, -1).forEach((cell, index) => {
-                    // const input = cell.querySelector('input');
-                    // if (input) {
-                        // rowData[table.rows[0].cells[index].textContent.toLowerCase()] = input.type === 'number' ? parseFloat(input.value) || 0 : input.value;
-                    // }
-                // });
-                // return rowData;
-            // });
-        // } else {
-            // console.error(`${type} table not found`);
-        // }
-    // });
-
     // Notes and other text areas
 	character.notes = {
 		general: safeGetValue('general-notes'),
