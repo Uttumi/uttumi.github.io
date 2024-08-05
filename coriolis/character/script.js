@@ -453,7 +453,7 @@ function updateMPBoxes()
 	
     const resolve = parseInt(resolveStr) || 0;
     const stress = parseInt(stressStr) || 0;
-    const boxes = document.getElementById('hp-boxes').querySelectorAll('.box');
+    const boxes = document.getElementById('mp-boxes').querySelectorAll('.box');
 
     clearTimeout(panicTimer);
     if (resolveStr !== '' && stressStr !== '')
@@ -472,8 +472,6 @@ function updateMPBoxes()
 
     let remainingMP = resolve - (stress % resolve);
     
-    document.getElementById('panic').value = panic;
-
     boxes.forEach((box, index) => {
         if (index < resolve) {
             if (index < remainingMP) {
