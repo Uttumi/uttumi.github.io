@@ -456,7 +456,7 @@ function updateMPBoxes()
     const boxes = document.getElementById('hp-boxes').querySelectorAll('.box');
 
     clearTimeout(panicTimer);
-    if (staminaStr !== '' && fatigueStr !== '')
+    if (resolveStr !== '' && stressStr !== '')
 	{
         panicTimer = setTimeout(
 			() => {
