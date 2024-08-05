@@ -21,10 +21,9 @@ const skillsByAttribute = {
 	empathy: {
 		observation: { label: 'Observation' },
 		influence: { label: 'Influence' },
-		insight: { label: 'Insight' },
 		culture: { label: 'Culture' },
 		fortitude: { label: 'Fortitude' }
-//		mysticPowers: { label: 'Mystic Powers' }
+		//mysticPowers: { label: 'Mystic Powers' }
 	},
 	wits: {
 		survival: { label: 'Survival' },
@@ -34,6 +33,10 @@ const skillsByAttribute = {
 		technology: { label: 'Technology' }
 	}
 };
+
+let exhaustionTimer;
+let panicTimer;
+const typingInterval = 500;
 
 document.addEventListener(
 	'DOMContentLoaded',
@@ -52,7 +55,8 @@ document.addEventListener(
 	}
 );
 
-function addRow(tableId, inputTypes) {
+function addRow(tableId, inputTypes)
+{
     const table = document.getElementById(tableId);
     const row = table.insertRow(-1);
     inputTypes.forEach((type, index) => {
@@ -81,7 +85,8 @@ function addRow(tableId, inputTypes) {
     return row;
 }
 
-function addTalent() {
+function addTalent()
+{
     const row = addRow('talents-table', ['textarea', 'textarea']);
 	
 	addChangeListeners(row);
@@ -93,7 +98,8 @@ function removeTalent(button)
 	row.parentNode.removeChild(row);
 }
 
-function addWeapon() {
+function addWeapon()
+{
     const row = addRow('weapons-table', ['textarea', 'text', 'text', 'text', 'textarea', 'number']);
     
     // Modifiers cell
@@ -151,7 +157,8 @@ function addWeapon() {
 	addChangeListeners(row);
 }
 
-function updateRangeValue(selectElement) {
+function updateRangeValue(selectElement)
+{
     const rangeValues = {
         'engaged': '2,5m [1]',
         'short': '5m [2]',
@@ -167,7 +174,8 @@ function updateRangeValue(selectElement) {
     valueInput.value = rangeValues[selectElement.value];
 }
 
-function addGear() {
+function addGear()
+{
     const row = addRow('gear-table', ['textarea', 'number', 'textarea', 'number']);
 	
     row.cells[3].querySelector('input').min = 0; // Size
@@ -179,7 +187,8 @@ function addGear() {
 	addChangeListeners(row);
 }
 
-function addArmor() {
+function addArmor()
+{
     const row = addRow('armor-table', ['textarea', 'number', 'number', 'textarea', 'number']);
 	
     row.cells[1].querySelector('input').min = 0; // AR
@@ -256,7 +265,8 @@ function calculateTotalLoad()
 	updateEncumbrance();
 }
 
-function updateEncumbrance() {
+function updateEncumbrance()
+{
     const totalLoad = parseFloat(document.getElementById('total-load').value) || 0;
     const carryingCapacity = Math.max(1, parseFloat(document.getElementById('carrying-capacity').value) || 1);
     const encumbrance = Math.max(0, Math.ceil(totalLoad / carryingCapacity) - 1); //.toFixed(0);
@@ -265,7 +275,8 @@ function updateEncumbrance() {
 	updateAttributeModifiers();
 }
 
-function generateAttributeSkillHTML() {
+function generateAttributeSkillHTML()
+{
     const container = document.getElementById('attributes-skills-container');
     let html = '';
 
@@ -337,7 +348,8 @@ function generateAttributeSkillHTML() {
     updateAttributeModifiers();
 }
 
-function updateCarryingCapacity() {
+function updateCarryingCapacity()
+{
 	const strength = parseInt(document.getElementById('strength').value) || 0;
 	const constitution = parseInt(document.getElementById('constitution-base').value) || 0;
 
@@ -350,12 +362,14 @@ function textAreaAdjust(element)
 	element.style.height = element.scrollHeight+"px";
 }
 
-function initializeHP() {
+function initializeHP()
+{
     createHPBoxes();
     updateHPBoxes();
 }
 
-function createHPBoxes() {
+function createHPBoxes()
+{
     const container = document.getElementById('hp-boxes');
     container.innerHTML = '';
     for (let i = 0; i < 4; i++) {  // Create 4 groups
@@ -370,18 +384,34 @@ function createHPBoxes() {
     }
 }		
 
-function updateHPBoxes() {
-    const originalHP = parseInt(document.getElementById('stamina').value) || 0;
-    const fatigue = parseInt(document.getElementById('fatigue').value) || 0;
+function updateHPBoxes()
+{
+	const staminaStr = document.getElementById('stamina').value;
+	const fatigueStr = document.getElementById('fatigue').value;
+	
+    const stamina = parseInt(staminaStr) || 0;
+    const fatigue = parseInt(fatigueStr) || 0;
     const boxes = document.getElementById('hp-boxes').querySelectorAll('.box');
 
-    let remainingHP = originalHP - (fatigue % originalHP);
-    let exhaustion = Math.floor(fatigue / originalHP);
+    clearTimeout(exhaustionTimer);
+    if (staminaStr !== '' && fatigueStr !== '')
+	{
+        exhaustionTimer = setTimeout(
+			() => {
+				let exhaustion = Math.floor(fatigue / stamina);
+				let exhaustionInput = document.getElementById('exhaustion');
+				addChangeEffect(exhaustionInput, exhaustion);
+				exhaustionInput.value = exhaustion;
+				updateAttributeModifiers();
+			}, 
+			typingInterval
+		);
+    }
 
-    document.getElementById('exhaustion').value = exhaustion;
-
+    let remainingHP = stamina - (fatigue % stamina);
+    
     boxes.forEach((box, index) => {
-        if (index < originalHP) {
+        if (index < stamina) {
             if (index < remainingHP) {
                 box.className = 'box full-box';
             } else {
@@ -391,16 +421,17 @@ function updateHPBoxes() {
             box.className = 'box';
         }
     });
-	
-	updateAttributeModifiers();
 }
 
-function initializeMP() {
+
+function initializeMP()
+{
     createMPBoxes();
     updateMPBoxes();
 }
 
-function createMPBoxes() {
+function createMPBoxes()
+{
     const container = document.getElementById('mp-boxes');
     container.innerHTML = '';
     for (let i = 0; i < 4; i++) {
@@ -415,18 +446,36 @@ function createMPBoxes() {
     }
 }
 
-function updateMPBoxes() {
-    const originalMP = parseInt(document.getElementById('resolve').value) || 0;
-    const stress = parseInt(document.getElementById('stress').value) || 0;
-    const boxes = document.getElementById('mp-boxes').querySelectorAll('.box'); // document.querySelectorAll('.mp-box');
+function updateMPBoxes()
+{
+	const resolveStr = document.getElementById('resolve').value;
+	const stressStr = document.getElementById('stress').value;
+	
+    const resolve = parseInt(resolveStr) || 0;
+    const stress = parseInt(stressStr) || 0;
+    const boxes = document.getElementById('hp-boxes').querySelectorAll('.box');
 
-    let remainingMP = originalMP - (stress % originalMP);
-    let panic = Math.floor(stress / originalMP);
+    clearTimeout(panicTimer);
+    if (staminaStr !== '' && fatigueStr !== '')
+	{
+        panicTimer = setTimeout(
+			() => {
+				let panic = Math.floor(stress / originalMP);
+				let panicInput = document.getElementById('panic');
+				addChangeEffect(panicInput, panic);
+				panicInput.value = panic;
+				updateAttributeModifiers();
+			}, 
+			typingInterval
+		);
+    }
 
+    let remainingMP = resolve - (stress % resolve);
+    
     document.getElementById('panic').value = panic;
 
     boxes.forEach((box, index) => {
-        if (index < originalMP) {
+        if (index < resolve) {
             if (index < remainingMP) {
                 box.className = 'box full-box';
             } else {
@@ -440,12 +489,14 @@ function updateMPBoxes() {
 	updateAttributeModifiers();
 }
 
-function initializeRadiation() {
+function initializeRadiation()
+{
     createRadiationBoxes();
     updateRadiationBoxes();
 }
 
-function createRadiationBoxes() {
+function createRadiationBoxes()
+{
     const container = document.getElementById('radiation-boxes');
     container.innerHTML = '';
     for (let i = 0; i < 4; i++) {
@@ -538,4 +589,21 @@ function updateTextAreas()
 	textAreas.forEach(textArea => {
 		textAreaAdjust(textArea);
 	});
+}
+
+function addChangeEffect(input, newValue)
+{
+	input.classList.remove('input-increase', 'input-decrease');
+	
+	const oldValue = parseInt(input.value);
+	
+	if (newValue > oldValue) {
+		input.classList.add('input-increase');
+	} else if (newValue < oldValue) {
+		input.classList.add('input-decrease');
+	}
+	
+	setTimeout(() => {
+		input.classList.remove('input-increase', 'input-decrease');
+	}, 1000);
 }

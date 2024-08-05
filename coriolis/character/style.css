@@ -227,12 +227,6 @@ label {
     color: #00ffff;
 }
 
-/* .attribute-modifiers input[readonly], */
-/* .attribute-current input[readonly] { */
-    /* background-color: rgba(42, 42, 62, 0.8); */
-    /* color: #e0e0ff; */
-/* } */
-
 .attribute-row {
 	display: flex;
 	align-items: center;
@@ -708,7 +702,9 @@ input[type="number"] {
 	appearance: textfield;
 }
 
-input[type="number"], input[type="text"] {
+input[type="text"],
+input[type="number"]
+{
 	text-align: center;
 	#font-size: 16px;
 	width: 50px; /* Increased width for two digits */
@@ -717,7 +713,8 @@ input[type="number"], input[type="text"] {
 
 input[type="text"],
 input[type="number"],
-textarea {
+textarea
+{
     background-color: rgba(42, 42, 62, 0.8);
     color: #e0e0ff;
     border: 1px solid #4a4a7f;
@@ -726,7 +723,9 @@ textarea {
     font-size: 14px;
     font-family: 'Orbitron', sans-serif;
     box-sizing: border-box;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    
+	transition: border-color 0.3s, box-shadow 0.3s;
+	transition: all 0.3s ease;
 }
 
 input[type="text"]:not([readonly]):focus,
@@ -1108,4 +1107,24 @@ input[readonly] {
         width: 100%;
         margin-right: 0;
     }		
+}
+
+@keyframes increase-pulse {
+  0% { box-shadow: 0 0 5px 2px rgba(255, 0, 0, 0.5); }
+  50% { box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.7); }
+  100% { box-shadow: 0 0 5px 2px rgba(255, 0, 0, 0.5); }
+}
+
+@keyframes decrease-pulse {
+  0% { box-shadow: 0 0 5px 2px rgba(0, 255, 0, 0.5); }
+  50% { box-shadow: 0 0 15px 5px rgba(0, 255, 0, 0.7); }
+  100% { box-shadow: 0 0 5px 2px rgba(0, 255, 0, 0.5); }
+}
+
+.input-increase {
+  animation: increase-pulse 1s ease-in-out;
+}
+
+.input-decrease {
+  animation: decrease-pulse 1s ease-in-out;
 }
