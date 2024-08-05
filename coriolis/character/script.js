@@ -460,7 +460,7 @@ function updateMPBoxes()
 	{
         panicTimer = setTimeout(
 			() => {
-				let panic = Math.floor(stress / originalMP);
+				let panic = Math.floor(stress / resolve);
 				let panicInput = document.getElementById('panic');
 				addChangeEffect(panicInput, panic);
 				panicInput.value = panic;
