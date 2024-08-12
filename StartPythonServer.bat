@@ -1,2 +1,3 @@
 @echo off
-python3 -m http.server 40000
+python -m http.server 40000
+cmd /k

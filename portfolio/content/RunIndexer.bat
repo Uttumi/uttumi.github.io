@@ -1,2 +1,3 @@
 @echo off
-python3 indexer.py
+python indexer.py
+cmd /k
