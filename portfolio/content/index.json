@@ -56,80 +56,121 @@
             ]
         }
     },
-    "unity": {
-        "2D_light_prototype": {
-            "pages": [
-                "3_unity/1_2D_light_prototype/index.html"
+    "games": {
+        "Bingwood": {
+            "images": [
+                "3_games/1_Bingwood/smithy.png"
             ],
             "description": [
-                "3_unity/1_2D_light_prototype/description.html"
+                "3_games/1_Bingwood/description.html"
+            ],
+            "subpages": [
+                {
+                    "animation": {
+                        "images": [
+                            "3_games/1_Bingwood/-animation/animation_container.PNG"
+                        ],
+                        "description": [
+                            "3_games/1_Bingwood/-animation/description.html"
+                        ]
+                    }
+                },
+                {
+                    "flowchart": {
+                        "images": [
+                            "3_games/1_Bingwood/-flowchart/flowchart.PNG"
+                        ],
+                        "description": [
+                            "3_games/1_Bingwood/-flowchart/description.html"
+                        ]
+                    }
+                },
+                {
+                    "navmesh": {
+                        "images": [
+                            "3_games/1_Bingwood/-navmesh/navmesh.PNG"
+                        ],
+                        "description": [
+                            "3_games/1_Bingwood/-navmesh/description.html"
+                        ]
+                    }
+                }
+            ]
+        },
+        "2D_light_prototype": {
+            "title": "2D Light Prototype",
+            "pages": [
+                "3_games/2_2D_light_prototype/index.html"
+            ],
+            "description": [
+                "3_games/2_2D_light_prototype/description.html"
             ]
         },
         "breakout": {
             "pages": [
-                "3_unity/2_breakout/index.html"
+                "3_games/3_breakout/index.html"
             ],
             "description": [
-                "3_unity/2_breakout/description.html"
+                "3_games/3_breakout/description.html"
             ]
         },
         "gravity_field_prototype": {
             "pages": [
-                "3_unity/3_gravity_field_prototype/index.html"
+                "3_games/4_gravity_field_prototype/index.html"
             ],
             "description": [
-                "3_unity/3_gravity_field_prototype/description.html"
+                "3_games/4_gravity_field_prototype/description.html"
             ]
         },
         "space_combat": {
             "pages": [
-                "3_unity/4_space_combat/index.html"
+                "3_games/5_space_combat/index.html"
             ],
             "description": [
-                "3_unity/4_space_combat/description.html"
+                "3_games/5_space_combat/description.html"
             ]
         }
     },
-    "ai": {
-        "title": "AI",
+    "ai_(rpg)": {
+        "title": "AI (RPG)",
         "description": [
-            "4_ai/description.html"
+            "4_ai_(rpg)/description.html"
         ],
         "subpages": [
             {
                 "coriolis_(scifi)": {
                     "images": [
-                        "4_ai/-coriolis_(scifi)/mid1.png",
-                        "4_ai/-coriolis_(scifi)/mid2.png",
-                        "4_ai/-coriolis_(scifi)/mid3.png",
-                        "4_ai/-coriolis_(scifi)/mid4.png",
-                        "4_ai/-coriolis_(scifi)/mid5.png",
-                        "4_ai/-coriolis_(scifi)/mid6.png",
-                        "4_ai/-coriolis_(scifi)/mid7.png",
-                        "4_ai/-coriolis_(scifi)/mid8.png",
-                        "4_ai/-coriolis_(scifi)/mid9.png"
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid1.png",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid2.png",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid3.png",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid4.png",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid5.png",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid6.png",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid7.png",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid8.png",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid9.png"
                     ]
                 }
             },
             {
                 "fighting_fantasy": {
                     "images": [
-                        "4_ai/-fighting_fantasy/mid1.png",
-                        "4_ai/-fighting_fantasy/mid2.png",
-                        "4_ai/-fighting_fantasy/mid3.png",
-                        "4_ai/-fighting_fantasy/mid4.png",
-                        "4_ai/-fighting_fantasy/mid5.png",
-                        "4_ai/-fighting_fantasy/mid6.png",
-                        "4_ai/-fighting_fantasy/mid7.png"
+                        "4_ai_(rpg)/-fighting_fantasy/mid1.png",
+                        "4_ai_(rpg)/-fighting_fantasy/mid2.png",
+                        "4_ai_(rpg)/-fighting_fantasy/mid3.png",
+                        "4_ai_(rpg)/-fighting_fantasy/mid4.png",
+                        "4_ai_(rpg)/-fighting_fantasy/mid5.png",
+                        "4_ai_(rpg)/-fighting_fantasy/mid6.png",
+                        "4_ai_(rpg)/-fighting_fantasy/mid7.png"
                     ]
                 }
             },
             {
                 "others": {
                     "images": [
-                        "4_ai/-others/mid1.png",
-                        "4_ai/-others/mid2.png",
-                        "4_ai/-others/mid3.png"
+                        "4_ai_(rpg)/-others/mid1.png",
+                        "4_ai_(rpg)/-others/mid2.png",
+                        "4_ai_(rpg)/-others/mid3.png"
                     ]
                 }
             }

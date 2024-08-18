@@ -1,0 +1,8 @@
+<p>
+Unity's animation system comes in two kinds. There's the old legacy system that's easy to use for simple animations. Then there's the state machine version for creating complex animation states and transitions. Our needs were closest to the former system, but unfortunately it predates Unity's 2D support and doesn't behave well with sprites. The state machine, on the other hand, would have created unnecessary overhead even for the simplest of animations.
+<p>
+So, the solution was to create a basic animation controller for the purpose of running tiny animations.
+</p>
+<p>
+The system is essentially a list of images and some control data, such as the duration of each frame and any actions that it might trigger. It was quick to implement and immensely streamlined the creation of 2D animations.
+</p>
