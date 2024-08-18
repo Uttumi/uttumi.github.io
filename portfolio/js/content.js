@@ -46,8 +46,8 @@
 			let pageName = Object.keys(subpage)[0];
 			let pageContent = subpage[pageName];
 
-			let article = document.createElement("ARTICLE");
-			article.style.width = '100%';
+			let articleElement = document.createElement("ARTICLE");
+			articleElement.classList.add('content');
 
 			let headline = [
 				'<div class="article-gap-line"></div>',
@@ -57,8 +57,8 @@
 				'<div class="article-gap-line"></div>'
 				].join('');
 
-			article.innerHTML = headline;
-			contentArea.appendChild(article);
+			articleElement.innerHTML = headline;
+			contentArea.appendChild(articleElement);
 
 			let description = $.utility.getArrayByKey(pageContent, 'description');
 			let pages 		= $.utility.getArrayByKey(pageContent, 'pages');
@@ -70,7 +70,7 @@
 			if(images === null) images = [];
 			if(videos === null) videos = [];
 
-			$.processContent(pageName, article, description, images, videos, pages, []);
+			$.processContent(pageName, articleElement, description, images, videos, pages, []);
 		}
 	};
 
@@ -158,7 +158,7 @@
 		let contentStyle = 'margin: 5px; height: 190px; object-fit: contain; object-position: 50% 50%; border-radius: 10px;';
 
 		let imageContainer = document.createElement('DIV');
-		imageContainer.setAttribute('style', 'width: 100%; display: flex; flex-wrap: wrap; justify-content: center;')
+		imageContainer.setAttribute('style', 'width: 100%; display: flex; flex-wrap: wrap; justify-content: center; padding-top: 10px; padding-bottom: 10px')
 
 		for(let url of imageUrls)
 		{
