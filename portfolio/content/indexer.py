@@ -4,7 +4,7 @@ from os import walk
 from collections import OrderedDict
 
 def get_filtered_file_list(file_list, filters, folder_path):
-	return [folder_path[2:] +'/'+ file_name for file_name in file_list if any( [file_name.endswith(filter) for filter in filters] ) ]
+	return [folder_path[2:] +'/'+ file_name for file_name in file_list if any( [file_name.lower().endswith(filter) for filter in filters] ) ]
 
 def is_number(s):
     try:
