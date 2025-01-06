@@ -1,0 +1,191 @@
+.box-container {
+    flex-grow       : 1;
+    display         : flex;
+    justify-content : flex-end;
+
+    /* @media (max-width: 756px) {
+        & {
+            justify-content : center;
+        }
+    } */
+
+    @media (max-width: 540px) {
+        & {
+            width           : 100%;
+            justify-content : center;
+        }
+    }
+}
+
+.boxes {
+    display   : flex;
+    flex-wrap : wrap;
+    gap       : 10px;
+    max-width : 440px;
+
+    @media (max-width: 756px) {
+        & {
+            display               : grid;
+            grid-template-columns : repeat(2, 1fr);
+            grid-template-rows    : repeat(2, 1fr);
+            max-width             : none;
+        }
+    }
+
+    @media (max-width: 540px) {
+        & {
+            padding-top: 10px;
+            display : flex;
+        }
+    }
+
+    @media (max-width: 380px) {
+        & {
+            display : grid;
+        }
+    }
+}
+
+.box-group {
+    display : flex;
+    gap     : 2px;
+
+    @media (max-width: 756px) {
+        & {
+            width           : 100%;
+            justify-content : center;
+        }
+    }
+
+    @media (max-width: 540px) {
+        & {
+            display : flex;
+            width   : auto;
+        }
+    }
+}
+
+.box {
+    width            : 15px;
+    height           : 15px;
+    border           : 1px solid #4a4a7f;
+    background-color : transparent;
+    transition       : background 0.3s ease;
+
+    &:nth-child(5n) {
+        margin-right : 6px;
+    }
+
+    @media (max-width: 540px) {
+        & {
+            width  : 12px;
+            height : 12px;
+        }
+    }
+}
+
+.full-box {
+    background : linear-gradient(135deg, #00ff9d 0%, #00b3ff 100%);
+    box-shadow : 0 0 5px rgba(0, 255, 157, 0.7);
+}
+
+.empty-box {
+    background : linear-gradient(135deg, #ff3d00 0%, #ff2da6 100%);
+    box-shadow : 0 0 5px rgba(255, 61, 0, 0.7);
+}
+
+.full-box,
+.empty-box {
+    animation : pulse 2s infinite ease-in-out;
+}
+
+.radiation-box {
+    border     : 1px solid #7fff00;
+    box-shadow : 0 0 5px rgba(127, 255, 0, 0.5);
+    animation  : radiate 2s infinite ease-in-out;
+}
+
+.radiation-box.full-box {
+    background : linear-gradient(135deg, #7fff00 0%, #32cd32 100%);
+    box-shadow : 0 0 10px rgba(127, 255, 0, 0.7);
+    animation  : radiate 2s infinite ease-in-out, glow 2s infinite alternate;
+}
+
+.radiation-box.empty-box {
+    background : linear-gradient(135deg, #32cd32 0%, #006400 100%);
+    box-shadow : 0 0 5px rgba(50, 205, 50, 0.5);
+}
+
+.input-increase {
+    animation : increase-pulse 1s ease-in-out;
+}
+
+.input-decrease {
+    animation : decrease-pulse 1s ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        opacity : 1;
+    }
+
+    50% {
+        opacity : 0.7;
+    }
+
+    100% {
+        opacity : 1;
+    }
+}
+
+@keyframes radiate {
+    0% {
+        box-shadow : 0 0 5px rgba(127, 255, 0, 0.5);
+    }
+
+    50% {
+        box-shadow : 0 0 15px rgba(127, 255, 0, 0.8);
+    }
+
+    100% {
+        box-shadow : 0 0 5px rgba(127, 255, 0, 0.5);
+    }
+}
+
+@keyframes glow {
+    from {
+        filter : brightness(1);
+    }
+
+    to {
+        filter : brightness(1.5);
+    }
+}
+
+@keyframes increase-pulse {
+    0% {
+        box-shadow : 0 0 5px 2px rgba(255, 0, 0, 0.5);
+    }
+
+    50% {
+        box-shadow : 0 0 15px 5px rgba(255, 0, 0, 0.7);
+    }
+
+    100% {
+        box-shadow : 0 0 5px 2px rgba(255, 0, 0, 0.5);
+    }
+}
+
+@keyframes decrease-pulse {
+    0% {
+        box-shadow : 0 0 5px 2px rgba(0, 255, 0, 0.5);
+    }
+
+    50% {
+        box-shadow : 0 0 15px 5px rgba(0, 255, 0, 0.7);
+    }
+
+    100% {
+        box-shadow : 0 0 5px 2px rgba(0, 255, 0, 0.5);
+    }
+}

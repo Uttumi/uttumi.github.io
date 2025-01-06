@@ -1,0 +1,114 @@
+#weapon-list {
+    padding-top: 10px;
+}
+
+.weapon-card {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #4a4a7f;
+    border-radius: 10px;
+}
+
+.weapon-header {
+    display        : flex;
+    flex-direction : row;
+    align-items    : center;
+}
+
+.weapon-name {
+    flex-grow: 1;
+}
+
+.weapon-stats {
+    display         : flex;
+    flex-wrap       : wrap;
+    justify-content : center;
+}
+
+.weapon-stat-group {
+    width  : 120px;
+    height : 58px;
+
+    border : 1px solid #4a4a7f;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @media (max-width: 768px) {
+        & {
+            width       : 100px;
+        }
+    }
+
+    @media (max-width: 560px) {
+        & {
+            width       : 90px;
+        }
+    }
+}
+
+.weapon-stat-label {
+    font-size       : 0.9em;
+    color           : #00ffff;
+    display         : flex;
+    justify-content : space-between;
+    align-items     : center;
+    text-transform  : uppercase;
+    padding         : 0px 2px 0px 10px;
+}
+
+.weapon-stat-label input {
+    width      : 30px !important;
+    min-width  : 30px !important;
+    padding    : 5px;
+    background : transparent;
+    border     : none;
+}
+
+/********
+* RANGE *
+********/
+
+.range-container {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 58px;
+    border: 1px solid #4a4a7f;
+    box-sizing: border-box;
+    color: #e0e0ff;
+    gap: 5px;
+    padding-top: 3px;
+
+    @media (max-width: 768px) {
+        & {
+            width : 170px;
+        }
+    }
+
+    @media (max-width: 560px) {
+        & {
+            width : 140px;
+        }
+    }
+}
+
+.range-selector,
+.range-value {
+    flex             : 1;
+    width            : auto;
+    box-sizing       : border-box;
+    text-align       : center;
+    font-size        : 1.0em;
+    padding          : 0;
+    margin           : 0;
+    border           : none;
+    background-color : transparent;
+    color            : inherit;
+    font-family      : inherit;
+}
+
+.range-selector option {
+    background-color : #0a0a1a;
+}

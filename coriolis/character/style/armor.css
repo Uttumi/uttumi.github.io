@@ -1,0 +1,78 @@
+#armor-list {
+    padding-top : 10px;
+}
+
+.armor-card {
+    padding       : 10px;
+    margin-bottom : 10px;
+    border        : 1px solid #4a4a7f;
+    border-radius : 10px;
+}
+
+.armor-header {
+    display        : flex;
+    flex-direction : row;
+    align-items    : center;
+}
+
+.armor-name {
+    flex-grow : 1;
+}
+
+.armor-content {
+    display         : flex;
+    flex-wrap       : wrap;
+    flex-direction  : row;
+    justify-content : center;
+}
+
+.armor-content textarea {
+    flex : 1;
+}
+
+.armor-stats {
+    display         : flex;
+    flex-wrap       : wrap;
+    justify-content : center;
+}
+
+.armor-stat-group {
+    width  : 100%;
+    height : 87px;
+
+    border : 1px solid #4a4a7f;
+
+    display         : flex;
+    flex-direction  : column;
+    justify-content : space-between;
+
+    @media (max-width: 768px) {
+        & {
+            /* width       : 100px; */
+        }
+    }
+
+    @media (max-width: 560px) {
+        & {
+            /* width       : 90px; */
+        }
+    }
+}
+
+.armor-stat-label {
+    font-size       : 0.9em;
+    color           : #00ffff;
+    display         : flex;
+    justify-content : space-between;
+    align-items     : center;
+    text-transform  : uppercase;
+    padding         : 0px 2px 0px 10px;
+}
+
+.armor-stat-label input {
+    width      : 30px !important;
+    min-width  : 30px !important;
+    padding    : 5px;
+    background : transparent;
+    border     : none;
+}

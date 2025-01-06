@@ -1,4 +1,5 @@
 let documentId = '';
+let hasDocumentId = false;
 
 const autosaveDelaySeconds = 30;
 let saveTimeout;
@@ -11,12 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (id)
 	{
         documentId = id;
+		hasDocumentId = true;
         loadCharacter();
     }
 	else
 	{
         console.log('No document ID provided. Using local storage.');
-		loadFromLocalStorage();
+		//loadFromLocalStorage();
     }
 	
 	addChangeListeners(document);
@@ -156,18 +158,7 @@ function saveCharacter() {
         }
     }
 
-    // Talents
-    const talentsTable = document.getElementById('talents-table');
-    if (talentsTable) {
-        character.talents = Array.from(talentsTable.rows).slice(1).map(row => ({
-            name: row.cells[0].querySelector('textarea').value,
-            description: row.cells[1].querySelector('textarea').value
-        }));
-    } else {
-        console.error("Talents table not found");
-    }
-
-    // Experience
+	character.talents = getTalentData();
     character.experience = parseInt(safeGetValue('experience')) || 0;
 
 	// Trauma
@@ -195,39 +186,41 @@ function saveCharacter() {
 		tinyItems: safeGetValue('tiny-items')
 	};
 
-	// Weapons
-	const weaponsTable = document.getElementById('weapons-table');
-	character.inventory.weapons = Array.from(weaponsTable.rows).slice(1).map(row => ({
-		// name: row.cells[0].querySelector('div[contenteditable]').textContent,
-		name: row.cells[0].querySelector('textarea').value,
-		bonus: row.cells[1].querySelectorAll('input')[0].value,
-		ap: row.cells[1].querySelectorAll('input')[1].value,
-		damage: row.cells[2].querySelectorAll('input')[0].value,
-		crit: row.cells[2].querySelectorAll('input')[1].value,
-		range: row.cells[3].querySelector('select').value,
-		rangeValue: row.cells[3].querySelector('input[type="text"]').value,
-		notes: row.cells[4].querySelector('textarea').value,
-		weight: parseFloat(row.cells[5].querySelector('input').value) || 0
-	}));
+	character.inventory.weapons = getWeaponData();
+	character.inventory.gear = getGearData();
+	character.inventory.armor = getArmorData();
 
-    // Gear
-	const gearTable = document.getElementById('gear-table');
-	character.inventory.gear = Array.from(gearTable.rows).slice(1).map(row => ({
-		name: row.cells[0].querySelector('textarea').value,
-		bonus: parseInt(row.cells[1].querySelector('input').value) || 0,
-		notes: row.cells[2].querySelector('textarea').value,
-		size: parseFloat(row.cells[3].querySelector('input').value) || 0
-	}));
+	// const weaponList = document.getElementById('weapon-list');
+	// character.inventory.weapons = Array.from(weaponList.children).map(card => ({
+	// 	// name: row.cells[0].querySelector('div[contenteditable]').textContent,
+	// 	name: getWeaponNameElement(card).value,
+	// 	bonus: getWeaponModifierElement(card).value,
+	// 	ap: getWeaponAPElement(card).value,
+	// 	damage: getWeaponDamageElement(card).value,
+	// 	crit: getWeaponCritElement(card).value,
+	// 	range: getWeaponRangeElement(card).value,
+	// 	notes: getWeaponFeaturesElement(card).value,
+	// 	weight: parseFloat(getWeaponSizeElement(card).value) || 0
+	// }));
+
+    // // Gear
+	// const gearTable = document.getElementById('gear-table');
+	// character.inventory.gear = Array.from(gearTable.rows).slice(1).map(row => ({
+	// 	name: row.cells[0].querySelector('textarea').value,
+	// 	bonus: parseInt(row.cells[1].querySelector('input').value) || 0,
+	// 	notes: row.cells[2].querySelector('textarea').value,
+	// 	size: parseFloat(row.cells[3].querySelector('input').value) || 0
+	// }));
 	
-	// Armor
-	const armorTable = document.getElementById('armor-table');
-	character.inventory.armor = Array.from(armorTable.rows).slice(1).map(row => ({
-		name: row.cells[0].querySelector('textarea').value,
-		ar: parseInt(row.cells[1].querySelector('input').value) || 0,
-		cover: parseInt(row.cells[2].querySelector('input').value) || 0,
-		notes: row.cells[3].querySelector('textarea').value,
-		size: parseFloat(row.cells[4].querySelector('input').value) || 0
-	}));
+	// // Armor
+	// const armorTable = document.getElementById('armor-table');
+	// character.inventory.armor = Array.from(armorTable.rows).slice(1).map(row => ({
+	// 	name: row.cells[0].querySelector('textarea').value,
+	// 	ar: parseInt(row.cells[1].querySelector('input').value) || 0,
+	// 	cover: parseInt(row.cells[2].querySelector('input').value) || 0,
+	// 	notes: row.cells[3].querySelector('textarea').value,
+	// 	size: parseFloat(row.cells[4].querySelector('input').value) || 0
+	// }));
 	
     // Notes and other text areas
 	character.notes = {
@@ -247,7 +240,10 @@ function saveCharacter() {
     const jsonData = JSON.stringify(character);
     console.log("JSON data:", jsonData);
 
-    updateNPointJSON(jsonData);
+	if(hasDocumentId)
+		updateNPointJSON(jsonData);
+	else
+		saveToLocalStorage(jsonData);
 }
 
 function loadCharacter()
@@ -275,15 +271,25 @@ function processCharacterData(jsonData)
 		// Load attributes and skills
 		for (const [attribute, data] of Object.entries(character.attributesAndSkills))
 		{
-			document.getElementById(`${attribute}-base`).value = data.base;
-			document.getElementById(`${attribute}-mod1`).value = data.modifier;
+			let baseElementName = `${attribute}-base`;
+			let modElementName = `${attribute}-mod1`;
+
+			// Support for name changes
+			if(attribute === "constitution")
+			{
+				baseElementName = "vigor-base";
+				modElementName = "vigor-mod1";
+			}
+
+			document.getElementById(baseElementName).value = data.base || 1;
+			document.getElementById(modElementName).value = data.modifier || 1;
 
 			for (const [skillKey, skillValue] of Object.entries(data.skills))
 			{
-				document.getElementById(skillKey).value = skillValue;
+				document.getElementById(skillKey).value = skillValue || 0;
 			}
 		}
-		
+
 		// Load trauma
 		document.getElementById('stamina').value = character.trauma.stamina;
 		document.getElementById('fatigue').value = character.trauma.fatigue;
@@ -297,17 +303,7 @@ function processCharacterData(jsonData)
 		document.getElementById('experience').value = character.experience;				
 		
 		// Load talents
-        const talentsTable = document.getElementById('talents-table');
-        // Clear existing rows except the header
-        while (talentsTable.rows.length > 1) {
-            talentsTable.deleteRow(1);
-        }
-        character.talents.forEach(talent => {
-            addTalent();
-            const lastRow = talentsTable.rows[talentsTable.rows.length - 1];
-            lastRow.cells[0].querySelector('textarea').value = talent.name;
-            lastRow.cells[1].querySelector('textarea').value = talent.description;
-        });
+		loadTalentData(character.talents);
 
 		// Load inventory
 		document.getElementById('carrying-capacity').value = character.inventory.carryingCapacity;
@@ -316,56 +312,9 @@ function processCharacterData(jsonData)
 		document.getElementById('birr').value = character.inventory.birr;
 		document.getElementById('tiny-items').value = character.inventory.tinyItems;
 
-		// Load weapons
-		const weaponsTable = document.getElementById('weapons-table');
-		// Clear existing rows except the header
-		while (weaponsTable.rows.length > 1) {
-			weaponsTable.deleteRow(1);
-		}
-		character.inventory.weapons.forEach(weapon => {
-			addWeapon();
-			const lastRow = weaponsTable.rows[weaponsTable.rows.length - 1];
-			lastRow.cells[0].querySelector('textarea').textContent = weapon.name;
-			lastRow.cells[1].querySelectorAll('input')[0].value = weapon.bonus;
-			lastRow.cells[1].querySelectorAll('input')[1].value = weapon.ap;
-			lastRow.cells[2].querySelectorAll('input')[0].value = weapon.damage;
-			lastRow.cells[2].querySelectorAll('input')[1].value = weapon.crit;
-			lastRow.cells[3].querySelector('select').value = weapon.range;
-			updateRangeValue(lastRow.cells[3].querySelector('select'));
-			lastRow.cells[4].querySelector('textarea').value = weapon.notes;
-			lastRow.cells[5].querySelector('input').value = weapon.weight;
-		});
-
-		// Load gear
-		const gearTable = document.getElementById('gear-table');
-		// Clear existing rows except the header
-		while (gearTable.rows.length > 1) {
-			gearTable.deleteRow(1);
-		}
-		character.inventory.gear.forEach(item => {
-			addGear();
-			const lastRow = gearTable.rows[gearTable.rows.length - 1];
-			lastRow.cells[0].querySelector('textarea').value = item.name;
-			lastRow.cells[1].querySelector('input').value = item.bonus;
-			lastRow.cells[2].querySelector('textarea').value = item.notes;
-			lastRow.cells[3].querySelector('input').value = item.size;
-		});
-
-        // Load armor
-        const armorTable = document.getElementById('armor-table');
-        // Clear existing rows except the header
-        while (armorTable.rows.length > 1) {
-            armorTable.deleteRow(1);
-        }
-        character.inventory.armor.forEach(armor => {
-            addArmor();
-            const lastRow = armorTable.rows[armorTable.rows.length - 1];
-            lastRow.cells[0].querySelector('textarea').value = armor.name;
-            lastRow.cells[1].querySelector('input').value = armor.ar;
-            lastRow.cells[2].querySelector('input').value = armor.cover;
-            lastRow.cells[3].querySelector('textarea').value = armor.notes;
-            lastRow.cells[4].querySelector('input').value = armor.size;
-        });
+		loadWeaponData(character.inventory.weapons);
+		loadGearData(character.inventory.gear);
+		loadArmorData(character.inventory.armor);
 
 		// Load notes and other text areas
 		document.getElementById('general-notes').value = character.notes.general;
@@ -374,16 +323,6 @@ function processCharacterData(jsonData)
 		document.getElementById('cabin-description').value = character.cabin.description;
 		document.getElementById('cabin-gear').value = character.cabin.gear;
 		document.getElementById('cabin-other').value = character.cabin.other;
-		
-	    // Set default values for attributes and skills if they're not present in the loaded data
-        for (const [attribute, data] of Object.entries(character.attributesAndSkills)) {
-            document.getElementById(`${attribute}-base`).value = data.base || 1;
-            document.getElementById(`${attribute}-current`).value = data.current || 1;
-
-            for (const [skillKey, skillValue] of Object.entries(data.skills)) {
-                document.getElementById(skillKey).value = skillValue || 0;
-            }
-        }
 
         // Set default values for other fields
         document.getElementById('stamina').value = character.trauma.stamina || 1;
@@ -396,7 +335,6 @@ function processCharacterData(jsonData)
         document.getElementById('birr').value = character.inventory.birr || 0;
         document.getElementById('carrying-capacity').value = character.inventory.carryingCapacity || 1;
 	
-		
 		initializeHP();
 		initializeMP();
 		initializeRadiation();

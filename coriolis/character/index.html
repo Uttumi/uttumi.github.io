@@ -4,92 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Character Sheet</title>
+
 	<script src="https://apis.google.com/js/api.js"></script>
-	<script src="script.js"></script>
-	<script src="data.js"></script>
-    <link rel="stylesheet" href="style.css">
+
+	<script src="scripts/main.js"></script>
+	<script src="scripts/data.js"></script>
+	<script src="scripts/talent.js"></script>
+	<script src="scripts/weapon.js"></script>
+	<script src="scripts/gear.js"></script>
+	<script src="scripts/armor.js"></script>
+
+    <link rel="stylesheet" href="style/style.css">
+	<link rel="stylesheet" href="style/boxes.css">
+	<link rel="stylesheet" href="style/talent.css">
+	<link rel="stylesheet" href="style/weapon.css">
+	<link rel="stylesheet" href="style/gear.css">
+	<link rel="stylesheet" href="style/armor.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+	<link rel="manifest" href="/site.webmanifest" />
 </head>
 <body>
     <h1>Character Sheet</h1>
 
 	<div class="section">
-		<h2>
-			<i class="fas fa-user-astronaut"></i>
-			<span class="title-text">Basic Information</span>
-		</h2>
-		<div class="basic-info-grid">
+		<div class="section-header">
+			<h2>
+				<i class="fas fa-user-astronaut"></i>
+				<span class="title-text">Basic Information</span>
+			</h2>
+		</div>
+		<div class="section-info" id="basic-info-grid">
 			<div class="info-item">
-				<label for="name">Name</label>
+				<h4 for="name">Name</h4>
 				<input type="text" id="name" name="name">
 			</div>
 			<div class="info-item">
-				<label for="background">Background</label>
+				<h4 for="background">Background</h4>
 				<input type="text" id="background" name="background">
 			</div>
 			<div class="info-item">
-				<label for="concept">Concept</label>
+				<h4 for="concept">Concept</h4>
 				<input type="text" id="concept" name="concept">
 			</div>
 			<div class="info-item">
-				<label for="icon">Icon</label>
+				<h4 for="icon">Icon</h4>
 				<input type="text" id="icon" name="icon">
 			</div>
 			<div class="info-item">
-				<label for="group-concept">Group Concept</label>
+				<h4 for="group-concept">Group Concept</h4>
 				<input type="text" id="group-concept" name="group-concept">
 			</div>
 			<div class="info-item">
-				<label for="reputation">Reputation</label>
+				<h4 for="reputation">Reputation</h4>
 				<input type="text" id="reputation" name="reputation">
 			</div>
 			<div class="info-item">
-				<label for="personal-problem">Personal Problem</label>
+				<h4 for="personal-problem">Personal Problem</h4>
 				<input type="text" id="personal-problem" name="personal-problem">
 			</div>
+			<div class="info-item full-width">
+				<h4 for="appearance">Appearance</h4>
+				<textarea id="appearance" name="appearance" onkeyup="textAreaAdjust(this)"></textarea>
+			</div>
+			<div class="info-item full-width">
+				<h4 for="character-notes">Notes</h4>
+				<textarea id="character-notes" name="character-notes" onkeyup="textAreaAdjust(this)"></textarea>
+			</div>
 		</div>
-		<div class="info-item full-width">
-			<label for="appearance">Appearance</label>
-			<textarea id="appearance" name="appearance" onkeyup="textAreaAdjust(this)"></textarea>
-		</div>
-		<div class="info-item full-width">
-			<label for="character-notes">Notes</label>
-			<textarea id="character-notes" name="character-notes" onkeyup="textAreaAdjust(this)"></textarea>
-		</div>
+
 	</div>
 
 	<div class="section">
-		<h2>
-			<i class="fas fa-dna"></i>
-			<span class="title-text">Traits</span>
-			<span class="experience-container">
-				Experience <input type="number" id="experience" name="experience" min="0" value="0">
-			</span>
-		</h2>	
-		<div id="attributes-skills-container"></div>
+		<div class="section-header">
+			<h2>
+				<i class="fas fa-dna"></i>
+				<span class="title-text">Traits</span>
+
+			</h2>
+			<div class="experience-container">
+				<h3 for="experience">Experience</h3>
+				<input type="number" id="experience" min="0" value="0">	
+			</div>
+		</div>
+		<div class="section-info" id="attributes-skills-container"></div>
 		<div class="subsection">
 			<h3>Talents</h3>
-			<table class="talents" id="talents-table">
-				<tr>
-					<th>Talent</th>
-					<th>Description</th>
-					<th></th>
-				</tr>
-			</table>
+			<div id="talent-list"></div>
 			<button onclick="addTalent()">Add Talent</button>
 		</div>
 	</div>
 
 	<div class="section">
-	
-		<h2>
-			<i class="fas fa-skull"></i>
-			<span class="title-text">Trauma</span>			
-		</h2>
-		
+		<div class="section-header">
+			<h2>
+				<i class="fas fa-skull"></i>
+				<span class="title-text">Trauma</span>			
+			</h2>
+		</div>
 		<div class="subsection">
 			<div class="subsection-header">
-				<div class="stamina-info">
+				<div class="subsection-title">
 					<h3>Stamina (HP)</h3>
 					<input type="number" id="stamina" name="stamina" min="1" value="1" oninput="updateHPBoxes()">
 				</div>
@@ -99,11 +118,11 @@
 			</div>
 			<div class="trauma-inputs">
 				<div class="input-pair">
-					<label for="fatigue">Fatigue</label>
+					<h4 for="fatigue">Fatigue</h4>
 					<input type="number" id="fatigue" name="fatigue" min="0" value="0" oninput="updateHPBoxes()">
 				</div>
 				<div class="input-pair">
-					<label for="exhaustion">Exhaustion</label>
+					<h4 for="exhaustion">Exhaustion</h4>
 					<input type="number" id="exhaustion" name="exhaustion" readonly>
 				</div>			
 			</div>
@@ -111,7 +130,7 @@
 
 		<div class="subsection">
 			<div class="subsection-header">
-				<div class="resolve-info">
+				<div class="subsection-title">
 					<h3>Resolve (MP)</h3>
 					<input type="number" id="resolve" name="resolve" min="1" value="1" oninput="updateMPBoxes()">
 				</div>
@@ -121,11 +140,11 @@
 			</div>
 			<div class="trauma-inputs">
 				<div class="input-pair">
-					<label for="stress">Stress</label>
+					<h4 for="stress">Stress</h4>
 					<input type="number" id="stress" name="stress" min="0" value="0" oninput="updateMPBoxes()">
 				</div>
 				<div class="input-pair">
-					<label for="panic">Panic</label>
+					<h4 for="panic">Panic</h4>
 					<input type="number" id="panic" name="panic" readonly>
 				</div>
 			</div>
@@ -133,7 +152,7 @@
 		
 		<div class="subsection">
 			<div class="subsection-header">
-				<div class="resolve-info">
+				<div class="subsection-title">
 					<h3>Radiation</h3>
 				</div>
 				<div class="box-container">
@@ -142,45 +161,50 @@
 			</div>
 			<div class="trauma-inputs">
 				<div class="input-pair">
-					<label for="current-radiation">Current</label>
+					<h4 for="current-radiation">Current</h4>
 					<input type="number" id="current-radiation" name="current-radiation" min="0" value="0" oninput="updateRadiationBoxes()">
 				</div>
 				<div class="input-pair">
-					<label for="permanent-radiation">Permanent</label>
+					<h4 for="permanent-radiation">Permanent</h4>
 					<input type="number" id="permanent-radiation" name="permanent-radiation" min="0" value="0" oninput="updateRadiationBoxes()">
 				</div>
 			</div>
 		</div>		
 		
-		<div class="subsection">
-			<h3>Critical Injuries</h3>
-			<textarea id="critical-injuries" name="critical-injuries" onkeyup="textAreaAdjust(this)"></textarea>
+		<div class="section-info" id="note-grid">
+			<div class="note-item">
+				<h3>Critical Injuries</h3>
+				<textarea id="critical-injuries" name="critical-injuries" onkeyup="textAreaAdjust(this)"></textarea>
+			</div>
 		</div>
 	</div>
 
 	<div class="section">
-		<h2>
-			<i class="fas fa-toolbox"></i>
-			<span class="title-text">Inventory</span>
-			<span class="inventory-info">
-				Birr <input type="number" id="birr" name="birr" value="0">
-			</span>	
-		</h2>
+		<div class="section-header">
+			<h2>
+				<i class="fas fa-toolbox"></i>
+				<span class="title-text">Inventory</span>
+			</h2>
+			<div class="birr-container">
+				<h3 for="birr">Birr</h3>
+				<input type="number" id="birr" value="0">
+			</div>	
+		</div>
 
 		<div class="subsection">
 			<div class="subsection-header">
-				<div class="carrying-capacity-info">
+				<div class="subsection-title">
 					<h3>Carrying Capacity</h3>
 					<input type="number" id="carrying-capacity" name="carrying-capacity" min="1" value="1" oninput="updateEncumbrance()">
 				</div>
 			</div>
 			<div class="capacity-inputs">
 				<div class="input-pair">
-					<label for="total-load">Total Load</label>
+					<h4 for="total-load">Load</h4>
 					<input type="number" id="total-load" name="total-load" readonly>
 				</div>
 				<div class="input-pair">
-					<label for="encumbrance">Encumbrance</label>
+					<h4 for="encumbrance">Encumbrance</h4>
 					<input type="number" id="encumbrance" name="encumbrance" readonly>
 				</div>
 			</div>
@@ -188,88 +212,79 @@
 
 		<div class="subsection">
 			<h3>Weapons</h3>
-			<table class="weapons" id="weapons-table">
-				<tr>
-					<th>Name</th>
-					<th>Modifiers</th>
-					<th>Damage</th>
-					<th>Range</th>
-					<th>Notes</th>
-					<th>Size</th>
-					<th></th>
-				</tr>
-			</table>			
+			<div id="weapon-list"></div>
 			<button onclick="addWeapon()">Add Weapon</button>
 		</div>
 
 		<div class="subsection">
 			<h3>Gear</h3>
-			<table class="gear" id="gear-table">
-				<tr>
-					<th>Name</th>
-					<th>Bonus</th>
-					<th>Notes</th>
-					<th>Size</th>
-					<th></th>
-				</tr>
-			</table>
+			<div id="gear-list"></div>
 			<button onclick="addGear()">Add Gear</button>
 		</div>
 
 		<div class="subsection">
 			<h3>Armor</h3>
-			<table class="armor" id="armor-table">
-				<tr>
-					<th>Name</th>
-					<th>AR</th>
-					<th>Cover</th>
-					<th>Notes</th>
-					<th>Size</th>
-					<th></th>
-				</tr>
-			</table>
+			<div id="armor-list"></div>
 			<button onclick="addArmor()">Add Armor</button>
 		</div>
-		
-		<div class="subsection">
-			<h3>Tiny Items</h3>
-			<textarea id="tiny-items" name="tiny-items" onkeyup="textAreaAdjust(this)"></textarea>
+
+		<div class="section-info" id="note-grid">
+			<div class="note-item">
+				<h3>Tiny Items</h3>
+				<textarea id="tiny-items" name="tiny-items" onkeyup="textAreaAdjust(this)"></textarea>
+			</div>
 		</div>
-		
 	</div>
 
     <div class="section">
-		<h2>
-			<i class="fas fa-book"></i>
-			<span class="title-text">Notes</span>
-		</h2>
-		<label for="general-notes">General</label>
-        <textarea id="general-notes" name="general-notes" onkeyup="textAreaAdjust(this)"></textarea>
-		<br>
-		<label for="people-notes">People</label>
-        <textarea id="people-notes" name="people-notes" onkeyup="textAreaAdjust(this)"></textarea>
-		<br>
-		<label for="place-notes">Places</label>
-        <textarea id="place-notes" name="place-notes" onkeyup="textAreaAdjust(this)"></textarea>
+		<div class="section-header">
+			<h2>
+				<i class="fas fa-book"></i>
+				<span class="title-text">Notes</span>
+			</h2>
+		</div>
+		<div class="section-info" id="note-grid">
+			<div class="note-item">
+				<h4 for="general-notes">General</h4>
+				<textarea id="general-notes" name="general-notes" onkeyup="textAreaAdjust(this)"></textarea>
+			</div>
+			<div class="note-item">
+				<h4 for="people-notes">People</h4>
+				<textarea id="people-notes" name="people-notes" onkeyup="textAreaAdjust(this)"></textarea>
+			</div>
+			<div class="note-item">
+				<h4 for="place-notes">Places</h4>
+				<textarea id="place-notes" name="place-notes" onkeyup="textAreaAdjust(this)"></textarea>
+			</div>
+		</div>
     </div>
 
     <div class="section">
-		<h2>
-			<i class="fas fa-rocket"></i>
-			<span class="title-text">My Cabin</span>
-		</h2>	
-        <label for="cabin-description">Description</label>
-        <textarea id="cabin-description" name="cabin-description" onkeyup="textAreaAdjust(this)"></textarea>
-		<br>
-        <label for="cabin-gear">Gear</label>
-        <textarea id="cabin-gear" name="cabin-gear" onkeyup="textAreaAdjust(this)"></textarea>
-		<br>
-        <label for="cabin-other">Other</label>
-        <textarea id="cabin-other" name="cabin-other" onkeyup="textAreaAdjust(this)"></textarea>
+		<div class="section-header">
+			<h2>
+				<i class="fas fa-rocket"></i>
+				<span class="title-text">My Cabin</span>
+			</h2>
+		</div>
+		<div class="section-info" id="note-grid">
+			<div class="note-item">
+				<h4 for="cabin-description">Description</h4>
+				<textarea id="cabin-description" name="cabin-description" onkeyup="textAreaAdjust(this)"></textarea>
+			</div>
+
+			<div class="note-item">
+				<h4 for="cabin-gear">Gear</h4>
+				<textarea id="cabin-gear" name="cabin-gear" onkeyup="textAreaAdjust(this)"></textarea>
+			</div>
+
+			<div class="note-item">
+				<h4 for="cabin-other">Other</h4>
+				<textarea id="cabin-other" name="cabin-other" onkeyup="textAreaAdjust(this)"></textarea>
+			</div>
+		</div>
     </div>
 
-    <!-- Add these buttons at the end of the body -->
-    <div class="section">
+    <div class="section" id="save-section">
         <button onclick="saveCharacter()">Save Character</button>
         <button onclick="loadCharacter()">Load Character</button>
     </div>
