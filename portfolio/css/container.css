@@ -51,6 +51,7 @@ body
     overflow: hidden;
     background-attachment: fixed;
     background-repeat: repeat-y;
+    background-size: cover;
     background-position: 0px 0px;
     background-image: url("./img/green_nebula_2048.jpg");
 
