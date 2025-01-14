@@ -1,13 +1,13 @@
 const rangeValues = {
-	'engaged': '2,5m [1]',
-	'short': '5m [2]',
-	'medium': '25m [10]',
-	'long': '50m [20]',
-	'far': '100m [40]',
-	'extreme': '1000m [400]',
-	'extreme+': '2000m [800]',
-	'extreme++': '3000m [1200]',
-	'extreme+++': '4000m [1600]'
+	'0': '2,5m [1]',
+	'1': '5m [2]',
+	'2': '25m [10]',
+	'3': '50m [20]',
+	'4': '100m [40]',
+	'5': '1000m [400]',
+	'6': '2000m [800]',
+	'7': '3000m [1200]',
+	'8': '4000m [1600]'
 };
 
 function addWeapon()
@@ -40,15 +40,15 @@ function addWeapon()
 
 			<div class="range-container">
 				<select class="range-selector" onchange="updateRangeValue(this)">
-					<option value="engaged">MELEE</option>
-					<option value="short">SHORT</option>
-					<option value="medium" selected>MEDIUM</option>
-					<option value="long">LONG</option>
-					<option value="far">FAR</option>
-					<option value="extreme">EXTREME</option>
-					<option value="extreme+">EXTREME+</option>
-					<option value="extreme++">EXTREME++</option>
-					<option value="extreme+++">EXTREME+++</option>
+					<option value="0">MELEE</option>
+					<option value="1">CLOSE</option>
+					<option value="2" selected>SHORT</option>
+					<option value="3">MEDIUM</option>
+					<option value="4">LONG</option>
+					<option value="5">EXTREME</option>
+					<option value="6">EXTREME+</option>
+					<option value="7">EXTREME++</option>
+					<option value="8">EXTREME+++</option>
 				</select>
 				<label class="range-value">
 			</div>
@@ -72,7 +72,7 @@ function addWeapon()
     return weaponCard;
 }
 
-function removeWeaponCard(button)
+function removeWeapon(button)
 {
     const weaponCard = button.closest('.weapon-card');
     weaponCard.remove();

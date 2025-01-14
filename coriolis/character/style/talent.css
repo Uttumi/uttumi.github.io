@@ -7,7 +7,8 @@
 .gear-card {
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #4a4a7f;
+	background-color : rgba(47, 47, 67);
+    border        : 1px solid #4a4a7f;
     border-radius: 10px;
 }
 

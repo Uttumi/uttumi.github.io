@@ -5,7 +5,8 @@
 .weapon-card {
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #4a4a7f;
+	background-color : rgba(47, 47, 67);
+    border        : 1px solid #4a4a7f;
     border-radius: 10px;
 }
 
@@ -64,6 +65,15 @@
     padding    : 5px;
     background : transparent;
     border     : none;
+}
+
+.weapon-card text,
+.weapon-card input, 
+.weapon-card textarea,
+.weapon-card text, 
+.weapon-card .weapon-stat-group
+{
+	#border : 1px solid white;
 }
 
 /********
