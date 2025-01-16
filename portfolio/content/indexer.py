@@ -1,10 +1,24 @@
 import os
+import re
 import json
 from os import walk
 from collections import OrderedDict
+from img2webp import convert_image, process_files
 
 def get_filtered_file_list(file_list, filters, folder_path):
 	return [folder_path[2:] +'/'+ file_name for file_name in file_list if any( [file_name.lower().endswith(filter) for filter in filters] ) ]
+
+def convert_images(image_paths):
+
+	new_image_paths = []
+
+	for image_path in image_paths:
+		# wepb_path = image_path.replace('.jpg', '.webp').replace('.png', '.webp')
+		wepb_path = re.sub(r'\.(jpg|jpeg|png)$', '.webp', image_path, flags=re.IGNORECASE)
+		convert_image(image_path, wepb_path, quality=80)
+		new_image_paths.append(wepb_path)
+
+	return new_image_paths
 
 def is_number(s):
     try:
@@ -52,6 +66,8 @@ def recursive_folder_check(folder_path):
 	folder_content_dict['pages'] = get_filtered_file_list( files,  ['.html'], folder_path )
 	folder_content_dict['images'] = get_filtered_file_list( files,  ['.png', '.jpg'], folder_path )
 	folder_content_dict['videos'] = get_filtered_file_list( files,  ['.avi', '.mpg', '.mp4'], folder_path )
+
+	folder_content_dict['images'] = convert_images(folder_content_dict['images'])
 
 	for page in folder_content_dict['pages']:
 		if page.endswith('description.html'):

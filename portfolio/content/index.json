@@ -59,7 +59,7 @@
     "games": {
         "Bingwood": {
             "images": [
-                "3_games/1_Bingwood/smithy.png"
+                "3_games/1_Bingwood/smithy.webp"
             ],
             "description": [
                 "3_games/1_Bingwood/description.html"
@@ -68,7 +68,7 @@
                 {
                     "animation": {
                         "images": [
-                            "3_games/1_Bingwood/-animation/animation_container.PNG"
+                            "3_games/1_Bingwood/-animation/animation_container.webp"
                         ],
                         "description": [
                             "3_games/1_Bingwood/-animation/description.html"
@@ -78,7 +78,7 @@
                 {
                     "flowchart": {
                         "images": [
-                            "3_games/1_Bingwood/-flowchart/flowchart.PNG"
+                            "3_games/1_Bingwood/-flowchart/flowchart.webp"
                         ],
                         "description": [
                             "3_games/1_Bingwood/-flowchart/description.html"
@@ -88,7 +88,7 @@
                 {
                     "navmesh": {
                         "images": [
-                            "3_games/1_Bingwood/-navmesh/navmesh.PNG"
+                            "3_games/1_Bingwood/-navmesh/navmesh.webp"
                         ],
                         "description": [
                             "3_games/1_Bingwood/-navmesh/description.html"
@@ -140,37 +140,37 @@
             {
                 "coriolis_(scifi)": {
                     "images": [
-                        "4_ai_(rpg)/-coriolis_(scifi)/mid1.png",
-                        "4_ai_(rpg)/-coriolis_(scifi)/mid2.png",
-                        "4_ai_(rpg)/-coriolis_(scifi)/mid3.png",
-                        "4_ai_(rpg)/-coriolis_(scifi)/mid4.png",
-                        "4_ai_(rpg)/-coriolis_(scifi)/mid5.png",
-                        "4_ai_(rpg)/-coriolis_(scifi)/mid6.png",
-                        "4_ai_(rpg)/-coriolis_(scifi)/mid7.png",
-                        "4_ai_(rpg)/-coriolis_(scifi)/mid8.png",
-                        "4_ai_(rpg)/-coriolis_(scifi)/mid9.png"
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid1.webp",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid2.webp",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid3.webp",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid4.webp",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid5.webp",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid6.webp",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid7.webp",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid8.webp",
+                        "4_ai_(rpg)/-coriolis_(scifi)/mid9.webp"
                     ]
                 }
             },
             {
                 "fighting_fantasy": {
                     "images": [
-                        "4_ai_(rpg)/-fighting_fantasy/mid1.png",
-                        "4_ai_(rpg)/-fighting_fantasy/mid2.png",
-                        "4_ai_(rpg)/-fighting_fantasy/mid3.png",
-                        "4_ai_(rpg)/-fighting_fantasy/mid4.png",
-                        "4_ai_(rpg)/-fighting_fantasy/mid5.png",
-                        "4_ai_(rpg)/-fighting_fantasy/mid6.png",
-                        "4_ai_(rpg)/-fighting_fantasy/mid7.png"
+                        "4_ai_(rpg)/-fighting_fantasy/mid1.webp",
+                        "4_ai_(rpg)/-fighting_fantasy/mid2.webp",
+                        "4_ai_(rpg)/-fighting_fantasy/mid3.webp",
+                        "4_ai_(rpg)/-fighting_fantasy/mid4.webp",
+                        "4_ai_(rpg)/-fighting_fantasy/mid5.webp",
+                        "4_ai_(rpg)/-fighting_fantasy/mid6.webp",
+                        "4_ai_(rpg)/-fighting_fantasy/mid7.webp"
                     ]
                 }
             },
             {
                 "others": {
                     "images": [
-                        "4_ai_(rpg)/-others/mid1.png",
-                        "4_ai_(rpg)/-others/mid2.png",
-                        "4_ai_(rpg)/-others/mid3.png"
+                        "4_ai_(rpg)/-others/mid1.webp",
+                        "4_ai_(rpg)/-others/mid2.webp",
+                        "4_ai_(rpg)/-others/mid3.webp"
                     ]
                 }
             }
@@ -185,26 +185,26 @@
                 {
                     "furniture": {
                         "images": [
-                            "5_blender/1_house_model/-furniture/arm_chair.png",
-                            "5_blender/1_house_model/-furniture/desk.png",
-                            "5_blender/1_house_model/-furniture/kitchen_table.png",
-                            "5_blender/1_house_model/-furniture/sofa.png"
+                            "5_blender/1_house_model/-furniture/arm_chair.webp",
+                            "5_blender/1_house_model/-furniture/desk.webp",
+                            "5_blender/1_house_model/-furniture/kitchen_table.webp",
+                            "5_blender/1_house_model/-furniture/sofa.webp"
                         ]
                     }
                 },
                 {
                     "house": {
                         "images": [
-                            "5_blender/1_house_model/-house/perspective_view.png",
-                            "5_blender/1_house_model/-house/top_view.png"
+                            "5_blender/1_house_model/-house/perspective_view.webp",
+                            "5_blender/1_house_model/-house/top_view.webp"
                         ]
                     }
                 },
                 {
                     "render": {
                         "images": [
-                            "5_blender/1_house_model/-render/bedroom.png",
-                            "5_blender/1_house_model/-render/kitchen_table_in_room.png"
+                            "5_blender/1_house_model/-render/bedroom.webp",
+                            "5_blender/1_house_model/-render/kitchen_table_in_room.webp"
                         ]
                     }
                 }
@@ -212,8 +212,8 @@
         },
         "ram": {
             "images": [
-                "5_blender/2_ram/wireframe.png",
-                "5_blender/2_ram/wireframe_angle.png"
+                "5_blender/2_ram/wireframe.webp",
+                "5_blender/2_ram/wireframe_angle.webp"
             ]
         },
         "starship_enterprise_animation": {
@@ -229,10 +229,10 @@
     "art": {
         "animal_citizens": {
             "images": [
-                "6_art/1_animal_citizens/0_Panda.png",
-                "6_art/1_animal_citizens/1_Panda_Vector.png",
-                "6_art/1_animal_citizens/2_Weasel.png",
-                "6_art/1_animal_citizens/3_Cat.png"
+                "6_art/1_animal_citizens/0_Panda.webp",
+                "6_art/1_animal_citizens/1_Panda_Vector.webp",
+                "6_art/1_animal_citizens/2_Weasel.webp",
+                "6_art/1_animal_citizens/3_Cat.webp"
             ],
             "description": [
                 "6_art/1_animal_citizens/description.html"
@@ -240,20 +240,20 @@
         },
         "oil_paintings": {
             "images": [
-                "6_art/2_oil_paintings/1_sunset.png",
-                "6_art/2_oil_paintings/2_puppies.jpg",
-                "6_art/2_oil_paintings/3_giraffes.jpg"
+                "6_art/2_oil_paintings/1_sunset.webp",
+                "6_art/2_oil_paintings/2_puppies.webp",
+                "6_art/2_oil_paintings/3_giraffes.webp"
             ]
         },
         "fantasy": {
             "images": [
-                "6_art/3_fantasy/1_dagger.jpg",
-                "6_art/3_fantasy/2_flight.jpg"
+                "6_art/3_fantasy/1_dagger.webp",
+                "6_art/3_fantasy/2_flight.webp"
             ]
         },
         "poster_people": {
             "images": [
-                "6_art/4_poster_people/1_poster_people.png"
+                "6_art/4_poster_people/1_poster_people.webp"
             ],
             "description": [
                 "6_art/4_poster_people/description.html"
@@ -261,7 +261,7 @@
         },
         "vector_art": {
             "images": [
-                "6_art/5_vector_art/dragonfly_by_uttumi-da3lnmj.png"
+                "6_art/5_vector_art/dragonfly_by_uttumi-da3lnmj.webp"
             ]
         }
     }

@@ -53,18 +53,18 @@ body
     background-repeat: repeat-y;
     background-size: cover;
     background-position: 0px 0px;
-    background-image: url("./img/green_nebula_2048.jpg");
+    background-image: url("./img/green_nebula_2048.wepb");
 
     transition: background-position ease 100;
 }
-
+/* 
 @media (min-width: 4096px)
 {
     .background
     {
         background-image: url("./img/green_nebula_4096.jpg");
     }
-}
+} */
 
 /* .background-true
 {
