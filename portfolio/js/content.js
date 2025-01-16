@@ -218,11 +218,12 @@
 		let view = document.createElement('DIV');
 
 		background.setAttribute('style', 'z-index: 1000; position: fixed; top: 0; right: 0; bottom: 0; left: 0; background-color: rgba(0, 20, 40, 0.9);');
-		view.setAttribute('style', 'pointer-events: none; z-index: 1100; position: fixed; top: 50px; right: 0; bottom: 50px; left: 0;');
+		view.setAttribute('style', 'z-index: 1100; position: fixed; top: 50px; right: 0; bottom: 50px; left: 0;');
 
 		contentClone.setAttribute('style', 'z-index: 1100; position: relative; height: 100%; width: 100%; object-fit: contain; object-position: 50% 50%; border-radius: 10px;');
 
 		background.addEventListener('click', $.closeContentView);
+		view.addEventListener('click', $.closeContentView);
 
 		view.appendChild(contentClone);
 
