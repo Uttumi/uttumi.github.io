@@ -17,8 +17,10 @@
 		{
 			location.href = '#!welcome';
 		}
-
-		$.navigationClick(anchor);
+		else
+		{
+			$.navigationClick(anchor);
+		}
 	};
 
 	$.setupNavigation = function(indexUrl)
