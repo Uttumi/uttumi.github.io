@@ -164,6 +164,7 @@
 		{
 			let imageElement = document.createElement('IMG');
 			imageElement.src = $.contentUrl + url;
+			imageElement.alt = "Portfolio image";
 
 			imageElement.setAttribute('style', contentStyle);
 
