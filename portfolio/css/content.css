@@ -86,6 +86,23 @@
     padding-bottom: 20px;
     padding-left:   20px;
     padding-right:  20px;
+
+    @media (min-width: 2048px)
+    {
+        &
+        {
+            font-size: var(--font-size-24);
+            line-height: var(--line-height-24);
+        }
+    }
+    @media (min-width: 4096px)
+    {
+        &
+        {
+            font-size: var(--font-size-32);
+            line-height: var(--line-height-32);
+        }
+    }
 }
 
 #content-area > article > a,
@@ -105,22 +122,7 @@
     font-style: italic;
 }
 
-@media (min-width: 2048px)
-{
-    #content-area > article > p
-    {
-        font-size: var(--font-size-24);
-        line-height: var(--line-height-24);
-    }
-}
-@media (min-width: 4096px)
-{
-    #content-area > article > p
-    {
-        font-size: var(--font-size-32);
-        line-height: var(--line-height-32);
-    }
-}
+
 
 #content-area > article > .article-gap-line
 {
