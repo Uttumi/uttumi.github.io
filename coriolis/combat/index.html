@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coriolis Combat Tracker</title>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+    body {
+        font-family: 'Exo 2', sans-serif;
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #0a0a12;
+        color: #c2e8ff;
+        text-shadow: 0 0 5px rgba(0, 200, 255, 0.2);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #121220;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 180, 255, 0.15);
+        box-shadow: 0 0 30px rgba(0, 100, 200, 0.1);
+        overflow: hidden;
+    }
+/* 
+    table, th, td {
+        border: 1px solid white;
+    } */
+
+    th, td {
+        padding: 16px 10px;
+        text-align: center;
+        border-bottom: 1px solid rgba(0, 150, 255, 0.1);
+        height: 24px; /* Fixed height to prevent jumping */
+        box-sizing: content-box; /* Ensure padding doesn't affect height */
+    }
+
+    th {
+        background: #15152a;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 600;
+        color: #00d0ff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 1.1em;
+    }
+
+    /* Turn indicator */
+    th:nth-child(1), td:nth-child(1) {
+        width: 60px;
+    }
+
+    /* Name */
+    th:nth-child(2), td:nth-child(2) {
+        width: 215px;
+    }
+
+    /* Remove button */
+    th:nth-child(11), td:nth-child(11) {
+        width: 40px;
+    }
+
+    input, select {
+        padding: 10px;
+        /* width: 100%; */
+        max-width: 60px;
+        background: #181830;
+        border: 1px solid #0070cc;
+        border-radius: 6px;
+        color: #66f0ff;
+        font-size: 1.1em;
+        font-weight: bold;
+        font-family: 'Exo 2', sans-serif;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 8px rgba(0, 100, 200, 0.15);
+    }
+
+    input[type=number], select {
+        width: 30px;
+    } 
+
+    input:focus, select:focus {
+        outline: none;
+        box-shadow: 0 0 12px rgba(0, 150, 255, 0.25);
+        border-color: #00a8ff;
+    }
+
+    .name-input {
+        min-width: 140px;
+        text-align: left;
+        max-width: none;
+        padding: 10px 14px;
+        letter-spacing: 0.5px;
+    }
+
+    .turn-btn {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 2px solid #0070cc;
+        cursor: pointer;
+        background: #121220;
+        transition: all 0.3s ease;
+    }
+
+    .turn-active {
+        background: radial-gradient(circle, #00c8ff 0%, #0060cc 100%);
+        box-shadow: 0 0 20px rgba(0, 140, 230, 0.4);
+        animation: pulse-space 2s infinite;
+    }
+
+    button {
+        padding: 12px 28px;
+        cursor: pointer;
+        background: linear-gradient(135deg, #0060cc, #00a8ff);
+        color: #000a20;
+        border: none;
+        border-radius: 6px;
+        margin: 0 auto;
+        display: block;
+        font-weight: bold;
+        font-family: 'Orbitron', sans-serif;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 120, 200, 0.2);
+    }
+
+    button:hover {
+        background: linear-gradient(135deg, #0070dd, #00b8ff);
+        box-shadow: 0 6px 16px rgba(0, 140, 220, 0.3);
+    }
+
+    /* .remove-btn {
+        background: linear-gradient(135deg, #cc0040, #ff3070);
+        font-size: 0.9em;
+        padding: 8px 12px;
+    } */
+
+    .remove-btn {
+        background-color: #ff4444;
+        padding: 6px 12px;
+    }
+
+    .remove-btn:hover {
+        background: linear-gradient(135deg, #dd0050, #ff4080);
+    }
+
+    .controls {
+        margin-bottom: 36px;
+    }
+
+    tr:hover {
+        background: #191935;
+    }
+
+    tr {
+        transition: background 0.3s ease;
+    }
+
+    @keyframes pulse-space {
+        0% { box-shadow: 0 0 0 0 rgba(0, 160, 230, 0.5); }
+        70% { box-shadow: 0 0 0 10px rgba(0, 160, 230, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(0, 160, 230, 0); }
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #121220;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #0060aa;
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: #0080cc;
+    }
+
+    /* Hide spinner buttons for all browsers */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* For Firefox */
+    input[type=number] {
+        text-align: center;
+        -moz-appearance: textfield;
+    }
+
+    /* Keep your existing code for hiding spinners */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <button onclick="addCharacter()">Add New Character</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Initiative</th>
+                <th>Fatigue</th>
+                <th>Exhaustion</th>
+                <th>Stress</th>
+                <th>Panic</th>
+                <th>Shock</th>
+                <th>Injury</th>
+                <th>Fatal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="initiativeList">
+        </tbody>
+    </table>
+    
+    <button onclick="endRound()" style="margin-top: 20px;">End Round</button>
+
+    <script>
+        let activeTurnIndex = -1;
+
+        function createSelectOptions() {
+            let options = '';
+            for(let i = 0; i <= 5; i++) {
+                options += `<option value="${i}">${i}</option>`;
+            }
+            return options;
+        }
+
+        function addCharacter() {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><button class="turn-btn" onclick="setTurn(this)"></button></td>
+                <td><input type="text" placeholder="Name" class="name-input"></td>
+                <td><input type="number" value="0" class="initiative-input" placeholder="0"></td>
+                <td><input type="number" value="0" min="0" title="Fatigue"></td>
+                <td><input type="number" value="0" min="0" title="Exhaustion"></td>
+                <td><input type="number" value="0" min="0" title="Stress"></td>
+                <td><input type="number" value="0" min="0" title="Panic"></td>
+                <td><input type="number" value="0" min="0" title="Shock"></td>
+                <td><input type="number" value="0" min="0" title="Injury"></td>
+                <td><input type="number" value="0" min="0" title="Fatal"></td>                
+                <td><button class="remove-btn" onclick="this.parentElement.parentElement.remove(); updateTurnAfterRemoval();">X</button></td>
+            `;
+
+            // <td><select title="Shock">${createSelectOptions()}</select></td>
+            // <td><select title="Injury">${createSelectOptions()}</select></td>
+            // <td><select title="Fatal">${createSelectOptions()}</select></td>
+
+            document.getElementById('initiativeList').appendChild(row);
+        }
+
+        function endRound() {
+            sortList();
+            setTurn(document.querySelector('#initiativeList tr .turn-btn'));
+        }
+
+        function sortList() {
+            const list = document.getElementById('initiativeList');
+            const rows = Array.from(list.children);
+
+            rows.sort((a, b) => {
+                const aInitiative = parseInt(a.querySelector('.initiative-input').value) || 0;
+                const bInitiative = parseInt(b.querySelector('.initiative-input').value) || 0;
+                return bInitiative - aInitiative;
+            });
+
+            while (list.firstChild) {
+                list.removeChild(list.firstChild);
+            }
+
+            rows.forEach(row => list.appendChild(row));
+        }
+
+        function setTurn(button) {
+            document.querySelectorAll('.turn-btn').forEach(btn => btn.classList.remove('turn-active'));
+            button.classList.add('turn-active');
+            activeTurnIndex = Array.from(document.getElementById('initiativeList').children).indexOf(button.parentElement.parentElement);
+        }
+
+        function updateTurnAfterRemoval() {
+            const rows = Array.from(document.getElementById('initiativeList').children);
+            if (rows.length === 0) {
+                activeTurnIndex = -1;
+                return;
+            }
+            activeTurnIndex = activeTurnIndex % rows.length;
+            setTurn(rows[activeTurnIndex].querySelector('.turn-btn'));
+        }
+    </script>
+</body>
+</html>
