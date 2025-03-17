@@ -236,9 +236,7 @@
     <button onclick="endRound()" style="margin-top: 20px;">End Round</button>
 
     <script>
-        let activeTurnIndex = -1;
-
-        function createSelectOptions() {
+		function createSelectOptions() {
             let options = '';
             for(let i = 0; i <= 5; i++) {
                 options += `<option value="${i}">${i}</option>`;
@@ -249,7 +247,7 @@
         function addCharacter() {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td><button class="turn-btn" onclick="setTurn(this)"></button></td>
+                <td><button class="turn-btn" onclick="toggleTurn(this)"></button></td>
                 <td><input type="text" placeholder="Name" class="name-input"></td>
                 <td><input type="number" value="0" class="initiative-input" placeholder="0"></td>
                 <td><input type="number" value="0" min="0" title="Fatigue"></td>
@@ -259,19 +257,33 @@
                 <td><input type="number" value="0" min="0" title="Shock"></td>
                 <td><input type="number" value="0" min="0" title="Injury"></td>
                 <td><input type="number" value="0" min="0" title="Fatal"></td>                
-                <td><button class="remove-btn" onclick="this.parentElement.parentElement.remove(); updateTurnAfterRemoval();">X</button></td>
+                <td><button class="remove-btn" onclick="this.parentElement.parentElement.remove();">X</button></td>
             `;
 
-            // <td><select title="Shock">${createSelectOptions()}</select></td>
-            // <td><select title="Injury">${createSelectOptions()}</select></td>
-            // <td><select title="Fatal">${createSelectOptions()}</select></td>
-
             document.getElementById('initiativeList').appendChild(row);
+            
+            // Add blur event listener to initiative input
+            const initiativeInput = row.querySelector('.initiative-input');
+            initiativeInput.addEventListener('blur', function() {
+                sortList();
+            });
+            
+            // Also add event listener for Enter key
+            initiativeInput.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    this.blur(); // Trigger the blur event
+                }
+            });
         }
 
         function endRound() {
+            // Clear all turn indicators
+            document.querySelectorAll('.turn-btn').forEach(btn => {
+                btn.classList.remove('turn-active');
+            });
+            
+            // Sort by initiative
             sortList();
-            setTurn(document.querySelector('#initiativeList tr .turn-btn'));
         }
 
         function sortList() {
@@ -291,20 +303,14 @@
             rows.forEach(row => list.appendChild(row));
         }
 
-        function setTurn(button) {
-            document.querySelectorAll('.turn-btn').forEach(btn => btn.classList.remove('turn-active'));
-            button.classList.add('turn-active');
-            activeTurnIndex = Array.from(document.getElementById('initiativeList').children).indexOf(button.parentElement.parentElement);
+        function toggleTurn(button) {
+            // Simple toggle of the turn-active class
+            button.classList.toggle('turn-active');
         }
 
-        function updateTurnAfterRemoval() {
-            const rows = Array.from(document.getElementById('initiativeList').children);
-            if (rows.length === 0) {
-                activeTurnIndex = -1;
-                return;
-            }
-            activeTurnIndex = activeTurnIndex % rows.length;
-            setTurn(rows[activeTurnIndex].querySelector('.turn-btn'));
+        // Initialize with one character
+        window.onload = function() {
+            addCharacter();
         }
     </script>
 </body>
