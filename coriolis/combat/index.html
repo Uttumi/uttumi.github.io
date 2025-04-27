@@ -1,317 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coriolis Combat Tracker</title>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-    body {
-        font-family: 'Exo 2', sans-serif;
-        max-width: 1200px;
-        margin: 20px auto;
-        padding: 20px;
-        background: #0a0a12;
-        color: #c2e8ff;
-        text-shadow: 0 0 5px rgba(0, 200, 255, 0.2);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coriolis Combat Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Exo 2', sans-serif;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgb(5 5 10);
+    color: #c2e8ff;
+    text-shadow: 0 0 5px rgba(0, 200, 255, 0.2);
+}
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        background: #121220;
-        border-radius: 12px;
-        border: 1px solid rgba(0, 180, 255, 0.15);
-        box-shadow: 0 0 30px rgba(0, 100, 200, 0.1);
-        overflow: hidden;
-    }
-/* 
-    table, th, td {
-        border: 1px solid white;
-    } */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 100, 200, 0.1);
+    overflow: hidden;
+}
 
-    th, td {
-        padding: 16px 10px;
-        text-align: center;
-        border-bottom: 1px solid rgba(0, 150, 255, 0.1);
-        height: 24px; /* Fixed height to prevent jumping */
-        box-sizing: content-box; /* Ensure padding doesn't affect height */
-    }
+th, td {
+    padding: 16px 10px;
+    text-align: center;
+    height: 24px;
+    box-sizing: content-box;
+    position: relative;
+}
 
-    th {
-        background: #15152a;
-        font-family: 'Orbitron', sans-serif;
-        font-weight: 600;
-        color: #00d0ff;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-size: 1.1em;
-    }
+th {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    color: #00d0ff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1em;
+}
 
-    /* Turn indicator */
-    th:nth-child(1), td:nth-child(1) {
-        width: 60px;
-    }
+th:nth-child(1), td:nth-child(1) {
+    width: 60px;
+}
 
-    /* Name */
-    th:nth-child(2), td:nth-child(2) {
-        width: 215px;
-    }
+th:nth-child(2), td:nth-child(2) {
+    width: 215px;
+}
 
-    /* Remove button */
-    th:nth-child(11), td:nth-child(11) {
-        width: 40px;
-    }
+th:nth-child(11), td:nth-child(11) {
+    width: 40px;
+}
 
-    input, select {
-        padding: 10px;
-        /* width: 100%; */
-        max-width: 60px;
-        background: #181830;
-        border: 1px solid #0070cc;
-        border-radius: 6px;
-        color: #66f0ff;
-        font-size: 1.1em;
-        font-weight: bold;
-        font-family: 'Exo 2', sans-serif;
-        transition: all 0.3s ease;
-        box-shadow: 0 0 8px rgba(0, 100, 200, 0.15);
-    }
+/* Inputs */
+input, select {
+    padding: 10px;
+    max-width: 60px;
+    background: #181830;
+    border: 1px solid #0070cc;
+    border-radius: 6px;
+    color: #66f0ff;
+    font-size: 1.1em;
+    font-weight: bold;
+    font-family: 'Exo 2', sans-serif;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(0, 100, 200, 0.15);
+}
 
-    input[type=number], select {
-        width: 30px;
-    } 
+input[type=number], select {
+    width: 26px;
+}
 
-    input:focus, select:focus {
-        outline: none;
-        box-shadow: 0 0 12px rgba(0, 150, 255, 0.25);
-        border-color: #00a8ff;
-    }
+input:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 12px rgba(0, 150, 255, 0.25);
+    border-color: #00a8ff;
+}
 
-    .name-input {
-        min-width: 140px;
-        text-align: left;
-        max-width: none;
-        padding: 10px 14px;
-        letter-spacing: 0.5px;
-    }
+.name-input {
+    min-width: 140px;
+    text-align: left;
+    max-width: none;
+    padding: 10px 14px;
+    letter-spacing: 0.5px;
+}
 
-    .turn-btn {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        border: 2px solid #0070cc;
-        cursor: pointer;
-        background: #121220;
-        transition: all 0.3s ease;
-    }
+/* Turn button */
+.turn-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    <!-- border: 2px solid #0070cc; -->
+    cursor: pointer;
+    background: #121220;
+    transition: all 0.3s ease;
+	box-shadow: 0 0 20px rgb(0, 140, 230);
+}
 
-    .turn-active {
-        background: radial-gradient(circle, #00c8ff 0%, #0060cc 100%);
-        box-shadow: 0 0 20px rgba(0, 140, 230, 0.4);
-        animation: pulse-space 2s infinite;
-    }
+.turn-btn:hover {
+	background: radial-gradient(circle, rgb(190 230 255) 0%, rgb(80 90 130) 100%);
+    animation: pulse-space 2s infinite;
+}
 
-    button {
-        padding: 12px 28px;
-        cursor: pointer;
-        background: linear-gradient(135deg, #0060cc, #00a8ff);
-        color: #000a20;
-        border: none;
-        border-radius: 6px;
-        margin: 0 auto;
-        display: block;
-        font-weight: bold;
-        font-family: 'Orbitron', sans-serif;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(0, 120, 200, 0.2);
-    }
+.turn-active {
+    background: radial-gradient(circle, rgb(177 214 245) 0%, rgb(62 74 107) 100%);
+}
 
-    button:hover {
-        background: linear-gradient(135deg, #0070dd, #00b8ff);
-        box-shadow: 0 6px 16px rgba(0, 140, 220, 0.3);
-    }
+@keyframes pulse-space {
+    0% { box-shadow: 0 0 20px 0 rgba(0, 140, 230, 1.0); }
+    70% { box-shadow: 0 0 5px 0 rgba(0, 160, 250, 0.5); }
+    100% { box-shadow: 0 0 20px 0 rgba(0, 140, 230, 1.0); }
+}
 
-    /* .remove-btn {
-        background: linear-gradient(135deg, #cc0040, #ff3070);
-        font-size: 0.9em;
-        padding: 8px 12px;
-    } */
+/* Buttons */
+button {
+    padding: 12px 28px;
+    cursor: pointer;
+    background: linear-gradient(135deg, rgb(165 252 249), rgb(77 90 140));
+    color: #000a20;
+    border: none;
+    border-radius: 6px;
+    margin: 0 auto;
+    display: block;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgb(0, 120, 200);
+}
 
-    .remove-btn {
-        background-color: #ff4444;
-        padding: 6px 12px;
-    }
+button:hover {
+    background: linear-gradient(135deg, rgb(200 255 255), rgb(110 130 180));
+    box-shadow: 0 0 30px rgb(0, 140, 220);
+}
 
-    .remove-btn:hover {
-        background: linear-gradient(135deg, #dd0050, #ff4080);
-    }
+.remove-btn {
+    background-color: #ff4444;
+    padding: 6px 12px;
+}
 
-    .controls {
-        margin-bottom: 36px;
-    }
+.remove-btn:hover {
+    background: linear-gradient(135deg, #dd0050, #ff4080);
+}
 
-    tr:hover {
-        background: #191935;
-    }
+.controls {
+    margin-bottom: 36px;
+}
 
-    tr {
-        transition: background 0.3s ease;
-    }
 
-    @keyframes pulse-space {
-        0% { box-shadow: 0 0 0 0 rgba(0, 160, 230, 0.5); }
-        70% { box-shadow: 0 0 0 10px rgba(0, 160, 230, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(0, 160, 230, 0); }
-    }
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
 
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-    }
+::-webkit-scrollbar-track {
+    background: #121220;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0060aa;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0080cc;
+}
+
+/* Hide number input spinners */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+	margin: 0 2px;
+    text-align: center;
+    -moz-appearance: textfield;
+}
+
+
+tr {
+    transition: background 0.3s ease;
+}
+
+tr:hover {
+    background: rgb(30 30 60);
+}
+
+th:nth-child(1),
+th:nth-child(2),
+th:nth-child(5),
+th:nth-child(6),
+th:nth-child(9),
+th:nth-child(10){
+    background: rgba(60, 60, 120, 0.5);
+}
+
+th:nth-child(3),
+th:nth-child(4),
+th:nth-child(7),
+th:nth-child(8),
+th:nth-child(11){
+    background: rgba(100, 100, 150, 0.5);
+}
+
+td:nth-child(1),
+td:nth-child(2),
+td:nth-child(5),
+td:nth-child(6),
+td:nth-child(9),
+td:nth-child(10){
+    background: rgba(20, 20, 40, 0.5);
+}
+
+td:nth-child(3),
+td:nth-child(4),
+td:nth-child(7),
+td:nth-child(8),
+td:nth-child(11){
+    background: rgba(40, 40, 80, 0.5);
+}
+
+
     
-    ::-webkit-scrollbar-track {
-        background: #121220;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background: #0060aa;
-        border-radius: 4px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-        background: #0080cc;
-    }
-
-    /* Hide spinner buttons for all browsers */
-    input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button { 
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    /* For Firefox */
-    input[type=number] {
-        text-align: center;
-        -moz-appearance: textfield;
-    }
-
-    /* Keep your existing code for hiding spinners */
-    input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button { 
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    </style>
+</style>
 </head>
+
 <body>
-    <div class="controls">
-        <button onclick="addCharacter()">Add New Character</button>
-    </div>
+<div class="controls">
+    <button onclick="addCharacter()">Add New Character</button>
+</div>
 
-    <table>
-        <thead>
-            <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Initiative</th>
-                <th>Fatigue</th>
-                <th>Exhaustion</th>
-                <th>Stress</th>
-                <th>Panic</th>
-                <th>Shock</th>
-                <th>Injury</th>
-                <th>Fatal</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody id="initiativeList">
-        </tbody>
-    </table>
-    
-    <button onclick="endRound()" style="margin-top: 20px;">End Round</button>
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Initiative</th>
+            <th>Reflexes</th>
+            <th>Fatigue</th>
+            <th>Exhaustion</th>
+            <th>Stress</th>
+            <th>Panic</th>
+            <th>Injury</th>
+            <th>Fatal</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="initiativeList">
+    </tbody>
+</table>
 
-    <script>
-		function createSelectOptions() {
-            let options = '';
-            for(let i = 0; i <= 5; i++) {
-                options += `<option value="${i}">${i}</option>`;
+<button onclick="endRound()" style="margin-top: 20px;">End Round</button>
+
+<script>
+function createSelectOptions() {
+    let options = '';
+    for(let i = 0; i <= 5; i++) {
+        options += `<option value="${i}">${i}</option>`;
+    }
+    return options;
+}
+
+function addCharacter() {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td><button class="turn-btn turn-active" onclick="toggleTurn(this)"></button></td>
+        <td><input type="text" placeholder="Name" class="name-input"></td>
+        <td><input type="number" value="0" class="initiative-input" placeholder="0"></td>
+        <td><input type="number" value="0" min="0" class="reflexes-input" title="Reflexes"></td>
+        <td><input type="number" value="0" min="0" title="Fatigue"></td>
+        <td><input type="number" value="0" min="0" title="Exhaustion"></td>
+        <td><input type="number" value="0" min="0" title="Stress"></td>
+        <td><input type="number" value="0" min="0" title="Panic"></td>
+        <td><input type="number" value="0" min="0" title="Injury"></td>
+        <td><input type="number" value="0" min="0" title="Fatal"></td>
+        <td><button class="remove-btn" onclick="this.parentElement.parentElement.remove();">X</button></td>
+    `;
+    document.getElementById('initiativeList').appendChild(row);
+
+    row.querySelectorAll('input[type="number"]').forEach(input => {
+        input.addEventListener('blur', function() {
+            if (this.value !== '') {
+                this.value = String(parseInt(this.value)); // Clean leading zeros
             }
-            return options;
+        });
+    });
+
+    // Also auto sort on blur of Initiative and Reflexes
+    const initiativeInput = row.querySelector('.initiative-input');
+    const reflexesInput = row.querySelector('.reflexes-input');
+
+    initiativeInput.addEventListener('blur', sortList);
+    reflexesInput.addEventListener('blur', sortList);
+}
+
+function endRound() {
+    document.querySelectorAll('.turn-btn').forEach(btn => {
+        btn.classList.add('turn-active');
+    });
+    sortList();
+}
+
+function sortList() {
+    const list = document.getElementById('initiativeList');
+    const rows = Array.from(list.children);
+
+    rows.sort((a, b) => {
+        const aInitiative = parseInt(a.querySelector('.initiative-input').value) || 0;
+        const bInitiative = parseInt(b.querySelector('.initiative-input').value) || 0;
+
+        const aReflexes = parseInt(a.children[3].querySelector('input').value) || 0;
+        const bReflexes = parseInt(b.children[3].querySelector('input').value) || 0;
+
+        if (bInitiative === aInitiative) {
+            return bReflexes - aReflexes;
         }
+        return bInitiative - aInitiative;
+    });
 
-        function addCharacter() {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td><button class="turn-btn" onclick="toggleTurn(this)"></button></td>
-                <td><input type="text" placeholder="Name" class="name-input"></td>
-                <td><input type="number" value="0" class="initiative-input" placeholder="0"></td>
-                <td><input type="number" value="0" min="0" title="Fatigue"></td>
-                <td><input type="number" value="0" min="0" title="Exhaustion"></td>
-                <td><input type="number" value="0" min="0" title="Stress"></td>
-                <td><input type="number" value="0" min="0" title="Panic"></td>
-                <td><input type="number" value="0" min="0" title="Shock"></td>
-                <td><input type="number" value="0" min="0" title="Injury"></td>
-                <td><input type="number" value="0" min="0" title="Fatal"></td>                
-                <td><button class="remove-btn" onclick="this.parentElement.parentElement.remove();">X</button></td>
-            `;
+    while (list.firstChild) {
+        list.removeChild(list.firstChild);
+    }
 
-            document.getElementById('initiativeList').appendChild(row);
-            
-            // Add blur event listener to initiative input
-            const initiativeInput = row.querySelector('.initiative-input');
-            initiativeInput.addEventListener('blur', function() {
-                sortList();
-            });
-            
-            // Also add event listener for Enter key
-            initiativeInput.addEventListener('keydown', function(event) {
-                if (event.key === 'Enter') {
-                    this.blur(); // Trigger the blur event
-                }
-            });
-        }
+    rows.forEach(row => list.appendChild(row));
+}
 
-        function endRound() {
-            // Clear all turn indicators
-            document.querySelectorAll('.turn-btn').forEach(btn => {
-                btn.classList.remove('turn-active');
-            });
-            
-            // Sort by initiative
-            sortList();
-        }
+function toggleTurn(button) {
+    button.classList.toggle('turn-active');
+}
 
-        function sortList() {
-            const list = document.getElementById('initiativeList');
-            const rows = Array.from(list.children);
-
-            rows.sort((a, b) => {
-                const aInitiative = parseInt(a.querySelector('.initiative-input').value) || 0;
-                const bInitiative = parseInt(b.querySelector('.initiative-input').value) || 0;
-                return bInitiative - aInitiative;
-            });
-
-            while (list.firstChild) {
-                list.removeChild(list.firstChild);
-            }
-
-            rows.forEach(row => list.appendChild(row));
-        }
-
-        function toggleTurn(button) {
-            // Simple toggle of the turn-active class
-            button.classList.toggle('turn-active');
-        }
-
-        // Initialize with one character
-        window.onload = function() {
-            addCharacter();
-        }
-    </script>
+window.onload = function() {
+    addCharacter();
+}
+</script>
 </body>
 </html>
