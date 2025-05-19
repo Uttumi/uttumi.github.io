@@ -9,7 +9,6 @@
 <style>
 body {
     font-family: 'Exo 2', sans-serif;
-    max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
     background: rgb(5 5 10);
@@ -18,7 +17,7 @@ body {
 }
 
 table {
-    width: 100%;
+    /* width: 100%; */
     border-collapse: collapse;
     border-radius: 12px;
     box-shadow: 0 0 30px rgba(0, 100, 200, 0.1);
@@ -40,6 +39,8 @@ th {
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 1em;
+
+    width: 120px;
 }
 
 th:nth-child(1), td:nth-child(1) {
@@ -50,7 +51,7 @@ th:nth-child(2), td:nth-child(2) {
     width: 215px;
 }
 
-th:nth-child(11), td:nth-child(11) {
+th:nth-child(12), td:nth-child(12) {
     width: 40px;
 }
 
@@ -71,6 +72,41 @@ input, select {
 
 input[type=number], select {
     width: 26px;
+    height: 20px;
+    border-radius: 2px;
+
+    text-align: center;
+    -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.valueButton {
+    width: 20px;
+    height: 40px;
+    padding: 0;
+    margin: 2px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    background: linear-gradient(135deg, rgb(80, 200, 220), rgb(40, 70, 120));
+}
+
+.valueButton:hover {
+    background: linear-gradient(135deg, rgb(100, 220, 240), rgb(60, 90, 140));
+}
+
+.leftButton {
+    border-radius: 20px 0 0 20px;
+}
+
+.rightButton {
+    border-radius: 0 20px 20px 0;
 }
 
 input:focus, select:focus {
@@ -87,20 +123,19 @@ input:focus, select:focus {
     letter-spacing: 0.5px;
 }
 
-/* Turn button */
 .turn-btn {
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    <!-- border: 2px solid #0070cc; -->
     cursor: pointer;
     background: #121220;
     transition: all 0.3s ease;
-	box-shadow: 0 0 20px rgb(0, 140, 230);
+    box-shadow: 0 0 20px rgb(0, 140, 230);
 }
 
 .turn-btn:hover {
-	background: radial-gradient(circle, rgb(190 230 255) 0%, rgb(80 90 130) 100%);
+    /* background: radial-gradient(circle, rgb(190 230 255) 0%, rgb(80 90 130) 100%); */
+    background: radial-gradient(circle, rgb(255 255 255) 0%, rgb(120 120 160) 100%);
     animation: pulse-space 2s infinite;
 }
 
@@ -150,7 +185,6 @@ button:hover {
     margin-bottom: 36px;
 }
 
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
@@ -170,19 +204,6 @@ button:hover {
     background: #0080cc;
 }
 
-/* Hide number input spinners */
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-input[type=number] {
-	margin: 0 2px;
-    text-align: center;
-    -moz-appearance: textfield;
-}
-
-
 tr {
     transition: background 0.3s ease;
 }
@@ -193,40 +214,61 @@ tr:hover {
 
 th:nth-child(1),
 th:nth-child(2),
+th:nth-child(4),
 th:nth-child(5),
-th:nth-child(6),
+th:nth-child(8),
 th:nth-child(9),
-th:nth-child(10){
+th:nth-child(12)
+{
     background: rgba(60, 60, 120, 0.5);
 }
 
 th:nth-child(3),
-th:nth-child(4),
+th:nth-child(6),
 th:nth-child(7),
-th:nth-child(8),
-th:nth-child(11){
+th:nth-child(10),
+th:nth-child(11)
+{
     background: rgba(100, 100, 150, 0.5);
 }
 
 td:nth-child(1),
 td:nth-child(2),
+td:nth-child(4),
 td:nth-child(5),
-td:nth-child(6),
+td:nth-child(8),
 td:nth-child(9),
-td:nth-child(10){
+td:nth-child(12)
+{
     background: rgba(20, 20, 40, 0.5);
 }
 
 td:nth-child(3),
-td:nth-child(4),
+td:nth-child(6),
 td:nth-child(7),
-td:nth-child(8),
-td:nth-child(11){
+td:nth-child(10),
+td:nth-child(11)
+{
     background: rgba(40, 40, 80, 0.5);
 }
 
+.value-container
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    
+.value
+{
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    color: #66f0ff;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
 </style>
 </head>
 
@@ -240,6 +282,7 @@ td:nth-child(11){
         <tr>
             <th></th>
             <th>Name</th>
+            <th>Shock</th>
             <th>Initiative</th>
             <th>Reflexes</th>
             <th>Fatigue</th>
@@ -267,39 +310,103 @@ function createSelectOptions() {
 }
 
 function addCharacter() {
-    const row = document.createElement('tr');
-    row.innerHTML = `
+    const tableBody = document.createElement('tr');
+    tableBody.innerHTML = `
         <td><button class="turn-btn turn-active" onclick="toggleTurn(this)"></button></td>
         <td><input type="text" placeholder="Name" class="name-input"></td>
-        <td><input type="number" value="0" class="initiative-input" placeholder="0"></td>
-        <td><input type="number" value="0" min="0" class="reflexes-input" title="Reflexes"></td>
-        <td><input type="number" value="0" min="0" title="Fatigue"></td>
-        <td><input type="number" value="0" min="0" title="Exhaustion"></td>
-        <td><input type="number" value="0" min="0" title="Stress"></td>
-        <td><input type="number" value="0" min="0" title="Panic"></td>
-        <td><input type="number" value="0" min="0" title="Injury"></td>
-        <td><input type="number" value="0" min="0" title="Fatal"></td>
+        <td>
+            <div class="value-container">
+                <button class="valueButton leftButton" onclick="changeValue(this, 1)">+</button>
+                <input type="number" value="0" min="0" class="suppression-value">
+                <button class="valueButton rightButton" onclick="changeValue(this, -1)">-</button>
+            </div>
+        </td>
+        <td>
+            <div class="value-container">
+                <button class="valueButton leftButton" onmouseleave="triggerBlur(this)" onclick="changeValue(this, 1)">+</button>
+                <input type="number" value="0" class="initiative-input" onblur="sortList(this)">
+                <button class="valueButton rightButton" onmouseleave="triggerBlur(this)" onclick="changeValue(this, -1)">-</button>
+            </div>
+        </td>
+        <td>
+            <div class="value-container">
+                <button class="valueButton leftButton" onmouseleave="triggerBlur(this)" onclick="changeValue(this, 1)">+</button>
+                <input type="number" value="0" min="0" class="reflexes-input" onblur="sortList(this)">
+                <button class="valueButton rightButton" onmouseleave="triggerBlur(this)" onclick="changeValue(this, -1)">-</button>
+            </div>
+        </td>
+        <td>
+            <div class="value-container">
+                <button class="valueButton leftButton" onclick="changeValue(this, 1)">+</button>
+                <input type="number" value="0" min="0" title="Fatigue">
+                <button class="valueButton rightButton" onclick="changeValue(this, -1)">-</button>
+            </div>
+        </td>
+        <td>
+            <div class="value-container">
+                <button class="valueButton leftButton" onclick="changeValue(this, 1)">+</button>
+                <input type="number" value="0" min="0" title="Exhaustion">
+                <button class="valueButton rightButton" onclick="changeValue(this, -1)">-</button>
+            </div>
+        </td>
+        <td>
+            <div class="value-container">
+                <button class="valueButton leftButton" onclick="changeValue(this, 1)">+</button>
+                <input type="number" value="0" min="0" title="Stress">
+                <button class="valueButton rightButton" onclick="changeValue(this, -1)">-</button>
+            </div>
+        </td>
+        <td>
+            <div class="value-container">
+                <button class="valueButton leftButton" onclick="changeValue(this, 1)">+</button>
+                <input type="number" value="0" min="0" title="Panic">
+                <button class="valueButton rightButton" onclick="changeValue(this, -1)">-</button>
+            </div>
+        </td>
+        <td>
+            <div class="value-container">
+                <button class="valueButton leftButton" onclick="changeValue(this, 1)">+</button>
+                <input type="number" value="0" min="0">
+                <button class="valueButton rightButton" onclick="changeValue(this, -1)">-</button>
+            </div>
+        </td>
+        <td>
+            <div class="value-container">
+                <button class="valueButton leftButton" onclick="changeValue(this, 1)">+</button>
+                <input type="number" value="0" min="0" title="Fatal">
+                <button class="valueButton rightButton" onclick="changeValue(this, -1)">-</button>
+            </div>
+        </td>
         <td><button class="remove-btn" onclick="this.parentElement.parentElement.remove();">X</button></td>
     `;
-    document.getElementById('initiativeList').appendChild(row);
+    document.getElementById('initiativeList').appendChild(tableBody);
 
-    row.querySelectorAll('input[type="number"]').forEach(input => {
-        input.addEventListener('blur', function() {
-            if (this.value !== '') {
-                this.value = String(parseInt(this.value)); // Clean leading zeros
-            }
-        });
+    tableBody.querySelectorAll('input[type="number"]').forEach(input => {
+        input.addEventListener('blur', event => cleanUpValue(event.target));
     });
 
     // Also auto sort on blur of Initiative and Reflexes
-    const initiativeInput = row.querySelector('.initiative-input');
-    const reflexesInput = row.querySelector('.reflexes-input');
+    // const initiativeInput = row.querySelector('.initiative-input');
+    // const reflexesInput = row.querySelector('.reflexes-input');
 
-    initiativeInput.addEventListener('blur', sortList);
-    reflexesInput.addEventListener('blur', sortList);
+    // initiativeInput.addEventListener('blur', sortList);
+    // reflexesInput.addEventListener('blur', sortList);
 }
 
-function endRound() {
+function cleanUpValue(input)
+{
+    if (input.value !== '')
+    {
+        input.value = String(parseInt(input.value));
+    }
+    else
+    {
+        input.value = 0;
+    }
+}
+
+function endRound()
+{
     document.querySelectorAll('.turn-btn').forEach(btn => {
         btn.classList.add('turn-active');
     });
@@ -314,8 +421,8 @@ function sortList() {
         const aInitiative = parseInt(a.querySelector('.initiative-input').value) || 0;
         const bInitiative = parseInt(b.querySelector('.initiative-input').value) || 0;
 
-        const aReflexes = parseInt(a.children[3].querySelector('input').value) || 0;
-        const bReflexes = parseInt(b.children[3].querySelector('input').value) || 0;
+        const aReflexes = parseInt(a.querySelector('.reflexes-input').value) || 0;
+        const bReflexes = parseInt(b.querySelector('.reflexes-input').value) || 0;
 
         if (bInitiative === aInitiative) {
             return bReflexes - aReflexes;
@@ -331,7 +438,32 @@ function sortList() {
 }
 
 function toggleTurn(button) {
+    if (button.classList.contains('turn-active')) {
+        const row = button.closest('tr');
+        const suppressionInput = row.querySelector('.suppression-value');
+        suppressionInput.value = 0;
+    }
+    
     button.classList.toggle('turn-active');
+}
+
+function changeValue(button, change) {
+    const container = button.closest('.value-container');
+    const valueInput = container.querySelector('input');
+    let currentValue = parseInt(valueInput.value) || 0;
+    
+    currentValue += change;
+    if(valueInput.min) currentValue = Math.max(valueInput.min, currentValue);
+    if(valueInput.max) currentValue = Math.min(valueInput.max, currentValue);
+    valueInput.value = currentValue;
+}
+
+function triggerBlur(button)
+{
+    const container = button.closest('.value-container');
+    const valueInput = container.querySelector('input');
+
+    valueInput.dispatchEvent(new Event('blur')); 
 }
 
 window.onload = function() {
