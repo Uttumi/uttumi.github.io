@@ -339,8 +339,18 @@ firebase.auth().onAuthStateChanged(user => {
     userId = user.uid;
     loadFromFirebase();
   }
+  else {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider).then(result => {
+        userId = user.uid;
+        loadFromFirebase();
+    }).catch(error => {
+      // Handle errors or user closing popup
+    });
+  }
 });
-    
+
+
 // Auth and load data
     /*
 firebase.auth().signInAnonymously()
