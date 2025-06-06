@@ -277,6 +277,7 @@ td:nth-child(11)
     <button onclick="addCharacter()">Add New Character</button>
     <button onclick="saveData()">💾 Save</button>
     <button onclick="loadData()">🔄 Load</button>
+    <button onclick="signIn()">Sign in</button>
 </div>
 
 <table>
@@ -393,6 +394,22 @@ firebase.auth().signInAnonymously().then(userCredential => {
 });
 */
 
+function signIn() {
+  signInWithRedirect();
+}
+    
+function signInWithRedirect() {
+  firebase.auth().getRedirectResult()
+      .then((result) => {
+        if (result.user) {
+            userId = user.uid;
+            loadFromFirebase();
+        }
+      })
+      .catch(console.error);
+}
+
+    
 function saveToFirebase(data) {
   if (!userId) return;
   firebase.database().ref(`users/${userId}/characters`).set(data);
@@ -417,6 +434,8 @@ function loadFromFirebase() {
   });
 }
 */
+
+
     
 // Utility to get value or 0
 function getVal(input) {
