@@ -337,17 +337,18 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
+const auth = firebase.auth();
 
 let currentUser = null;
 let userId = null;
 
-firebase.auth().onAuthStateChanged(user => {
+auth.onAuthStateChanged(user => {
   if (user) {
     if (user.isAnonymous) {
       console.log("Signed in anonymously, uid:", user.uid);
-        firebase.auth().signOut().then(() => {
+        auth.signOut().then(() => {
           const provider = new firebase.auth.GoogleAuthProvider();
-          firebase.auth().signInWithPopup(provider);
+          auth.signInWithPopup(provider);
         });
     } else {
         userId = user.uid;
@@ -358,7 +359,7 @@ firebase.auth().onAuthStateChanged(user => {
   if (!user) {
     
 
-    firebase.auth().getRedirectResult()
+    auth.getRedirectResult()
       .then((result) => {
         if (result.user) {
             userId = user.uid;
@@ -400,7 +401,7 @@ firebase.auth().signInAnonymously().then(userCredential => {
 function signUp() {
   const email = document.getElementById("email").value;
   const pass = document.getElementById("password").value;
-   auth.createUserWithEmailAndPassword(auth, email, pass)
+  auth.createUserWithEmailAndPassword(auth, email, pass)
     .then((cred) => console.log("User created:", cred.user))
     .catch(console.error);
 }
@@ -408,7 +409,7 @@ function signUp() {
 function signIn() {
   const email = document.getElementById("email").value;
   const pass = document.getElementById("password").value;
-   auth.signInWithEmailAndPassword(auth, email, pass)
+   firebase.auth.signInWithEmailAndPassword(auth, email, pass)
     .then((cred) => console.log("Signed in:", cred.user))
     .catch(console.error);
     
@@ -420,7 +421,7 @@ function signOut() {
 }
     
 function trySignInWithRedirect() {
-  firebase.auth().getRedirectResult()
+  auth.getRedirectResult()
       .then((result) => {
         if (result.user) {
             userId = user.uid;
