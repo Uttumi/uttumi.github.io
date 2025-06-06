@@ -354,7 +354,7 @@ firebase.auth().onAuthStateChanged(user => {
         userId = user.uid;
         loadFromFirebase();
     }).catch(error => {
-      // Handle errors or user closing popup
+      console.log("Failed to open popup");
     });
   }
 });
