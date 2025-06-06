@@ -349,6 +349,20 @@ firebase.auth().onAuthStateChanged(user => {
   }
       
   if (!user) {
+    
+
+    firebase.auth().getRedirectResult()
+      .then((result) => {
+        if (result.user) {
+            userId = user.uid;
+            loadFromFirebase();
+        }
+      })
+      .catch(console.error => {
+      console.log("Failed to redirect");
+    });
+
+      /*
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then(result => {
         userId = user.uid;
@@ -356,6 +370,7 @@ firebase.auth().onAuthStateChanged(user => {
     }).catch(error => {
       console.log("Failed to open popup");
     });
+    */
   }
 });
 
