@@ -329,12 +329,30 @@ const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
 let currentUser = null;
+let userId = null;
 
+// Auth and load data
+firebase.auth().signInAnonymously()
+    .then(userCredential => {
+      userId = userCredential.user.uid;
+      loadFromFirebase();
+    })
+    .catch(console.error);
+    
 firebase.auth().signInAnonymously().then(userCredential => {
   currentUser = userCredential.user;
-  loadData();
+  userId = currentUser.uid;
+  loadFromFirebase();
 });
 
+function loadFromFirebase() {
+  const ref = firebase.database().ref(`users/${userId}/characters`);
+  ref.once('value').then(snapshot => {
+    const data = snapshot.val() || [];
+    loadData(data);
+  });
+}
+    
 // Utility to get value or 0
 function getVal(input) {
   return parseInt(input.value) || 0;
@@ -365,16 +383,36 @@ function saveData() {
   });
 }
 
-function loadData() {
-  if (!currentUser) return;
-  db.ref("users/" + currentUser.uid + "/characters").once("value").then(snapshot => {
-    const characters = snapshot.val() || [];
-    document.getElementById("initiativeList").innerHTML = "";
-    characters.forEach(char => addCharacter(char));
-  });
+function loadData(data) {
+    const list = document.getElementById('initiativeList');
+    list.innerHTML = ''; // Clear current rows
+
+    data.forEach(char => {
+        addCharacter(); // adds a blank row
+        const lastRow = list.lastElementChild;
+
+        lastRow.querySelector('.name-input').value = char.name || '';
+
+        lastRow.querySelector('.suppression-value').value = char.shock || 0;
+        lastRow.querySelector('.initiative-input').value = char.initiative || 0;
+        lastRow.querySelector('.reflexes-input').value = char.reflexes || 0;
+
+        lastRow.querySelector('input[title="Fatigue"]').value = char.fatigue || 0;
+        lastRow.querySelector('input[title="Exhaustion"]').value = char.exhaustion || 0;
+        lastRow.querySelector('input[title="Stress"]').value = char.stress || 0;
+        lastRow.querySelector('input[title="Panic"]').value = char.panic || 0;
+
+        // Injury is the input inside the 10th <td> in the row
+        lastRow.querySelector('td:nth-child(10) input[type="number"]').value = char.injury || 0;
+
+        lastRow.querySelector('input[title="Fatal"]').value = char.fatal || 0;
+    });
+
+    // Optional: resort list after loading to keep order correct
+    sortList();
 }
 
-window.onload = loadData;
+//window.onload = loadData;
 
 function createSelectOptions() {
     let options = '';
