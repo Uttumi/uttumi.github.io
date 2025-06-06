@@ -344,15 +344,15 @@ function collectData() {
   return Array.from(document.querySelectorAll("#initiativeList tr")).map(row => {
     return {
       name: row.querySelector('.name-input').value,
-      shock: getVal(row.querySelector('.shock-input')),
+      shock: getVal(row.querySelector('.suppression-value')),
       initiative: getVal(row.querySelector('.initiative-input')),
       reflexes: getVal(row.querySelector('.reflexes-input')),
-      fatigue: getVal(row.querySelector('.fatigue-input')),
-      exhaustion: getVal(row.querySelector('.exhaustion-input')),
-      stress: getVal(row.querySelector('.stress-input')),
-      panic: getVal(row.querySelector('.panic-input')),
-      injury: getVal(row.querySelector('.injury-input')),
-      fatal: getVal(row.querySelector('.fatal-input'))
+      fatigue: getVal(row.querySelector('input[title="Fatigue"]')),
+      exhaustion: getVal(row.querySelector('input[title="Exhaustion"]')),
+      stress: getVal(row.querySelector('input[title="Stress"]')),
+      panic: getVal(row.querySelector('input[title="Panic"]')),
+      injury: getVal(row.querySelector('td:nth-child(10) input[type="number"]')),
+      fatal: getVal(row.querySelector('input[title="Fatal"]')),
     };
   });
 }
