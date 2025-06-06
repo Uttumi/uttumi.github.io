@@ -336,10 +336,19 @@ let userId = null;
 
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
-    userId = user.uid;
-    loadFromFirebase();
+    if (user.isAnonymous) {
+      console.log("Signed in anonymously, uid:", user.uid);
+        firebase.auth().signOut().then(() => {
+          const provider = new firebase.auth.GoogleAuthProvider();
+          firebase.auth().signInWithPopup(provider);
+        });
+    } else {
+        userId = user.uid;
+        loadFromFirebase();
+    }
   }
-  else {
+      
+  if (!user) {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then(result => {
         userId = user.uid;
