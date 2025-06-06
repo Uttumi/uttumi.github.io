@@ -276,7 +276,7 @@ td:nth-child(11)
 <div class="controls">
     <button onclick="addCharacter()">Add New Character</button>
     <button onclick="saveData()">💾 Save</button>
-    <button onclick="loadData()">🔄 Load</button>
+    <button onclick="loadFromFirebase()">🔄 Load</button>
     <input type="email" id="email" placeholder="Email">
     <input type="password" id="password" placeholder="Password">
     <button onclick="signUp()">Sign Up</button>
@@ -351,17 +351,17 @@ auth.onAuthStateChanged(user => {
           auth.signInWithPopup(provider);
         });
     } else {
+        currentUser = user;
         userId = user.uid;
         loadFromFirebase();
     }
   }
       
   if (!user) {
-    
-
     auth.getRedirectResult()
       .then((result) => {
         if (result.user) {
+            currentUser = user;
             userId = user.uid;
             loadFromFirebase();
         }
@@ -401,23 +401,33 @@ firebase.auth().signInAnonymously().then(userCredential => {
 function signUp() {
   const email = document.getElementById("email").value;
   const pass = document.getElementById("password").value;
-  auth.createUserWithEmailAndPassword(auth, email, pass)
-    .then((cred) => console.log("User created:", cred.user))
+  auth.createUserWithEmailAndPassword(email, pass)
+    .then((cred) => {
+      console.log("User created:", cred.user);
+      currentUser = cred.user;
+      userId = cred.user.uid;
+      loadFromFirebase();
+    })
     .catch(console.error);
 }
 
 function signIn() {
   const email = document.getElementById("email").value;
   const pass = document.getElementById("password").value;
-   firebase.auth.signInWithEmailAndPassword(auth, email, pass)
-    .then((cred) => console.log("Signed in:", cred.user))
+   auth.signInWithEmailAndPassword(email, pass)
+    .then((cred) => {
+      console.log("Signed in:", cred.user);
+      currentUser = cred.user;
+      userId = cred.user.uid;
+      loadFromFirebase();
+    })
     .catch(console.error);
     
   //trySignInWithRedirect();
 }
 
 function signOut() {
-   auth.signOut(auth).then(() => console.log("Signed out"));
+   auth.signOut().then(() => console.log("Signed out"));
 }
     
 function trySignInWithRedirect() {
