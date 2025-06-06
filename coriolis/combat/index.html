@@ -277,7 +277,11 @@ td:nth-child(11)
     <button onclick="addCharacter()">Add New Character</button>
     <button onclick="saveData()">💾 Save</button>
     <button onclick="loadData()">🔄 Load</button>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="signUp()">Sign Up</button>
     <button onclick="signIn()">Sign in</button>
+    <button onclick="signOut()">Sign Out</button>
 </div>
 
 <table>
@@ -393,9 +397,26 @@ firebase.auth().signInAnonymously().then(userCredential => {
   loadFromFirebase();
 });
 */
+function signUp() {
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
+   auth.createUserWithEmailAndPassword(auth, email, pass)
+    .then((cred) => console.log("User created:", cred.user))
+    .catch(console.error);
+}
 
 function signIn() {
-  trySignInWithRedirect();
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
+   auth.signInWithEmailAndPassword(auth, email, pass)
+    .then((cred) => console.log("Signed in:", cred.user))
+    .catch(console.error);
+    
+  //trySignInWithRedirect();
+}
+
+function signOut() {
+   auth.signOut(auth).then(() => console.log("Signed out"));
 }
     
 function trySignInWithRedirect() {
