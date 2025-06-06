@@ -302,10 +302,13 @@ td:nth-child(11)
 
 <button onclick="endRound()" style="margin-top: 20px;">End Round</button>
 
+<!-- Firebase App (core) -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+<!-- Firebase Authentication -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
- 
+<!-- Firebase Realtime Database -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+    
 <script>
 
 // Import the functions you need from the SDKs you need
@@ -331,20 +334,47 @@ const db = firebase.database();
 let currentUser = null;
 let userId = null;
 
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    userId = user.uid;
+    loadFromFirebase();
+  }
+});
+    
 // Auth and load data
+    /*
 firebase.auth().signInAnonymously()
     .then(userCredential => {
       userId = userCredential.user.uid;
       loadFromFirebase();
     })
     .catch(console.error);
-    
+    */
+
+    /*
 firebase.auth().signInAnonymously().then(userCredential => {
   currentUser = userCredential.user;
   userId = currentUser.uid;
   loadFromFirebase();
 });
+*/
 
+function saveToFirebase(data) {
+  if (!userId) return;
+  firebase.database().ref(`users/${userId}/characters`).set(data);
+}
+
+function loadFromFirebase() {
+  if (!userId) return;
+
+  const ref = firebase.database().ref(`users/${userId}/characters`);
+  ref.once('value').then(snapshot => {
+    const data = snapshot.val() || [];
+    loadData(data);
+  });
+}
+
+    /*
 function loadFromFirebase() {
   const ref = firebase.database().ref(`users/${userId}/characters`);
   ref.once('value').then(snapshot => {
@@ -352,6 +382,7 @@ function loadFromFirebase() {
     loadData(data);
   });
 }
+*/
     
 // Utility to get value or 0
 function getVal(input) {
