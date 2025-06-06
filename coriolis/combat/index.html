@@ -395,10 +395,10 @@ firebase.auth().signInAnonymously().then(userCredential => {
 */
 
 function signIn() {
-  signInWithRedirect();
+  trySignInWithRedirect();
 }
     
-function signInWithRedirect() {
+function trySignInWithRedirect() {
   firebase.auth().getRedirectResult()
       .then((result) => {
         if (result.user) {
