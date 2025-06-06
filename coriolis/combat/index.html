@@ -275,6 +275,8 @@ td:nth-child(11)
 <body>
 <div class="controls">
     <button onclick="addCharacter()">Add New Character</button>
+    <button onclick="saveData()">💾 Save</button>
+    <button onclick="loadData()">🔄 Load</button>
 </div>
 
 <table>
@@ -300,7 +302,80 @@ td:nth-child(11)
 
 <button onclick="endRound()" style="margin-top: 20px;">End Round</button>
 
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+ 
 <script>
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBM_5J39bj9G-tQ5tM7AkEEBURkxyuaGf4",
+  authDomain: "coriolis-combat-tracker.firebaseapp.com",
+  databaseURL: "https://coriolis-combat-tracker-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "coriolis-combat-tracker",
+  storageBucket: "coriolis-combat-tracker.firebasestorage.app",
+  messagingSenderId: "322123206512",
+  appId: "1:322123206512:web:238da425dd47a79e0509b5"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = firebase.database();
+
+let currentUser = null;
+
+firebase.auth().signInAnonymously().then(userCredential => {
+  currentUser = userCredential.user;
+  loadData();
+});
+
+// Utility to get value or 0
+function getVal(input) {
+  return parseInt(input.value) || 0;
+}
+    
+function collectData() {
+  return Array.from(document.querySelectorAll("#initiativeList tr")).map(row => {
+    return {
+      name: row.querySelector('.name-input').value,
+      shock: getVal(row.querySelector('.shock-input')),
+      initiative: getVal(row.querySelector('.initiative-input')),
+      reflexes: getVal(row.querySelector('.reflexes-input')),
+      fatigue: getVal(row.querySelector('.fatigue-input')),
+      exhaustion: getVal(row.querySelector('.exhaustion-input')),
+      stress: getVal(row.querySelector('.stress-input')),
+      panic: getVal(row.querySelector('.panic-input')),
+      injury: getVal(row.querySelector('.injury-input')),
+      fatal: getVal(row.querySelector('.fatal-input'))
+    };
+  });
+}
+
+function saveData() {
+  if (!currentUser) return;
+  const data = collectData();
+  db.ref("users/" + currentUser.uid + "/characters").set(data).then(() => {
+    alert("Saved!");
+  });
+}
+
+function loadData() {
+  if (!currentUser) return;
+  db.ref("users/" + currentUser.uid + "/characters").once("value").then(snapshot => {
+    const characters = snapshot.val() || [];
+    document.getElementById("initiativeList").innerHTML = "";
+    characters.forEach(char => addCharacter(char));
+  });
+}
+
+window.onload = loadData;
+
 function createSelectOptions() {
     let options = '';
     for(let i = 0; i <= 5; i++) {
@@ -469,6 +544,8 @@ function triggerBlur(button)
 window.onload = function() {
     addCharacter();
 }
+
+
 </script>
 </body>
 </html>
