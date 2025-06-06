@@ -358,9 +358,7 @@ firebase.auth().onAuthStateChanged(user => {
             loadFromFirebase();
         }
       })
-      .catch(console.error => {
-      console.log("Failed to redirect");
-    });
+      .catch(console.error);
 
       /*
     const provider = new firebase.auth.GoogleAuthProvider();
