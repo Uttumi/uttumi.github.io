@@ -755,11 +755,14 @@ window.onload = function() {
 
 // 📂 Dataset Manager Popup Logic
 function openDatasetPopup() {
-  document.getElementById('datasetPopup').style.display = 'block';
+  showPopup("datasetPopup");
+  listDatasets();
+    /*
   listDatasets(names => {
     const listDiv = document.getElementById('datasetList');
     listDiv.innerHTML = 'Available: ' + (names.length ? names.join(', ') : '(none)');
   });
+  */
 }
 
 function closeDatasetPopup() {
