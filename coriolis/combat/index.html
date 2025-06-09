@@ -882,7 +882,7 @@ function listDatasets() {
         
       const li = document.createElement("li");
       li.innerHTML = `
-        <h4 id="datasetItemText">${name}</h4>
+        <h4 class="datasetItemText">${name}</h4>
         <button class="datasetItemButton" onclick="loadDatasetFromFirebase('${name}', false)">📥 Load</button>
         <button class="datasetItemButton" onclick="loadDatasetFromFirebase('${name}', true)">➕ Merge</button>
       `;
