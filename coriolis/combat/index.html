@@ -872,7 +872,7 @@ function hidePopup(id) {
 
 function triggerAutoSave() {
   clearTimeout(autoSaveTimer);
-  autoSaveTimer = setTimeout(saveDatasetToFirebase('default'), 30000);
+  autoSaveTimer = setTimeout(() => saveDatasetToFirebase('default'), 30000);
 }
     
 </script>
