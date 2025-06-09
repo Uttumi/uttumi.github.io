@@ -736,10 +736,8 @@ function openDatasetPopup() {
 }
 
 function closeDatasetPopup() {
-  document.getElementById('datasetPopup').style.display = 'none';
+  hidePopup("datasetPopup");
 }
-
-
 
 function saveDatasetFromPopup() {
   const name = document.getElementById('datasetNameInput').value.trim();
