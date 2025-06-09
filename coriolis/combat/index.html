@@ -813,7 +813,7 @@ function listDatasets(callback) {
   const ref = db.ref(`users/${currentUser.uid}/datasets`);
   ref.once('value')
     .then(snapshot => {
-      const list = document.getElementById("datasetsList");
+      const list = document.getElementById("datasetList");
       list.innerHTML = "";
         
       const datasets = snapshot.val() || {};
@@ -842,7 +842,7 @@ function listDatasets(callback) {
 // 📄 List user datasets (excluding 'default')
 function listDatasets() {
   db.ref(`users/${currentUser.uid}/datasets`).once('value', snapshot => {
-    const list = document.getElementById("datasetsList");
+    const list = document.getElementById("datasetList");
     list.innerHTML = "";
 
     const datasets = snapshot.val() || {};
