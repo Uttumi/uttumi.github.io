@@ -26,16 +26,21 @@ body {
 }
 
 .popup {
-  position: fixed;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  color: black;
-  padding: 20px;
-  border-radius: 10px;
-  z-index: 1001;
-  display: none;
-  max-width: 90%;
+
+width: 500px;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(18 18 32);
+    color: rgb(102 240 255);
+    padding: 20px;
+    border-radius: 10px;
+    border-color: rgb(0 96 170);
+    border-width: 5px;
+    z-index: 1001;
+    display: none;
+    max-width: 90%;
 }
     
 .popup button {
@@ -295,6 +300,16 @@ td:nth-child(11)
     font-weight: bold;
 }
 
+.datasetItem
+{
+
+}
+    
+.datasetItemButton
+{
+
+}
+    
 </style>
 </head>
 
@@ -852,10 +867,11 @@ function listDatasets() {
       const li = document.createElement("li");
       li.innerHTML = `
         <strong>${name}</strong>
-        <button onclick="loadDatasetFromFirebase('${name}', false)">📥 Load</button>
-        <button onclick="loadDatasetFromFirebase('${name}', true)">➕ Merge</button>
+        <button class="datasetItemButton" onclick="loadDatasetFromFirebase('${name}', false)">📥 Load</button>
+        <button class="datasetItemButton" onclick="loadDatasetFromFirebase('${name}', true)">➕ Merge</button>
       `;
       list.appendChild(li);
+     li.classList.add("datasetItem");
     });
   });
 }
