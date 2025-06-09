@@ -392,48 +392,24 @@ const auth = firebase.auth();
 let currentUser = null;
 let userId = null;
 
-    /*
+
 auth.onAuthStateChanged(user => {
   if (user) {
     if (user.isAnonymous) {
-      console.log("Signed in anonymously, uid:", user.uid);
+        console.log(f"Signed in anonymously. Signing out. Uid: {user.uid}");
         auth.signOut().then(() => {
-          const provider = new firebase.auth.GoogleAuthProvider();
-          auth.signInWithPopup(provider);
+          showPopup("signinPopup");
         });
     } else {
-        currentUser = user;
-        userId = user.uid;
-        loadFromFirebase();
+        onUserSignedIn();
     }
   }
-      
-  if (!user) {
-    auth.getRedirectResult()
-      .then((result) => {
-        if (result.user) {
-            currentUser = user;
-            userId = user.uid;
-            loadFromFirebase();
-        }
-      })
-      .catch(console.error);
-
-      /*
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider).then(result => {
-        userId = user.uid;
-        loadFromFirebase();
-    }).catch(error => {
-      console.log("Failed to open popup");
-    });
-    */
-    
-/*
+  else {
+    showPopup("signinPopup");
   }
 });
-    */
-
+    
+/*
 // Check auth on load
 window.onload = () => {
   auth.onAuthStateChanged(user => {
@@ -444,6 +420,7 @@ window.onload = () => {
     }
   });
 };
+*/
 
 // Sign in using Google
 function startGoogleSignIn() {
