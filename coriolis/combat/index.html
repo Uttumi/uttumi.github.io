@@ -396,7 +396,7 @@ let userId = null;
 auth.onAuthStateChanged(user => {
   if (user) {
     if (user.isAnonymous) {
-        console.log(f"Signed in anonymously. Signing out. Uid: {user.uid}");
+        console.log("Signed in anonymously. Signing out. Uid: ${user.uid}");
         auth.signOut().then(() => {
           showPopup("signinPopup");
         });
