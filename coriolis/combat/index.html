@@ -302,12 +302,19 @@ td:nth-child(11)
 
 .datasetItem
 {
-
+    display: flex;
+}
+    
+.datasetItemText
+{
+    width: 100px;
 }
     
 .datasetItemButton
 {
-
+    padding: 0px;
+    /* flex-shrink: initial; */
+    flex: 0 0 1px;
 }
     
 </style>
@@ -866,7 +873,7 @@ function listDatasets() {
         
       const li = document.createElement("li");
       li.innerHTML = `
-        <strong>${name}</strong>
+        <label id="datasetItemText">${name}</label>
         <button class="datasetItemButton" onclick="loadDatasetFromFirebase('${name}', false)">📥 Load</button>
         <button class="datasetItemButton" onclick="loadDatasetFromFirebase('${name}', true)">➕ Merge</button>
       `;
