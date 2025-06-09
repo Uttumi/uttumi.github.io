@@ -275,8 +275,9 @@ td:nth-child(11)
 <body>
 <div class="controls">
     <button onclick="addCharacter()">Add New Character</button>
-    <button onclick="saveData()">💾 Save</button>
-    <button onclick="loadFromFirebase()">🔄 Load</button>
+    <!--<button onclick="saveData()">💾 Save</button>-->
+    <!--<button onclick="loadFromFirebase()">🔄 Load</button>-->
+    <button onclick="openDatasetPopup()">📂 Manage Datasets</button>
     <input type="email" id="email" placeholder="Email">
     <input type="password" id="password" placeholder="Password">
     <button onclick="signUp()">Sign Up</button>
@@ -284,6 +285,24 @@ td:nth-child(11)
     <button onclick="signOut()">Sign Out</button>
 </div>
 
+<!-- 📂 Dataset Manager Popup -->
+<div id="datasetPopup" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
+  <h3>Datasets</h3>
+  <input type="text" id="datasetNameInput" placeholder="Enter dataset name"><br><br>
+  <button onclick="saveDatasetFromPopup()">💾 Save</button>
+  <button onclick="loadDatasetFromPopup(false)">📥 Load</button>
+  <button onclick="loadDatasetFromPopup(true)">🔀 Merge</button>
+  <button onclick="closeDatasetPopup()">❌ Close</button>
+  <div id="datasetList" style="margin-top:10px;"></div>
+</div>
+
+<!-- 🔐 Sign-In Popup -->
+<div id="signInPopup" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
+  <h3>Sign In</h3>
+  <p>Sign in to save and load your data across devices.</p>
+  <button onclick="signInWithGoogle()">Sign in with Google</button>
+</div>
+    
 <table>
     <thead>
         <tr>
@@ -447,15 +466,9 @@ function saveToFirebase(data) {
   firebase.database().ref(`users/${userId}/characters`).set(data);
 }
 
-function loadFromFirebase() {
-  if (!userId) return;
 
-  const ref = firebase.database().ref(`users/${userId}/characters`);
-  ref.once('value').then(snapshot => {
-    const data = snapshot.val() || [];
-    loadData(data);
-  });
-}
+    
+
 
     /*
 function loadFromFirebase() {
@@ -491,42 +504,10 @@ function collectData() {
   });
 }
 
-function saveData() {
-  if (!currentUser) return;
-  const data = collectData();
-  db.ref("users/" + currentUser.uid + "/characters").set(data).then(() => {
-    alert("Saved!");
-  });
-}
 
-function loadData(data) {
-    const list = document.getElementById('initiativeList');
-    list.innerHTML = ''; // Clear current rows
 
-    data.forEach(char => {
-        addCharacter(); // adds a blank row
-        const lastRow = list.lastElementChild;
 
-        lastRow.querySelector('.name-input').value = char.name || '';
 
-        lastRow.querySelector('.suppression-value').value = char.shock || 0;
-        lastRow.querySelector('.initiative-input').value = char.initiative || 0;
-        lastRow.querySelector('.reflexes-input').value = char.reflexes || 0;
-
-        lastRow.querySelector('input[title="Fatigue"]').value = char.fatigue || 0;
-        lastRow.querySelector('input[title="Exhaustion"]').value = char.exhaustion || 0;
-        lastRow.querySelector('input[title="Stress"]').value = char.stress || 0;
-        lastRow.querySelector('input[title="Panic"]').value = char.panic || 0;
-
-        // Injury is the input inside the 10th <td> in the row
-        lastRow.querySelector('td:nth-child(10) input[type="number"]').value = char.injury || 0;
-
-        lastRow.querySelector('input[title="Fatal"]').value = char.fatal || 0;
-    });
-
-    // Optional: resort list after loading to keep order correct
-    sortList();
-}
 
 //window.onload = loadData;
 
@@ -699,7 +680,106 @@ window.onload = function() {
     addCharacter();
 }
 
+// 📂 Dataset Manager Popup Logic
+function openDatasetPopup() {
+  document.getElementById('datasetPopup').style.display = 'block';
+  listDatasets(names => {
+    const listDiv = document.getElementById('datasetList');
+    listDiv.innerHTML = 'Available: ' + (names.length ? names.join(', ') : '(none)');
+  });
+}
 
+function closeDatasetPopup() {
+  document.getElementById('datasetPopup').style.display = 'none';
+}
+
+
+
+function saveDatasetFromPopup() {
+  const name = document.getElementById('datasetNameInput').value.trim();
+  if (!name) return alert('Enter a dataset name');
+  saveDataset(name);
+}
+
+// Save current table state to Firebase under the given name
+function saveDataset(name) {
+  if (!currentUser) return alert("You must be signed in to save data.");
+
+  const data = collectData();
+
+  db.ref(`users/${user.uid}/datasets/${name}`).set(data)
+    .then(() => alert("Dataset saved!"))
+    .catch(err => alert("Save failed: " + err.message));
+}
+
+function loadDatasetFromPopup(merge) {
+  const name = document.getElementById('datasetNameInput').value.trim();
+  if (!name) return alert('Enter a dataset name');
+  loadDataset(name, merge);
+}
+
+function loadFromFirebase(name, merge = false) {
+  if (!userId) return;
+
+  const ref = db.ref(`users/${user.uid}/datasets/${name}`);
+  ref.once('value').then(snapshot => {
+    const data = snapshot.val() || [];
+    if (!data) return alert("Dataset not found.");
+
+    if (!merge) {
+      document.getElementById("initiativeList").innerHTML = "";
+    }
+      
+    loadData(data);
+  });
+}
+    
+function loadData(data) {
+    const list = document.getElementById('initiativeList');
+    list.innerHTML = ''; // Clear current rows
+
+    data.forEach(char => {
+        addCharacter(); // adds a blank row
+        const lastRow = list.lastElementChild;
+
+        lastRow.querySelector('.name-input').value = char.name || '';
+
+        lastRow.querySelector('.suppression-value').value = char.shock || 0;
+        lastRow.querySelector('.initiative-input').value = char.initiative || 0;
+        lastRow.querySelector('.reflexes-input').value = char.reflexes || 0;
+
+        lastRow.querySelector('input[title="Fatigue"]').value = char.fatigue || 0;
+        lastRow.querySelector('input[title="Exhaustion"]').value = char.exhaustion || 0;
+        lastRow.querySelector('input[title="Stress"]').value = char.stress || 0;
+        lastRow.querySelector('input[title="Panic"]').value = char.panic || 0;
+
+        // Injury is the input inside the 10th <td> in the row
+        lastRow.querySelector('td:nth-child(10) input[type="number"]').value = char.injury || 0;
+
+        lastRow.querySelector('input[title="Fatal"]').value = char.fatal || 0;
+    });
+
+    // Optional: resort list after loading to keep order correct
+    sortList();
+}
+
+// List all dataset keys
+function listDatasets(callback) {
+  if (!userId) return console.warn("Not signed in");
+    
+  const ref = db.ref(`users/${user.uid}/datasets`);
+  ref.once('value')
+    .then(snapshot => {
+      const data = snapshot.val() || {};
+      const datasetNames = Object.keys(data);
+      callback(datasetNames);
+    })
+    .catch(error => {
+      console.error("Failed to list datasets:", error);
+      callback([]);
+    });
+}
+    
 </script>
 </body>
 </html>
