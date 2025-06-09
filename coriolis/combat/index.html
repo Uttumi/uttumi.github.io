@@ -810,17 +810,16 @@ function loadDatasetFromFirebase(name, merge = false) {
     const data = snapshot.val() || [];
     if (!data) return alert("Dataset not found.");
 
-    if (!merge) {
-      document.getElementById("initiativeList").innerHTML = "";
-    }
-      
     loadData(data);
   });
 }
     
-function loadData(data) {
+function loadData(data, merge = false) {
     const list = document.getElementById('initiativeList');
-    list.innerHTML = ''; // Clear current rows
+
+    if (!merge) {
+      list.innerHTML = ''; // Clear current rows
+    }
 
     data.forEach(char => {
         addCharacter(); // adds a blank row
