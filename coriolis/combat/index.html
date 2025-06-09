@@ -392,6 +392,7 @@ const auth = firebase.auth();
 let currentUser = null;
 let userId = null;
 
+let autoSaveTimer = null;
 
 auth.onAuthStateChanged(user => {
   if (user) {
