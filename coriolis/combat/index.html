@@ -328,10 +328,10 @@ td:nth-child(11)
   <h3>Datasets</h3>
   <input type="text" id="datasetNameInput" placeholder="Enter dataset name"><br><br>
   <button onclick="saveDatasetFromPopup()">💾 Save</button>
-  <button onclick="loadDatasetFromPopup(false)">📥 Load</button>
-  <button onclick="loadDatasetFromPopup(true)">🔀 Merge</button>
+  <!--<button onclick="loadDatasetFromPopup(false)">📥 Load</button>-->
+  <!--<button onclick="loadDatasetFromPopup(true)">🔀 Merge</button>-->
   <button onclick="closeDatasetPopup()">❌ Close</button>
-  <div id="datasetList" style="margin-top:10px;"></div>
+  <ul id="datasetList"></ul>
 </div>
 
 <table>
@@ -471,7 +471,7 @@ function signUp() {
       console.log("User created:", cred.user);
       currentUser = cred.user;
       userId = cred.user.uid;
-      loadFromFirebase();
+      loadDatasetFromFirebase("default");
     })
     .catch(console.error);
 }
@@ -484,17 +484,16 @@ function signIn() {
       console.log("Signed in:", cred.user);
       currentUser = cred.user;
       userId = cred.user.uid;
-      loadFromFirebase();
+      loadDatasetFromFirebase("default");
     })
     .catch(console.error);
-    
-  //trySignInWithRedirect();
 }
 
 function signOut() {
    auth.signOut().then(() => console.log("Signed out"));
 }
-    
+
+    /*
 function trySignInWithRedirect() {
   auth.getRedirectResult()
       .then((result) => {
@@ -505,13 +504,14 @@ function trySignInWithRedirect() {
       })
       .catch(console.error);
 }
+*/
 
-    
+    /*
 function saveToFirebase(data) {
   if (!userId) return;
   firebase.database().ref(`users/${userId}/characters`).set(data);
 }
-
+*/
 
     
 
@@ -691,6 +691,8 @@ function sortList() {
     }
 
     rows.forEach(row => list.appendChild(row));
+
+    triggerAutoSave();
 }
 
 function toggleTurn(button) {
@@ -806,15 +808,30 @@ function loadData(data) {
     // Optional: resort list after loading to keep order correct
     sortList();
 }
-
-// List all dataset keys
+/*
+// 📄 List user datasets (excluding 'default')
 function listDatasets(callback) {
   if (!userId) return console.warn("Not signed in");
     
   const ref = db.ref(`users/${currentUser.uid}/datasets`);
   ref.once('value')
     .then(snapshot => {
-      const data = snapshot.val() || {};
+      const list = document.getElementById("datasetsList");
+      list.innerHTML = "";
+        
+      const datasets = snapshot.val() || {};
+
+        Object.keys(datasets).forEach(name => {
+          if (name === 'default') return;
+          const li = document.createElement("li");
+          li.innerHTML = `
+            <strong>${name}</strong>
+            <button onclick="loadDataset('${name}')">📥 Load</button>
+            <button onclick="mergeDataset('${name}')">➕ Merge</button>
+          `;
+          list.appendChild(li);
+        });
+        
       const datasetNames = Object.keys(data);
       callback(datasetNames);
     })
@@ -823,7 +840,29 @@ function listDatasets(callback) {
       callback([]);
     });
 }
+*/
+    
+// 📄 List user datasets (excluding 'default')
+function listDatasets() {
+  const uid = firebase.auth().currentUser.uid;
+  firebase.database().ref(`users/${uid}/datasets`).once('value', snapshot => {
+    const list = document.getElementById("datasetsList");
+    list.innerHTML = "";
 
+    const datasets = snapshot.val() || {};
+    Object.keys(datasets).forEach(name => {
+      if (name === 'default') return;
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <strong>${name}</strong>
+        <button onclick="loadDatasetFromFirebase('${name}', false)">📥 Load</button>
+        <button onclick="loadDatasetFromFirebase('${name}', true)">➕ Merge</button>
+      `;
+      list.appendChild(li);
+    });
+  });
+}
+    
 function showPopup(id) {
   document.getElementById("overlay").style.display = "block";
   document.getElementById(id).style.display = "block";
@@ -834,7 +873,11 @@ function hidePopup(id) {
   document.getElementById(id).style.display = "none";
 }
 
-
+function triggerAutoSave() {
+  clearTimeout(autoSaveTimer);
+  autoSaveTimer = setTimeout(saveDatasetToFirebase('default'), 30000);
+}
+    
 </script>
 </body>
 </html>
