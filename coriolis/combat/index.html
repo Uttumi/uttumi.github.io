@@ -15,7 +15,33 @@ body {
     color: #c2e8ff;
     text-shadow: 0 0 5px rgba(0, 200, 255, 0.2);
 }
+    
+#overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 1000;
+  display: none;
+}
 
+.popup {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1001;
+  display: none;
+  max-width: 90%;
+}
+    
+.popup button {
+  margin-top: 10px;
+}
+    
 table {
     /* width: 100%; */
     border-collapse: collapse;
@@ -278,15 +304,27 @@ td:nth-child(11)
     <!--<button onclick="saveData()">💾 Save</button>-->
     <!--<button onclick="loadFromFirebase()">🔄 Load</button>-->
     <button onclick="openDatasetPopup()">📂 Manage Datasets</button>
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="signUp()">Sign Up</button>
-    <button onclick="signIn()">Sign in</button>
-    <button onclick="signOut()">Sign Out</button>
+
+
 </div>
 
+<div id="overlay"></div>
+
+<!-- 🔐 Sign-In Popup -->
+<div id="signinPopup" class="popup">
+  <h2>Sign In</h2>
+  <p>Sign in to store your data across devices.</p>
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="signUp()">Sign Up</button>
+  <button onclick="signIn()">Sign in</button>
+  <!--<button onclick="signOut()">Sign Out</button>    -->
+  <!--<button onclick="signInWithGoogle()">Sign in with Google</button>-->
+</div>
+
+    
 <!-- 📂 Dataset Manager Popup -->
-<div id="datasetPopup" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
+<div id="datasetPopup" class="popup">
   <h3>Datasets</h3>
   <input type="text" id="datasetNameInput" placeholder="Enter dataset name"><br><br>
   <button onclick="saveDatasetFromPopup()">💾 Save</button>
@@ -296,13 +334,6 @@ td:nth-child(11)
   <div id="datasetList" style="margin-top:10px;"></div>
 </div>
 
-<!-- 🔐 Sign-In Popup -->
-<div id="signInPopup" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
-  <h3>Sign In</h3>
-  <p>Sign in to save and load your data across devices.</p>
-  <button onclick="signInWithGoogle()">Sign in with Google</button>
-</div>
-    
 <table>
     <thead>
         <tr>
@@ -352,7 +383,7 @@ const firebaseConfig = {
   messagingSenderId: "322123206512",
   appId: "1:322123206512:web:238da425dd47a79e0509b5"
 };
-
+ 
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
@@ -398,6 +429,40 @@ auth.onAuthStateChanged(user => {
     */
   }
 });
+
+// Check auth on load
+window.onload = () => {
+  auth.onAuthStateChanged(user => {
+    if (!user) {
+      showPopup("signinPopup");
+    } else {
+      onUserSignedIn();
+    }
+  });
+};
+
+// Sign in using Google
+function startGoogleSignIn() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+    .then(() => {
+      hidePopup("signinPopup");
+      onUserSignedIn();
+    })
+    .catch(err => {
+      alert("Sign in failed: " + err.message);
+    });
+}
+    
+// Called once when sign-in is confirmed
+function onUserSignedIn() {
+  // Enable page functionality now that the user is signed in
+  console.log("User signed in:", auth.currentUser.email);
+  currentUser = auth.currentUser;
+  userId = currentUser.uid;  
+  showPopup("datasetPopup");
+}
+
 
 
 // Auth and load data
@@ -779,7 +844,18 @@ function listDatasets(callback) {
       callback([]);
     });
 }
-    
+
+function showPopup(id) {
+  document.getElementById("overlay").style.display = "block";
+  document.getElementById(id).style.display = "block";
+}
+
+function hidePopup(id) {
+  document.getElementById("overlay").style.display = "none";
+  document.getElementById(id).style.display = "none";
+}
+
+
 </script>
 </body>
 </html>
