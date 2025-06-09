@@ -751,7 +751,7 @@ function saveDatasetToFirebase(name) {
 
   const data = collectData();
 
-  db.ref(`users/${user.uid}/datasets/${name}`).set(data)
+  db.ref(`users/${currentUser.uid}/datasets/${name}`).set(data)
     .then(() => alert("Dataset saved!"))
     .catch(err => alert("Save failed: " + err.message));
 }
@@ -811,7 +811,7 @@ function loadData(data) {
 function listDatasets(callback) {
   if (!userId) return console.warn("Not signed in");
     
-  const ref = db.ref(`users/${user.uid}/datasets`);
+  const ref = db.ref(`users/${currentUser.uid}/datasets`);
   ref.once('value')
     .then(snapshot => {
       const data = snapshot.val() || {};
