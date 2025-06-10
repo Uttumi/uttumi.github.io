@@ -781,25 +781,32 @@ function closeDatasetPopup() {
 
 function saveDatasetFromPopup() {
   const name = document.getElementById('datasetNameInput').value.trim();
-  if (!name) return alert('Enter a dataset name');
+    
+  if (!name) 
+      return alert('Enter a dataset name');
+    
   saveDatasetToFirebase(name);
 }
 
 // Save current table state to Firebase under the given name
 function saveDatasetToFirebase(name) {
-  if (!currentUser) return alert("You must be signed in to save data.");
+  if (!currentUser) 
+      return alert("You must be signed in to save data.");
 
   const data = collectData();
 
   db.ref(`users/${currentUser.uid}/datasets/${name}`).set(data)
-    .then(() => alert("Dataset saved!"))
+    .then(() => console.log(`Dataset saved with name ${name}`))
     .catch(err => alert("Save failed: " + err.message));
 }
 
 function loadDatasetFromPopup(merge) {
   const name = document.getElementById('datasetNameInput').value.trim();
-  if (!name) return alert('Enter a dataset name');
+    
+  if (!name) 
+      return alert('Enter a dataset name');
   loadDatasetFromFirebase(name, merge);
+    
 }
 
 function loadDatasetFromFirebase(name, merge = false) {
@@ -808,7 +815,9 @@ function loadDatasetFromFirebase(name, merge = false) {
   const ref = db.ref(`users/${currentUser.uid}/datasets/${name}`);
   ref.once('value').then(snapshot => {
     const data = snapshot.val() || [];
-    if (!data) return alert("Dataset not found.");
+      
+    if (!data) 
+        return alert("Dataset not found.");
 
     loadData(data);
   });
