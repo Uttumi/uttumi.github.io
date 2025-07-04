@@ -53,6 +53,7 @@ table {
     border-radius: 12px;
     box-shadow: 0 0 30px rgba(0, 100, 200, 0.1);
     overflow: hidden;
+    margin: 0 auto;
 }
 
 th, td {
@@ -235,6 +236,15 @@ button:hover {
     background: #0080cc;
 }
 
+#datasetList {
+    padding: 0px;
+}
+
+.datasetItemButton {
+    width: 60px;
+}
+   
+    
 tr {
     transition: background 0.3s ease;
 }
@@ -339,11 +349,7 @@ h3
 <body>
 <div class="controls">
     <button onclick="addCharacter()">Add New Character</button>
-    <!--<button onclick="saveData()">💾 Save</button>-->
-    <!--<button onclick="loadFromFirebase()">🔄 Load</button>-->
-    <button onclick="openDatasetPopup()">📂 Manage Datasets</button>
-
-
+    <button onclick="openDatasetPopup()">Manage Datasets</button>
 </div>
 
 <div id="overlay" class="overlay"></div>
@@ -360,16 +366,15 @@ h3
   <!--<button onclick="signInWithGoogle()">Sign in with Google</button>-->
 </div>
 
-    
 <!-- 📂 Dataset Manager Popup -->
 <div id="datasetPopup" class="popup">
   <h3>Datasets</h3>
-  <input type="text" id="datasetNameInput" placeholder="Enter dataset name"><br><br>
-  <button onclick="saveDatasetFromPopup()">💾 Save</button>
-  <!--<button onclick="loadDatasetFromPopup(false)">📥 Load</button>-->
-  <!--<button onclick="loadDatasetFromPopup(true)">🔀 Merge</button>-->
-  <button onclick="closeDatasetPopup()">❌ Close</button>
+  <div class="datasetItem">
+    <input type="text" id="datasetNameInput" placeholder="Enter dataset name">
+    <button onclick="saveDatasetFromPopup()">💾 Save</button>
+  </div>
   <ul id="datasetList"></ul>
+  <button onclick="closeDatasetPopup()">❌ Close</button>
 </div>
 
 <table>
