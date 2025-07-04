@@ -417,14 +417,6 @@ td:nth-child(11)
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
     
 <script>
-  //import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  //import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-// Import the functions you need from the SDKs you need
-//import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBM_5J39bj9G-tQ5tM7AkEEBURkxyuaGf4",
@@ -462,19 +454,6 @@ auth.onAuthStateChanged(user => {
   }
 });
     
-/*
-// Check auth on load
-window.onload = () => {
-  auth.onAuthStateChanged(user => {
-    if (!user) {
-      showPopup("signinPopup");
-    } else {
-      onUserSignedIn();
-    }
-  });
-};
-*/
-
 // Sign in using Google
 function startGoogleSignIn() {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -497,25 +476,6 @@ function onUserSignedIn() {
   loadDatasetFromFirebase("default");
 }
 
-
-
-// Auth and load data
-    /*
-firebase.auth().signInAnonymously()
-    .then(userCredential => {
-      userId = userCredential.user.uid;
-      loadFromFirebase();
-    })
-    .catch(console.error);
-    */
-
-    /*
-firebase.auth().signInAnonymously().then(userCredential => {
-  currentUser = userCredential.user;
-  userId = currentUser.uid;
-  loadFromFirebase();
-});
-*/
 function signUp() {
   const email = document.getElementById("email").value;
   const pass = document.getElementById("password").value;
@@ -542,41 +502,6 @@ function signOut() {
    auth.signOut().then(() => console.log("Signed out"));
 }
 
-    /*
-function trySignInWithRedirect() {
-  auth.getRedirectResult()
-      .then((result) => {
-        if (result.user) {
-            userId = user.uid;
-            loadFromFirebase();
-        }
-      })
-      .catch(console.error);
-}
-*/
-
-    /*
-function saveToFirebase(data) {
-  if (!userId) return;
-  firebase.database().ref(`users/${userId}/characters`).set(data);
-}
-*/
-
-    
-
-
-    /*
-function loadFromFirebase() {
-  const ref = firebase.database().ref(`users/${userId}/characters`);
-  ref.once('value').then(snapshot => {
-    const data = snapshot.val() || [];
-    loadData(data);
-  });
-}
-*/
-
-
-    
 // Utility to get value or 0
 function getVal(input) {
   return parseInt(input.value) || 0;
@@ -598,11 +523,6 @@ function collectData() {
     };
   });
 }
-
-
-
-
-
 
 //window.onload = loadData;
 
@@ -781,12 +701,6 @@ window.onload = function() {
 function openDatasetPopup() {
   showPopup("datasetPopup");
   listDatasets();
-    /*
-  listDatasets(names => {
-    const listDiv = document.getElementById('datasetList');
-    listDiv.innerHTML = 'Available: ' + (names.length ? names.join(', ') : '(none)');
-  });
-  */
 }
 
 function closeDatasetPopup() {
@@ -800,6 +714,7 @@ function saveDatasetFromPopup() {
       return alert('Enter a dataset name');
     
   saveDatasetToFirebase(name);
+  listDatasets();
 }
 
 // Save current table state to Firebase under the given name
@@ -868,40 +783,7 @@ function loadData(data, merge = false) {
     // Optional: resort list after loading to keep order correct
     sortList();
 }
-/*
-// 📄 List user datasets (excluding 'default')
-function listDatasets(callback) {
-  if (!userId) return console.warn("Not signed in");
-    
-  const ref = db.ref(`users/${currentUser.uid}/datasets`);
-  ref.once('value')
-    .then(snapshot => {
-      const list = document.getElementById("datasetList");
-      list.innerHTML = "";
-        
-      const datasets = snapshot.val() || {};
 
-        Object.keys(datasets).forEach(name => {
-          if (name === 'default') return;
-          const li = document.createElement("li");
-          li.innerHTML = `
-            <strong>${name}</strong>
-            <button onclick="loadDataset('${name}')">📥 Load</button>
-            <button onclick="mergeDataset('${name}')">➕ Merge</button>
-          `;
-          list.appendChild(li);
-        });
-        
-      const datasetNames = Object.keys(data);
-      callback(datasetNames);
-    })
-    .catch(error => {
-      console.error("Failed to list datasets:", error);
-      callback([]);
-    });
-}
-*/
-    
 // 📄 List user datasets (excluding 'default')
 function listDatasets() {
   db.ref(`users/${currentUser.uid}/datasets`).once('value', snapshot => {
