@@ -239,11 +239,6 @@ button:hover {
 #datasetList {
     padding: 0px;
 }
-
-.datasetItemButton {
-    width: 60px;
-}
-   
     
 tr {
     transition: background 0.3s ease;
@@ -325,6 +320,17 @@ h3
 {
     display: flex;
 }
+
+#datasetNameInput
+{
+    flex: 0;
+}
+    
+#datasetSaveButton
+{
+    flex: 0;
+    width: 160px;
+}
     
 .datasetItemText
 {
@@ -339,6 +345,7 @@ h3
     
 .datasetItemButton
 {
+    width: 80px;
     padding: 0px;
     flex: 0;
 }
@@ -371,7 +378,7 @@ h3
   <h3>Datasets</h3>
   <div class="datasetItem">
     <input type="text" id="datasetNameInput" placeholder="Enter dataset name">
-    <button onclick="saveDatasetFromPopup()">💾 Save</button>
+    <button id="datasetSaveButton" onclick="saveDatasetFromPopup()">💾 Save</button>
   </div>
   <ul id="datasetList"></ul>
   <button onclick="closeDatasetPopup()">❌ Close</button>
