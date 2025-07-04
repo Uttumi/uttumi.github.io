@@ -380,7 +380,7 @@ td:nth-child(11)
   <h3 id="popupTitle">Datasets</h3>
   <div class="datasetItem">
     <input type="text" id="datasetNameInput" placeholder="Enter dataset name">
-    <button id="datasetSaveButton" onclick="saveDatasetFromPopup()">💾 Save</button>
+    <button id="datasetSaveButton" onclick="saveDatasetFromPopup()">Save</button>
   </div>
   <ul id="datasetList"></ul>
   <button onclick="closeDatasetPopup()">❌ Close</button>
@@ -915,8 +915,8 @@ function listDatasets() {
       const li = document.createElement("li");
       li.innerHTML = `
         <h4 class="datasetItemText">${name}</h4>
-        <button class="datasetItemButton" onclick="loadDatasetFromFirebase('${name}', false)">📥 Load</button>
-        <button class="datasetItemButton" onclick="loadDatasetFromFirebase('${name}', true)">➕ Merge</button>
+        <button class="datasetItemButton" onclick="loadDatasetFromFirebase('${name}', false)">Load</button>
+        <button class="datasetItemButton" onclick="loadDatasetFromFirebase('${name}', true)">Merge</button>
       `;
       list.appendChild(li);
      li.classList.add("datasetItem");
