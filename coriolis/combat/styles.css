@@ -1,0 +1,344 @@
+body {
+    font-family: 'Exo 2', sans-serif;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgb(5 5 10);
+    color: #c2e8ff;
+    text-shadow: 0 0 5px rgba(0, 200, 255, 0.2);
+}
+    
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 1000;
+  display: none;
+}
+
+.popup {
+
+    width: 500px;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(18 18 32);
+    color: rgb(102 240 255);
+    padding: 20px;
+    border-radius: 10px;
+    border-color: rgb(0 96 170);
+    border-width: 5px;
+    z-index: 1001;
+    display: none;
+    max-width: 90%;
+}
+    
+.popup button {
+  margin-top: 10px;
+}
+    
+table {
+    /* width: 100%; */
+    border-collapse: collapse;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 100, 200, 0.1);
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+th, td {
+    padding: 16px 10px;
+    text-align: center;
+    height: 24px;
+    box-sizing: content-box;
+    position: relative;
+}
+
+th {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    color: #00d0ff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1em;
+
+    width: 120px;
+}
+
+th:nth-child(1), td:nth-child(1) {
+    width: 60px;
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 215px;
+}
+
+th:nth-child(12), td:nth-child(12) {
+    width: 40px;
+}
+
+/* Inputs */
+input, select {
+    padding: 10px;
+    max-width: 60px;
+    background: #181830;
+    border: 1px solid #0070cc;
+    border-radius: 6px;
+    color: #66f0ff;
+    font-size: 1.1em;
+    font-weight: bold;
+    font-family: 'Exo 2', sans-serif;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(0, 100, 200, 0.15);
+}
+
+input[type=number], select {
+    width: 26px;
+    height: 20px;
+    border-radius: 2px;
+
+    text-align: center;
+    -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.valueButton {
+    width: 20px;
+    height: 40px;
+    padding: 0;
+    margin: 2px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    background: linear-gradient(135deg, rgb(80, 200, 220), rgb(40, 70, 120));
+}
+
+.valueButton:hover {
+    background: linear-gradient(135deg, rgb(100, 220, 240), rgb(60, 90, 140));
+}
+
+.leftButton {
+    border-radius: 20px 0 0 20px;
+}
+
+.rightButton {
+    border-radius: 0 20px 20px 0;
+}
+
+input:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 12px rgba(0, 150, 255, 0.25);
+    border-color: #00a8ff;
+}
+
+.name-input {
+    min-width: 140px;
+    text-align: left;
+    max-width: none;
+    padding: 10px 14px;
+    letter-spacing: 0.5px;
+}
+
+.turn-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: #121220;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgb(0, 140, 230);
+}
+
+.turn-btn:hover {
+    /* background: radial-gradient(circle, rgb(190 230 255) 0%, rgb(80 90 130) 100%); */
+    background: radial-gradient(circle, rgb(255 255 255) 0%, rgb(120 120 160) 100%);
+    animation: pulse-space 2s infinite;
+}
+
+.turn-active {
+    background: radial-gradient(circle, rgb(177 214 245) 0%, rgb(62 74 107) 100%);
+}
+
+@keyframes pulse-space {
+    0% { box-shadow: 0 0 20px 0 rgba(0, 140, 230, 1.0); }
+    70% { box-shadow: 0 0 5px 0 rgba(0, 160, 250, 0.5); }
+    100% { box-shadow: 0 0 20px 0 rgba(0, 140, 230, 1.0); }
+}
+
+/* Buttons */
+button {
+    padding: 12px 28px;
+    cursor: pointer;
+    background: linear-gradient(135deg, rgb(165 252 249), rgb(77 90 140));
+    color: #000a20;
+    border: none;
+    border-radius: 6px;
+    margin: 0 auto;
+    display: block;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgb(0, 120, 200);
+}
+
+button:hover {
+    background: linear-gradient(135deg, rgb(200 255 255), rgb(110 130 180));
+    box-shadow: 0 0 30px rgb(0, 140, 220);
+}
+
+.remove-btn {
+    background-color: #ff4444;
+    padding: 6px 12px;
+}
+
+.remove-btn:hover {
+    background: linear-gradient(135deg, #dd0050, #ff4080);
+}
+
+.controls {
+    margin-bottom: 36px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #121220;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0060aa;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0080cc;
+}
+
+#datasetList {
+    padding: 0px;
+}
+    
+tr {
+    transition: background 0.3s ease;
+}
+
+tr:hover {
+    background: rgb(30 30 60);
+}
+
+th:nth-child(1),
+th:nth-child(2),
+th:nth-child(4),
+th:nth-child(5),
+th:nth-child(8),
+th:nth-child(9),
+th:nth-child(12)
+{
+    background: rgba(60, 60, 120, 0.5);
+}
+
+th:nth-child(3),
+th:nth-child(6),
+th:nth-child(7),
+th:nth-child(10),
+th:nth-child(11)
+{
+    background: rgba(100, 100, 150, 0.5);
+}
+
+td:nth-child(1),
+td:nth-child(2),
+td:nth-child(4),
+td:nth-child(5),
+td:nth-child(8),
+td:nth-child(9),
+td:nth-child(12)
+{
+    background: rgba(20, 20, 40, 0.5);
+}
+
+td:nth-child(3),
+td:nth-child(6),
+td:nth-child(7),
+td:nth-child(10),
+td:nth-child(11)
+{
+    background: rgba(40, 40, 80, 0.5);
+}
+
+.value-container
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.value
+{
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    color: #66f0ff;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+ 
+.datasetItem
+{
+    display: flex;
+}
+
+#popupTitle
+{
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 1000;
+    color: #00d0ff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 2em;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 10px;
+}
+    
+#datasetNameInput
+{
+    flex: 1;
+    max-width: 100%;
+}
+    
+#datasetSaveButton
+{
+    margin: 0;
+}
+    
+.datasetItemText
+{
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    color: #00d0ff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1em;
+    flex: 1;
+}
+    
+.datasetItemButton
+{
+    width: 80px;
+    height: 35px;
+    padding: 0px;
+}
