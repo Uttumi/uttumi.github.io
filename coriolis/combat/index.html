@@ -389,7 +389,6 @@ function loadDatasetFromPopup(merge) {
   if (!name) 
       return alert('Enter a dataset name');
   loadDatasetFromFirebase(name, merge);
-  saveDatasetToFirebase('default')
 }
 
 function loadDatasetFromFirebase(name, merge = false) {
@@ -403,6 +402,7 @@ function loadDatasetFromFirebase(name, merge = false) {
         return alert("Dataset not found.");
 
     loadData(data, merge);
+    saveDatasetToFirebase('default')
   });
 }
     
