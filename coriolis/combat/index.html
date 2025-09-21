@@ -82,16 +82,6 @@ const firebaseConfig = {
   appId: "1:392425621124:web:47008bdcbe0fe69b1964d1"
 };
 
-<!-- const firebaseConfig = { -->
-  <!-- apiKey: "AIzaSyBM_5J39bj9G-tQ5tM7AkEEBURkxyuaGf4", -->
-  <!-- authDomain: "coriolis-combat-tracker.firebaseapp.com", -->
-  <!-- databaseURL: "https://coriolis-combat-tracker-default-rtdb.europe-west1.firebasedatabase.app", -->
-  <!-- projectId: "coriolis-combat-tracker", -->
-  <!-- storageBucket: "coriolis-combat-tracker.firebasestorage.app", -->
-  <!-- messagingSenderId: "322123206512", -->
-  <!-- appId: "1:322123206512:web:238da425dd47a79e0509b5" -->
-<!-- }; -->
- 
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
@@ -399,7 +389,7 @@ function loadDatasetFromPopup(merge) {
   if (!name) 
       return alert('Enter a dataset name');
   loadDatasetFromFirebase(name, merge);
-    
+  saveDatasetToFirebase('default')
 }
 
 function loadDatasetFromFirebase(name, merge = false) {
